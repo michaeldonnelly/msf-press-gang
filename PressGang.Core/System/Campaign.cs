@@ -1,16 +1,10 @@
 ﻿using System;
 namespace PressGang.Core.System
 {
-    public class Campaign
+    public class Campaign : ResourceLocation
     {
-        public Campaign(string name)
+        public Campaign(string name) : base(name)
         {
-            Name = name;
         }
-
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
     }
 }
