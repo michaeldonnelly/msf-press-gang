@@ -6,5 +6,9 @@ namespace PressGang.Core.System
         public Character()
         {
         }
+
+        public int Id { get; set; }
+
+        public string Name { get; set; }
     }
 }
