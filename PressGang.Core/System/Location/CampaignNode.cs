@@ -10,5 +10,9 @@ namespace PressGang.Core.System.Location
         }
 
         public Campaign Campaign { get; set; }
+
+        public int Level { get; set; }
+
+        public int Node { get; set; }
     }
 }
