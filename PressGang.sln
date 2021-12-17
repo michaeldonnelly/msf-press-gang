@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "press-gang-console", "press-gang-console\press-gang-console.csproj", "{5194AA5F-FEC1-47B2-B759-477AB6E22667}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Console", "PressGang.Console\PressGang.Console.csproj", "{5194AA5F-FEC1-47B2-B759-477AB6E22667}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
