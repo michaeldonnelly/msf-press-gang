@@ -6,7 +6,7 @@ namespace PressGang.Console
     {
         static void Main(string[] args)
         {
-            PressGang.Core.Data.Initialize.ResourceLocations();
+            Core.Data.Initialize.ResourceLocations();
             System.Console.WriteLine("Hello World!");
         }
     }
