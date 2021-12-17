@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace PressGang.Core.System
 {
-    public class Event
+    public class FlashEvent : ResourceLocation
     {
-        public Event()
+        public FlashEvent(string name) : base(name)
         {
         }
+
+        public List<Character> RequiredCharacters { get; set; }
     }
 }
