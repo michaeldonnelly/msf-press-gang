@@ -6,4 +6,7 @@
     <RootNamespace>PressGang.Console</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PressGang.Core\PressGang.Core.csproj" />
+  </ItemGroup>
 </Project>
