@@ -5,7 +5,7 @@ namespace PressGang.Core.Data
 {
     public static class Initialize
     {
-        public static void ResourceLocations()
+        public static void System()
         {
             new Store("Main");
             new Store("Raid");
@@ -17,6 +17,8 @@ namespace PressGang.Core.Data
             new Campaign("Villains United");
             new Campaign("Nexus");
             new Campaign("Mystic Forces Rising");
+
+
         }
 
     }
