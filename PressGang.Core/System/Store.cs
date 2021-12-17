@@ -3,12 +3,8 @@ namespace PressGang.Core.System
 {
     public class Store : ResourceLocation
     {
-        public Store()
+        public Store(string name) : base(name)
         {
         }
-
-        public int Id { get; set; }
-
-        public string Name { get; set; }
     }
 }

@@ -3,13 +3,8 @@ namespace PressGang.Core.System
 {
     public class CampaignNode : ResourceLocation
     {
-        public CampaignNode()
+        public CampaignNode(string name) : base(name)
         {
         }
-
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
     }
 }
