@@ -1,7 +1,7 @@
 ﻿using System;
-namespace PressGang.Core.System
+namespace PressGang.Core.System.GameMode
 {
-    public class Campaign : ResourceLocation
+    public class Campaign : GameMode
     {
         public Campaign(string name) : base(name)
         {
