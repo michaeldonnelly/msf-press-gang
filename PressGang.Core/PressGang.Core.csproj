@@ -16,6 +16,6 @@
     <Folder Include="User\" />
     <Folder Include="Data\" />
     <Folder Include="System\Location\" />
-    <Folder Include="System\GameMode\" />
+    <Folder Include="System\Mode\" />
   </ItemGroup>
 </Project>
