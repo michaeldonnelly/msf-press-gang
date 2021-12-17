@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "press-gang-console/1.0.0": {
+        "runtime": {
+          "press-gang-console.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "press-gang-console/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

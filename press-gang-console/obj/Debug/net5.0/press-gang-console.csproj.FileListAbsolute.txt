@@ -1,0 +1,15 @@
+/Users/donnelly/Repos/press-gang/press-gang-console/bin/Debug/net5.0/press-gang-console.deps.json
+/Users/donnelly/Repos/press-gang/press-gang-console/bin/Debug/net5.0/press-gang-console.runtimeconfig.json
+/Users/donnelly/Repos/press-gang/press-gang-console/bin/Debug/net5.0/press-gang-console.runtimeconfig.dev.json
+/Users/donnelly/Repos/press-gang/press-gang-console/bin/Debug/net5.0/press-gang-console.dll
+/Users/donnelly/Repos/press-gang/press-gang-console/bin/Debug/net5.0/ref/press-gang-console.dll
+/Users/donnelly/Repos/press-gang/press-gang-console/bin/Debug/net5.0/press-gang-console.pdb
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.csproj.AssemblyReference.cache
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.GeneratedMSBuildEditorConfig.editorconfig
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.AssemblyInfoInputs.cache
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.AssemblyInfo.cs
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.csproj.CoreCompileInputs.cache
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.dll
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/ref/press-gang-console.dll
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.pdb
+/Users/donnelly/Repos/press-gang/press-gang-console/obj/Debug/net5.0/press-gang-console.genruntimeconfig.cache
