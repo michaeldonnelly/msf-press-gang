@@ -8,10 +8,12 @@
     <None Remove="System\" />
     <None Remove="User\" />
     <None Remove="Data\" />
+    <None Remove="System\ResourceLocation\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="System\" />
     <Folder Include="User\" />
     <Folder Include="Data\" />
+    <Folder Include="System\ResourceLocation\" />
   </ItemGroup>
 </Project>
