@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PressGang.Core.System
+namespace PressGang.Core.System.Location
 {
     public class Store : ResourceLocation
     {

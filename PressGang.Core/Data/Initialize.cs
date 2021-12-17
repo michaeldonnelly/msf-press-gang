@@ -1,6 +1,6 @@
 ﻿using System;
-using PressGang.Core.System;
-using PressGang.Core.System.GameMode;
+using PressGang.Core.System.Location;
+using PressGang.Core.System.Mode;
 
 
 namespace PressGang.Core.Data

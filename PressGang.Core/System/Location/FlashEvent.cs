@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PressGang.Core.System
+namespace PressGang.Core.System.Location
 {
     public class FlashEvent : ResourceLocation
     {

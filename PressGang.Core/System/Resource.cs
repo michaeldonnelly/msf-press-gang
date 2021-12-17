@@ -1,4 +1,6 @@
 ﻿using System;
+using PressGang.Core.System.Location;
+
 namespace PressGang.Core.System
 {
     public partial class Resource

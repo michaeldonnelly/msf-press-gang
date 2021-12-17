@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PressGang.Core.System.GameMode
+namespace PressGang.Core.System.Mode
 {
     public partial class GameMode
     {

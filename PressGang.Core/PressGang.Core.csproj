@@ -15,7 +15,7 @@
     <Folder Include="System\" />
     <Folder Include="User\" />
     <Folder Include="Data\" />
-    <Folder Include="System\ResourceLocation\" />
+    <Folder Include="System\Location\" />
     <Folder Include="System\GameMode\" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
-using PressGang.Core.System.GameMode;
+using PressGang.Core.System.Mode;
 
-namespace PressGang.Core.System
+namespace PressGang.Core.System.Location
 {
     public class CampaignNode : ResourceLocation
     {
