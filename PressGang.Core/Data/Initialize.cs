@@ -78,12 +78,12 @@ namespace PressGang.Core.Data
             foo.Characters.Add(10, cable);
             foo.Characters.Add(5, yondu);
 
-            List<Character> shoppingList = foo.ShoppingList(opportunities);
+            List<Opportunity> shoppingList = foo.ShoppingList(opportunities);
 
             string bar = "";
-            foreach (Character c in shoppingList)
+            foreach (Opportunity o in shoppingList)
             {
-                bar += c.Name + "\r\n";
+                bar += o.ToString() + "\r\n";
             }
             return bar;
         }

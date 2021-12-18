@@ -16,10 +16,10 @@ namespace PressGang.Core.User
 
         public Dictionary<int, Character> Characters { get; set; }
 
-        public List<Character> ShoppingList(List<Opportunity> opportunities)
+        public List<Opportunity> ShoppingList(List<Opportunity> opportunities)
         {
             Type locationType = typeof(CampaignNode);
-            Dictionary<int, Character> shoppingList = new();
+            Dictionary<int, Opportunity> shoppingList = new();
             foreach (Opportunity opportunity in opportunities)
             {
                 if (opportunity.ResourceLocation.GetType() == locationType)
@@ -31,14 +31,14 @@ namespace PressGang.Core.User
                         int? priority = Characters.FirstOrDefault(kvp => kvp.Value == character).Key;
                         if (priority != null)
                         {
-                            shoppingList.Add((int)priority, character);
+                            shoppingList.Add((int)priority, opportunity);
                         }
                     }
                 }
             }
 
-            List<Character> result = new();
-            foreach (KeyValuePair<int, Character> kvp in shoppingList.OrderBy(kvp => kvp.Key))
+            List<Opportunity> result = new();
+            foreach (KeyValuePair<int, Opportunity> kvp in shoppingList.OrderBy(kvp => kvp.Key))
             {
                 result.Add(kvp.Value);
             }
