@@ -28,10 +28,10 @@ namespace PressGang.Core.User
                     if (resource.GetType() == typeof(CharacterShard))
                     {
                         Character character = ((CharacterShard)resource).Character;
-                        int? priority = Characters.FirstOrDefault(kvp => kvp.Value == character).Key;
-                        if (priority != null)
+                        int priority = Characters.FirstOrDefault(kvp => kvp.Value == character).Key;
+                        if (priority > 0)
                         {
-                            shoppingList.Add((int)priority, opportunity);
+                            shoppingList.Add(priority, opportunity);
                         }
                     }
                 }
