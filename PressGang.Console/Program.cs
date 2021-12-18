@@ -9,17 +9,21 @@ namespace PressGang.Console
     {
         static AppSettings appSettings = new AppSettings();
 
-        static void Main(string[] args)
+        static void LoadAppSettings()
         {
-
             var builder = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             var configuration = builder.Build();
             ConfigurationBinder.Bind(configuration, appSettings);
 
-            Debug.WriteLine(appSettings.DataDirectory);
 
+        }
+
+        static void Main(string[] args)
+        {
+            LoadAppSettings();
+            Debug.WriteLine(appSettings.DataDirectory);
             string output = Core.Data.Initialize.System();
 
             Debug.WriteLine("\n\n");
