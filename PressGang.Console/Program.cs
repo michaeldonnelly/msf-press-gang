@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace PressGang.Console
 {
@@ -6,7 +7,12 @@ namespace PressGang.Console
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine(Core.Data.Initialize.System());
+            string output = Core.Data.Initialize.System();
+
+            Debug.WriteLine("\n\n");
+            Debug.WriteLine(output);
+            Debug.WriteLine("\n\n");
+
             System.Console.WriteLine("Hello World!");
         }
     }
