@@ -13,8 +13,11 @@ namespace PressGang.Core.Data
         public static void ImportCampaigns(PressGangContext context, string dataDirectory)
         {
             string jsonString = File.ReadAllText(dataDirectory + "/campaigns.json");
-            CampaignList campaigns = JsonConvert.DeserializeObject<CampaignList>(jsonString);
-            Debug.WriteLine(campaigns.Campaigns.Count.ToString());
+            CampaignList campaignList = JsonConvert.DeserializeObject<CampaignList>(jsonString);
+            foreach (Campaign campaign in campaignList.Campaigns)
+            {
+                context.Add(campaign);
+            }
         }
 
         public static void ImportCharacters(PressGangContext context, string dataDirectory)
