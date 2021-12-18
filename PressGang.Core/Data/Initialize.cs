@@ -22,6 +22,8 @@ namespace PressGang.Core.Data
             new Campaign("Nexus");
             Campaign mystic = new Campaign("Mystic Forces Rising");
 
+            List<CampaignNode> lcn = mystic.Nodes();
+
             CampaignNode mystic1n9 = new CampaignNode("mystic1n9")
             {
                 Campaign = mystic,
