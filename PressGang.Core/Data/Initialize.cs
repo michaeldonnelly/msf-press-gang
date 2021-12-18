@@ -95,6 +95,7 @@ namespace PressGang.Core.Data
             CharacterPriorityList foo = new();
             foo.Characters.Add(10, cable);
             foo.Characters.Add(5, yondu);
+            foo.Characters.Add(99, ultimateSpidey);
 
             List<Opportunity> shoppingList = foo.ShoppingList(opportunities);
 
