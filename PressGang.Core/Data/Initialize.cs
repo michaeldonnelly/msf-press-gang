@@ -101,9 +101,11 @@ namespace PressGang.Core.Data
             List<Opportunity> shoppingList = foo.ShoppingList(opportunities);
 
             string bar = "";
+            int lineNumber = 0;
             foreach (Opportunity o in shoppingList)
             {
-                bar += o.ToString() + "\r\n";
+                lineNumber++;
+                bar += String.Format("{0}. {1}\r\n", lineNumber.ToString(), o.ToString());
             }
             return bar;
         }
