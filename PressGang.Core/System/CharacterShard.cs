@@ -5,7 +5,7 @@ namespace PressGang.Core.System
     {
         public CharacterShard(Character character)
         {
-            this.Name = character.Name + "Shard";
+            this.Name = character.Name + " Shard";
             Character = character; 
         }
 
