@@ -12,6 +12,7 @@
     <None Remove="System\GameMode\" />
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="System\" />
@@ -23,5 +24,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
   </ItemGroup>
 </Project>
