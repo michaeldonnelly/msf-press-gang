@@ -94,7 +94,7 @@ namespace PressGang.Core.Data
 
             CharacterPriorityList foo = new();
             foo.Characters.Add(cable, 10);
-            foo.Characters.Add(yondu, 5);
+            foo.Characters.Add(yondu, 10);
             foo.Characters.Add(ultimateSpidey, 99);
             //foo.Characters.Add(30, danvers);
 

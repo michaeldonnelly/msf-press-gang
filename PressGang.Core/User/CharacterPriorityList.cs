@@ -19,7 +19,8 @@ namespace PressGang.Core.User
         public List<Opportunity> ShoppingList(List<Opportunity> opportunities)
         {
             Type locationType = typeof(CampaignNode);
-            Dictionary<int, Opportunity> shoppingList = new();
+            Dictionary<int, List<Opportunity>> shoppingList = new();
+//            Dictionary<int, Opportunity> shoppingList = new();
             foreach (Opportunity opportunity in opportunities)
             {
                 if (opportunity.ResourceLocation.GetType() == locationType)
@@ -28,23 +29,37 @@ namespace PressGang.Core.User
                     if (resource.GetType() == typeof(CharacterShard))
                     {
                         Character character = ((CharacterShard)resource).Character;
+                        int priority;
                         try
                         {
-                            int priority = Characters[character];
-                            shoppingList.Add(priority, opportunity);
+                            priority = Characters[character];
                         }
                         catch
                         {
-                            // Don't care - if it isn't there, don't add it to the list
+                            continue;
                         }
+
+                        if (shoppingList.ContainsKey(priority))
+                        {
+                            shoppingList[priority].Add(opportunity);
+                        }
+                        else
+                        {
+                            List<Opportunity> lo = new() { opportunity };
+                            shoppingList.Add(priority, lo);
+                        }
+
                     }
                 }
             }
 
             List<Opportunity> result = new();
-            foreach (KeyValuePair<int, Opportunity> kvp in shoppingList.OrderBy(kvp => kvp.Key))
+            foreach (KeyValuePair<int, List<Opportunity>> kvp in shoppingList.OrderBy(kvp => kvp.Key))
             {
-                result.Add(kvp.Value);
+                foreach (Opportunity opportunity in kvp.Value)
+                {
+                    result.Add(opportunity);
+                }                
             }
             return result;
         }
