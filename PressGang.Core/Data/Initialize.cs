@@ -76,9 +76,16 @@ namespace PressGang.Core.Data
 
             CharacterPriorityList foo = new();
             foo.Characters.Add(10, cable);
+            foo.Characters.Add(5, yondu);
 
+            List<Character> shoppingList = foo.ShoppingList(opportunities);
 
-            return foo.ToString();
+            string bar = "";
+            foreach (Character c in shoppingList)
+            {
+                bar += c.Name + "\r\n";
+            }
+            return bar;
         }
 
     }
