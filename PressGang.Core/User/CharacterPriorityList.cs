@@ -14,7 +14,7 @@ namespace PressGang.Core.User
             Characters = new();
         }
 
-        public Dictionary<int, Character> Characters { get; set; }
+        public Dictionary<Character, int> Characters { get; set; }
 
         public List<Opportunity> ShoppingList(List<Opportunity> opportunities)
         {
@@ -28,10 +28,14 @@ namespace PressGang.Core.User
                     if (resource.GetType() == typeof(CharacterShard))
                     {
                         Character character = ((CharacterShard)resource).Character;
-                        int priority = Characters.FirstOrDefault(kvp => kvp.Value == character).Key;
-                        if (priority > 0)
+                        try
                         {
+                            int priority = Characters[character];
                             shoppingList.Add(priority, opportunity);
+                        }
+                        catch
+                        {
+                            // Don't care - if it isn't there, don't add it to the list
                         }
                     }
                 }
