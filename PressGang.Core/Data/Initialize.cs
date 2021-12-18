@@ -13,7 +13,7 @@ namespace PressGang.Core.Data
         {
             new Store("Main");
             new Store("Raid");
-            new Store("Blitz");
+            Store blitzStore = new Store("Blitz");
             new Store("Arena");
             new Store("War");
 
@@ -35,7 +35,12 @@ namespace PressGang.Core.Data
                 Level = 2,
                 Node = 6
             };
-
+            CampaignNode heroes3n3 = new CampaignNode("heroes3n3")
+            {
+                Campaign = heroes,
+                Level = 3,
+                Node = 3
+            };
             CampaignNode heroes6n9 = new CampaignNode("heroes6n9")
             {
                 Campaign = heroes,
@@ -53,6 +58,9 @@ namespace PressGang.Core.Data
             Character danvers = new Character("Captain Marvel");
             CharacterShard danversShard = new CharacterShard(danvers);
 
+            Character ultimateSpidey = new Character("Spider-Man (Miles)");
+            CharacterShard ultimateSpideyShard = new CharacterShard(ultimateSpidey);
+
             List<Opportunity> opportunities = new();
             opportunities.Add(new Opportunity()
             {
@@ -61,9 +69,19 @@ namespace PressGang.Core.Data
             });
             opportunities.Add(new Opportunity()
             {
+                Resource = ultimateSpideyShard,
+                ResourceLocation = blitzStore
+            });
+            opportunities.Add(new Opportunity()
+            {
+                Resource = ultimateSpideyShard,
+                ResourceLocation = heroes3n3
+            });
+            opportunities.Add(new Opportunity()
+            {
                 Resource = yonduShard,
                 ResourceLocation = heroes2n6
-            });
+            });            
             opportunities.Add(new Opportunity()
             {
                 Resource = danversShard,
