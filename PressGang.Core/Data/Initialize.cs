@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using PressGang.Core.System;
 using PressGang.Core.System.Location;
 using PressGang.Core.System.Mode;
-
+using PressGang.Core.User;
 
 namespace PressGang.Core.Data
 {
@@ -16,10 +17,10 @@ namespace PressGang.Core.Data
             new Store("Arena");
             new Store("War");
 
-            new Campaign("Heros Assemble");
+            Campaign heroes = new Campaign("Heros Assemble");
             new Campaign("Villains United");
             new Campaign("Nexus");
-            var mystic = new Campaign("Mystic Forces Rising");
+            Campaign mystic = new Campaign("Mystic Forces Rising");
 
             CampaignNode mystic1n9 = new CampaignNode("mystic1n9")
             {
@@ -28,14 +29,54 @@ namespace PressGang.Core.Data
                 Node = 9
             };
 
+            CampaignNode heroes2n6 = new CampaignNode("heroes2n6")
+            {
+                Campaign = heroes,
+                Level = 2,
+                Node = 6
+            };
 
-            var cable = new Character("Cable");
-            var cableShard = new CharacterShard(cable);
-            var foo = new Opportunity()
+            CampaignNode heroes6n9 = new CampaignNode("heroes6n9")
+            {
+                Campaign = heroes,
+                Level = 6,
+                Node = 9
+            };
+
+
+            Character cable = new Character("Cable");
+            CharacterShard cableShard = new CharacterShard(cable);
+
+            Character yondu = new Character("Yondu");
+            CharacterShard yonduShard = new CharacterShard(yondu);
+
+            Character danvers = new Character("Captain Marvel");
+            CharacterShard danversShard = new CharacterShard(danvers);
+
+            List<Opportunity> opportunities = new();
+            opportunities.Add(new Opportunity()
             {
                 Resource = cableShard,
                 ResourceLocation = mystic1n9
-            };
+            });
+            opportunities.Add(new Opportunity()
+            {
+                Resource = yonduShard,
+                ResourceLocation = heroes2n6
+            });
+            opportunities.Add(new Opportunity()
+            {
+                Resource = danversShard,
+                ResourceLocation = heroes6n9
+            });
+
+
+
+
+
+            CharacterPriorityList foo = new();
+            foo.Characters.Add(10, cable);
+
 
             return foo.ToString();
         }
