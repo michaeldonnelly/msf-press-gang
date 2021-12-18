@@ -15,7 +15,7 @@ namespace PressGang.Core.System
 
         public override string ToString()
         {
-            return Resource.Name + " at " + ResourceLocation.Name;
+            return Resource.Name + " at " + ResourceLocation.ToString();
         }
     }
 }
