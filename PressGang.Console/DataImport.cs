@@ -1,10 +1,8 @@
 ﻿using System;
 namespace PressGang.Console
 {
-    public class DataImport
+    static class DataImport
     {
-        public DataImport()
-        {
-        }
+
     }
 }

@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace PressGang.Console
 {
     class Program
     {
+        static AppSettings appSettings = new AppSettings();
+
         static void Main(string[] args)
         {
+
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            var configuration = builder.Build();
+            ConfigurationBinder.Bind(configuration, appSettings);
+
+            Debug.WriteLine(appSettings.DataDirectory);
+
             string output = Core.Data.Initialize.System();
 
             Debug.WriteLine("\n\n");
