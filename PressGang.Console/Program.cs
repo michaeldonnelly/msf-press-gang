@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using PressGang.Core;
+using PressGang.Core.Data;
 
 namespace PressGang.Console
 {
     class Program
     {
-        private static AppSettings appSettings = new AppSettings();
+        private static AppSettings _appSettings = new AppSettings();
+        private readonly PressGangContext _context;
 
         private static void LoadAppSettings()
         {
@@ -15,13 +19,19 @@ namespace PressGang.Console
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             ConfigurationRoot configuration = (ConfigurationRoot)builder.Build();
-            ConfigurationBinder.Bind(configuration, appSettings);
+            ConfigurationBinder.Bind(configuration, _appSettings);
         }
 
         static void Main(string[] args)
         {
             LoadAppSettings();
-            Debug.WriteLine(appSettings.DataDirectory);
+            DbContextOptions<PressGangContext> dbOptions = new();
+            PressGangContext context = new PressGangContext(dbOptions);
+
+            Import.ImportCampaigns(context, _appSettings.DataDirectory);
+
+
+            Debug.WriteLine(_appSettings.DataDirectory);
             string output = Core.Data.Initialize.System();
 
             Debug.WriteLine("\n\n");

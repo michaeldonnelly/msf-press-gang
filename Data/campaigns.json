@@ -1,0 +1,12 @@
+{
+  "Campaigns" : [
+    {
+      "Name": "Heroes Assemble",
+      "Levels": 7
+    },
+    {
+      "Name": "Nexus",
+      "Levels": 8
+    }
+  ]
+}
