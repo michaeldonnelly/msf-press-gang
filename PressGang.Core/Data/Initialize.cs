@@ -17,10 +17,10 @@ namespace PressGang.Core.Data
             new Store("Arena");
             new Store("War");
 
-            Campaign heroes = new Campaign("Heros Assemble");
-            new Campaign("Villains United");
-            new Campaign("Nexus");
-            Campaign mystic = new Campaign("Mystic Forces Rising");
+            Campaign heroes = new Campaign("Heros Assemble", 7);
+            new Campaign("Villains United", 7);
+            new Campaign("Nexus", 8);
+            Campaign mystic = new Campaign("Mystic Forces Rising", 3);
 
             List<CampaignNode> lcn = mystic.Nodes();
 
