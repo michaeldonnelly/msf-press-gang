@@ -9,6 +9,7 @@ namespace PressGang.Core.User
     {
         public CharacterPriorityList()
         {
+            Characters = new();
         }
 
         public Dictionary<int, Character> Characters { get; set; }
