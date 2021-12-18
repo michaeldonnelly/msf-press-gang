@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using PressGang.Core.System;
+using PressGang.Core.System.Location;
+using PressGang.Core.System.Mode;
 
 namespace PressGang.Core.User
 {
@@ -14,12 +16,13 @@ namespace PressGang.Core.User
 
         public Dictionary<int, Character> Characters { get; set; }
 
-        public List<Character> PriorityForMode(Type gameMode, List<Opportunity> opportunities)
+        public List<Character> ShoppingList(List<Opportunity> opportunities)
         {
+            Type locationType = typeof(CampaignNode);
             Dictionary<int, Character> shoppingList = new();
             foreach (Opportunity opportunity in opportunities)
             {
-                if (opportunity.ResourceLocation.GetType() == gameMode)
+                if (opportunity.ResourceLocation.GetType() == locationType)
                 {
                     var resource = opportunity.Resource;
                     if (resource.GetType() == typeof(CharacterShard))
