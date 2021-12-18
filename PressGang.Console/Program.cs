@@ -14,7 +14,7 @@ namespace PressGang.Console
             ConfigurationBuilder builder = (ConfigurationBuilder)new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            var configuration = builder.Build();
+            ConfigurationRoot configuration = (ConfigurationRoot)builder.Build();
             ConfigurationBinder.Bind(configuration, appSettings);
         }
 
