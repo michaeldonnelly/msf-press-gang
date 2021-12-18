@@ -7,17 +7,15 @@ namespace PressGang.Console
 {
     class Program
     {
-        static AppSettings appSettings = new AppSettings();
+        private static AppSettings appSettings = new AppSettings();
 
-        static void LoadAppSettings()
+        private static void LoadAppSettings()
         {
-            var builder = new ConfigurationBuilder()
+            ConfigurationBuilder builder = (ConfigurationBuilder)new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
             var configuration = builder.Build();
             ConfigurationBinder.Bind(configuration, appSettings);
-
-
         }
 
         static void Main(string[] args)
