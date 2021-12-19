@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PressGang.Core.System.Location;
 using PressGang.Core.System.Mode;
 
 namespace PressGang.Core.Data
@@ -49,21 +50,36 @@ namespace PressGang.Core.Data
 
         private static void GenerateCampaignLevels(PressGangContext context)
         {
-            var foo = context.Campaigns.ToList();
-            Debug.WriteLine(foo.ToString());
+            Debug.WriteLine("\r\n\r\n");
 
-            foreach (Campaign bar in context.Campaigns)
+            foreach (Campaign campaign in context.Campaigns)
             {
-                Debug.WriteLine(bar.Name);
-
+                Debug.WriteLine(campaign.Name);
+                for (int level = 1; level <= campaign.Levels; level++)
+                {
+                    for (int node = 1; node <= campaign.NodesPerLevel; node++)
+                    {
+                        try
+                        {
+                            _ = context.CampaignNodes.First<CampaignNode>(
+                                n => (
+                                    (n.Campaign == campaign)
+                                    && (n.Level == level)
+                                    && (n.Node == node)
+                                ));
+                        }
+                        catch(InvalidOperationException)
+                        {
+                            CampaignNode campaignNode = new(campaign, level, node);
+                            Debug.WriteLine("  " + campaignNode.Name);
+                            context.Add(campaignNode);
+                        }
+                    }
+                }
             }
+            context.SaveChanges();
+            Debug.WriteLine("\r\n\r\n");
 
-
-
-           // foreach (Campaign campaign in context.Campaigns)
-           // {
-           //     Debug.WriteLine(campaign.Name + " " + campaign.Levels.ToString());
-           // }
         }
 
         public static void ImportCharacters(PressGangContext context, string dataDirectory)
