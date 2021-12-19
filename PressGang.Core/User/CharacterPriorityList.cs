@@ -29,24 +29,19 @@ namespace PressGang.Core.User
                     if (resource.GetType() == typeof(CharacterShard))
                     {
                         Character character = ((CharacterShard)resource).Character;
-                        int priority;
-                        try
-                        {
-                            priority = Characters[character];
-                        }
-                        catch
-                        {
-                            continue;
-                        }
 
-                        if (shoppingList.ContainsKey(priority))
+                        if (Characters.ContainsKey(character))
                         {
-                            shoppingList[priority].Add(opportunity);
-                        }
-                        else
-                        {
-                            List<Opportunity> lo = new() { opportunity };
-                            shoppingList.Add(priority, lo);
+                            int priority = Characters[character];
+                            if (shoppingList.ContainsKey(priority))
+                            {
+                                shoppingList[priority].Add(opportunity);
+                            }
+                            else
+                            {
+                                List<Opportunity> lo = new() { opportunity };
+                                shoppingList.Add(priority, lo);
+                            }
                         }
 
                     }
