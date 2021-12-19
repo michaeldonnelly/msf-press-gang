@@ -37,7 +37,7 @@ namespace PressGang.Core.Data
             {
                 try
                 {
-                    Campaign _ = context.Campaigns.First<Campaign>(c => c.Name == campaign.Name);
+                    _ = context.Campaigns.First<Campaign>(c => c.Name == campaign.Name);
                 }
                 catch(InvalidOperationException)
                 {
