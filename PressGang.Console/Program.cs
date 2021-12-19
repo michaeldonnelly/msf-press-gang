@@ -33,7 +33,7 @@ namespace PressGang.Console
             Import.ImportAll(context, _appSettings.DataDirectory);
 
 
-            Debug.WriteLine(_appSettings.DataDirectory);
+            Debug.WriteLine(_appSettings.ConnectionString);
             string output = Core.Data.Initialize.System();
 
             Debug.WriteLine("\n\n");

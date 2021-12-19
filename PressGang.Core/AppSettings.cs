@@ -3,6 +3,7 @@ namespace PressGang.Console
 {
     public class AppSettings
     {
-       public string DataDirectory { set; get; }
+        public string ConnectionString { set; get; }
+        public string DataDirectory { set; get; }
     }
 }
