@@ -27,9 +27,10 @@ namespace PressGang.Console
             LoadAppSettings();
 
             DbContextOptionsBuilder<PressGangContext> optionsBuilder = new();
-            optionsBuilder.UseSqlite("foo");
+            optionsBuilder.UseSqlite(_appSettings.ConnectionString);
             DbContextOptions<PressGangContext> options = optionsBuilder.Options;
             PressGangContext context = new PressGangContext(options);
+            context.Database.EnsureCreated();
             Import.ImportAll(context, _appSettings.DataDirectory);
 
 
