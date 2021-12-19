@@ -19,17 +19,6 @@ namespace PressGang.Core.Data
             GenerateCampaignLevels(context);
         }
 
-        public static void ImportCampaigns(ModelBuilder modelBuilder, string dataDirectory)
-        {
-            string jsonString = File.ReadAllText(dataDirectory + "/campaigns.json");
-            CampaignList campaignList = JsonConvert.DeserializeObject<CampaignList>(jsonString);
-            foreach (Campaign campaign in campaignList.Campaigns)
-            {
-                modelBuilder.Entity<Campaign>().HasData(campaign);
-            }
-        }
-
-
         private static void ImportCampaigns(PressGangContext context, string dataDirectory)
         {
             string jsonString = File.ReadAllText(dataDirectory + "/campaigns.json");
