@@ -24,7 +24,10 @@ namespace PressGang.Console
 
         static void Main(string[] args)
         {
+            System.Console.WriteLine("Hello World!");
+
             LoadAppSettings();
+
 
             DbContextOptionsBuilder<PressGangContext> optionsBuilder = new();
             optionsBuilder.UseSqlite(_appSettings.ConnectionString);
@@ -41,7 +44,7 @@ namespace PressGang.Console
             Debug.WriteLine(output);
             Debug.WriteLine("\n\n");
 
-            System.Console.WriteLine("Hello World!");
+            System.Console.WriteLine("Done");
         }
     }
 }
