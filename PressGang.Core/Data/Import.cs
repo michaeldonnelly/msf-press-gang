@@ -10,7 +10,12 @@ namespace PressGang.Core.Data
 {
     public static class Import
     {
-        public static void ImportCampaigns(PressGangContext context, string dataDirectory)
+        public static void ImportAll(PressGangContext context, string dataDirectory)
+        {
+            ImportCampaigns(context, dataDirectory);
+        }
+
+        private static void ImportCampaigns(PressGangContext context, string dataDirectory)
         {
             string jsonString = File.ReadAllText(dataDirectory + "/campaigns.json");
             CampaignList campaignList = JsonConvert.DeserializeObject<CampaignList>(jsonString);

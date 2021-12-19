@@ -30,7 +30,7 @@ namespace PressGang.Console
             optionsBuilder.UseSqlite("foo");
             DbContextOptions<PressGangContext> options = optionsBuilder.Options;
             PressGangContext context = new PressGangContext(options);
-            Import.ImportCampaigns(context, _appSettings.DataDirectory);
+            Import.ImportAll(context, _appSettings.DataDirectory);
 
 
             Debug.WriteLine(_appSettings.DataDirectory);
