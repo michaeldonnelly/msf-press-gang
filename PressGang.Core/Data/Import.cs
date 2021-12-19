@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PressGang.Core.System.Mode;
 
@@ -14,8 +15,19 @@ namespace PressGang.Core.Data
         public static void ImportAll(PressGangContext context, string dataDirectory)
         {
             ImportCampaigns(context, dataDirectory);
-            //GenerateCampaignLevels(context);
+            GenerateCampaignLevels(context);
         }
+
+        public static void ImportCampaigns(ModelBuilder modelBuilder, string dataDirectory)
+        {
+            string jsonString = File.ReadAllText(dataDirectory + "/campaigns.json");
+            CampaignList campaignList = JsonConvert.DeserializeObject<CampaignList>(jsonString);
+            foreach (Campaign campaign in campaignList.Campaigns)
+            {
+                modelBuilder.Entity<Campaign>().HasData(campaign);
+            }
+        }
+
 
         private static void ImportCampaigns(PressGangContext context, string dataDirectory)
         {
@@ -23,7 +35,14 @@ namespace PressGang.Core.Data
             CampaignList campaignList = JsonConvert.DeserializeObject<CampaignList>(jsonString);
             foreach (Campaign campaign in campaignList.Campaigns)
             {
-                context.Add(campaign);
+                try
+                {
+                    Campaign _ = context.Campaigns.First<Campaign>(c => c.Name == campaign.Name);
+                }
+                catch(InvalidOperationException)
+                {
+                    context.Add(campaign);
+                }
             }
             context.SaveChanges();
         }
@@ -33,9 +52,9 @@ namespace PressGang.Core.Data
             var foo = context.Campaigns.ToList();
             Debug.WriteLine(foo.ToString());
 
-            foreach (var bar in context.Campaigns)
+            foreach (Campaign bar in context.Campaigns)
             {
-                Debug.WriteLine(bar.ToString());
+                Debug.WriteLine(bar.Name);
 
             }
 
