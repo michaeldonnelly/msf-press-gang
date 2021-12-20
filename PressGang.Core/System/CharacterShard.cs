@@ -14,6 +14,5 @@ namespace PressGang.Core.System
             Character = character; 
         }
 
-        public Character Character { get; set; }
     }
 }

@@ -24,9 +24,9 @@ namespace PressGang.Core.User
                 if (opportunity.ResourceLocation.GetType() == locationType)
                 {
                     Resource resource = opportunity.Resource;
-                    if (resource.GetType() == typeof(CharacterShard))
+                    if (resource.ResourceType == ResourceType.CharacterShard)
                     {
-                        Character character = ((CharacterShard)resource).Character;
+                        Character character = resource.Character;
 
                         if (Characters.ContainsKey(character))
                         {

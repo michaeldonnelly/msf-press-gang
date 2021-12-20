@@ -50,16 +50,16 @@ namespace PressGang.Core.Data
 
 
             Character cable = new Character("Cable");
-            CharacterShard cableShard = new CharacterShard(cable);
+            Resource cableShard = new Resource(cable);
 
             Character yondu = new Character("Yondu");
-            CharacterShard yonduShard = new CharacterShard(yondu);
+            Resource yonduShard = new Resource(yondu);
 
             Character danvers = new Character("Captain Marvel");
-            CharacterShard danversShard = new CharacterShard(danvers);
+            Resource danversShard = new Resource(danvers);
 
             Character ultimateSpidey = new Character("Spider-Man (Miles)");
-            CharacterShard ultimateSpideyShard = new CharacterShard(ultimateSpidey);
+            Resource ultimateSpideyShard = new Resource(ultimateSpidey);
 
             List<Opportunity> opportunities = new();
             opportunities.Add(new Opportunity()
