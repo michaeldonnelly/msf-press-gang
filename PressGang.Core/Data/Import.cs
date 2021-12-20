@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
+using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,7 @@ namespace PressGang.Core.Data
         {
             ImportCampaigns(context, dataDirectory);
             GenerateCampaignLevels(context);
+            LoadCharactersAndLocations(dataDirectory);
         }
 
         private static void ImportCampaigns(PressGangContext context, string dataDirectory)
@@ -69,7 +72,20 @@ namespace PressGang.Core.Data
 
         private static void LoadCharactersAndLocations(string dataDirectory)
         {
+            string path = dataDirectory + "/shard-locations.csv";
+            _ = ReadCharacterLocations(path);
 
+        }
+
+
+        private static List<CharacterLocationModel> ReadCharacterLocations(string path)
+        {
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                List<CharacterLocationModel> characterLocations = csv.GetRecords<CharacterLocationModel>().ToList<CharacterLocationModel>();
+                return characterLocations;
+            }
         }
 
         public static void ImportCharacters(PressGangContext context, string dataDirectory)
@@ -86,7 +102,7 @@ namespace PressGang.Core.Data
         public List<Campaign> Campaigns { get; set; }
     }
 
-    class CharacterLocation
+    class CharacterLocationModel
     {
         [Name(CsvHeaders.CharacterName)]
         public string CharacterName { get; set; }
@@ -95,10 +111,10 @@ namespace PressGang.Core.Data
         public string Location { get; set; }
 
         [Name(CsvHeaders.CampaignLevel)]
-        public int CampaignLevel { get; set; }
+        public int? CampaignLevel { get; set; }
 
         [Name(CsvHeaders.CampaignNode)]
-        public int CampaignNode { get; set; }
+        public int? CampaignNode { get; set; }
 
         [Name(CsvHeaders.Cost)]
         public int Cost { get; set; }
@@ -113,7 +129,7 @@ namespace PressGang.Core.Data
         public const string Cost = "Cost"; 
     }
 
-    sealed class CharacterLocationMap : ClassMap<CharacterLocation>
+    sealed class CharacterLocationMap : ClassMap<CharacterLocationModel>
     {
         public CharacterLocationMap()
         {
