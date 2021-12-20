@@ -73,7 +73,8 @@ namespace PressGang.Core.Data
         private static void LoadCharactersAndLocations(string dataDirectory)
         {
             string path = dataDirectory + "/shard-locations.csv";
-            _ = ReadCharacterLocations(path);
+            List<CharacterLocationModel> characterLocations = ReadCharacterLocations(path);
+            Debug.WriteLine(characterLocations.Count);
 
         }
 
@@ -88,13 +89,7 @@ namespace PressGang.Core.Data
             }
         }
 
-        public static void ImportCharacters(PressGangContext context, string dataDirectory)
-        {
-            string jsonString = File.ReadAllText(dataDirectory + "/characters.json");
-
-        }
-
-        
+          
     }
 
     class CampaignList
