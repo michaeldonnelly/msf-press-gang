@@ -125,6 +125,7 @@ namespace PressGang.Core.Data
 
         private static Location FindLocation(PressGangContext context, CharacterLocation characterLocation)
         {
+            // TODO: Do we need this if we have all the stores built?
             try
             {
                 if (characterLocation.CampaignLevel != null)
