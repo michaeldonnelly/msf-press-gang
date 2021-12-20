@@ -11,7 +11,7 @@ namespace PressGang.Core.System.Location
         public ResourceLocation(string name, Type type)
         {
             Name = name;
-            LocationType = type.Name;
+            LocationType = type.FullName;
         }
 
         public int Id { get; set; }
