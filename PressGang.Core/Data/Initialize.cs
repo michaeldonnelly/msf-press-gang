@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using PressGang.Core.System;
-using PressGang.Core.System.Location;
 using PressGang.Core.System.Mode;
 using PressGang.Core.User;
 
@@ -22,28 +21,28 @@ namespace PressGang.Core.Data
             new Campaign("Nexus", 8);
             Campaign mystic = new Campaign("Mystic Forces Rising", 3);
 
-            List<CampaignNode> lcn = mystic.Nodes();
+            List<ResourceLocation> lcn = mystic.Nodes();
 
-            CampaignNode mystic1n9 = new CampaignNode("mystic1n9")
+            ResourceLocation mystic1n9 = new ResourceLocation("mystic1n9")
             {
                 Campaign = mystic,
                 Level = 1,
                 Node = 9
             };
 
-            CampaignNode heroes2n6 = new CampaignNode("heroes2n6")
+            ResourceLocation heroes2n6 = new ResourceLocation("heroes2n6")
             {
                 Campaign = heroes,
                 Level = 2,
                 Node = 6
             };
-            CampaignNode heroes3n3 = new CampaignNode("heroes3n3")
+            ResourceLocation heroes3n3 = new ResourceLocation("heroes3n3")
             {
                 Campaign = heroes,
                 Level = 3,
                 Node = 3
             };
-            CampaignNode heroes6n9 = new CampaignNode("heroes6n9")
+            ResourceLocation heroes6n9 = new ResourceLocation("heroes6n9")
             {
                 Campaign = heroes,
                 Level = 6,

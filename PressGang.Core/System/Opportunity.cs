@@ -1,5 +1,4 @@
 ﻿using System;
-using PressGang.Core.System.Location;
 
 namespace PressGang.Core.System
 {

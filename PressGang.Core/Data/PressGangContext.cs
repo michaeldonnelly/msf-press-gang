@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using PressGang.Core.System;
-using PressGang.Core.System.Location;
 using PressGang.Core.System.Mode;
 
 namespace PressGang.Core.Data

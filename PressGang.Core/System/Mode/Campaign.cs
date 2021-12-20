@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PressGang.Core.System.Location;
 
 namespace PressGang.Core.System.Mode
 {
@@ -19,14 +18,14 @@ namespace PressGang.Core.System.Mode
 
         public int NodesPerLevel { get; set; }
 
-        public List<CampaignNode> Nodes()
+        public List<ResourceLocation> Nodes()
         {
-            List<CampaignNode> nodes = new();
+            List<ResourceLocation> nodes = new();
             for (int level = 1; level <= Levels; level++)
             {
                 for (int node = 1; node <= NodesPerLevel; node++)
                 {
-                    CampaignNode campaignNode = new(this, level, node);
+                    ResourceLocation campaignNode = new(this, level, node);
                     nodes.Add(campaignNode);
                 }
             }
