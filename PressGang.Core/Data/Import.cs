@@ -91,8 +91,10 @@ namespace PressGang.Core.Data
                 catch (InvalidOperationException)
                 {
                     Character character = new(characterName);
+                    CharacterShard characterShard = new(character);
                     Debug.WriteLine(characterName);
                     context.Add(character);
+                    context.Add(characterShard);
                     context.SaveChanges();
                 }
             }
