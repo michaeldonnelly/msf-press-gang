@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
+using CsvHelper.Configuration.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PressGang.Core.System.Location;
@@ -65,6 +66,11 @@ namespace PressGang.Core.Data
             context.SaveChanges();
         }
 
+        private static void LoadCharactersAndLocations(string dataDirectory)
+        {
+
+        }
+
         public static void ImportCharacters(PressGangContext context, string dataDirectory)
         {
             string jsonString = File.ReadAllText(dataDirectory + "/characters.json");
@@ -77,5 +83,32 @@ namespace PressGang.Core.Data
     class CampaignList
     {
         public List<Campaign> Campaigns { get; set; }
+    }
+
+    class CharacterLocation
+    {
+        [Name(CsvHeaders.CharacterName)]
+        public string CharacterName { get; set; }
+
+        [Name(CsvHeaders.Location)]
+        public string Location { get; set; }
+
+        [Name(CsvHeaders.CampaignLevel)]
+        public int CampaignLevel { get; set; }
+
+        [Name(CsvHeaders.CampaignNode)]
+        public int CampaignNode { get; set; }
+
+        [Name(CsvHeaders.Cost)]
+        public int Cost { get; set; }
+    }
+
+    static class CsvHeaders
+    {
+        public const string CharacterName = "Character"; 
+        public const string Location = "Location"; 
+        public const string CampaignLevel = "Level"; 
+        public const string CampaignNode = "Node"; 
+        public const string Cost = "Cost"; 
     }
 }
