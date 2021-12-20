@@ -11,7 +11,7 @@ namespace PressGang.Console
     class Program
     {
         private static AppSettings _appSettings = new AppSettings();
-        private readonly PressGangContext _context;
+        //private readonly PressGangContext _context;
 
         private static void LoadAppSettings()
         {
