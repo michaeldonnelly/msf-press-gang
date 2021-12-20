@@ -21,7 +21,7 @@ namespace PressGang.Core.Data
         {
             ImportCampaigns(context, dataDirectory);
             GenerateCampaignLevels(context);
-            LoadCharactersAndLocations(dataDirectory);
+            ImportCharactersAndLocations(context, dataDirectory);
         }
 
         private static void ImportCampaigns(PressGangContext context, string dataDirectory)
@@ -70,12 +70,11 @@ namespace PressGang.Core.Data
             context.SaveChanges();
         }
 
-        private static void LoadCharactersAndLocations(string dataDirectory)
+        private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
         {
             string path = dataDirectory + "/shard-locations.csv";
             List<CharacterLocation> characterLocations = ReadCharacterLocations(path);
             Debug.WriteLine(characterLocations.Count);
-
         }
 
 
