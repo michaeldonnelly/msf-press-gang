@@ -11,19 +11,19 @@ namespace PressGang.Core.System
         public Opportunity(Resource resource, Location resourceLocation)
         {
             Resource = resource;
-            ResourceLocation = resourceLocation;
+            Location = resourceLocation;
         }
 
         public int Id { get; set; }
 
         public Resource Resource { get; set; }
 
-        public Location ResourceLocation { get; set; }
+        public Location Location { get; set; }
 
         public override string ToString()
         {
             string name = Resource.Name;
-            string location = ResourceLocation.Name;
+            string location = Location.Name;
             return name + " at " + location;
         }
     }

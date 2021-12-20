@@ -21,7 +21,7 @@ namespace PressGang.Core.User
 //            Dictionary<int, Opportunity> shoppingList = new();
             foreach (Opportunity opportunity in opportunities)
             {
-                if (opportunity.ResourceLocation.GetType() == locationType)
+                if (opportunity.Location.GetType() == locationType)
                 {
                     Resource resource = opportunity.Resource;
                     if (resource.ResourceType == ResourceType.CharacterShard)

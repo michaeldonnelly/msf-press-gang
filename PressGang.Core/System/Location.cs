@@ -22,7 +22,6 @@ namespace PressGang.Core.System
             LocationType = LocationType.CampaignNode;
         }
 
-
         public int Id { get; set; }
 
         public string Name { get; set; }
