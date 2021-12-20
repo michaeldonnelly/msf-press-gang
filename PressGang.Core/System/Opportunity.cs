@@ -9,6 +9,12 @@ namespace PressGang.Core.System
         {
         }
 
+        public Opportunity(Resource resource, ResourceLocation resourceLocation)
+        {
+            Resource = resource;
+            ResourceLocation = resourceLocation;
+        }
+
         public int Id { get; set; }
 
         public Resource Resource { get; set; }
