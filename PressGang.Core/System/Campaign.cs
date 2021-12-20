@@ -18,6 +18,8 @@ namespace PressGang.Core.System
 
         public string Name { get; set; }
 
+        public string NickName { get; set; }
+
         public int Levels { get; set; }
 
         public int NodesPerLevel { get; set; }

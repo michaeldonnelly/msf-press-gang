@@ -2,7 +2,8 @@
   "Campaigns" : [
     {
       "Name": "Heroes Assemble",
-      "Levels": 7
+      "Levels": 7,
+      "NickName": "Heroes"
     },
     {
       "Name": "Villains United",
@@ -19,6 +20,6 @@
     {
       "Name": "Mystic Forces Rising",
       "Levels": 3
-    },    
+    },
   ]
 }

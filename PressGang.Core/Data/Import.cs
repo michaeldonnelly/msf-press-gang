@@ -124,7 +124,7 @@ namespace PressGang.Core.Data
         {
             if (characterLocation.CampaignLevel != null)
             {
-                Campaign campaign = context.Campaigns.First(c => c.Name == characterLocation.Location);
+                Campaign campaign = context.Campaigns.First(c => c.NickName == characterLocation.Location);
                 Location location = context.Locations.First(l =>
                     (l.LocationType == LocationType.CampaignNode)
                     && (l.Campaign == campaign)
