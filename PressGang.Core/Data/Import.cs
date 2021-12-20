@@ -20,6 +20,7 @@ namespace PressGang.Core.Data
         {
             ImportCampaigns(context, dataDirectory);
             GenerateCampaignLevels(context);
+            ImportStores(context, dataDirectory);
             ImportCharactersAndLocations(context, dataDirectory);
         }
 
@@ -39,6 +40,30 @@ namespace PressGang.Core.Data
                 }
             }
             context.SaveChanges();
+        }
+
+        private static void ImportStores(PressGangContext context, string dataDirectory)
+        {
+            string jsonString = File.ReadAllText(dataDirectory + "/stores.json");
+            StoreList storeList = JsonConvert.DeserializeObject<StoreList>(jsonString);
+            foreach (Location store in storeList.Stores)
+            {
+                store.LocationType = LocationType.Store;
+                try
+                {
+                    _ = context.Locations.First(l =>
+                        (l.LocationType == LocationType.Store)
+                        &&(l.Name == store.Name)
+                    );
+                }
+                catch (InvalidOperationException)
+                {
+                    Debug.WriteLine(store.Name);
+                    context.Add(store);
+                }
+            }
+            context.SaveChanges();
+
         }
 
         private static void GenerateCampaignLevels(PressGangContext context)
@@ -171,6 +196,11 @@ namespace PressGang.Core.Data
     class CampaignList
     {
         public List<Campaign> Campaigns { get; set; }
+    }
+
+    class StoreList
+    {
+        public List<Location> Stores { get; set; }
     }
 
     class CharacterLocation
