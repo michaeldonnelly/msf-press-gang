@@ -104,42 +104,52 @@ namespace PressGang.Core.Data
                 }
 
                 Location location = FindLocation(context, characterLocation);
-                try
+                if (location != null)
                 {
-                    _ = context.Opportunties.First(o =>
-                        (o.Resource == characterShard)
-                        && (o.ResourceLocation == location)
-                    );
-                }
-                catch
-                {
-                    Opportunity opportunity = new(characterShard, location);
-                    context.Add(opportunity);
-                    context.SaveChanges();
+                    try
+                    {
+                        _ = context.Opportunties.First(o =>
+                            (o.Resource == characterShard)
+                            && (o.ResourceLocation == location)
+                        );
+                    }
+                    catch
+                    {
+                        Opportunity opportunity = new(characterShard, location);
+                        context.Add(opportunity);
+                        context.SaveChanges();
+                    }
                 }
             }
         }
 
         private static Location FindLocation(PressGangContext context, CharacterLocation characterLocation)
         {
-            if (characterLocation.CampaignLevel != null)
+            try
             {
-                Campaign campaign = context.Campaigns.First(c => c.NickName == characterLocation.Location);
-                Location location = context.Locations.First(l =>
-                    (l.LocationType == LocationType.CampaignNode)
-                    && (l.Campaign == campaign)
-                    && (l.Level == (int)characterLocation.CampaignLevel)
-                    && (l.Node == (int)characterLocation.CampaignNode)
-                );
-                return location;
+                if (characterLocation.CampaignLevel != null)
+                {
+                    Campaign campaign = context.Campaigns.First(c => c.NickName == characterLocation.Location);
+                    Location location = context.Locations.First(l =>
+                        (l.LocationType == LocationType.CampaignNode)
+                        && (l.Campaign == campaign)
+                        && (l.Level == (int)characterLocation.CampaignLevel)
+                        && (l.Node == (int)characterLocation.CampaignNode)
+                    );
+                    return location;
+                }
+                else
+                {
+                    Location location = context.Locations.First(l =>
+                        (l.LocationType != LocationType.CampaignNode)
+                        && (l.Name == characterLocation.Location)
+                    );
+                    return location;
+                }
             }
-            else
+            catch(InvalidOperationException)
             {
-                Location location = context.Locations.First(l =>
-                    (l.LocationType != LocationType.CampaignNode)
-                    && (l.Name == characterLocation.Location)
-                );
-                return location;
+                return null;
             }
         }
 
