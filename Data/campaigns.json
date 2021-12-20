@@ -7,19 +7,23 @@
     },
     {
       "Name": "Villains United",
-      "Levels": 7
+      "Levels": 7,
+      "NickName": "Villains"
     },
     {
       "Name": "Nexus",
-      "Levels": 8
+      "Levels": 8,
+      "NickName": "Nexus"
     },
     {
       "Name": "Cosmic Conflicts",
-      "Levels": 3
+      "Levels": 3,
+      "NickName": "Cosmic"
     },
     {
       "Name": "Mystic Forces Rising",
-      "Levels": 3
+      "Levels": 3,
+      "NickName": "Mystic"
     },
   ]
 }
