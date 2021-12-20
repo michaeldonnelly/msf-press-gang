@@ -103,7 +103,20 @@ namespace PressGang.Core.Data
                     context.SaveChanges();
                 }
 
-
+                Location location = FindLocation(context, characterLocation);
+                try
+                {
+                    _ = context.Opportunties.First(o =>
+                        (o.Resource == characterShard)
+                        && (o.ResourceLocation == location)
+                    );
+                }
+                catch
+                {
+                    Opportunity opportunity = new(characterShard, location);
+                    context.Add(opportunity);
+                    context.SaveChanges();
+                }
             }
         }
 
