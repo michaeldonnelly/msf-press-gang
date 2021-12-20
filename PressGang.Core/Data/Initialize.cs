@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using PressGang.Core.System;
 using PressGang.Core.User;
 
@@ -15,6 +16,7 @@ namespace PressGang.Core.Data
                 Debug.WriteLine(opportunity.ToString());
             }
 
+#if False
             new Location("Main");
             new Location("Raid");
             Location blitzStore = new Location("Blitz");
@@ -93,10 +95,13 @@ namespace PressGang.Core.Data
                 Resource = danversShard,
                 ResourceLocation = heroes6n9
             });
+#endif
 
 
 
-
+            Character cable = context.Characters.First(c => c.Name == "Cable");
+            Character yondu = context.Characters.First(c => c.Name == "Yondu");
+            Character ultimateSpidey = context.Characters.First(c => c.Name == "Spider-Man [Miles]");
 
             CharacterPriorityList foo = new();
             foo.Characters.Add(cable, 10);
@@ -104,7 +109,7 @@ namespace PressGang.Core.Data
             foo.Characters.Add(ultimateSpidey, 99);
             //foo.Characters.Add(30, danvers);
 
-            List<Opportunity> shoppingList = foo.ShoppingList(opportunities);
+            List<Opportunity> shoppingList = foo.ShoppingList(context.Opportunties.ToList<Opportunity>());
 
             string bar = "";
             int lineNumber = 0;
