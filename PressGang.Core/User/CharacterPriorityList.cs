@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PressGang.Core.Data;
 using PressGang.Core.System;
 
 namespace PressGang.Core.User
@@ -14,8 +15,9 @@ namespace PressGang.Core.User
 
         public Dictionary<Character, int> Characters { get; set; }
 
-        public List<Opportunity> ShoppingList(List<Opportunity> opportunities)
+        public List<Opportunity> ShoppingList(PressGangContext context)
         {
+            List<Opportunity> opportunities = context.Opportunties.ToList<Opportunity>();
             Type locationType = typeof(Location);
             Dictionary<int, List<Opportunity>> shoppingList = new();
 //            Dictionary<int, Opportunity> shoppingList = new();

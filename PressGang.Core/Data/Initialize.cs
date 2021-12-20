@@ -29,7 +29,7 @@ namespace PressGang.Core.Data
             foo.Characters.Add(ultimateSpidey, 99);
             //foo.Characters.Add(30, danvers);
 
-            List<Opportunity> shoppingList = foo.ShoppingList(context.Opportunties.ToList<Opportunity>());
+            List<Opportunity> shoppingList = foo.ShoppingList(context);
 
             string bar = "";
             int lineNumber = 0;
