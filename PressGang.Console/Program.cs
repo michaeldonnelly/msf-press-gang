@@ -38,7 +38,7 @@ namespace PressGang.Console
 
 
             Debug.WriteLine(_appSettings.ConnectionString);
-            string output = Core.Data.Initialize.System();
+            string output = Core.Data.Initialize.System(context);
 
             Debug.WriteLine("\n\n");
             Debug.WriteLine(output);

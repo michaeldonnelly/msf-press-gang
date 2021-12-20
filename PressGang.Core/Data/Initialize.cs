@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using PressGang.Core.System;
 using PressGang.Core.User;
 
@@ -7,8 +8,13 @@ namespace PressGang.Core.Data
 {
     public static class Initialize
     {
-        public static string System()
+        public static string System(PressGangContext context)
         {
+            foreach (Opportunity opportunity in context.Opportunties)
+            {
+                Debug.WriteLine(opportunity.ToString());
+            }
+
             new Location("Main");
             new Location("Raid");
             Location blitzStore = new Location("Blitz");
