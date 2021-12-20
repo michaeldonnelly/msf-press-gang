@@ -83,19 +83,50 @@ namespace PressGang.Core.Data
             foreach(CharacterLocation characterLocation in characterLocations)
             {
                 string characterName = characterLocation.CharacterName;
+                Resource characterShard;
+
                 try
                 {
-                    _ = context.Characters.First(c => c.Name == characterName);
+                    Character character = context.Characters.First(c => c.Name == characterName);
+                    characterShard = context.Resources.First(r =>
+                        (r.ResourceType == ResourceType.CharacterShard)
+                        && (r.Character == character)
+                    );
                 }
                 catch (InvalidOperationException)
                 {
                     Character character = new(characterName);
-                    Resource characterShard = new(character);
+                    characterShard = new(character);
                     Debug.WriteLine(characterName);
                     context.Add(character);
                     context.Add(characterShard);
                     context.SaveChanges();
                 }
+
+
+            }
+        }
+
+        private static Location FindLocation(PressGangContext context, CharacterLocation characterLocation)
+        {
+            if (characterLocation.CampaignLevel != null)
+            {
+                Campaign campaign = context.Campaigns.First(c => c.Name == characterLocation.Location);
+                Location location = context.Locations.First(l =>
+                    (l.LocationType == LocationType.CampaignNode)
+                    && (l.Campaign == campaign)
+                    && (l.Level == (int)characterLocation.CampaignLevel)
+                    && (l.Node == (int)characterLocation.CampaignNode)
+                );
+                return location;
+            }
+            else
+            {
+                Location location = context.Locations.First(l =>
+                    (l.LocationType != LocationType.CampaignNode)
+                    && (l.Name == characterLocation.Location)
+                );
+                return location;
             }
         }
 
