@@ -2,6 +2,5 @@
 .vs
 */bin/*
 */obj/*
-
 .DS_Store
-/Data/*
+*.sqlite3
