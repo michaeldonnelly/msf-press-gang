@@ -11,7 +11,7 @@ namespace PressGang.Core.Data
     {
         public static string System(PressGangContext context)
         {
-            
+
             foreach (Opportunity opportunity in context.Opportunties)
             {
                 Debug.WriteLine(opportunity.ToString());

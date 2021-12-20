@@ -135,7 +135,7 @@ namespace PressGang.Core.Data
                     {
                         _ = context.Opportunties.First(o =>
                             (o.Resource == characterShard)
-                            && (o.ResourceLocation == location)
+                            && (o.Location == location)
                         );
                     }
                     catch
