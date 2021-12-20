@@ -15,7 +15,7 @@ namespace PressGang.Core.Data
 
         public DbSet<Location> Locations { get; set; }
         public DbSet<Resource> Resources { get; set; }
-        //public DbSet<Opportunity> Opportunties { get; set; }
+        public DbSet<Opportunity> Opportunties { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
