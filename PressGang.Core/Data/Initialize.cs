@@ -11,11 +11,11 @@ namespace PressGang.Core.Data
     {
         public static string System()
         {
-            new Store("Main");
-            new Store("Raid");
-            Store blitzStore = new Store("Blitz");
-            new Store("Arena");
-            new Store("War");
+            new ResourceLocation("Main");
+            new ResourceLocation("Raid");
+            ResourceLocation blitzStore = new ResourceLocation("Blitz");
+            new ResourceLocation("Arena");
+            new ResourceLocation("War");
 
             Campaign heroes = new Campaign("Heros Assemble", 7);
             new Campaign("Villains United", 7);
