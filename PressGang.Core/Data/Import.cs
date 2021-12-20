@@ -123,16 +123,4 @@ namespace PressGang.Core.Data
         public const string CampaignNode = "Node"; 
         public const string Cost = "Cost"; 
     }
-
-    sealed class CharacterLocationMap : ClassMap<CharacterLocationModel>
-    {
-        public CharacterLocationMap()
-        {
-            Map(m => m.CharacterName).Name(CsvHeaders.CharacterName);
-            Map(m => m.Location).Name(CsvHeaders.Location);
-            Map(m => m.CampaignLevel).Name(CsvHeaders.CampaignLevel);
-            Map(m => m.CampaignNode).Name(CsvHeaders.CampaignNode);
-            Map(m => m.Cost).Name(CsvHeaders.Cost);
-        }
-    }
 }
