@@ -73,18 +73,18 @@ namespace PressGang.Core.Data
         private static void LoadCharactersAndLocations(string dataDirectory)
         {
             string path = dataDirectory + "/shard-locations.csv";
-            List<CharacterLocationModel> characterLocations = ReadCharacterLocations(path);
+            List<CharacterLocation> characterLocations = ReadCharacterLocations(path);
             Debug.WriteLine(characterLocations.Count);
 
         }
 
 
-        private static List<CharacterLocationModel> ReadCharacterLocations(string path)
+        private static List<CharacterLocation> ReadCharacterLocations(string path)
         {
             using (var reader = new StreamReader(path))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                List<CharacterLocationModel> characterLocations = csv.GetRecords<CharacterLocationModel>().ToList<CharacterLocationModel>();
+                List<CharacterLocation> characterLocations = csv.GetRecords<CharacterLocation>().ToList<CharacterLocation>();
                 return characterLocations;
             }
         }
@@ -97,7 +97,7 @@ namespace PressGang.Core.Data
         public List<Campaign> Campaigns { get; set; }
     }
 
-    class CharacterLocationModel
+    class CharacterLocation
     {
         [Name(CsvHeaders.CharacterName)]
         public string CharacterName { get; set; }
