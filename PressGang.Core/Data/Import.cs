@@ -93,9 +93,9 @@ namespace PressGang.Core.Data
                     Character character = new(characterName);
                     Debug.WriteLine(characterName);
                     context.Add(character);
+                    context.SaveChanges();
                 }
             }
-            context.SaveChanges();
         }
 
 
