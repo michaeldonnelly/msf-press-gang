@@ -21,7 +21,7 @@ namespace PressGang.Core.Data
         public static void ImportAll(PressGangContext context, string dataDirectory)
         {
             ImportCampaigns(context, dataDirectory);
-            GenerateCampaignLevels(context);
+            //GenerateCampaignLevels(context);
             ImportCharactersAndLocations(context, dataDirectory);
         }
 
@@ -43,33 +43,33 @@ namespace PressGang.Core.Data
             context.SaveChanges();
         }
 
-        private static void GenerateCampaignLevels(PressGangContext context)
-        {
-            foreach (Campaign campaign in context.Campaigns)
-            {
-                for (int level = 1; level <= campaign.Levels; level++)
-                {
-                    for (int node = 1; node <= campaign.NodesPerLevel; node++)
-                    {
-                        try
-                        {
-                            _ = context.CampaignNodes.First<CampaignNode>(
-                                n => (
-                                    (n.Campaign == campaign)
-                                    && (n.Level == level)
-                                    && (n.Node == node)
-                                ));
-                        }
-                        catch(InvalidOperationException)
-                        {
-                            CampaignNode campaignNode = new(campaign, level, node);
-                            context.Add(campaignNode);
-                        }
-                    }
-                }
-            }
-            context.SaveChanges();
-        }
+        //private static void GenerateCampaignLevels(PressGangContext context)
+        //{
+        //    foreach (Campaign campaign in context.Campaigns)
+        //    {
+        //        for (int level = 1; level <= campaign.Levels; level++)
+        //        {
+        //            for (int node = 1; node <= campaign.NodesPerLevel; node++)
+        //            {
+        //                try
+        //                {
+        //                    _ = context.CampaignNodes.First<CampaignNode>(
+        //                        n => (
+        //                            (n.Campaign == campaign)
+        //                            && (n.Level == level)
+        //                            && (n.Node == node)
+        //                        ));
+        //                }
+        //                catch(InvalidOperationException)
+        //                {
+        //                    CampaignNode campaignNode = new(campaign, level, node);
+        //                    context.Add(campaignNode);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    context.SaveChanges();
+        //}
 
         private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
         {
@@ -94,7 +94,7 @@ namespace PressGang.Core.Data
                     CharacterShard characterShard = new(character);
                     Debug.WriteLine(characterName);
                     context.Add(character);
-                    context.Add(characterShard);
+                    //context.Add(characterShard);
                     context.SaveChanges();
                 }
             }
