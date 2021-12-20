@@ -24,6 +24,10 @@ namespace PressGang.Core.System
         {
             string name = Resource.Name;
             string location = Location.Name;
+            if (Location.LocationType == LocationType.Store)
+            {
+                location += " Store";
+            }
             return name + " at " + location;
         }
     }
