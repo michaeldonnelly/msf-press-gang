@@ -93,7 +93,7 @@ namespace PressGang.Core.Data
                     Resource characterShard = new(character);
                     Debug.WriteLine(characterName);
                     context.Add(character);
-                    //context.Add(characterShard);
+                    context.Add(characterShard);
                     context.SaveChanges();
                 }
             }
