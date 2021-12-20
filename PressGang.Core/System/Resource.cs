@@ -10,7 +10,7 @@ namespace PressGang.Core.System
 
         public Resource(Character character) 
         {
-            this.Name = character.Name + " Shard";
+            this.Name = character.Name + " shard";
             Character = character;
             ResourceType = ResourceType.CharacterShard;
         }

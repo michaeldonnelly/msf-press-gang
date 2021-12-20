@@ -7,6 +7,7 @@ namespace PressGang.Core.System
     {
         public Campaign(string name, int levels = 0) 
         {
+            Name = name;
             if (levels != 0)
             {
                 Levels = levels;
