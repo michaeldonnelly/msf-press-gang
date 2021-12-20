@@ -15,12 +15,15 @@ namespace PressGang.Core.System
             Campaign = campaign;
             Level = level;
             Node = node;
+            LocationType = LocationType.CampaignNode;
         }
 
 
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public LocationType LocationType { get; set; }
 
         public Campaign Campaign { get; set; }
 
@@ -33,5 +36,10 @@ namespace PressGang.Core.System
             return String.Format("{0} {1}-{2}", campaignName, level.ToString(), node.ToString());
         }
 
+    }
+
+    public enum LocationType
+    {
+        CampaignNode
     }
 }
