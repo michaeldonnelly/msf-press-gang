@@ -23,7 +23,7 @@ namespace PressGang.Core.System
         public override string ToString()
         {
             string name = Resource.Name;
-            string location = ResourceLocation.ToString();
+            string location = ResourceLocation.Name;
             return name + " at " + location;
         }
     }
