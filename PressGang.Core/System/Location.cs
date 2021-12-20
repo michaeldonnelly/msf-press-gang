@@ -4,6 +4,10 @@ namespace PressGang.Core.System
 {
     public class Location
     {
+        public Location()
+        {
+        }
+
         public Location(string name)
         {
             Name = name;
@@ -40,6 +44,7 @@ namespace PressGang.Core.System
 
     public enum LocationType
     {
-        CampaignNode
+        CampaignNode,
+        Store
     }
 }
