@@ -5,11 +5,11 @@ namespace PressGang.Core.System.Location
 {
     public class CampaignNode : ResourceLocation
     {
-        public CampaignNode(string name) : base(name)
+        public CampaignNode(string name) : base(name, typeof(CampaignNode))
         {
         }
 
-        public CampaignNode(Campaign campaign, int level, int node) : base(NodeToString(campaign.Name, level, node))
+        public CampaignNode(Campaign campaign, int level, int node) : base(NodeToString(campaign.Name, level, node), typeof(CampaignNode))
         {
             Campaign = campaign;
             Level = level;
