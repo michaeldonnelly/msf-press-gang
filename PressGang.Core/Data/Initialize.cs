@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using PressGang.Core.System;
-using PressGang.Core.System.Mode;
 using PressGang.Core.User;
 
 namespace PressGang.Core.Data
@@ -10,39 +9,39 @@ namespace PressGang.Core.Data
     {
         public static string System()
         {
-            new ResourceLocation("Main");
-            new ResourceLocation("Raid");
-            ResourceLocation blitzStore = new ResourceLocation("Blitz");
-            new ResourceLocation("Arena");
-            new ResourceLocation("War");
+            new Location("Main");
+            new Location("Raid");
+            Location blitzStore = new Location("Blitz");
+            new Location("Arena");
+            new Location("War");
 
             Campaign heroes = new Campaign("Heros Assemble", 7);
             new Campaign("Villains United", 7);
             new Campaign("Nexus", 8);
             Campaign mystic = new Campaign("Mystic Forces Rising", 3);
 
-            List<ResourceLocation> lcn = mystic.Nodes();
+            List<Location> lcn = mystic.Nodes();
 
-            ResourceLocation mystic1n9 = new ResourceLocation("mystic1n9")
+            Location mystic1n9 = new Location("mystic1n9")
             {
                 Campaign = mystic,
                 Level = 1,
                 Node = 9
             };
 
-            ResourceLocation heroes2n6 = new ResourceLocation("heroes2n6")
+            Location heroes2n6 = new Location("heroes2n6")
             {
                 Campaign = heroes,
                 Level = 2,
                 Node = 6
             };
-            ResourceLocation heroes3n3 = new ResourceLocation("heroes3n3")
+            Location heroes3n3 = new Location("heroes3n3")
             {
                 Campaign = heroes,
                 Level = 3,
                 Node = 3
             };
-            ResourceLocation heroes6n9 = new ResourceLocation("heroes6n9")
+            Location heroes6n9 = new Location("heroes6n9")
             {
                 Campaign = heroes,
                 Level = 6,

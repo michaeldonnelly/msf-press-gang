@@ -8,7 +8,7 @@ namespace PressGang.Core.System
         {
         }
 
-        public Opportunity(Resource resource, ResourceLocation resourceLocation)
+        public Opportunity(Resource resource, Location resourceLocation)
         {
             Resource = resource;
             ResourceLocation = resourceLocation;
@@ -18,7 +18,7 @@ namespace PressGang.Core.System
 
         public Resource Resource { get; set; }
 
-        public ResourceLocation ResourceLocation { get; set; }
+        public Location ResourceLocation { get; set; }
 
         public override string ToString()
         {

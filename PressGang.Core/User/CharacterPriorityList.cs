@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using PressGang.Core.System;
-using PressGang.Core.System.Mode;
 
 namespace PressGang.Core.User
 {
@@ -17,7 +16,7 @@ namespace PressGang.Core.User
 
         public List<Opportunity> ShoppingList(List<Opportunity> opportunities)
         {
-            Type locationType = typeof(ResourceLocation);
+            Type locationType = typeof(Location);
             Dictionary<int, List<Opportunity>> shoppingList = new();
 //            Dictionary<int, Opportunity> shoppingList = new();
             foreach (Opportunity opportunity in opportunities)

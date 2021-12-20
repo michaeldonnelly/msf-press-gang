@@ -12,6 +12,6 @@ namespace PressGang.Core.System
 
         public string Name { get; set; }
 
-        public ResourceLocation ResourceLocation { get; set; }
+        public Location ResourceLocation { get; set; }
     }
 }

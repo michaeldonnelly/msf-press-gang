@@ -1,16 +1,15 @@
 ﻿using System;
-using PressGang.Core.System.Mode;
 
 namespace PressGang.Core.System
 {
-    public class ResourceLocation
+    public class Location
     {
-        public ResourceLocation(string name)
+        public Location(string name)
         {
             Name = name;
         }
 
-        public ResourceLocation(Campaign campaign, int level, int node)
+        public Location(Campaign campaign, int level, int node)
         {
             Name = CampaignNodeToString(campaign.Name, level, node);
             Campaign = campaign;
