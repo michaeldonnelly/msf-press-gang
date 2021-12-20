@@ -13,8 +13,11 @@ namespace PressGang.Core.Data
         }
 
         public DbSet<Campaign> Campaigns { get; set; }
+
         //public DbSet<CampaignNode> CampaignNodes { get; set; }
         public DbSet<Character> Characters { get; set; }
+
+        public DbSet<ResourceLocation> Locations { get; set; }
         //public DbSet<CharacterShard> CharacterShards { get; set; }
         //public DbSet<Opportunity> Opportunties { get; set; }
 
