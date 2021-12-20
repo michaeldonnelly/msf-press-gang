@@ -10,6 +10,7 @@ using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PressGang.Core.System;
 using PressGang.Core.System.Location;
 using PressGang.Core.System.Mode;
 
@@ -75,6 +76,26 @@ namespace PressGang.Core.Data
             string path = dataDirectory + "/shard-locations.csv";
             List<CharacterLocation> characterLocations = ReadCharacterLocations(path);
             Debug.WriteLine(characterLocations.Count);
+            AddCharacters(context, characterLocations);
+        }
+
+        private static void AddCharacters(PressGangContext context, List<CharacterLocation> characterLocations)
+        {
+            foreach(CharacterLocation characterLocation in characterLocations)
+            {
+                string characterName = characterLocation.CharacterName;
+                try
+                {
+                    _ = context.Characters.First(c => c.Name == characterName);
+                }
+                catch (InvalidOperationException)
+                {
+                    Character character = new(characterName);
+                    Debug.WriteLine(characterName);
+                    context.Add(character);
+                }
+            }
+            context.SaveChanges();
         }
 
 
