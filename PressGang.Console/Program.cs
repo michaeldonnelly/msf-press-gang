@@ -19,19 +19,8 @@ namespace PressGang.Console
             System.Console.WriteLine("Hello World!");
 
             AppConfig.LoadAppSettings(_appSettings);
-
-
-            //DbContextOptionsBuilder<PressGangContext> optionsBuilder = new();
-            //optionsBuilder.UseSqlite(_appSettings.ConnectionString);
-            //DbContextOptions<PressGangContext> options = optionsBuilder.Options;
-            //PressGangContext context = new PressGangContext(options);
-            //context.Database.EnsureCreated();
-            //Import.ImportAll(context, _appSettings.DataDirectory);
-
             PressGangContext context = AppConfig.DbContext(_appSettings);
 
-
-            Debug.WriteLine(_appSettings.ConnectionString);
             string output = Core.Data.Initialize.System(context);
 
             Debug.WriteLine("\n\n");

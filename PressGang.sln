@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Console", "PressG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Core", "PressGang.Core\PressGang.Core.csproj", "{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Bot", "PressGang.Bot\PressGang.Bot.csproj", "{ADD9EDE7-12CD-405A-AAD4-ED02969AC23B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD9EDE7-12CD-405A-AAD4-ED02969AC23B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD9EDE7-12CD-405A-AAD4-ED02969AC23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD9EDE7-12CD-405A-AAD4-ED02969AC23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD9EDE7-12CD-405A-AAD4-ED02969AC23B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
