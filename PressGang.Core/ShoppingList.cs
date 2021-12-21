@@ -106,6 +106,19 @@ namespace PressGang.Core
             return shoppingList;
         }
 
+        public string DisplayOpportunities(LocationType locationType, string locationName = null)
+        {
+            List<Opportunity> opportunityList = ListOpportunities(locationType, locationName);
+            string result = "";
+            int lineNumber = 0;
+            foreach (Opportunity opportunity in opportunityList)
+            {
+                lineNumber++;
+                result += String.Format("{0}. {1}\r\n", lineNumber.ToString(), opportunity.ToString());
+            }
+            return result;
+        }
+
 
         private Dictionary<int, List<Opportunity>> LoadOpportunities()
         {
