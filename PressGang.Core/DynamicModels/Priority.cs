@@ -9,6 +9,13 @@ namespace PressGang.Core.DynamicModels
         {
         }
 
+        public Priority(User user, Resource resource, int priorityLevel)
+        {
+            User = user;
+            Resource = resource;
+            PriorityLevel = priorityLevel;
+        }
+
         public int Id { get; set; }
 
         public User User { get; set; }
