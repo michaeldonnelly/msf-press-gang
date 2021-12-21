@@ -1,0 +1,19 @@
+{
+  "Stores" : [
+    {
+      "Name": "Main"
+    },
+    {
+      "Name": "Raid"
+    },
+    {
+      "Name": "Blitz"
+    },
+    {
+      "Name": "Arena"
+    },
+    {
+      "Name": "War"
+    }
+  ]
+}

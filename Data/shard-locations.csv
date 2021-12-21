@@ -1,0 +1,115 @@
+Character,Location,Level,Node,Cost
+AIM Assaulter,Heroes,5,3,16
+AIM Infector,Raid,,,1125
+AIM Monstrosity,Blitz,,,400
+AIM Researcher,Arena,,,400
+AIM Security,Villains,5,3,16
+America Chavez,Villains,6,9,20
+Ant-Man,Blitz,,,500
+Black Panther,Cosmic,3,9,20
+Bullseye,Heroes,2,6,12
+Bullseye,Villains,1,3,12
+Cable,Mystic,1,9,20
+Cable,War,,,1375
+Captain America,Heroes,6,9,16
+Captain America,Nexus,1,3,12
+Carnage,War,,,1375
+Crossbones,Blitz,,,500
+Daredevil,Arena,,,500
+Deadpool,Arena,,,500
+Doctor Strange,Mystic,2,9,20
+Drax,Arena,,,500
+Elektra,Heroes,3,9,12
+Elektra,Nexus,3,9,16
+Falcon,Nexus,7,3,20
+Gamora,Blitz,,,500
+Green Goblin,Nexus,5,6,20
+Groot,Nexus,2,9,16
+Hand Archer,Arena,,,400
+Hand Assassin,Nexus,7,6,20
+Hand Blademaster,Nexus,5,3,20
+Hand Blademaster,Villains,3,6,12
+Hand Sentry,Mystic,1,6,20
+Hand Sentry,Raid,,,1125
+Hand Sorceress,Heroes,2,9,12
+Hand Sorceress,Nexus,3,3,16
+Hawkeye,Heroes,6,6,16
+Hawkeye,Villains,1,9,12
+Human Torch,Arena,,,500
+Human Torch,Nexus,5,9,20
+Hydra Armored Guard,Arena,,,400
+Hydra Rifle Trooper,Blitz,,,400
+Hydra Scientist,Blitz,,,400
+Hydra Sniper,Villains,2,3,12
+Hydra Sniper,Raid,,,1125
+Hydra Sniper,War,,,1100
+Iron Fist,Nexus,1,9,12
+Jessica Jones,Nexus,4,9,16
+Jessica Jones,Villains,2,9,12
+Juggernaut,Arena,,,500
+Killmonger,Raid,,,1400
+Kingpin,Nexus,7,9,20
+Korath the Pursuer,Villains,5,9,16
+Kree Cyborg,Nexus,3,6,16
+Kree Cyborg,Cosmic,2,3,20
+Kree Noble,Cosmic,1,6,20
+Kree Oracle,Raid,,,1125
+Kree Reaper,Heroes,5,6,16
+Kree Reaper,Cosmic,2,6,20
+Kree Royal Guard,Blitz,,,400
+Loki,Mystic,3,6,20
+Luke Cage,Heroes,3,3,12
+Luke Cage,Blitz,,,500
+M'Baku,Arena,,,500
+Mantis,Blitz,,,500
+Mercenary Lieutenant,Villains,3,3,12
+Mercenary Riot Guard,Blitz,,,400
+Mercenary Sniper,Nexus,4,6,16
+Mercenary Sniper,War,,,1100
+Mercenary Soldier,Raid,,,1125
+Mordo,Arena,,,500
+Ms. Marvel,Mystic,2,6,20
+Mysterio,Raid,,,1400
+Mystique,Villains,5,6,16
+Nebula,Heroes,4,9,16
+Night Nurse,Heroes,5,9,16
+Night Nurse,Villains,3,9,12
+Nobu,Villains,6,3,20
+Nobu,War,,,1375
+Okoye,Nexus,6,3,20
+Psylocke,Cosmic,3,6,20
+Punisher,Heroes,1,6,12
+Pyro,War,,,1375
+Quake,Arena,,,500
+Ravager Boomer,Blitz,,,400
+Ravager Bruiser,Heroes,4,6,16
+Ravager Bruiser,War,,,1100
+Ravager Stitcher,Raid,,,1125
+Rhino,Blitz,,,500
+Rocket Raccoon,Raid,,,1400
+Ronan the Accuser,Raid,,,1400
+Sabretooth,Raid,,,1400
+Scarlet Witch,Arena,,,500
+Scientist Supreme,Cosmic,2,9,20
+SHIELD Assault,Nexus,2,3,16
+SHIELD Medic,Heroes,2,3,12
+SHIELD Medic,Villains,1,6,12
+SHIELD Operative,Heroes,4,3,16
+SHIELD Operative,War,,,1100
+SHIELD Security,Heroes,3,6,12
+SHIELD Security,Arena,,,400
+SHIELD Trooper,Villains,4,3,16
+SHIELD Trooper,Raid,,,1125
+Shocker,Cosmic,1,9,20
+Spider-Man,Blitz,,,500
+Spider-Man [Miles],Blitz,,,500
+Storm,Mystic,2,3,20
+The Thing,Blitz,,,500
+Thor,Raid,,,1400
+Venom,Nexus,6,9,20
+Vision,Mystic,3,9,20
+Vulture,Arena,,,500
+War Machine,Raid,,,1400
+Wasp,Villains,4,9,16
+Winter Soldier,Heroes,6,3,16
+Yondu,Heroes,1,9,12
