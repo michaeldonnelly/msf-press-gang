@@ -19,7 +19,7 @@ namespace PressGang.Core
             DataAccessOptions dataAccessOptions = new();
             Configuration.GetSection(DataAccessOptions.DataAccess).Bind(dataAccessOptions);
             PressGangContext context = DbContext(dataAccessOptions);
-            Initialize.Init(context, dataAccessOptions);
+            DbInitializer.Initialize(context, dataAccessOptions);
         }
 
         private PressGangContext DbContext(DataAccessOptions dataAccessOptions)

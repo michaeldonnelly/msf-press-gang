@@ -7,9 +7,9 @@ using PressGang.Core.DynamicModels;
 
 namespace PressGang.Core.Data
 {
-    public static class Initialize
+    public static class DbInitializer
     {
-        public static void Init(PressGangContext context, DataAccessOptions options)
+        public static void Initialize(PressGangContext context, DataAccessOptions options)
         {
             //TODO: Migrations
             if (options.EnsureCreated)
