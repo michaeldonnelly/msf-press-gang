@@ -13,6 +13,7 @@ namespace PressGang.Core.DynamicModels
             Characters = new();
         }
 
+        public User User { get; set; }
         public Dictionary<Character, int> Characters { get; set; }
 
         public List<Opportunity> ShoppingList(PressGangContext context)
