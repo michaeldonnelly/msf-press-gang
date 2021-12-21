@@ -17,8 +17,6 @@ namespace PressGang.Core.Data
                 Debug.WriteLine(opportunity.ToString());
             }
 
-
-
             Character cable = context.Characters.First(c => c.Name == "Cable");
             Character yondu = context.Characters.First(c => c.Name == "Yondu");
             Character ultimateSpidey = context.Characters.First(c => c.Name == "Spider-Man [Miles]");
@@ -29,17 +27,8 @@ namespace PressGang.Core.Data
             shoppingList1.AddCharacter(yondu, 10);
             shoppingList1.AddCharacter(ultimateSpidey, 99);
 
-
             List<Opportunity> shoppingList = shoppingList1.ListOpportunities(LocationType.CampaignNode);
 
-
-            //CharacterPriorityList foo = new();
-            //foo.Characters.Add(cable.Id, 10);
-            //foo.Characters.Add(yondu.Id, 10);
-            //foo.Characters.Add(ultimateSpidey.Id, 99);
-            ////foo.Characters.Add(30, danvers);
-
-            //List<Opportunity> shoppingList = foo.ShoppingList(context);
 
             string bar = "";
             int lineNumber = 0;
