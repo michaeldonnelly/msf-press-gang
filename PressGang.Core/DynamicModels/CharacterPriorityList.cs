@@ -4,7 +4,7 @@ using System.Linq;
 using PressGang.Core.Data;
 using PressGang.Core.StaticModels;
 
-namespace PressGang.Core.User
+namespace PressGang.Core.DynamicModels
 {
     public class CharacterPriorityList
     {
