@@ -31,11 +31,8 @@ namespace PressGang.Bot
                 Intents = DiscordIntents.AllUnprivileged
             }) ;
 
-            discord.MessageCreated += async (s, e) =>
-            {
-                if (e.Message.Content.ToLower().StartsWith("ping"))
-                    await e.Message.RespondAsync("ack");
-            };
+            discord.MessageCreated += (s, e) => Listener.MessageCreatedHandler(e);
+
 
             await discord.ConnectAsync();
             await Task.Delay(-1);
