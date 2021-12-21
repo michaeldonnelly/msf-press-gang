@@ -30,13 +30,17 @@ namespace PressGang.Core.Data
             List<Opportunity> shoppingList = shoppingList1.ListOpportunities(LocationType.CampaignNode);
 
 
-            string bar = "";
-            int lineNumber = 0;
-            foreach (Opportunity o in shoppingList)
-            {
-                lineNumber++;
-                bar += String.Format("{0}. {1}\r\n", lineNumber.ToString(), o.ToString());
-            }
+            string bar = "Campaign\r\n----------------\r\n";
+            bar += shoppingList1.DisplayOpportunities(LocationType.CampaignNode);
+            bar += "\r\nStores\r\n----------------\r\n";
+            bar += shoppingList1.DisplayOpportunities(LocationType.Store);
+
+            //int lineNumber = 0;
+            //foreach (Opportunity o in shoppingList)
+            //{
+            //    lineNumber++;
+            //    bar += String.Format("{0}. {1}\r\n", lineNumber.ToString(), o.ToString());
+            //}
             return bar;
         }
 
