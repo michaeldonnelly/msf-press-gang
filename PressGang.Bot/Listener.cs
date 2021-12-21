@@ -41,21 +41,21 @@ namespace PressGang.Bot
             _ = Task.Run(async () =>
             {
                 string message = e.Message.Content.ToLower();
-                //Console.WriteLine(e.Author.Username + ": " + message);
+                Console.WriteLine(e.Author.Username + ": " + message);
 
                 if (message.StartsWith("ping"))
                 {
                     await e.Message.RespondAsync("ack");
                 }
-                //else if (message.StartsWith("list"))
-                //{
-                //    DiscordUser discordUser = e.Author;
-                //    ShoppingList shoppingList = new(context, discordUser.Id, discordUser.Username);
-                //    Character cap = context.Characters.First(c => c.Name == "Captain America");
-                //    shoppingList.AddCharacter(cap, 10);
-                //    string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
-                //    await e.Message.RespondAsync(response);
-                //}
+                else if (message.StartsWith("list"))
+                {
+                    DiscordUser discordUser = e.Author;
+                    ShoppingList shoppingList = new(_context, discordUser.Id, discordUser.Username);
+                    Character cap = _context.Characters.First(c => c.Name == "Captain America");
+                    shoppingList.AddCharacter(cap, 10);
+                    string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
+                    await e.Message.RespondAsync(response);
+                }
                 await Task.Delay(-1);
             });
             return Task.CompletedTask;
