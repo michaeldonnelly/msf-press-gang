@@ -14,7 +14,9 @@ namespace PressGang.Core.DynamicModels
         }
 
         public User User { get; set; }
-        public Dictionary<Character, int> Characters { get; set; }
+
+        // Character ID, priority
+        public Dictionary<int, int> Characters { get; set; }
 
         public List<Opportunity> ShoppingList(PressGangContext context)
         {
@@ -31,9 +33,9 @@ namespace PressGang.Core.DynamicModels
                     {
                         Character character = resource.Character;
 
-                        if (Characters.ContainsKey(character))
+                        if (Characters.ContainsKey(character.Id))
                         {
-                            int priority = Characters[character];
+                            int priority = Characters[character.Id];
                             if (shoppingList.ContainsKey(priority))
                             {
                                 shoppingList[priority].Add(opportunity);

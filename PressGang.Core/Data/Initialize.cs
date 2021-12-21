@@ -24,9 +24,9 @@ namespace PressGang.Core.Data
             Character ultimateSpidey = context.Characters.First(c => c.Name == "Spider-Man [Miles]");
 
             CharacterPriorityList foo = new();
-            foo.Characters.Add(cable, 10);
-            foo.Characters.Add(yondu, 10);
-            foo.Characters.Add(ultimateSpidey, 99);
+            foo.Characters.Add(cable.Id, 10);
+            foo.Characters.Add(yondu.Id, 10);
+            foo.Characters.Add(ultimateSpidey.Id, 99);
             //foo.Characters.Add(30, danvers);
 
             List<Opportunity> shoppingList = foo.ShoppingList(context);
