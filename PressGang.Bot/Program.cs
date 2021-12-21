@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using DSharpPlus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PressGang.Core;
@@ -19,8 +20,8 @@ namespace PressGang.Bot
             DiscordOptions discordOptions = new();
             startUp.Configuration.GetSection(DiscordOptions.Discord).Bind(discordOptions);
             System.Console.WriteLine("Hello World!");
-            Listener listener = new(discordOptions);
-            listener.Connect().GetAwaiter().GetResult();
+            DiscordClient discordClient = Listener.Initialize(discordOptions);
+            Listener.Connect(discordClient).GetAwaiter().GetResult();
         }
     }
 }

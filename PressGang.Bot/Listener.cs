@@ -13,10 +13,9 @@ using PressGang.Core.StaticModels;
 
 namespace PressGang.Bot
 {
-    public class Listener
+    public static class Listener
     {
-        private readonly DiscordClient _discord;
-        public Listener(DiscordOptions discordOptions)
+        public static DiscordClient Initialize(DiscordOptions discordOptions)
         {
             
             DiscordConfiguration discordConfiguration = new()
@@ -27,17 +26,17 @@ namespace PressGang.Bot
             };
             DiscordClient discordClient = new(discordConfiguration);
             RegisterCommandListeners(discordClient);
-            _discord = discordClient;
+            return discordClient;
         }
 
-        private string DiscordToken(DiscordOptions discordOptions)
+        private static string DiscordToken(DiscordOptions discordOptions)
         {
             string tokenFile = discordOptions.TokenFilePath;
             string token = File.ReadAllText(tokenFile);
             return token;
         }
 
-        private void RegisterCommandListeners(DiscordClient discordClient)
+        private static void RegisterCommandListeners(DiscordClient discordClient)
         {
             CommandsNextConfiguration commandsNextConfiguration = new()
             {
@@ -48,9 +47,9 @@ namespace PressGang.Bot
             commands.RegisterCommands<UpgradePlanning>();
         }
 
-        public async Task Connect()
+        public static async Task Connect(DiscordClient discordClient)
         {
-            await _discord.ConnectAsync();
+            await discordClient.ConnectAsync();
             await Task.Delay(-1);
         }
 
