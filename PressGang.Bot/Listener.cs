@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
+using PressGang.Bot.Commands;
 using PressGang.Core;
 using PressGang.Core.Data;
 using PressGang.Core.StaticModels;
@@ -15,6 +17,7 @@ namespace PressGang.Bot
         private readonly AppSettings _appSettings;
         private readonly PressGangContext _context;
         private readonly DiscordClient _discord;
+        private CommandsNextExtension _commands;
 
         public Listener(AppSettings appSettings, PressGangContext context)
         {
@@ -27,7 +30,21 @@ namespace PressGang.Bot
                 Intents = DiscordIntents.AllUnprivileged
             };
             _discord = new(discordConfiguration);
-            _discord.MessageCreated += (s, e) => MessageCreatedHandler(s, e);
+
+            RegisterCommandListeners();
+
+            //_discord.MessageCreated += (s, e) => MessageCreatedHandler(s, e);
+        }
+
+        private void RegisterCommandListeners()
+        {
+            CommandsNextConfiguration commandsNextConfiguration = new()
+            {
+                StringPrefixes = new[] { "!" }
+            };
+
+            _commands = _discord.UseCommandsNext(commandsNextConfiguration);
+            _commands.RegisterCommands<UpgradePlanning>();
         }
 
         public async Task Connect()
@@ -36,6 +53,7 @@ namespace PressGang.Bot
             await Task.Delay(-1);
         }
 
+        // TODO: Delete this when it's all copied somewhere else
         public Task MessageCreatedHandler(DiscordClient s, MessageCreateEventArgs e)
         {
             _ = Task.Run(async () =>

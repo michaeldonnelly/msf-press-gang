@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using DSharpPlus;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.DependencyInjection;
 using PressGang.Core;
 using PressGang.Core.Data;
 
@@ -16,7 +14,20 @@ namespace PressGang.Bot
 
         static void Main(string[] args)
         {
+            IServiceCollection services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+            StartUp startUp = new StartUp();
+            startUp.ConfigureServices(services);
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+
+
+
+
             AppConfig.LoadAppSettings(_appSettings);
+
+            //ServiceCollection serviceCollection = new ServiceCollection()
+            //    .AddSingleton<AppSettings>()
+            //    .BuildServiceProvider();
 
             Debug.WriteLine(AppConfig.DiscordToken(_appSettings));
             System.Console.WriteLine("Hello World!");
