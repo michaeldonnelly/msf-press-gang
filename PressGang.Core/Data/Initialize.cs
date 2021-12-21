@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using PressGang.Core.StaticModels;
-using PressGang.Core.User;
+using PressGang.Core.DynamicModels;
 
 namespace PressGang.Core.Data
 {

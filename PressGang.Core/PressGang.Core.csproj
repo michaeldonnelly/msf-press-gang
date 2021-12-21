@@ -16,7 +16,7 @@
     <None Remove="CsvHelper" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="System\" />
+    <Folder Include="StaticModels\" />
     <Folder Include="User\" />
     <Folder Include="Data\" />
   </ItemGroup>
