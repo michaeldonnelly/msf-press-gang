@@ -19,24 +19,7 @@ namespace PressGang.Bot
 
             Debug.WriteLine(AppConfig.DiscordToken(_appSettings));
             System.Console.WriteLine("Hello World!");
-            MainAsync().GetAwaiter().GetResult();
-        }
-
-        static async Task MainAsync()
-        {
-            var discord = new DiscordClient(new DiscordConfiguration()
-            {
-                Token = AppConfig.DiscordToken(_appSettings),
-                TokenType = TokenType.Bot,
-                Intents = DiscordIntents.AllUnprivileged
-            }) ;
-
-            discord.MessageCreated += (s, e) => Listener.MessageCreatedHandler(e);
-
-
-            await discord.ConnectAsync();
-            await Task.Delay(-1);
-
+            Listener.Activate(_appSettings).GetAwaiter().GetResult();
         }
     }
 }
