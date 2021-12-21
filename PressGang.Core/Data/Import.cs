@@ -113,10 +113,7 @@ namespace PressGang.Core.Data
                 try
                 {
                     Character character = context.Characters.First(c => c.Name == characterName);
-                    characterShard = context.Resources.First(r =>
-                        (r.ResourceType == ResourceType.CharacterShard)
-                        && (r.Character == character)
-                    );
+                    characterShard = LookUp.Shard(context, character);
                 }
                 catch (InvalidOperationException)
                 {
