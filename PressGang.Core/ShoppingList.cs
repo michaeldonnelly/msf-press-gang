@@ -13,20 +13,18 @@ namespace PressGang.Core
         private readonly User _user;
         private List<Priority> _priorities;
 
-        public ShoppingList(PressGangContext context, int userId)
+        public ShoppingList(PressGangContext context, ulong discordId, string userName)
         {
             _context = context;
             User user;
             try
             {
-                user = context.Users.First(u => u.Id == userId);
+                user = context.Users.First(u => u.DiscordId == discordId);
             }
             catch(InvalidOperationException)
             {
-                user = new()
-                {
-                    Id = userId
-                };
+                user = new(discordId, userName);
+                context.Add(user);
                 context.SaveChanges();
             }
         }

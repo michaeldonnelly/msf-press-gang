@@ -7,8 +7,16 @@ namespace PressGang.Core.DynamicModels
         {
         }
 
+        public User(ulong discordId, string userName)
+        {
+            DiscordId = discordId;
+            UserName = userName;
+        }
+
         public int Id { get; set; }
 
-        // TODO: Discord ID
+        public ulong DiscordId { get; set; }
+
+        public string UserName { get; set; }
     }
 }
