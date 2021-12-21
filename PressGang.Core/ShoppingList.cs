@@ -60,6 +60,7 @@ namespace PressGang.Core
 
             Priority newPriority = new(_user, shard, priorityLevel);
             _context.Add(newPriority);
+            _context.SaveChanges();
         }
 
         private Priority FindCharacterPriority(Character character)
@@ -84,7 +85,7 @@ namespace PressGang.Core
             }
         }
 
-        public List<Opportunity> ListOpportunities(LocationType locationType)
+        public List<Opportunity> ListOpportunities(LocationType locationType, string locationName = null)
         {
             Dictionary<int, List<Opportunity>> opportunityList = LoadOpportunities();
             List<Opportunity> shoppingList = new();
@@ -95,12 +96,14 @@ namespace PressGang.Core
                     Location location = opportunity.Location;
                     if (location.LocationType == locationType)
                     {
-                        shoppingList.Add(opportunity);
+                        if (String.IsNullOrWhiteSpace(locationName) || location.Name == locationName)
+                        {
+                            shoppingList.Add(opportunity);
+                        }
                     }
                 }
             }
             return shoppingList;
-
         }
 
 
