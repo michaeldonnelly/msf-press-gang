@@ -16,10 +16,6 @@ namespace PressGang.Bot
     public class Listener
     {
         private readonly DiscordClient _discord;
-        private CommandsNextExtension _commands;
-
-        //public AppSettings AppSettings { private get; set; }
-
         public Listener(DiscordOptions discordOptions)
         {
             
@@ -29,9 +25,9 @@ namespace PressGang.Bot
                 TokenType = TokenType.Bot,
                 Intents = DiscordIntents.AllUnprivileged
             };
-            _discord = new(discordConfiguration);
-
-            RegisterCommandListeners();
+            DiscordClient discordClient = new(discordConfiguration);
+            RegisterCommandListeners(discordClient);
+            _discord = discordClient;
         }
 
         private string DiscordToken(DiscordOptions discordOptions)
@@ -41,15 +37,15 @@ namespace PressGang.Bot
             return token;
         }
 
-        private void RegisterCommandListeners()
+        private void RegisterCommandListeners(DiscordClient discordClient)
         {
             CommandsNextConfiguration commandsNextConfiguration = new()
             {
                 StringPrefixes = new[] { "!" }
             };
 
-            _commands = _discord.UseCommandsNext(commandsNextConfiguration);
-            _commands.RegisterCommands<UpgradePlanning>();
+            CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
+            commands.RegisterCommands<UpgradePlanning>();
         }
 
         public async Task Connect()
