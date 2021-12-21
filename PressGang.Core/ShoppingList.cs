@@ -84,28 +84,59 @@ namespace PressGang.Core
             }
         }
 
-        //public List<Opportunity> ListCampaignOpportunities(LocationType locationType)
-        //{
-             
-
-        //}
-
-        private Dictionary<int, List<Resource>> LoadResourceList()
+        public List<Opportunity> ListOpportunities(LocationType locationType)
         {
-            Dictionary<int, List<Resource>> resourceList = new();
-            foreach (Priority priority in _context.Priorities.Where<Priority>(p => p.User == _user))
+            Dictionary<int, List<Opportunity>> opportunityList = LoadOpportunities();
+            List<Opportunity> shoppingList = new();
+            foreach (KeyValuePair<int, List<Opportunity>> kvp in opportunityList.OrderBy(kvp => kvp.Key))
             {
-                if (resourceList.ContainsKey(priority.PriorityLevel))
+                foreach (Opportunity opportunity in kvp.Value)
                 {
-                    resourceList[priority.PriorityLevel].Add(priority.Resource);
-                }
-                else
-                {
-                    List<Resource> resources = new() { priority.Resource };
-                    resourceList.Add(priority.PriorityLevel, resources);
+                    Location location = opportunity.Location;
+                    if (location.LocationType == locationType)
+                    {
+                        shoppingList.Add(opportunity);
+                    }
                 }
             }
-            return resourceList;
+            return shoppingList;
+
+        }
+
+
+        public Dictionary<int, List<Opportunity>> LoadOpportunities()
+        {
+            Dictionary<Resource, int> priorityList = LoadPriorities();
+            Dictionary<int, List<Opportunity>> opportunityList = new();
+
+            foreach (Opportunity opportunity in _context.Opportunties)
+            {
+                if (priorityList.ContainsKey(opportunity.Resource))
+                {
+                    int priorityLevel = priorityList[opportunity.Resource];
+                    if (opportunityList.ContainsKey(priorityLevel))
+                    {
+                        opportunityList[priorityLevel].Add(opportunity);
+                    }
+                    else
+                    {
+                        List<Opportunity> lo = new() { opportunity };
+                        opportunityList.Add(priorityLevel, lo);
+                    }
+                }
+            }
+            return opportunityList;
+
+        }
+
+        private Dictionary<Resource, int> LoadPriorities()
+        {
+            Dictionary<Resource, int> priorityList = new();
+            foreach (Priority priority in _context.Priorities.Where<Priority>(p => p.User == _user))
+            {
+                priorityList.Add(priority.Resource, priority.PriorityLevel);
+            }
+            return priorityList;
         }
 
     }
