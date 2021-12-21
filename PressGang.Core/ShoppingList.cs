@@ -107,7 +107,7 @@ namespace PressGang.Core
         }
 
 
-        public Dictionary<int, List<Opportunity>> LoadOpportunities()
+        private Dictionary<int, List<Opportunity>> LoadOpportunities()
         {
             Dictionary<Resource, int> priorityList = LoadPriorities();
             Dictionary<int, List<Opportunity>> opportunityList = new();
