@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DSharpPlus;
 using Microsoft.Extensions.Configuration;
 using PressGang.Core;
+using PressGang.Core.Data;
 
 namespace PressGang.Bot
 {
@@ -19,7 +20,9 @@ namespace PressGang.Bot
 
             Debug.WriteLine(AppConfig.DiscordToken(_appSettings));
             System.Console.WriteLine("Hello World!");
-            Listener.Initialize(_appSettings).GetAwaiter().GetResult();
+            PressGangContext context = AppConfig.DbContext(_appSettings);
+            Listener listener = new(_appSettings, context);
+            listener.Connect().GetAwaiter().GetResult();
         }
     }
 }

@@ -21,8 +21,8 @@ namespace PressGang.Core.Data
             Character yondu = context.Characters.First(c => c.Name == "Yondu");
             Character ultimateSpidey = context.Characters.First(c => c.Name == "Spider-Man [Miles]");
 
-            int userId = 999;
-            ShoppingList shoppingList1 = new(context, userId);
+            ulong userId = 999;
+            ShoppingList shoppingList1 = new(context, userId, "Elijah Snow");
             shoppingList1.AddCharacter(cable, 10);
             shoppingList1.AddCharacter(yondu, 10);
             shoppingList1.AddCharacter(ultimateSpidey, 99);
