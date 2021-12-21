@@ -19,6 +19,7 @@ namespace PressGang.Core.Data
         public DbSet<Opportunity> Opportunties { get; set; }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<CharacterPriorityList> CharacterPriorityLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
