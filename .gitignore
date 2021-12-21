@@ -4,3 +4,4 @@
 */obj/*
 .DS_Store
 *.sqlite3
+/Data/token.txt
