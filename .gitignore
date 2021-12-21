@@ -5,3 +5,4 @@
 .DS_Store
 *.sqlite3
 /Data/token.txt
+discord-token.txt
