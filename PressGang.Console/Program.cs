@@ -21,11 +21,11 @@ namespace PressGang.Console
             AppConfig.LoadAppSettings(_appSettings);
             PressGangContext context = AppConfig.DbContext(_appSettings);
 
-            string output = Core.Data.Initialize.System(context);
+            //string output = Core.Data.Initialize.System(context);
 
-            Debug.WriteLine("\n\n");
-            Debug.WriteLine(output);
-            Debug.WriteLine("\n\n");
+            //Debug.WriteLine("\n\n");
+            //Debug.WriteLine(output);
+            //Debug.WriteLine("\n\n");
 
             System.Console.WriteLine("Done");
         }
