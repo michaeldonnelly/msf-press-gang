@@ -19,7 +19,7 @@ namespace PressGang.Bot
 
             Debug.WriteLine(AppConfig.DiscordToken(_appSettings));
             System.Console.WriteLine("Hello World!");
-            Listener.Activate(_appSettings).GetAwaiter().GetResult();
+            Listener.Initialize(_appSettings).GetAwaiter().GetResult();
         }
     }
 }

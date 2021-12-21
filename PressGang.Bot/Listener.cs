@@ -10,7 +10,7 @@ namespace PressGang.Bot
     public static class Listener
     {
 
-        public static async Task Activate(AppSettings appSettings)
+        public static async Task Initialize(AppSettings appSettings)
         {
             DiscordClient discord = new DiscordClient(new DiscordConfiguration()
             {
