@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using PressGang.Core.System;
+using PressGang.Core.StaticModels;
 using PressGang.Core.User;
 
 namespace PressGang.Core.Data

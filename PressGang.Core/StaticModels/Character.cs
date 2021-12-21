@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PressGang.Core.System
+namespace PressGang.Core.StaticModels
 {
     public class Character
     {

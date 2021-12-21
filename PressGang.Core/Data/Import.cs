@@ -10,7 +10,7 @@ using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using PressGang.Core.System;
+using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.Data
 {

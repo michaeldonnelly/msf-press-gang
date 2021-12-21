@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using PressGang.Core.System;
+using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.Data
 {
