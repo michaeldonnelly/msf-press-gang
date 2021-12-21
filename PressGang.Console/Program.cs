@@ -13,28 +13,22 @@ namespace PressGang.Console
         private static AppSettings _appSettings = new AppSettings();
         //private readonly PressGangContext _context;
 
-        private static void LoadAppSettings()
-        {
-            ConfigurationBuilder builder = (ConfigurationBuilder)new ConfigurationBuilder()
-               .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            ConfigurationRoot configuration = (ConfigurationRoot)builder.Build();
-            ConfigurationBinder.Bind(configuration, _appSettings);
-        }
 
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
 
-            LoadAppSettings();
+            AppConfig.LoadAppSettings(_appSettings);
 
 
-            DbContextOptionsBuilder<PressGangContext> optionsBuilder = new();
-            optionsBuilder.UseSqlite(_appSettings.ConnectionString);
-            DbContextOptions<PressGangContext> options = optionsBuilder.Options;
-            PressGangContext context = new PressGangContext(options);
-            context.Database.EnsureCreated();
-            Import.ImportAll(context, _appSettings.DataDirectory);
+            //DbContextOptionsBuilder<PressGangContext> optionsBuilder = new();
+            //optionsBuilder.UseSqlite(_appSettings.ConnectionString);
+            //DbContextOptions<PressGangContext> options = optionsBuilder.Options;
+            //PressGangContext context = new PressGangContext(options);
+            //context.Database.EnsureCreated();
+            //Import.ImportAll(context, _appSettings.DataDirectory);
+
+            PressGangContext context = AppConfig.DbContext(_appSettings);
 
 
             Debug.WriteLine(_appSettings.ConnectionString);

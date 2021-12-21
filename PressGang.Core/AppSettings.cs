@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PressGang.Console
+namespace PressGang.Core
 {
     public class AppSettings
     {
