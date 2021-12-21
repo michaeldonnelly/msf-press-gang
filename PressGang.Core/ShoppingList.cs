@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PressGang.Core.Data;
 using PressGang.Core.DynamicModels;
+using PressGang.Core.StaticModels;
 
 namespace PressGang.Core
 {
@@ -9,7 +11,7 @@ namespace PressGang.Core
     {
         private readonly PressGangContext _context;
         private readonly User _user;
-        private CharacterPriorityList _characterPriorityList;
+        private List<Priority> _priorities;
 
         public ShoppingList(PressGangContext context, int userId)
         {
@@ -28,15 +30,19 @@ namespace PressGang.Core
                 context.SaveChanges();
             }
 
-            CharacterPriorityList characterPriorityList;
-            //try
-            //{
-            //    characterPriorityList = 
-            //}
-
-
-
+            LoadPriorities();
         }
+
+        private void LoadPriorities()
+        {
+            _priorities = _context.Priorities.Where<Priority>(p => p.User == _user).ToList<Priority>();
+        }
+
+        public void RemoveCharacter(Character character)
+        {
+            //Resource shard = 
+        }
+
 
 
     }
