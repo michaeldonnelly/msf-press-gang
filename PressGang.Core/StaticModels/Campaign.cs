@@ -39,5 +39,10 @@ namespace PressGang.Core.StaticModels
 
             return nodes;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
