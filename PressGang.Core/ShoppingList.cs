@@ -142,6 +142,17 @@ namespace PressGang.Core
             return opportunityList;
 
         }
+        
+        public string DisplayPriorities()
+        {
+            Dictionary<Resource, int> priorityList = LoadPriorities();
+            string result = "Character - Priority\r\n";
+            foreach (KeyValuePair<Resource, int> kvp in priorityList)
+            {
+                result += String.Format("{0} - {1}\r\n", kvp.Key.Name, kvp.Value.ToString());
+            }
+            return result;
+        }
 
         private Dictionary<Resource, int> LoadPriorities()
         {

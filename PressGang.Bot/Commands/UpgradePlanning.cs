@@ -24,7 +24,6 @@ namespace PressGang.Bot.Commands
         public async Task GreetCommand(CommandContext ctx)
         {
             DiscordMember discordMember = ctx.Member;
-
             await ctx.RespondAsync("Greetings " + discordMember.Username);
         }
 
@@ -41,6 +40,29 @@ namespace PressGang.Bot.Commands
 
 
 
+        //public async Task AddCommand(CommandContext ctx, string character, int priorityLevel)
+        //{
+        //    string response 
+        //}
+
+        [Command("list")]
+        public async Task ListCommand(CommandContext ctx)
+        {
+            DiscordMember discordUser = ctx.Member;
+            ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
+
+            Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
+            shoppingList.AddCharacter(cap, 10);
+
+
+
+            string response = shoppingList.DisplayPriorities();
+            await ctx.RespondAsync(response);
+        }
+
+
+
+
 
 
         [Command("campaign")]
@@ -50,8 +72,9 @@ namespace PressGang.Bot.Commands
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
             Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
             shoppingList.AddCharacter(cap, 10);
-            string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
-            await ctx.RespondAsync(response);            
+            await ctx.RespondAsync(shoppingList.DisplayOpportunities(LocationType.CampaignNode));
+            //string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
+            //await ctx.RespondAsync(response);
         }
 
     }
