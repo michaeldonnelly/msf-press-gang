@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using Microsoft.EntityFrameworkCore;
 using PressGang.Core;
 using PressGang.Core.Data;
 using PressGang.Core.StaticModels;
@@ -78,11 +79,22 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                string response = "Where to get character shards\r\n";
-                foreach (Opportunity opportunity in PressGangContext.Opportunties)
+                //string response = "Where to get character shards\r\n";
+
+                var dbSet = PressGangContext.Characters;
+                Type type = typeof(Character);
+                string response = "List of " + type.ToString() + "\r\n";
+                foreach(var entry in dbSet)
                 {
-                    response += opportunity.ToString() + "\r\n";
+                    response += entry.ToString() + "\r\n";
                 }
+
+
+
+                //foreach (Opportunity opportunity in PressGangContext.Opportunties.ToList<Opportunity>())
+                //{
+                //    response += opportunity.ToString() + "\r\n";
+                //}
                 await ctx.RespondAsync(response);
             }
             catch (Exception ex)
@@ -104,6 +116,7 @@ namespace PressGang.Bot.Commands
         [Command("db")]
         public async Task DbCommand(CommandContext ctx)
         {
+            // TODO: restrict to owner
             string response = "Database status\r\n";
             try
             {
