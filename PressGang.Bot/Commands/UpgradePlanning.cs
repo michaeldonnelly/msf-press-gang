@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
@@ -25,6 +26,14 @@ namespace PressGang.Bot.Commands
         {
             DiscordMember discordMember = ctx.Member;
             await ctx.RespondAsync("Greetings " + discordMember.Username);
+        }
+
+        [Command("wait")]
+        public async Task WaitCommand(CommandContext ctx, int milliseconds)
+        {
+            Thread.Sleep(milliseconds);
+            string response = String.Format("Waited for {0} seconds", (milliseconds / 1000).ToString());
+            await ctx.RespondAsync(response);
         }
 
         [Command("char")]
