@@ -109,6 +109,14 @@ namespace PressGang.Bot.Commands
             {
                 response += "CanConnect: " + PressGangContext.Database.CanConnect().ToString() + "\r\n";
                 response += "ProviderName: " + PressGangContext.Database.ProviderName.ToString() + "\r\n";
+
+                response += "Record counts\r\n";
+                response += String.Format("\t{0}: {1}\r\n", "Characters", PressGangContext.Characters.Count().ToString());
+                response += String.Format("\t{0}: {1}\r\n", "Resources", PressGangContext.Resources.Count().ToString());
+                response += String.Format("\t{0}: {1}\r\n", "Locations", PressGangContext.Locations.Count().ToString());
+                response += String.Format("\t{0}: {1}\r\n", "Opportunties", PressGangContext.Opportunties.Count().ToString());
+                response += String.Format("\t{0}: {1}\r\n", "Priorities", PressGangContext.Priorities.Count().ToString());
+
                 await ctx.RespondAsync(response);
             }
             catch (Exception ex)
