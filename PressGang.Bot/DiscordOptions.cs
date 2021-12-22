@@ -6,5 +6,10 @@ namespace PressGang.Bot
         public const string Discord = nameof(Discord);
 
         public string TokenFilePath { get; set; }
+
+        /// <summary>
+        /// The Discord User ID of the person who owns the bot.  This determines who gets error messages.
+        /// </summary>
+        public int OwnerUserId { get; set; } 
     }
 }
