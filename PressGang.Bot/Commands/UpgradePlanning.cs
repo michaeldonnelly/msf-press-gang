@@ -50,7 +50,10 @@ namespace PressGang.Bot.Commands
             }
             else
             {
-                response = character.Name + " " + character.Id.ToString();
+                DiscordMember discordUser = ctx.Member;
+                ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
+                shoppingList.AddCharacter(character, priorityLevel);
+                response = "Added " + character.Name;
             }
 
             await ctx.RespondAsync(response);
@@ -64,8 +67,8 @@ namespace PressGang.Bot.Commands
             DiscordMember discordUser = ctx.Member;
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
 
-            Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
-            shoppingList.AddCharacter(cap, 10);
+            //Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
+            //shoppingList.AddCharacter(cap, 10);
 
 
 
