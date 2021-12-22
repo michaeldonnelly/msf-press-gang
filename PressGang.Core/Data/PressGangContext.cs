@@ -9,14 +9,6 @@ namespace PressGang.Core.Data
 {
     public class PressGangContext : DbContext
     {
-        private readonly DbConnection _connection;
-
-        private readonly string _connectionString;
-
-        public DataAccessOptions DataAccessOptions { private get; set; }
-
-        //public DataAccessOptions dataAccessOptions = new();
-
         public PressGangContext(DbContextOptions<PressGangContext> options) : base(options)
         {
         }
@@ -30,7 +22,6 @@ namespace PressGang.Core.Data
                 optionsBuilder.UseSqlite(dataAccessOptions.ConnectionString);
             }
         }
-
 
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Character> Characters { get; set; }

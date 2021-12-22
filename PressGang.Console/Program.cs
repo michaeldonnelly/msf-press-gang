@@ -18,8 +18,8 @@ namespace PressGang.Console
         {
             System.Console.WriteLine("Hello World!");
 
-            AppConfig.LoadAppSettings(_appSettings);
-            PressGangContext context = AppConfig.DbContext(_appSettings);
+           // AppConfig.LoadAppSettings(_appSettings);
+           // PressGangContext context = AppConfig.DbContext(_appSettings);
 
             //string output = Core.Data.Initialize.System(context);
 
