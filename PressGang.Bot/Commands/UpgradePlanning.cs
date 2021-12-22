@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -79,12 +81,30 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                //string response = "Where to get character shards\r\n";
+                IEnumerable set = default(IEnumerable);
+                Type type = null;
 
-                var dbSet = PressGangContext.Characters;
-                Type type = typeof(Character);
+                switch(subject)
+                {
+                    case "character":
+                        set = PressGangContext.Characters;
+                        type = typeof(Character);
+                        break;
+                    case "campaign":
+                        set = PressGangContext.Campaigns;
+                        type = typeof(Campaign);
+                        break;
+                }
+
+                if (type == null)
+                {
+                    // TODO: tell the user we didn't find whatever it was
+                }
+
+
+
                 string response = "List of " + type.ToString() + "\r\n";
-                foreach(var entry in dbSet)
+                foreach(var entry in set)
                 {
                     response += entry.ToString() + "\r\n";
                 }
