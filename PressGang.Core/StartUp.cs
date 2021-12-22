@@ -12,12 +12,8 @@ namespace PressGang.Core
 
         public StartUp()
         {
-            IConfigurationBuilder builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json");
-            Configuration = builder.Build();
-
-            DataAccessOptions dataAccessOptions = new();
-            Configuration.GetSection(DataAccessOptions.DataAccess).Bind(dataAccessOptions);
+            Configuration = GetConfiguration();
+            DataAccessOptions dataAccessOptions = GetDataAccessOptions(Configuration);
             PressGangContext context = DbContext(dataAccessOptions);
             DbInitializer.Initialize(context, dataAccessOptions);
         }
@@ -34,9 +30,22 @@ namespace PressGang.Core
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddOptions<AppSettings>().Bind(Configuration.Get());
             services.AddOptions<DataAccessOptions>().Bind(Configuration.GetSection(DataAccessOptions.DataAccess));
             services.AddEntityFrameworkSqlite().AddDbContext<PressGangContext>();
+        }
+
+        public static IConfiguration GetConfiguration()
+        {
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json");
+            return builder.Build();
+        }
+
+        public static DataAccessOptions GetDataAccessOptions(IConfiguration configuration)
+        {
+            DataAccessOptions dataAccessOptions = new();
+            configuration.GetSection(DataAccessOptions.DataAccess).Bind(dataAccessOptions);
+            return dataAccessOptions;
         }
     }
 }

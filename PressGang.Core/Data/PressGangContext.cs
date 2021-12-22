@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PressGang.Core.DynamicModels;
 using PressGang.Core.StaticModels;
 
@@ -7,9 +9,28 @@ namespace PressGang.Core.Data
 {
     public class PressGangContext : DbContext
     {
+        private readonly DbConnection _connection;
+
+        private readonly string _connectionString;
+
+        public DataAccessOptions DataAccessOptions { private get; set; }
+
+        //public DataAccessOptions dataAccessOptions = new();
+
         public PressGangContext(DbContextOptions<PressGangContext> options) : base(options)
         {
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfiguration Configuration = StartUp.GetConfiguration();
+                DataAccessOptions dataAccessOptions = StartUp.GetDataAccessOptions(Configuration);
+                optionsBuilder.UseSqlite(dataAccessOptions.ConnectionString);
+            }
+        }
+
 
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Character> Characters { get; set; }
