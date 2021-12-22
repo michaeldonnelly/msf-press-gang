@@ -9,11 +9,14 @@ using PressGang.Core;
 using PressGang.Core.Data;
 using PressGang.Core.StaticModels;
 
+
+// 559173272306974740
 namespace PressGang.Bot.Commands
 {
     public class UpgradePlanning : BaseCommandModule 
     {
         public PressGangContext PressGangContext { private get; set; }
+        
 
         [Command("ping")]
         public async Task PingCommand(CommandContext ctx)
@@ -71,7 +74,19 @@ namespace PressGang.Bot.Commands
         }
 
         [Command("list")]
-        public async Task ListCommand(CommandContext ctx)
+        public async Task ListCommand(CommandContext ctx, string subject = null)
+        {
+            string response = "list";
+            if (subject != null)
+            {
+                response += " " + subject;
+            }
+            await ctx.RespondAsync(response);
+
+        }
+
+        [Command("my")]
+        public async Task MyCommand(CommandContext ctx)
         {
             DiscordMember discordUser = ctx.Member;
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
@@ -86,20 +101,35 @@ namespace PressGang.Bot.Commands
         }
 
 
-
-
-
-
         [Command("campaign")]
         public async Task CampaignCommand(CommandContext ctx)
         {
             DiscordMember discordUser = ctx.Member;
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-            Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
-            shoppingList.AddCharacter(cap, 10);
-            await ctx.RespondAsync(shoppingList.DisplayOpportunities(LocationType.CampaignNode));
-            //string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
-            //await ctx.RespondAsync(response);
+            //Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
+            //shoppingList.AddCharacter(cap, 10);
+            //await ctx.RespondAsync(shoppingList.DisplayOpportunities(LocationType.CampaignNode));
+            try
+            {
+                string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
+                await ctx.RespondAsync(response);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ctx, ex);
+            }
+        }
+
+        private void HandleError(CommandContext ctx, Exception ex)
+        {
+            if (ctx.User.Id == 559173272306974740)
+            {
+                ctx.RespondAsync(ex.ToString());
+            }
+            else
+            {
+                // TODO: log errors
+            }
         }
 
     }
