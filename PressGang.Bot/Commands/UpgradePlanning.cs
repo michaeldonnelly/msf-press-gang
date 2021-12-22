@@ -76,14 +76,49 @@ namespace PressGang.Bot.Commands
         [Command("list")]
         public async Task ListCommand(CommandContext ctx, string subject = null)
         {
-            string response = "list";
-            if (subject != null)
+            try
             {
-                response += " " + subject;
+                string response = "Where to get character shards\r\n";
+                foreach (Opportunity opportunity in PressGangContext.Opportunties)
+                {
+                    response += opportunity.ToString() + "\r\n";
+                }
+                await ctx.RespondAsync(response);
             }
-            await ctx.RespondAsync(response);
+            catch (Exception ex)
+            {
+                HandleError(ctx, ex);
+            }
+
+
+            //string response = "list";
+            //if (subject != null)
+            //{
+            //    response += " " + subject;
+            //}
+            //await ctx.RespondAsync(response);
 
         }
+
+
+        [Command("db")]
+        public async Task DbCommand(CommandContext ctx)
+        {
+            string response = "Database status\r\n";
+            try
+            {
+                response += "CanConnect: " + PressGangContext.Database.CanConnect().ToString() + "\r\n";
+                response += "ProviderName: " + PressGangContext.Database.ProviderName.ToString() + "\r\n";
+                await ctx.RespondAsync(response);
+            }
+            catch (Exception ex)
+            {
+                HandleError(ctx, ex);
+            }
+
+        }
+
+
 
         [Command("my")]
         public async Task MyCommand(CommandContext ctx)
