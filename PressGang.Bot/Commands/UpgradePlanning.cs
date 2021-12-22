@@ -39,11 +39,24 @@ namespace PressGang.Bot.Commands
         }
 
 
+        [Command("add")]
+        public async Task AddCommand(CommandContext ctx, string characterName, int priorityLevel)
+        {
+            Character character = LookUp.Character(PressGangContext, characterName);
+            string response;
+            if (character == null)
+            {
+                response = "Not found: " + characterName;
+            }
+            else
+            {
+                response = character.Name + " " + character.Id.ToString();
+            }
 
-        //public async Task AddCommand(CommandContext ctx, string character, int priorityLevel)
-        //{
-        //    string response 
-        //}
+            await ctx.RespondAsync(response);
+
+
+        }
 
         [Command("list")]
         public async Task ListCommand(CommandContext ctx)

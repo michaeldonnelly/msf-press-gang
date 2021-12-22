@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PressGang.Core.StaticModels;
 
@@ -20,6 +21,17 @@ namespace PressGang.Core.Data
             {
                 return null;
             }
+        }
+
+        public static Character Character(PressGangContext context, string name)
+        {
+            List<Character> results = context.Characters.Where(c => c.Name.ToLower().StartsWith(name)).ToList();
+            if (results.Count == 1)
+            {
+                return results[0];
+            }
+
+            return null;
         }
     }
 }
