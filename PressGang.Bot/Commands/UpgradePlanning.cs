@@ -4,12 +4,15 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using PressGang.Core;
+using PressGang.Core.Data;
 using PressGang.Core.StaticModels;
 
 namespace PressGang.Bot.Commands
 {
     public class UpgradePlanning : BaseCommandModule 
     {
+        public PressGangContext _pressGangContext { private get; set; }
+
         [Command("ping")]
         public async Task PingCommand(CommandContext ctx)
         {
@@ -29,6 +32,7 @@ namespace PressGang.Bot.Commands
         {
             DiscordMember discordUser = ctx.Member;
 
+            var foo = _pressGangContext.ContextId;
             
             //ShoppingList shoppingList = new(_context, discordUser.Id, discordUser.Username);
             //Character cap = _context.Characters.First(c => c.Name == "Captain America");

@@ -20,7 +20,7 @@ namespace PressGang.Bot
             DiscordOptions discordOptions = new();
             startUp.Configuration.GetSection(DiscordOptions.Discord).Bind(discordOptions);
             Console.WriteLine("Hello World!");
-            DiscordClient discordClient = Listener.Initialize(discordOptions);
+            DiscordClient discordClient = Listener.Initialize(discordOptions, serviceProvider);
             Listener.Connect(discordClient).GetAwaiter().GetResult();
         }
     }

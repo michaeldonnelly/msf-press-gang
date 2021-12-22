@@ -8,7 +8,6 @@ namespace PressGang.Core.Data
     {
         public static Resource Shard(PressGangContext context, Character character)
         {
-
             try
             {
                 Resource shard = context.Resources.First(r =>

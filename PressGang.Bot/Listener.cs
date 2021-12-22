@@ -15,7 +15,7 @@ namespace PressGang.Bot
 {
     public static class Listener
     {
-        public static DiscordClient Initialize(DiscordOptions discordOptions)
+        public static DiscordClient Initialize(DiscordOptions discordOptions, IServiceProvider serviceProvider)
         {
             
             DiscordConfiguration discordConfiguration = new()
@@ -25,7 +25,7 @@ namespace PressGang.Bot
                 Intents = DiscordIntents.AllUnprivileged
             };
             DiscordClient discordClient = new(discordConfiguration);
-            RegisterCommandListeners(discordClient);
+            RegisterCommandListeners(discordClient, serviceProvider);
             return discordClient;
         }
 
@@ -36,11 +36,12 @@ namespace PressGang.Bot
             return token;
         }
 
-        private static void RegisterCommandListeners(DiscordClient discordClient)
+        private static void RegisterCommandListeners(DiscordClient discordClient, IServiceProvider serviceProvider)
         {
             CommandsNextConfiguration commandsNextConfiguration = new()
             {
-                StringPrefixes = new[] { "!" }
+                StringPrefixes = new[] { "!" },
+                Services = serviceProvider
             };
 
             CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
