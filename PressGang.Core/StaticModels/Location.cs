@@ -39,6 +39,11 @@ namespace PressGang.Core.StaticModels
             return String.Format("{0} {1}-{2}", campaignName, level.ToString(), node.ToString());
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 
     public enum LocationType
