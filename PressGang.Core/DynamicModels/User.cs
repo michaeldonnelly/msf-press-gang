@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace PressGang.Core.DynamicModels
 {
     public class User
@@ -18,5 +20,7 @@ namespace PressGang.Core.DynamicModels
         public ulong DiscordId { get; set; }
 
         public string UserName { get; set; }
+
+        public virtual List<Goal> Goals { get; set; }
     }
 }

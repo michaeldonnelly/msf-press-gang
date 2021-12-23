@@ -32,6 +32,7 @@ namespace PressGang.Core.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Priority> Priorities { get; set; }
+        public DbSet<Goal> Goals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,6 +44,13 @@ namespace PressGang.Core.Data
 
             modelBuilder.Entity<Opportunity>()
                 .HasOne(o => o.Location);
+
+            modelBuilder.Entity<Goal>()
+                .HasOne(g => g.User)
+                .WithMany(u => u.Goals);
+
+            modelBuilder.Entity<Goal>()
+                .HasOne(g => g.Character);
         }
     }
 }
