@@ -22,5 +22,10 @@ namespace PressGang.Core.DynamicModels
         public string UserName { get; set; }
 
         public virtual List<Goal> Goals { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0} [{1}, {2}]", UserName, DiscordId.ToString(), Id.ToString());
+        }
     }
 }
