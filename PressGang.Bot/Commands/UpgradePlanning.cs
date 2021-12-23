@@ -117,6 +117,7 @@ namespace PressGang.Bot.Commands
                 {
                     await ctx.RespondAsync(responseString);
                     responseString = "";
+                    Thread.Sleep(250);
                 }
                 responseString += line;
                 responseString += "\r\n";
