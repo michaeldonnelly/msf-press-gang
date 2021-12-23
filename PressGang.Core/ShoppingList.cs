@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PressGang.Core.Data;
+using PressGang.Core.DatabaseContext;
 using PressGang.Core.DynamicModels;
 using PressGang.Core.StaticModels;
 

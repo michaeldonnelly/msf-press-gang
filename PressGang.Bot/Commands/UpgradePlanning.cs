@@ -10,7 +10,7 @@ using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using PressGang.Core;
-using PressGang.Core.Data;
+using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
 
 
@@ -107,7 +107,7 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        private async void Respond(CommandContext ctx, Queue<string> responseQueue)
+        private static async void Respond(CommandContext ctx, Queue<string> responseQueue)
         {
             const string codeMarkdown = "```";
             string responseString = codeMarkdown;

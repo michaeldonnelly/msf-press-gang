@@ -5,7 +5,7 @@ using System.Linq;
 using PressGang.Core.StaticModels;
 using PressGang.Core.DynamicModels;
 
-namespace PressGang.Core.Data
+namespace PressGang.Core.DatabaseContext
 {
     public static class DbInitializer
     {

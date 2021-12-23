@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PressGang.Core.StaticModels;
 
-namespace PressGang.Core.Data
+namespace PressGang.Core.DatabaseContext
 {
     public static class Import
     {

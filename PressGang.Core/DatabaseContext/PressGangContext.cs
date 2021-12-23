@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using PressGang.Core.DynamicModels;
 using PressGang.Core.StaticModels;
 
-namespace PressGang.Core.Data
+namespace PressGang.Core.DatabaseContext
 {
     public class PressGangContext : DbContext
     {

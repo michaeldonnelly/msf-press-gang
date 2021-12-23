@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PressGang.Core.Data;
+using PressGang.Core.DatabaseContext;
 
 namespace PressGang.Core
 {

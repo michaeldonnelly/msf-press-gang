@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using PressGang.Core.StaticModels;
 
-namespace PressGang.Core.Data
+namespace PressGang.Core.DatabaseContext
 {
     public static class LookUp
     {

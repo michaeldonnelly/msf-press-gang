@@ -4,7 +4,7 @@ using DSharpPlus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PressGang.Core;
-using PressGang.Core.Data;
+using PressGang.Core.DatabaseContext;
 
 namespace PressGang.Bot
 {

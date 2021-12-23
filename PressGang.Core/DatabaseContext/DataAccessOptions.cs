@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PressGang.Core.Data
+namespace PressGang.Core.DatabaseContext
 {
     public class DataAccessOptions
     {

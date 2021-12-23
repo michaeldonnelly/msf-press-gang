@@ -8,7 +8,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using PressGang.Bot.Commands;
 using PressGang.Core;
-using PressGang.Core.Data;
+using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
 
 namespace PressGang.Bot

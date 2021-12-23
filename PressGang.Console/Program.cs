@@ -4,7 +4,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PressGang.Core;
-using PressGang.Core.Data;
+using PressGang.Core.DatabaseContext;
 
 namespace PressGang.Console
 {
