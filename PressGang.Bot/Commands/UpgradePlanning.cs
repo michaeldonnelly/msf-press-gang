@@ -109,20 +109,22 @@ namespace PressGang.Bot.Commands
 
         private async void Respond(CommandContext ctx, Queue<string> responseQueue)
         {
-            string responseString = "";
+            const string codeMarkdown = "```";
+            string responseString = codeMarkdown;
             while (responseQueue.Count > 0)
             {
                 string line = responseQueue.Dequeue();
                 if (responseString.Length + line.Length > 1800)
                 {
+                    responseString += codeMarkdown;
                     await ctx.RespondAsync(responseString);
-                    responseString = "";
+                    responseString = codeMarkdown;
                     Thread.Sleep(250);
                 }
                 responseString += line;
                 responseString += "\r\n";
             }
-
+            responseString += codeMarkdown;
             await ctx.RespondAsync(responseString);
         }
 
