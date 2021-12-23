@@ -82,9 +82,15 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                string tableName = FindTableByName(PressGangContext, subject);
-                IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
+                string tableName = LookUp.FindTableByName(PressGangContext, subject);
+                if (tableName == null)
+                {
+                    string error = "Sorry, I can't find a table named '" + subject + "'\r\n";
+                    await ctx.RespondAsync(error);
+                    return;
+                }
 
+                IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
                 string response = "List of " + tableName + "\r\n";
                 foreach(var entry in set)
                 {
@@ -99,79 +105,6 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        private static string FindTableInModel(IModel model, string subject = null, IEntityType entityType = null)
-        {
-            IRelationalModel relationalModel = model.GetRelationalModel();
-
-            string tableName = null;
-            foreach (ITable table in relationalModel.Tables)
-            {
-                if (
-                    ((subject != null) && (table.Name.ToLower().Contains(subject)))
-                   ||
-                    ((entityType != null) && (EntityTypeForTable(table) == entityType))
-                   )
-                {
-                    if (tableName != null)
-                    {
-                        // We already found a match
-                        return null;
-                    }
-
-                    tableName = table.Name;
-                }
-            }
-
-            return tableName;
-        }
-
-        private static IEntityType EntityTypeForTable(ITable table)
-        {
-            IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
-            ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
-            return tableMapping.EntityType;
-        }
-
-        private static IEntityType FindEntityTypeInModel(IModel model, string subject)
-        {
-            IEnumerable<IEntityType> entityTypes = model.GetEntityTypes();
-            IEntityType result = null;
-            foreach (IEntityType entityType in entityTypes)
-            {
-                string entityName = entityType.DisplayName().ToLower();
-                if (entityName.Contains(subject))
-                {
-                    if (result != null)
-                    {
-                        // The subject already matched on an EntityType
-                        return null;
-                    }
-
-                    result = entityType;
-                }
-            }
-            return result;
-        }
-
-       
-        private static string FindTableByName(DbContext dbContext, string subject)
-        {
-            IModel model = dbContext.Model;
-            string tableName = FindTableInModel(model, subject: subject);
-            if (tableName != null)
-            {
-                return tableName;
-            }
-
-            IEntityType entityType = FindEntityTypeInModel(model, subject);
-            if (entityType == null)
-            {
-                return null;
-            }
-
-            tableName = FindTableInModel(model, entityType: entityType);
-            return tableName;
-        }
 
         [Command("db")]
         public async Task DbCommand(CommandContext ctx)
