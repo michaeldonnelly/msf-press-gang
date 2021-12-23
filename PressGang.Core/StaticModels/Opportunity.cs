@@ -16,13 +16,9 @@ namespace PressGang.Core.StaticModels
 
         public int Id { get; set; }
 
-        public int ResourceId { get; set; }
+        public Resource Resource { get; set; }
 
-        public virtual Resource Resource { get; set; }
-
-        public int LocationId { get; set; }
-
-        public virtual Location Location { get; set; }
+        public Location Location { get; set; }
 
         public override string ToString()
         {
