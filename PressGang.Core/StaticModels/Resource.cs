@@ -21,7 +21,7 @@ namespace PressGang.Core.StaticModels
 
         public ResourceType ResourceType { get; set; }
 
-        public int CharacterId { get; set; }
+        public int? CharacterId { get; set; }
 
         public virtual Character Character { get; set; }
 
