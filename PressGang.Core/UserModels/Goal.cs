@@ -1,7 +1,7 @@
 ﻿using System;
 using PressGang.Core.StaticModels;
 
-namespace PressGang.Core.DynamicModels
+namespace PressGang.Core.UserModels
 {
     public class Goal
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PressGang.Core.DynamicModels
+namespace PressGang.Core.UserModels
 {
     public class User
     {

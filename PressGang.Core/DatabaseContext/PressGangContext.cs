@@ -2,7 +2,7 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using PressGang.Core.DynamicModels;
+using PressGang.Core.UserModels;
 using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.DatabaseContext

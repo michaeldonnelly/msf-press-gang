@@ -22,7 +22,7 @@
   <ItemGroup>
     <Folder Include="StaticModels\" />
     <Folder Include="DynamicModels\" />
-    <Folder Include="Data\" />
+    <Folder Include="DatabaseContext\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
