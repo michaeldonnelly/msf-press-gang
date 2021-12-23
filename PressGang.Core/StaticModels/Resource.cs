@@ -21,8 +21,6 @@ namespace PressGang.Core.StaticModels
 
         public ResourceType ResourceType { get; set; }
 
-        public Location ResourceLocation { get; set; }
-
         public Character Character { get; set; }
 
     }
