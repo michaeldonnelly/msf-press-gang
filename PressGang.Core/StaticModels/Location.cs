@@ -41,7 +41,12 @@ namespace PressGang.Core.StaticModels
 
         public override string ToString()
         {
-            return Name;
+            string name = Name;
+            if (LocationType == LocationType.Store)
+            {
+                name += " Store";
+            }
+            return name;
         }
 
     }
