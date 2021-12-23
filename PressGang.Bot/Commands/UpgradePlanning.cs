@@ -94,6 +94,11 @@ namespace PressGang.Bot.Commands
                         set = PressGangContext.Campaigns;
                         type = typeof(Campaign);
                         break;
+                    case "resource":
+                        set = PressGangContext.Resources;
+                        type = typeof(Resource);
+                        break;
+
                 }
 
                 if (type == null)
