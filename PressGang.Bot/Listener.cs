@@ -25,7 +25,7 @@ namespace PressGang.Bot
                 Intents = DiscordIntents.AllUnprivileged
             };
             DiscordClient discordClient = new(discordConfiguration);
-            RegisterCommandListeners(discordClient, serviceProvider);
+            RegisterCommandListeners(discordClient, serviceProvider);            
             return discordClient;
         }
 
@@ -47,6 +47,15 @@ namespace PressGang.Bot
             CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
             commands.RegisterCommands<UpgradePlanning>();
         }
+
+        //private static void RegisterErrorHandler(DiscordClient discordClient, DiscordOptions discordOptions)
+        //{
+        //    discordClient.ClientErrored += ClientErrorHandler;
+        //}
+
+        //private static async Task ClientErrorHandler(DiscordClient discordClient, ClientErrorEventArgs clientErrorEventArgs)
+        //{
+        //}
 
         public static async Task Connect(DiscordClient discordClient)
         {
