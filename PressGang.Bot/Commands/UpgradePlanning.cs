@@ -93,10 +93,10 @@ namespace PressGang.Bot.Commands
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
 
                 Queue<string> response2 = new();
-                response2.Append("List of " + tableName);
+                response2.Append("**List of " + tableName + "**");
                 foreach(var entry in set)
                 {
-                    response2.Append(entry.ToString());
+                    response2.Enqueue(entry.ToString());
                 }
 
                 Respond(ctx, response2);
@@ -110,10 +110,18 @@ namespace PressGang.Bot.Commands
         private async void Respond(CommandContext ctx, Queue<string> responseQueue)
         {
             string responseString = "";
-            foreach(string line in responseQueue)
+            while (responseQueue.Count > 0)
             {
+                string line = responseQueue.Dequeue();
+                if (responseString.Length + line.Length > 1800)
+                {
+                    await ctx.RespondAsync(responseString);
+                    responseString = "";
+                }
                 responseString += line;
+                responseString += "\r\n";
             }
+
             await ctx.RespondAsync(responseString);
         }
 
