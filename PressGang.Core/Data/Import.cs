@@ -182,7 +182,8 @@ namespace PressGang.Core.Data
             using (var reader = new StreamReader(path))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                List<CharacterLocation> characterLocations = csv.GetRecords<CharacterLocation>().ToList<CharacterLocation>();
+                IEnumerable<CharacterLocation> rows = csv.GetRecords<CharacterLocation>();
+                List<CharacterLocation> characterLocations = rows.ToList<CharacterLocation>();
                 return characterLocations;
             }
         }
@@ -215,7 +216,7 @@ namespace PressGang.Core.Data
         public int? CampaignNode { get; set; }
 
         [Name(CsvHeaders.Cost)]
-        public int Cost { get; set; }
+        public int? Cost { get; set; }
     }
 
     static class CsvHeaders
