@@ -107,7 +107,7 @@ namespace PressGang.Core
         public string DisplayOpportunities(LocationType locationType, string locationName = null)
         {
             List<Opportunity> opportunityList = ListOpportunities(locationType, locationName);
-            string result = "";
+            string result = "Character shard priorities\r\n";
             int lineNumber = 0;
             foreach (Opportunity opportunity in opportunityList)
             {
@@ -125,17 +125,20 @@ namespace PressGang.Core
 
             foreach (Opportunity opportunity in _context.Opportunties)
             {
-                if (priorityList.ContainsKey(opportunity.Resource))
+                if (opportunity.Resource != null)
                 {
-                    int priorityLevel = priorityList[opportunity.Resource];
-                    if (opportunityList.ContainsKey(priorityLevel))
+                    if (priorityList.ContainsKey(opportunity.Resource))
                     {
-                        opportunityList[priorityLevel].Add(opportunity);
-                    }
-                    else
-                    {
-                        List<Opportunity> lo = new() { opportunity };
-                        opportunityList.Add(priorityLevel, lo);
+                        int priorityLevel = priorityList[opportunity.Resource];
+                        if (opportunityList.ContainsKey(priorityLevel))
+                        {
+                            opportunityList[priorityLevel].Add(opportunity);
+                        }
+                        else
+                        {
+                            List<Opportunity> lo = new() { opportunity };
+                            opportunityList.Add(priorityLevel, lo);
+                        }
                     }
                 }
             }
@@ -159,7 +162,10 @@ namespace PressGang.Core
             Dictionary<Resource, int> priorityList = new();
             foreach (Priority priority in _context.Priorities.Where<Priority>(p => p.User == _user))
             {
-                priorityList.Add(priority.Resource, priority.PriorityLevel);
+                if (priority.Resource != null)
+                {
+                    priorityList.Add(priority.Resource, priority.PriorityLevel);
+                }
             }
             return priorityList;
         }
