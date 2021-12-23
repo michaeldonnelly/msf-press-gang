@@ -78,6 +78,16 @@ namespace PressGang.Bot.Commands
 
         }
 
+        private static string MonospaceUnderline(int length)
+        {
+            string result = "";
+            for (int cursor = 0; cursor < length; cursor++)
+            {
+                result += "-";
+            }
+            return result;
+        }
+
         [Command("list")]
         public async Task ListCommand(CommandContext ctx, string subject = null)
         {
@@ -93,14 +103,15 @@ namespace PressGang.Bot.Commands
 
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
 
-                Queue<string> response2 = new();
-                response2.Append("**List of " + tableName + "**");
+                Queue<string> response = new();
+                response.Enqueue(tableName);
+                response.Enqueue(MonospaceUnderline(tableName.Length));
                 foreach(var entry in set)
                 {
-                    response2.Enqueue(entry.ToString());
+                    response.Enqueue(entry.ToString());
                 }
 
-                Respond(ctx, response2);
+                Respond(ctx, response);
             }
             catch (Exception ex)
             {
