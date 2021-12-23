@@ -36,9 +36,7 @@ namespace PressGang.Core.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Resource>()
-                .HasOne(r => r.Character)
-                .WithMany(c => c.Resources)
-                .HasForeignKey(r => r.CharacterId);
+                .HasOne(r => r.Character);
         }
     }
 }
