@@ -133,22 +133,24 @@ namespace PressGang.Bot.Commands
         public async Task DbCommand(CommandContext ctx)
         {
             // TODO: restrict to owner
-            string response = "**Database status**\r\n";
+            Queue<string> response = new();
+            response.Enqueue("PressGang Database Status");
+            response.Enqueue("-------------------------");
             try
             {
-                response += "\tCanConnect: " + PressGangContext.Database.CanConnect().ToString() + "\r\n";
-                response += "\tProviderName: " + PressGangContext.Database.ProviderName.ToString() + "\r\n";
-                response += "\tRecord counts\r\n";
+                response.Enqueue("CanConnect: " + PressGangContext.Database.CanConnect().ToString());
+                response.Enqueue("ProviderName: " + PressGangContext.Database.ProviderName.ToString());
+                response.Enqueue("Record counts");
                 IRelationalModel relationalModel = PressGangContext.Model.GetRelationalModel();
                 foreach (ITable table in relationalModel.Tables)
                 {
                     string tableName = table.Name;
                     IEnumerable<object> set = (IEnumerable<object>)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
                     int recordCount = set.Count();
-                    response += String.Format("\t\t{0}: {1}\r\n", tableName, recordCount.ToString());
+                    response.Enqueue(String.Format("\t{0}: {1}", tableName, recordCount.ToString()));
                 }
-            
-                await ctx.RespondAsync(response);
+
+                Respond(ctx, response);
             }
             catch (Exception ex)
             {
