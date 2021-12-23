@@ -18,11 +18,13 @@
     <None Remove="Microsoft.Extensions.Options.ConfigurationExtensions" />
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="DatabaseOperations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="StaticModels\" />
-    <Folder Include="DynamicModels\" />
+    <Folder Include="UserModels\" />
     <Folder Include="DatabaseContext\" />
+    <Folder Include="DatabaseOperations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
 
-namespace PressGang.Core.DatabaseContext
+namespace PressGang.Core.DatabaseOperations
 {
     public static class LookUp
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.UserModels;
 using PressGang.Core.StaticModels;
+using PressGang.Core.DatabaseOperations;
 
 namespace PressGang.Core
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using PressGang.Core.DatabaseOperations;
 using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
 
