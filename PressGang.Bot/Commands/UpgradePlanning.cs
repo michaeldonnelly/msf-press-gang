@@ -82,7 +82,7 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                string tableName = TableName(subject);
+                string tableName = FindTableInDbContext(PressGangContext, subject);
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
 
                 string response = "List of " + tableName + "\r\n";
@@ -99,8 +99,10 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        private string FindTableInRelationalModel(IRelationalModel relationalModel, string subject = null, IEntityType entityType = null)
+        private string FindTableInModel(IModel model, string subject = null, IEntityType entityType = null)
         {
+            IRelationalModel relationalModel = model.GetRelationalModel();
+
             string tableName = null;
             foreach (ITable table in relationalModel.Tables)
             {
@@ -130,10 +132,10 @@ namespace PressGang.Bot.Commands
             return tableMapping.EntityType;
         }
 
-        private IEntityType FindEntityType(IEnumerable<IEntityType> entityTypes, string subject)
+        private IEntityType FindEntityTypeInModel(IModel model, string subject)
         {
+            IEnumerable<IEntityType> entityTypes = model.GetEntityTypes();
             IEntityType result = null;
-
             foreach (IEntityType entityType in entityTypes)
             {
                 string entityName = entityType.DisplayName().ToLower();
@@ -148,29 +150,26 @@ namespace PressGang.Bot.Commands
                     result = entityType;
                 }
             }
-
             return result;
         }
 
        
-        private string TableName(string subject)
+        private string FindTableInDbContext(DbContext dbContext, string subject)
         {
-            IModel model = PressGangContext.Model;
-            IRelationalModel relationalModel = model.GetRelationalModel();
-            string tableName = FindTableInRelationalModel(relationalModel, subject: subject);
+            IModel model = dbContext.Model;
+            string tableName = FindTableInModel(model, subject: subject);
             if (tableName != null)
             {
                 return tableName;
             }
 
-            IEnumerable<IEntityType> entityTypes = model.GetEntityTypes();
-            IEntityType entityType = FindEntityType(entityTypes, subject);
+            IEntityType entityType = FindEntityTypeInModel(model, subject);
             if (entityType == null)
             {
                 return null;
             }
 
-            tableName = FindTableInRelationalModel(relationalModel, entityType: entityType);
+            tableName = FindTableInModel(model, entityType: entityType);
             return tableName;
         }
 
