@@ -82,52 +82,7 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                Type type = null;
-                string tableName = null;
-
-                IEnumerable<IEntityType> entityTypes = PressGangContext.Model.GetEntityTypes();
-                foreach (IEntityType entityType in entityTypes)
-                {
-                    string entityName = entityType.DisplayName().ToLower();
-                    if (entityName.Contains(subject))
-                    {
-                        if (type != null)
-                        {
-                            // The subject already matched on an EntityType
-                            // TODO: throw an exception
-                        }
-
-                        IModel model = PressGangContext.Model;
-                        IRelationalModel relationalModel = model.GetRelationalModel();
-
-                        foreach(var table in relationalModel.Tables)
-                        {
-                            IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
-                            ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
-                            if (tableMapping.EntityType == entityType)
-                            {
-                                if (type != null)
-                                {
-                                    // TODO: error
-                                }
-
-                                tableName = table.Name;
-                            }
-                        }
-                        type = entityType.ClrType;
-
-                    }
-                }
-
-
-              
-
-                
-
-                if ((type == null) || (tableName == null))
-                {
-                    // TODO: tell the user we didn't find whatever it was
-                }
+               
 
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
             
@@ -161,6 +116,55 @@ namespace PressGang.Bot.Commands
 
         }
 
+        private string TableName(string subject)
+        {
+            Type type = null;
+            string tableName = null;
+
+            IEnumerable<IEntityType> entityTypes = PressGangContext.Model.GetEntityTypes();
+            foreach (IEntityType entityType in entityTypes)
+            {
+                string entityName = entityType.DisplayName().ToLower();
+                if (entityName.Contains(subject))
+                {
+                    if (type != null)
+                    {
+                        // The subject already matched on an EntityType
+                        // TODO: throw an exception
+                    }
+
+                    IModel model = PressGangContext.Model;
+                    IRelationalModel relationalModel = model.GetRelationalModel();
+
+                    foreach (var table in relationalModel.Tables)
+                    {
+                        IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
+                        ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
+                        if (tableMapping.EntityType == entityType)
+                        {
+                            if (type != null)
+                            {
+                                // TODO: error
+                            }
+
+                            tableName = table.Name;
+                        }
+                    }
+                    type = entityType.ClrType;
+
+                }
+            }
+
+
+
+
+
+
+            if ((type == null) || (tableName == null))
+            {
+                // TODO: tell the user we didn't find whatever it was
+            }
+        }
 
         [Command("db")]
         public async Task DbCommand(CommandContext ctx)
