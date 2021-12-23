@@ -82,7 +82,7 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                string tableName = FindTableInDbContext(PressGangContext, subject);
+                string tableName = FindTableByName(PressGangContext, subject);
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
 
                 string response = "List of " + tableName + "\r\n";
@@ -99,7 +99,7 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        private string FindTableInModel(IModel model, string subject = null, IEntityType entityType = null)
+        private static string FindTableInModel(IModel model, string subject = null, IEntityType entityType = null)
         {
             IRelationalModel relationalModel = model.GetRelationalModel();
 
@@ -125,14 +125,14 @@ namespace PressGang.Bot.Commands
             return tableName;
         }
 
-        private IEntityType EntityTypeForTable(ITable table)
+        private static IEntityType EntityTypeForTable(ITable table)
         {
             IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
             ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
             return tableMapping.EntityType;
         }
 
-        private IEntityType FindEntityTypeInModel(IModel model, string subject)
+        private static IEntityType FindEntityTypeInModel(IModel model, string subject)
         {
             IEnumerable<IEntityType> entityTypes = model.GetEntityTypes();
             IEntityType result = null;
@@ -154,7 +154,7 @@ namespace PressGang.Bot.Commands
         }
 
        
-        private string FindTableInDbContext(DbContext dbContext, string subject)
+        private static string FindTableByName(DbContext dbContext, string subject)
         {
             IModel model = dbContext.Model;
             string tableName = FindTableInModel(model, subject: subject);
