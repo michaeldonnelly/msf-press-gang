@@ -8,6 +8,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using PressGang.Core;
 using PressGang.Core.Data;
 using PressGang.Core.StaticModels;
@@ -81,40 +82,55 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                IEnumerable set = default(IEnumerable);
                 Type type = null;
+                string tableName = null;
 
-                switch(subject)
+                IEnumerable<IEntityType> entityTypes = PressGangContext.Model.GetEntityTypes();
+                foreach (IEntityType entityType in entityTypes)
                 {
-                    case "character":
-                        set = PressGangContext.Characters;
-                        type = typeof(Character);
-                        break;
-                    case "campaign":
-                        set = PressGangContext.Campaigns;
-                        type = typeof(Campaign);
-                        break;
-                    case "resource":
-                        set = PressGangContext.Resources;
-                        type = typeof(Resource);
-                        break;
-                    case "location":
-                        set = PressGangContext.Locations;
-                        type = typeof(Location);
-                        break;
-                    case "opportunity":
-                        set = PressGangContext.Opportunties;
-                        type = typeof(Opportunity);
-                        break;
+                    string entityName = entityType.DisplayName().ToLower();
+                    if (entityName.Contains(subject))
+                    {
+                        if (type != null)
+                        {
+                            // The subject already matched on an EntityType
+                            // TODO: throw an exception
+                        }
 
+                        IModel model = PressGangContext.Model;
+                        IRelationalModel relationalModel = model.GetRelationalModel();
+
+                        foreach(var table in relationalModel.Tables)
+                        {
+                            IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
+                            ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
+                            if (tableMapping.EntityType == entityType)
+                            {
+                                if (type != null)
+                                {
+                                    // TODO: error
+                                }
+
+                                tableName = table.Name;
+                            }
+                        }
+                        type = entityType.ClrType;
+
+                    }
                 }
 
-                if (type == null)
+
+              
+
+                
+
+                if ((type == null) || (tableName == null))
                 {
                     // TODO: tell the user we didn't find whatever it was
                 }
 
-
+                IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
+            
 
                 string response = "List of " + type.ToString() + "\r\n";
                 foreach(var entry in set)
@@ -162,6 +178,14 @@ namespace PressGang.Bot.Commands
                 response += String.Format("\t{0}: {1}\r\n", "Locations", PressGangContext.Locations.Count().ToString());
                 response += String.Format("\t{0}: {1}\r\n", "Opportunties", PressGangContext.Opportunties.Count().ToString());
                 response += String.Format("\t{0}: {1}\r\n", "Priorities", PressGangContext.Priorities.Count().ToString());
+
+
+                IEnumerable<IEntityType> entityTypes = PressGangContext.Model.GetEntityTypes();
+                foreach (IEntityType entityType in entityTypes)
+                {
+                    response += entityType.DisplayName() + "\r\n";
+                }
+
 
                 await ctx.RespondAsync(response);
             }
