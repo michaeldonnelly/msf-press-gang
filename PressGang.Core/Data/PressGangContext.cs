@@ -37,6 +37,12 @@ namespace PressGang.Core.Data
         {
             modelBuilder.Entity<Resource>()
                 .HasOne(r => r.Character);
+
+            modelBuilder.Entity<Opportunity>()
+                .HasOne(o => o.Resource);
+
+            modelBuilder.Entity<Opportunity>()
+                .HasOne(o => o.Location);
         }
     }
 }
