@@ -136,32 +136,23 @@ namespace PressGang.Bot.Commands
             {
                 response += "CanConnect: " + PressGangContext.Database.CanConnect().ToString() + "\r\n";
                 response += "ProviderName: " + PressGangContext.Database.ProviderName.ToString() + "\r\n";
-
                 response += "Record counts\r\n";
-                response += String.Format("\t{0}: {1}\r\n", "Characters", PressGangContext.Characters.Count().ToString());
-                response += String.Format("\t{0}: {1}\r\n", "Resources", PressGangContext.Resources.Count().ToString());
-                response += String.Format("\t{0}: {1}\r\n", "Locations", PressGangContext.Locations.Count().ToString());
-                response += String.Format("\t{0}: {1}\r\n", "Opportunties", PressGangContext.Opportunties.Count().ToString());
-                response += String.Format("\t{0}: {1}\r\n", "Priorities", PressGangContext.Priorities.Count().ToString());
-
-
-                IEnumerable<IEntityType> entityTypes = PressGangContext.Model.GetEntityTypes();
-                foreach (IEntityType entityType in entityTypes)
+                IRelationalModel relationalModel = PressGangContext.Model.GetRelationalModel();
+                foreach (ITable table in relationalModel.Tables)
                 {
-                    response += entityType.DisplayName() + "\r\n";
+                    string tableName = table.Name;
+                    IEnumerable<object> set = (IEnumerable<object>)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
+                    int recordCount = set.Count();
+                    response += String.Format("\t{0}: {1}\r\n", tableName, recordCount.ToString());
                 }
-
-
+            
                 await ctx.RespondAsync(response);
             }
             catch (Exception ex)
             {
                 HandleError(ctx, ex);
             }
-
         }
-
-
 
         [Command("my")]
         public async Task MyCommand(CommandContext ctx)
