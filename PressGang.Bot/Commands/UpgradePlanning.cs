@@ -82,88 +82,96 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-               
-
+                string tableName = TableName(subject);
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
-            
 
-                string response = "List of " + type.ToString() + "\r\n";
+                string response = "List of " + tableName + "\r\n";
                 foreach(var entry in set)
                 {
                     response += entry.ToString() + "\r\n";
                 }
 
-
-
-                //foreach (Opportunity opportunity in PressGangContext.Opportunties.ToList<Opportunity>())
-                //{
-                //    response += opportunity.ToString() + "\r\n";
-                //}
                 await ctx.RespondAsync(response);
             }
             catch (Exception ex)
             {
                 HandleError(ctx, ex);
             }
-
-
-            //string response = "list";
-            //if (subject != null)
-            //{
-            //    response += " " + subject;
-            //}
-            //await ctx.RespondAsync(response);
-
         }
 
-        private string TableName(string subject)
+        private string FindTableInRelationalModel(IRelationalModel relationalModel, string subject = null, IEntityType entityType = null)
         {
-            Type type = null;
             string tableName = null;
+            foreach (ITable table in relationalModel.Tables)
+            {
+                if (
+                    ((subject != null) && (table.Name.ToLower().Contains(subject)))
+                   ||
+                    ((entityType != null) && (EntityTypeForTable(table) == entityType))
+                   )
+                {
+                    if (tableName != null)
+                    {
+                        // We already found a match
+                        return null;
+                    }
 
-            IEnumerable<IEntityType> entityTypes = PressGangContext.Model.GetEntityTypes();
+                    tableName = table.Name;
+                }
+            }
+
+            return tableName;
+        }
+
+        private IEntityType EntityTypeForTable(ITable table)
+        {
+            IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
+            ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
+            return tableMapping.EntityType;
+        }
+
+        private IEntityType FindEntityType(IEnumerable<IEntityType> entityTypes, string subject)
+        {
+            IEntityType result = null;
+
             foreach (IEntityType entityType in entityTypes)
             {
                 string entityName = entityType.DisplayName().ToLower();
                 if (entityName.Contains(subject))
                 {
-                    if (type != null)
+                    if (result != null)
                     {
                         // The subject already matched on an EntityType
-                        // TODO: throw an exception
+                        return null;
                     }
 
-                    IModel model = PressGangContext.Model;
-                    IRelationalModel relationalModel = model.GetRelationalModel();
-
-                    foreach (var table in relationalModel.Tables)
-                    {
-                        IEnumerable<ITableMapping> entityTypeMapping = table.EntityTypeMappings;
-                        ITableMapping tableMapping = entityTypeMapping.First<ITableMapping>();
-                        if (tableMapping.EntityType == entityType)
-                        {
-                            if (type != null)
-                            {
-                                // TODO: error
-                            }
-
-                            tableName = table.Name;
-                        }
-                    }
-                    type = entityType.ClrType;
-
+                    result = entityType;
                 }
             }
 
+            return result;
+        }
 
-
-
-
-
-            if ((type == null) || (tableName == null))
+       
+        private string TableName(string subject)
+        {
+            IModel model = PressGangContext.Model;
+            IRelationalModel relationalModel = model.GetRelationalModel();
+            string tableName = FindTableInRelationalModel(relationalModel, subject: subject);
+            if (tableName != null)
             {
-                // TODO: tell the user we didn't find whatever it was
+                return tableName;
             }
+
+            IEnumerable<IEntityType> entityTypes = model.GetEntityTypes();
+            IEntityType entityType = FindEntityType(entityTypes, subject);
+            if (entityType == null)
+            {
+                return null;
+            }
+
+            tableName = FindTableInRelationalModel(relationalModel, entityType: entityType);
+            return tableName;
         }
 
         [Command("db")]
