@@ -98,6 +98,14 @@ namespace PressGang.Bot.Commands
                         set = PressGangContext.Resources;
                         type = typeof(Resource);
                         break;
+                    case "location":
+                        set = PressGangContext.Locations;
+                        type = typeof(Location);
+                        break;
+                    case "opportunity":
+                        set = PressGangContext.Opportunties;
+                        type = typeof(Opportunity);
+                        break;
 
                 }
 
