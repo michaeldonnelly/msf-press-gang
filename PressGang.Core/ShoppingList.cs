@@ -105,15 +105,16 @@ namespace PressGang.Core
             return shoppingList;
         }
 
-        public string DisplayOpportunities(LocationType locationType, string locationName = null)
+        public Queue<string> DisplayOpportunities(LocationType locationType, string locationName = null)
         {
             List<Opportunity> opportunityList = ListOpportunities(locationType, locationName);
-            string result = "Character shard priorities\r\n";
+            Queue<string> result = new();
+            result.Enqueue("Character shard priorities");
             int lineNumber = 0;
             foreach (Opportunity opportunity in opportunityList)
             {
                 lineNumber++;
-                result += String.Format("{0}. {1}\r\n", lineNumber.ToString(), opportunity.ToString());
+                result.Enqueue(String.Format("{0}. {1}", lineNumber.ToString(), opportunity.ToString()));
             }
             return result;
         }
@@ -147,13 +148,14 @@ namespace PressGang.Core
 
         }
         
-        public string DisplayPriorities()
+        public Queue<string> DisplayPriorities()
         {
             Dictionary<Resource, int> priorityList = LoadPriorities();
-            string result = "Character - Priority\r\n";
+            Queue<string> result = new();
+            result.Enqueue("Character - Priority");
             foreach (KeyValuePair<Resource, int> kvp in priorityList)
             {
-                result += String.Format("{0} - {1}\r\n", kvp.Key.Name, kvp.Value.ToString());
+                result.Enqueue(String.Format("{0} - {1}", kvp.Key.Name, kvp.Value.ToString()));
             }
             return result;
         }

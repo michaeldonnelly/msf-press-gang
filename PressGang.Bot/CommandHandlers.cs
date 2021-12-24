@@ -139,8 +139,8 @@ namespace PressGang.Bot
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
             try
             {
-                string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
-                await ctx.RespondAsync(response);
+                Queue<string> response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
+                await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
