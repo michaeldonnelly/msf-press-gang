@@ -11,7 +11,7 @@ namespace PressGang.Core.StaticModels
         {
             Character = character;
             DependsOn = dependsOn;
-            Name = dependsOn.Name + "->" + character.Name;
+            Name = dependsOn.Name + " -> " + character.Name;
            
         }
 
