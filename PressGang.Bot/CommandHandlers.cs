@@ -79,6 +79,7 @@ namespace PressGang.Bot
                 IEnumerable set = (IEnumerable)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
 
                 Queue<string> response = new();
+                response.Enqueue("");  // TODO: figure out why tableName causing the first line to be ignored
                 response.Enqueue(tableName);
                 response.Enqueue(DiscordUtils.MonospaceUnderline(tableName.Length));
                 foreach(var entry in set)
