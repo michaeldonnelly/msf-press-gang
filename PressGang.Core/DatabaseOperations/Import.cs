@@ -112,12 +112,12 @@ namespace PressGang.Core.DatabaseOperations
             Character loki = LookUp.Character(context, "Loki");
             Character phoenix = new("Phoenix");
 
-            Prereq lp = new(phoenix, loki);
-            Prereq mp = new(phoenix, mordo);
+            Prerequisite lp = new(phoenix, loki);
+            Prerequisite mp = new(phoenix, mordo);
 
             context.Characters.Add(phoenix);
-            context.Prereqs.Add(lp);
-            context.Prereqs.Add(mp);
+            context.Prerequisites.Add(lp);
+            context.Prerequisites.Add(mp);
 
             context.SaveChanges();
 
