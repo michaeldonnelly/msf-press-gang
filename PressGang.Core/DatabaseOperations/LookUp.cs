@@ -28,7 +28,7 @@ namespace PressGang.Core.DatabaseOperations
 
         public static Character Character(PressGangContext context, string name)
         {
-            List<Character> results = context.Characters.Where(c => c.Name.ToLower().StartsWith(name)).ToList();
+            List<Character> results = context.Characters.Where(c => c.Name.ToLower().StartsWith(name.ToLower())).ToList();
             if (results.Count == 1)
             {
                 return results[0];
