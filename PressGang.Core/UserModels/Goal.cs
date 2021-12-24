@@ -9,12 +9,13 @@ namespace PressGang.Core.UserModels
         {
         }
 
-        public Goal(User user, Character character, int priority, int? yellowStarRank)
+        public Goal(User user, Character character, int priority, int? yellowStarRank = null)
         {
             GoalType = GoalType.YellowStarRank;
             User = user;
             Character = character;
             YellowStarRank = yellowStarRank;
+            Name = character.Name + " for " + user.UserName;
         }
 
         public int Id { get; set; }
