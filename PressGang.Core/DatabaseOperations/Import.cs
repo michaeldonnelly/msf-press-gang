@@ -23,6 +23,7 @@ namespace PressGang.Core.DatabaseOperations
             GenerateCampaignLevels(context);
             ImportStores(context, dataDirectory);
             ImportCharactersAndLocations(context, dataDirectory);
+            ImportPrereqs(context, dataDirectory);
         }
 
         private static void ImportCampaigns(PressGangContext context, string dataDirectory)
@@ -103,6 +104,26 @@ namespace PressGang.Core.DatabaseOperations
             Debug.WriteLine(characterLocations.Count);
             AddCharacters(context, characterLocations);
         }
+
+        private static void ImportPrereqs(PressGangContext context , string dataDirectory)
+        {
+            // TODO: actually get this from a file
+            Character mordo = LookUp.Character(context, "Mordo");
+            Character loki = LookUp.Character(context, "Loki");
+            Character phoenix = new("Phoenix");
+
+            Prereq lp = new(phoenix, loki);
+            Prereq mp = new(phoenix, mordo);
+
+            context.Characters.Add(phoenix);
+            context.Prereqs.Add(lp);
+            context.Prereqs.Add(mp);
+
+            context.SaveChanges();
+
+        }
+
+
 
         private static void AddCharacters(PressGangContext context, List<CharacterLocation> characterLocations)
         {
