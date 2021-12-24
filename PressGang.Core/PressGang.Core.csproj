@@ -19,12 +19,14 @@
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="DatabaseOperations\" />
+    <None Remove="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="StaticModels\" />
     <Folder Include="UserModels\" />
     <Folder Include="DatabaseContext\" />
     <Folder Include="DatabaseOperations\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
