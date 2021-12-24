@@ -128,8 +128,8 @@ namespace PressGang.Bot
         {
             DiscordMember discordUser = ctx.Member;
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-            string response = shoppingList.DisplayPriorities();
-            await ctx.RespondAsync(response);
+            Queue<string> response = shoppingList.DisplayPriorities();
+            await DiscordUtils.Respond(ctx, response);
         }
 
         [Command("campaign")]
