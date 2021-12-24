@@ -9,6 +9,47 @@
         "Nobu",
         "Ronan the Accuser"
       ]
+    },
+    {
+      "Character": "Black Bolt",
+      "DependsOn": [
+        "Hela",
+        "Loki",
+        "Thor",
+        "Sif",
+        "Heimdall"
+      ]
+    },
+    {
+      "Character": "Ebony Maw",
+      "DependsOn": [
+        "Black Bolt",
+        "Karnak",
+        "Quake",
+        "Crystal",
+        "Ms. Marvel",
+        "Yo-Yo"
+      ]
+    },
+    {
+      "Character": "Doctor Octopus",
+      "DependsOn": [
+        "Cable",
+        "Domino",
+        "Deadpool",
+        "X-23",
+        "Negasonic"
+      ]
+    },
+    {
+      "Character": "Jubilee",
+      "DependsOn": [
+        "Ant-Man",
+        "Wasp",
+        "Yellowjacket",
+        "Stature",
+        "Ghost"
+      ]
     }
   ]
 }
