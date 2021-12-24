@@ -22,7 +22,6 @@ namespace PressGang.Bot
     {
         public PressGangContext PressGangContext { private get; set; }
         
-
         [Command("ping")]
         public async Task PingCommand(CommandContext ctx)
         {
@@ -74,12 +73,8 @@ namespace PressGang.Bot
             }
 
             await ctx.RespondAsync(response);
-
-
         }
-
       
-
         [Command("list")]
         public async Task ListCommand(CommandContext ctx, string subject = null)
         {
@@ -110,9 +105,6 @@ namespace PressGang.Bot
                 DiscordUtils.HandleError(ctx, ex);
             }
         }
-
-     
-
 
         [Command("db")]
         public async Task DbCommand(CommandContext ctx)
@@ -148,25 +140,15 @@ namespace PressGang.Bot
         {
             DiscordMember discordUser = ctx.Member;
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-
-            //Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
-            //shoppingList.AddCharacter(cap, 10);
-
-
-
             string response = shoppingList.DisplayPriorities();
             await ctx.RespondAsync(response);
         }
-
 
         [Command("campaign")]
         public async Task CampaignCommand(CommandContext ctx)
         {
             DiscordMember discordUser = ctx.Member;
             ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-            //Character cap = PressGangContext.Characters.First(c => c.Name == "Captain America");
-            //shoppingList.AddCharacter(cap, 10);
-            //await ctx.RespondAsync(shoppingList.DisplayOpportunities(LocationType.CampaignNode));
             try
             {
                 string response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
@@ -177,9 +159,5 @@ namespace PressGang.Bot
                 DiscordUtils.HandleError(ctx, ex);
             }
         }
-
-       
-
     }
-
 }
