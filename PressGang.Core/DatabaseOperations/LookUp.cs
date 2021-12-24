@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
+using PressGang.Core.UserModels;
 
 namespace PressGang.Core.DatabaseOperations
 {
@@ -49,6 +50,12 @@ namespace PressGang.Core.DatabaseOperations
             }
 
             return null;
+        }
+
+        public static User User(PressGangContext context, ulong discordId)
+        {
+            List<User> results = context.Users.Where(u => u.DiscordId == discordId).ToList();
+            return results[0];
         }
 
         public static string FindTableByName(DbContext dbContext, string subject)

@@ -12,7 +12,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.DatabaseOperations;
+using PressGang.Core.Reports;
 using PressGang.Core.StaticModels;
+using PressGang.Core.UserModels;
 
 
 // 559173272306974740
@@ -58,6 +60,12 @@ namespace PressGang.Bot
                 ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
                 shoppingList.AddCharacter(character, priorityLevel);
                 response = "Added " + character.Name;
+
+
+                User user = LookUp.User(PressGangContext, discordUser.Id);
+                Goal goal = new(user, character, priorityLevel, null);
+                PressGangContext.Goals.Add(goal);
+                PressGangContext.SaveChanges();
             }
 
             await DiscordUtils.Respond(ctx, response);
@@ -127,10 +135,25 @@ namespace PressGang.Bot
         [Command("my")]
         public async Task MyCommand(CommandContext ctx)
         {
-            DiscordMember discordUser = ctx.Member;
-            ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-            Queue<string> response = shoppingList.DisplayPriorities();
-            await DiscordUtils.Respond(ctx, response);
+            try
+            {
+                DiscordMember discordUser = ctx.Member;
+                User user = LookUp.User(PressGangContext, discordUser.Id);
+                CharacterPriorities characterPriorities = new(PressGangContext, user);
+                List<Character> myCbp = characterPriorities.CharactersWithPrerequisites();
+
+                Queue<string> response = new();
+                response.Enqueue("Your prioritied characters (with prerequisites)");
+                foreach (Character character in myCbp)
+                {
+                    response.Enqueue(character.ToString());
+                }
+                await DiscordUtils.Respond(ctx, response);
+            }
+            catch (Exception ex)
+            {
+                await DiscordUtils.HandleError(ctx, ex);
+            }
         }
 
         [Command("campaign")]
