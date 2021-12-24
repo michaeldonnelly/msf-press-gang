@@ -9,7 +9,7 @@ namespace PressGang.Core.UserModels
         {
         }
 
-        public Goal(User user, Character character, int yellowStarRank)
+        public Goal(User user, Character character, int priority, int? yellowStarRank)
         {
             GoalType = GoalType.YellowStarRank;
             User = user;
@@ -27,11 +27,13 @@ namespace PressGang.Core.UserModels
 
         public virtual User User { get; set; }
 
+        public int Priority { get; set; }
+
         public int CharacterId { get; set; }
 
         public virtual Character Character { get; set; }
 
-        public int YellowStarRank { get; set; }
+        public int? YellowStarRank { get; set; }
     }
 
     public enum GoalType
