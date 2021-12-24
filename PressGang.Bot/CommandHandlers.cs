@@ -32,7 +32,7 @@ namespace PressGang.Bot
         public async Task GreetCommand(CommandContext ctx)
         {
             DiscordMember discordMember = ctx.Member;
-            await ctx.RespondAsync("Greetings " + discordMember.Username);
+            await DiscordUtils.Respond(ctx, "Greetings " + discordMember.Username);
         }
 
         [Command("wait")]
@@ -40,20 +40,8 @@ namespace PressGang.Bot
         {
             Thread.Sleep(milliseconds);
             string response = String.Format("Waited for {0} seconds", (milliseconds / 1000).ToString());
-            await ctx.RespondAsync(response);
+            await DiscordUtils.Respond(ctx, response);
         }
-
-        [Command("char")]
-        public async Task CharCommand(CommandContext ctx)
-        {
-            string response = "";
-            foreach (Character character in PressGangContext.Characters)
-            {
-                response += character.Name + "\r\n";
-            }
-            await ctx.RespondAsync(response);
-        }
-
 
         [Command("add")]
         public async Task AddCommand(CommandContext ctx, string characterName, int priorityLevel)
@@ -72,7 +60,7 @@ namespace PressGang.Bot
                 response = "Added " + character.Name;
             }
 
-            await ctx.RespondAsync(response);
+            await DiscordUtils.Respond(ctx, response);
         }
       
         [Command("list")]
