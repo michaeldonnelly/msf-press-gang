@@ -107,19 +107,49 @@ namespace PressGang.Core.DatabaseOperations
 
         private static void ImportPrereqs(PressGangContext context , string dataDirectory)
         {
-            // TODO: actually get this from a file
-            Character mordo = LookUp.Character(context, "Mordo");
-            Character loki = LookUp.Character(context, "Loki");
-            Character phoenix = new("Phoenix");
+            string jsonString = File.ReadAllText(dataDirectory + "/prerequisites.json");
+            PrerequisiteList prerequisiteList = JsonConvert.DeserializeObject<PrerequisiteList>(jsonString);
+            foreach (PrerequisiteListEntry entry in prerequisiteList.Prerequisites)
+            {
+                Character character = LookUp.Character(context, entry.Character);
+                if (character == null)
+                {
+                    character = new(entry.Character);
+                    context.Add(character);
+                }
+                foreach (string dependsOnName in entry.DependsOn)
+                {
+                    Character dependsOn = LookUp.Character(context, dependsOnName);
+                    if (dependsOn == null)
+                    {
+                        dependsOn = new(dependsOnName);
+                        context.Add(dependsOn);
+                    }
 
-            Prerequisite lp = new(phoenix, loki);
-            Prerequisite mp = new(phoenix, mordo);
+                    Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
+                    if (prerequisite == null)
+                    {
+                        prerequisite = new(character, dependsOn);
+                        context.Add(prerequisite);
+                    }
+                }
+                context.SaveChanges();
+            }
 
-            context.Characters.Add(phoenix);
-            context.Prerequisites.Add(lp);
-            context.Prerequisites.Add(mp);
 
-            context.SaveChanges();
+            //    // TODO: actually get this from a file
+            //    Character mordo = LookUp.Character(context, "Mordo");
+            //Character loki = LookUp.Character(context, "Loki");
+            //Character phoenix = new("Phoenix");
+
+            //Prerequisite lp = new(phoenix, loki);
+            //Prerequisite mp = new(phoenix, mordo);
+
+            //context.Characters.Add(phoenix);
+            //context.Prerequisites.Add(lp);
+            //context.Prerequisites.Add(mp);
+
+            //context.SaveChanges();
 
         }
 
@@ -221,6 +251,17 @@ namespace PressGang.Core.DatabaseOperations
     class StoreList
     {
         public List<Location> Stores { get; set; }
+    }
+
+    class PrerequisiteList
+    {
+        public List<PrerequisiteListEntry> Prerequisites { get; set; }
+    }
+
+    class PrerequisiteListEntry
+    {
+        public string Character { get; set; }
+        public List<string> DependsOn { get; set; }
     }
 
     class CharacterLocation

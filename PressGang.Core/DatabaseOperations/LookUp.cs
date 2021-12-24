@@ -37,6 +37,20 @@ namespace PressGang.Core.DatabaseOperations
             return null;
         }
 
+        public static Prerequisite Prerequisite(PressGangContext context, Character character, Character dependsOn)
+        {
+            List<Prerequisite> results = context.Prerequisites
+                .Where(p => (p.Character == character) && (p.DependsOn == dependsOn))
+                .ToList();
+
+            if (results.Count == 1)
+            {
+                return results[0];
+            }
+
+            return null;
+        }
+
         public static string FindTableByName(DbContext dbContext, string subject)
         {
             IModel model = dbContext.Model;

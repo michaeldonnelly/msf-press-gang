@@ -1,0 +1,14 @@
+{
+  "Prerequisites" : [
+    {
+      "Character": "Phoenix",
+      "DependsOn": [
+        "Hela",
+        "Loki",
+        "Mordo",
+        "Nobu",
+        "Ronan the Accuser"
+      ]
+    }
+  ]
+}
