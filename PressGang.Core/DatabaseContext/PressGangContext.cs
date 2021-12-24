@@ -38,7 +38,8 @@ namespace PressGang.Core.DatabaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Prerequisite>()
-                .HasOne(p => p.Character);
+                .HasOne(p => p.Character)
+                .WithMany(c => c.Prerequisites);
 
             modelBuilder.Entity<Prerequisite>()
                 .HasOne(p => p.DependsOn);

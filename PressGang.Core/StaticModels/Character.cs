@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace PressGang.Core.StaticModels
 {
     public class Character
@@ -11,6 +13,8 @@ namespace PressGang.Core.StaticModels
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public virtual List<Prerequisite> Prerequisites { get; set; }
 
         public override string ToString()
         {
