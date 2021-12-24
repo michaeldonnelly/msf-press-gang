@@ -135,25 +135,7 @@ namespace PressGang.Core.DatabaseOperations
                 }
                 context.SaveChanges();
             }
-
-
-            //    // TODO: actually get this from a file
-            //    Character mordo = LookUp.Character(context, "Mordo");
-            //Character loki = LookUp.Character(context, "Loki");
-            //Character phoenix = new("Phoenix");
-
-            //Prerequisite lp = new(phoenix, loki);
-            //Prerequisite mp = new(phoenix, mordo);
-
-            //context.Characters.Add(phoenix);
-            //context.Prerequisites.Add(lp);
-            //context.Prerequisites.Add(mp);
-
-            //context.SaveChanges();
-
         }
-
-
 
         private static void AddCharacters(PressGangContext context, List<CharacterLocation> characterLocations)
         {
