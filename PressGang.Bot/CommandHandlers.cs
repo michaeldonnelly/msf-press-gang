@@ -16,9 +16,9 @@ using PressGang.Core.StaticModels;
 
 
 // 559173272306974740
-namespace PressGang.Bot.Commands
+namespace PressGang.Bot
 {
-    public class UpgradePlanning : BaseCommandModule 
+    public class CommandHandlers : BaseCommandModule 
     {
         public PressGangContext PressGangContext { private get; set; }
         
@@ -78,15 +78,7 @@ namespace PressGang.Bot.Commands
 
         }
 
-        private static string MonospaceUnderline(int length)
-        {
-            string result = "";
-            for (int cursor = 0; cursor < length; cursor++)
-            {
-                result += "-";
-            }
-            return result;
-        }
+      
 
         [Command("list")]
         public async Task ListCommand(CommandContext ctx, string subject = null)
@@ -105,40 +97,21 @@ namespace PressGang.Bot.Commands
 
                 Queue<string> response = new();
                 response.Enqueue(tableName);
-                response.Enqueue(MonospaceUnderline(tableName.Length));
+                response.Enqueue(DiscordUtils.MonospaceUnderline(tableName.Length));
                 foreach(var entry in set)
                 {
                     response.Enqueue(entry.ToString());
                 }
 
-                Respond(ctx, response);
+                DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
-                HandleError(ctx, ex);
+                DiscordUtils.HandleError(ctx, ex);
             }
         }
 
-        private static async void Respond(CommandContext ctx, Queue<string> responseQueue)
-        {
-            const string codeMarkdown = "```";
-            string responseString = codeMarkdown;
-            while (responseQueue.Count > 0)
-            {
-                string line = responseQueue.Dequeue();
-                if (responseString.Length + line.Length > 1800)
-                {
-                    responseString += codeMarkdown;
-                    await ctx.RespondAsync(responseString);
-                    responseString = codeMarkdown;
-                    Thread.Sleep(250);
-                }
-                responseString += line;
-                responseString += "\r\n";
-            }
-            responseString += codeMarkdown;
-            await ctx.RespondAsync(responseString);
-        }
+     
 
 
         [Command("db")]
@@ -147,7 +120,7 @@ namespace PressGang.Bot.Commands
             // TODO: restrict to owner
             Queue<string> response = new();
             response.Enqueue("PressGang Database Status");
-            response.Enqueue("-------------------------");
+            response.Enqueue(DiscordUtils.MonospaceUnderline(25));
             try
             {
                 response.Enqueue("CanConnect: " + PressGangContext.Database.CanConnect().ToString());
@@ -162,11 +135,11 @@ namespace PressGang.Bot.Commands
                     response.Enqueue(String.Format("\t{0}: {1}", tableName, recordCount.ToString()));
                 }
 
-                Respond(ctx, response);
+                DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
-                HandleError(ctx, ex);
+                DiscordUtils.HandleError(ctx, ex);
             }
         }
 
@@ -201,21 +174,11 @@ namespace PressGang.Bot.Commands
             }
             catch (Exception ex)
             {
-                HandleError(ctx, ex);
+                DiscordUtils.HandleError(ctx, ex);
             }
         }
 
-        private void HandleError(CommandContext ctx, Exception ex)
-        {
-            if (ctx.User.Id == 559173272306974740)
-            {
-                ctx.RespondAsync(ex.ToString());
-            }
-            else
-            {
-                // TODO: log errors
-            }
-        }
+       
 
     }
 

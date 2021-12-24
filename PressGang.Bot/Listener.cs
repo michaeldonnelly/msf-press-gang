@@ -6,7 +6,6 @@ using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
-using PressGang.Bot.Commands;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
@@ -45,7 +44,7 @@ namespace PressGang.Bot
             };
 
             CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
-            commands.RegisterCommands<UpgradePlanning>();
+            commands.RegisterCommands<CommandHandlers>();
         }
 
         //private static void RegisterErrorHandler(DiscordClient discordClient, DiscordOptions discordOptions)
