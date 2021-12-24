@@ -25,7 +25,7 @@ namespace PressGang.Bot
         [Command("ping")]
         public async Task PingCommand(CommandContext ctx)
         {
-            await ctx.RespondAsync("ack");
+            await DiscordUtils.Respond(ctx, "ack");
         }
 
         [Command("hello")]
@@ -98,11 +98,11 @@ namespace PressGang.Bot
                     response.Enqueue(entry.ToString());
                 }
 
-                DiscordUtils.Respond(ctx, response);
+                await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
-                DiscordUtils.HandleError(ctx, ex);
+                await DiscordUtils.HandleError(ctx, ex);
             }
         }
 
@@ -127,11 +127,11 @@ namespace PressGang.Bot
                     response.Enqueue(String.Format("\t{0}: {1}", tableName, recordCount.ToString()));
                 }
 
-                DiscordUtils.Respond(ctx, response);
+                await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
-                DiscordUtils.HandleError(ctx, ex);
+                await DiscordUtils.HandleError(ctx, ex);
             }
         }
 
@@ -156,7 +156,7 @@ namespace PressGang.Bot
             }
             catch (Exception ex)
             {
-                DiscordUtils.HandleError(ctx, ex);
+                await DiscordUtils.HandleError(ctx, ex);
             }
         }
     }

@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 
 namespace PressGang.Bot
 {
     public static class DiscordUtils
     {
-        public static async void Respond(CommandContext ctx, Queue<string> responseQueue)
+        public static Task Respond(CommandContext ctx, string responseString)
+        {
+            return ctx.RespondAsync(responseString);
+        }
+
+        public static Task Respond(CommandContext ctx, Queue<string> responseQueue)
         {
             const string codeMarkdown = "```";
             string responseString = codeMarkdown;
@@ -17,7 +23,7 @@ namespace PressGang.Bot
                 if (responseString.Length + line.Length > 1800)
                 {
                     responseString += codeMarkdown;
-                    await ctx.RespondAsync(responseString);
+                    ctx.RespondAsync(responseString);
                     responseString = codeMarkdown;
                     Thread.Sleep(250);
                 }
@@ -25,19 +31,21 @@ namespace PressGang.Bot
                 responseString += "\r\n";
             }
             responseString += codeMarkdown;
-            await ctx.RespondAsync(responseString);
+            return ctx.RespondAsync(responseString);
         }
 
-        public static void HandleError(CommandContext ctx, Exception ex)
+        public static Task HandleError(CommandContext ctx, Exception ex)
         {
-            if (ctx.User.Id == 559173272306974740)
-            {
-                ctx.RespondAsync(ex.ToString());
-            }
-            else
-            {
-                // TODO: log errors
-            }
+            return ctx.RespondAsync(ex.ToString());
+
+            //if (ctx.User.Id == 559173272306974740)
+            //{
+            //    ctx.RespondAsync(ex.ToString());
+            //}
+            //else
+            //{
+            //    // TODO: log errors
+            //}
         }
 
         public static string MonospaceUnderline(int length)
