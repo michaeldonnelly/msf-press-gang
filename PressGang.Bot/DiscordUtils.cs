@@ -10,7 +10,7 @@ namespace PressGang.Bot
     {
         public static Task Respond(CommandContext ctx, string responseString)
         {
-            return ctx.RespondAsync(responseString);
+            return ctx.RespondAsync("`" + responseString + "`");
         }
 
         public static Task Respond(CommandContext ctx, Queue<string> responseQueue)
