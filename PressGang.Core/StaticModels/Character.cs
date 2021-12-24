@@ -14,7 +14,7 @@ namespace PressGang.Core.StaticModels
 
         public string Name { get; set; }
 
-        public virtual List<Prerequisite> Prerequisites { get; set; }
+        public virtual List<Prerequisite> Prerequisites { get; set; } = new();
 
         public override string ToString()
         {

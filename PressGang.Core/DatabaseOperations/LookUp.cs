@@ -55,6 +55,10 @@ namespace PressGang.Core.DatabaseOperations
         public static User User(PressGangContext context, ulong discordId)
         {
             List<User> results = context.Users.Where(u => u.DiscordId == discordId).ToList();
+            if (results.Count == 0)
+            {
+                return null;
+            }
             return results[0];
         }
 

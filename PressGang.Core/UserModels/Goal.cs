@@ -14,6 +14,7 @@ namespace PressGang.Core.UserModels
             GoalType = GoalType.YellowStarRank;
             User = user;
             Character = character;
+            Priority = priority;
             YellowStarRank = yellowStarRank;
             Name = character.Name + " for " + user.UserName;
         }
@@ -35,6 +36,11 @@ namespace PressGang.Core.UserModels
         public virtual Character Character { get; set; }
 
         public int? YellowStarRank { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public enum GoalType

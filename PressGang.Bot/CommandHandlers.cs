@@ -48,27 +48,38 @@ namespace PressGang.Bot
         [Command("add")]
         public async Task AddCommand(CommandContext ctx, string characterName, int priorityLevel)
         {
-            Character character = LookUp.Character(PressGangContext, characterName);
-            string response;
-            if (character == null)
+            try
             {
-                response = "Not found: " + characterName;
+                Character character = LookUp.Character(PressGangContext, characterName);
+                string response;
+                if (character == null)
+                {
+                    response = "Not found: " + characterName;
+                }
+                else
+                {
+                    DiscordMember discordUser = ctx.Member;
+                    //ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
+                    //shoppingList.AddCharacter(character, priorityLevel);
+
+                    User user = LookUp.User(PressGangContext, discordUser.Id);
+                    if (user == null)
+                    {
+                        user = new(discordUser.Id, discordUser.Username);
+                    }
+                    Goal goal = new(user, character, priorityLevel, null);
+                    PressGangContext.Goals.Add(goal);
+                    PressGangContext.SaveChanges();
+                    response = "Added " + character.Name;
+
+                }
+
+                await DiscordUtils.Respond(ctx, response);
             }
-            else
+            catch(Exception ex)
             {
-                DiscordMember discordUser = ctx.Member;
-                ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-                shoppingList.AddCharacter(character, priorityLevel);
-                response = "Added " + character.Name;
-
-
-                User user = LookUp.User(PressGangContext, discordUser.Id);
-                Goal goal = new(user, character, priorityLevel, null);
-                PressGangContext.Goals.Add(goal);
-                PressGangContext.SaveChanges();
+                await DiscordUtils.HandleError(ctx, ex);
             }
-
-            await DiscordUtils.Respond(ctx, response);
         }
       
         [Command("list")]
