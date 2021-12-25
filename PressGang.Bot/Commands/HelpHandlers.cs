@@ -23,7 +23,8 @@ namespace PressGang.Bot.Commands
         public async Task InfoCommand(CommandContext ctx)
         {
             string botName = _options.BotName;
-            string response = String.Format("Hi I'm {0}, the alliance support bot for {1}.", botName, "foo");
+            string allianceName = _options.AllianceName;
+            string response = $"Hi I'm {botName}, the alliance support bot for {allianceName}.";
             await DiscordUtils.Respond(ctx, response);
         }
     }

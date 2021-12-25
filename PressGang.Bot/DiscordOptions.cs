@@ -12,6 +12,8 @@ namespace PressGang.Bot
         /// </summary>
         public ulong OwnerUserId { get; set; }
 
-        public string BotName { get; set; } = "Zola";
+        public string BotName { get; set; } = "$BotName not set";
+
+        public string AllianceName { get; set; } = "$AllianceName not set";
     }
 }
