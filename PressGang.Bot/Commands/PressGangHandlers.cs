@@ -20,10 +20,13 @@ using PressGang.Core.UserModels;
 // 559173272306974740
 namespace PressGang.Bot.Commands
 {
-    public class CommandHandlers : BaseCommandModule 
+    public class PressGangHandlers : HandlerCore 
     {
         public PressGangContext PressGangContext { private get; set; }
-        
+
+        public PressGangHandlers(IOptions<DiscordOptions> options) : base(options)
+        { }
+
         [Command("add")]
         public async Task AddCommand(CommandContext ctx, string characterName, int priorityLevel)
         {
