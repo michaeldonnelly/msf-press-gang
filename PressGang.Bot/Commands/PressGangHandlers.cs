@@ -20,6 +20,8 @@ using PressGang.Core.UserModels;
 
 namespace PressGang.Bot.Commands
 {
+    [Group("pressgang")]
+    [Aliases("pg")]
     public class PressGangHandlers : HandlerCore 
     {
         public PressGangContext PressGangContext { private get; set; }
