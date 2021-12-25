@@ -144,18 +144,31 @@ namespace PressGang.Bot
         }
 
         [Command("my")]
-        public async Task MyCommand(CommandContext ctx)
+        public async Task MyCommand(CommandContext ctx, string subject = null)
         {
             try
             {
                 DiscordMember discordUser = ctx.Member;
                 User user = LookUp.User(PressGangContext, discordUser.Id);
                 CharacterPriorities characterPriorities = new(PressGangContext, user);
-                List<Character> myCbp = characterPriorities.CharactersWithPrerequisites();
+                //if (subject == null)
+                //{
+                //    subject = "derived";
+                //}
+
+                List<Character> cl;
+                if (subject.ToLower() == "base")
+                {
+                    cl = characterPriorities.Characters();
+                }
+                else
+                {
+                    cl = characterPriorities.CharactersWithPrerequisites();
+                }
 
                 Queue<string> response = new();
                 response.Enqueue("Your prioritied characters (with prerequisites)");
-                foreach (Character character in myCbp)
+                foreach (Character character in cl)
                 {
                     response.Enqueue(character.ToString());
                 }

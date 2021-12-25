@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
@@ -18,21 +19,35 @@ namespace PressGang.Core.Reports
 
         public User User { get; set; }
 
+        public List<Character> Characters()
+        {
+            Dictionary<Character, int> characterGoals = BaseList();
+            SortedDictionary<int, List<Character>> priorities = InvertCharacterGoals(characterGoals);
+            List<Character> cl = DictToList<Character>(priorities);
+            return cl;
+        }
+
         public List<Character> CharactersWithPrerequisites()
         {
             Dictionary<Character, int> characterGoals = DerivePriorities();
             SortedDictionary<int, List<Character>> priorities = InvertCharacterGoals(characterGoals);
-            List<Character> cwp = new();
-            foreach (KeyValuePair<int, List<Character>> kvp in priorities)
-            {
-                foreach(Character character in kvp.Value)
-                {
-                    cwp.Add(character);
-                }
-            }
-            return cwp;
+            List<Character> cl = DictToList<Character>(priorities);
+            return cl;
         }
 
+        private List<T> DictToList<T>(SortedDictionary<int, List<T>> d)
+        {
+
+            List<T> l = new List<T>();
+            foreach (KeyValuePair<int, List<T>> kvp in d)
+            {
+                foreach (T entry in kvp.Value)
+                {
+                    l.Add(entry);
+                }
+            }
+            return l;
+        }
 
         private SortedDictionary<int, List<Character>> InvertCharacterGoals(Dictionary<Character, int> characterGoals)
         {
