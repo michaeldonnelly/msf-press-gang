@@ -36,6 +36,57 @@ namespace PressGang.Core.Reports
             return cl;
         }
 
+        public Queue<string> Farm()
+        {
+            Queue<string> farmGuide = new();
+            farmGuide.Enqueue("Priority  Character             Location");
+            farmGuide.Enqueue("--------  --------------------  --------------------");
+
+            SortedDictionary<int, List<Goal>> goals = Goals();
+            foreach(KeyValuePair<int, List<Goal>> kvp in goals)
+            {
+                int priority = kvp.Key;
+                foreach(Goal goal in kvp.Value)
+                {
+                    Character character = goal.Character;
+                    Resource shard = character.Shard;
+                    foreach (Opportunity opportunity in shard.Opportunities)
+                    {
+                        Location location = opportunity.Location;
+                        string line = String.Format("{0,8}  {1,-20}  {2,-20}",
+                            priority,
+                            character.Name,
+                            location.ToString());
+                        farmGuide.Enqueue(line);
+                    }
+                }               
+            }
+            return farmGuide;
+        }
+
+        private SortedDictionary<int, List<Goal>> Goals()
+        {
+            SortedDictionary<int, List<Goal>> goals = new();
+            foreach (Goal goal in User.Goals)
+            {
+                if (goal.GoalType == GoalType.YellowStarRank)
+                {
+                    int priority = goal.Priority;
+                    if (goals.ContainsKey(priority))
+                    {
+                        goals[priority].Add(goal);
+                    }
+                    else
+                    {
+                        List<Goal> l = new();
+                        l.Add(goal);
+                        goals.Add(priority, l);
+                    }
+                }
+            }
+            return goals;
+        }
+
         public Goal Add(Character character, int priority)
         {
             Dictionary<Character, int> characterGoals = BaseList();

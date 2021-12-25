@@ -174,6 +174,24 @@ namespace PressGang.Bot
             }
         }
 
+        [Command("farm")]
+        public async Task FarmCommand(CommandContext ctx)
+        {
+            try
+            {
+                DiscordMember discordUser = ctx.Member;
+                User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
+                CharacterPriorities characterPriorities = new(PressGangContext, user);
+                Queue<string> response = characterPriorities.Farm();
+                await DiscordUtils.Respond(ctx, response);
+            }
+            catch (Exception ex)
+            {
+                await DiscordUtils.HandleError(ctx, ex);
+            }
+        }
+
+
         [Command("campaign")]
         public async Task CampaignCommand(CommandContext ctx)
         {

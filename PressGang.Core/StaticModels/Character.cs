@@ -16,6 +16,8 @@ namespace PressGang.Core.StaticModels
 
         public virtual List<Prerequisite> Prerequisites { get; set; } = new();
 
+        public virtual Resource Shard { get; set; }
+
         public override string ToString()
         {
             return Name;

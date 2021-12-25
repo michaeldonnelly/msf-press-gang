@@ -45,10 +45,12 @@ namespace PressGang.Core.DatabaseContext
                 .HasOne(p => p.DependsOn);
 
             modelBuilder.Entity<Resource>()
-                .HasOne(r => r.Character);
+                .HasOne(r => r.Character)
+                .WithOne(c => c.Shard);
 
             modelBuilder.Entity<Opportunity>()
-                .HasOne(o => o.Resource);
+                .HasOne(o => o.Resource)
+                .WithMany(r => r.Opportunities);
 
             modelBuilder.Entity<Opportunity>()
                 .HasOne(o => o.Location);
