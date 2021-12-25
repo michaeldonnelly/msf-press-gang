@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 
 namespace PressGang.Bot
 {
@@ -46,6 +47,16 @@ namespace PressGang.Bot
             //{
             //    // TODO: log errors
             //}
+        }
+
+        public static Task Respond(CommandContext ctx, string title, string imageUrl)
+        {
+            DiscordEmbedBuilder embed = new()
+            {
+                Title = title,
+                ImageUrl = imageUrl
+            };
+            return ctx.RespondAsync(embed);
         }
 
         public static string MonospaceUnderline(int length)
