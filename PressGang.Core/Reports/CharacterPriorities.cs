@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
@@ -33,6 +34,27 @@ namespace PressGang.Core.Reports
             SortedDictionary<int, List<Character>> priorities = InvertCharacterGoals(characterGoals);
             List<Character> cl = DictToList<Character>(priorities);
             return cl;
+        }
+
+        public Goal Add(Character character, int priority)
+        {
+            Dictionary<Character, int> characterGoals = BaseList();
+            Goal goal;
+            if (characterGoals.ContainsKey(character))
+            {
+                goal = User.Goals.Where(g => g.Character == character).First();
+                if (goal.Priority != priority)
+                {
+                    goal.Priority = priority;
+                }
+            }
+            else
+            {
+                goal = new(User, character, priority, null);
+                _pressGangContext.Add(goal);
+            }
+            _pressGangContext.SaveChanges();
+            return goal;
         }
 
         private List<T> DictToList<T>(SortedDictionary<int, List<T>> d)
