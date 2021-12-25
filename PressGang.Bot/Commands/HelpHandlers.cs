@@ -7,14 +7,10 @@ using Microsoft.Extensions.Options;
 
 namespace PressGang.Bot.Commands
 {
-    public class HelpHandlers : BaseCommandModule
+    public class HelpHandlers : HandlerCore
     {
-        private readonly DiscordOptions _options;
-
-        public HelpHandlers(IOptions<DiscordOptions> options)
-        {
-            _options = options.Value;
-        }
+        public HelpHandlers(IOptions<DiscordOptions> options) : base(options)
+        { }
 
         [Command("hello")]
         public async Task GreetCommand(CommandContext ctx)
