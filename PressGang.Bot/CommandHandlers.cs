@@ -59,19 +59,10 @@ namespace PressGang.Bot
                 else
                 {
                     DiscordMember discordUser = ctx.Member;
-                    //ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-                    //shoppingList.AddCharacter(character, priorityLevel);
-
-                    User user = LookUp.User(PressGangContext, discordUser.Id);
-                    if (user == null)
-                    {
-                        user = new(discordUser.Id, discordUser.Username);
-                    }
-                    Goal goal = new(user, character, priorityLevel, null);
-                    PressGangContext.Goals.Add(goal);
-                    PressGangContext.SaveChanges();
-                    response = "Added " + character.Name;
-
+                    User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
+                    CharacterPriorities characterPriorities = new(PressGangContext, user);
+                    Goal goal = characterPriorities.Add(character, priorityLevel);
+                    response = "Added " + goal.Character.Name;
                 }
 
                 await DiscordUtils.Respond(ctx, response);
