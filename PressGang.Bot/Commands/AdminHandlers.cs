@@ -14,6 +14,7 @@ namespace PressGang.Bot.Commands
         { }
 
         [Command("ping")]
+        [Description("Confirm that the bot is up and running")]
         public async Task PingCommand(CommandContext ctx)
         {
             await DiscordUtils.Respond(ctx, "ack");
@@ -21,18 +22,11 @@ namespace PressGang.Bot.Commands
 
         [Command("wait")]
         [RequireOwner]
+        [Description("Sleep for while")]
         public async Task WaitCommand(CommandContext ctx, int milliseconds)
         {
-            string response;
-            if (CallerIsOwner(ctx))
-            {
-                Thread.Sleep(milliseconds);
-                response = String.Format("Waited for {0} seconds", (milliseconds / 1000).ToString());
-            }
-            else
-            {
-                response = "You're not the boss of me.";
-            }
+            Thread.Sleep(milliseconds);
+            string response = String.Format("Waited for {0} seconds", (milliseconds / 1000).ToString());
             await DiscordUtils.Respond(ctx, response);
         }
 
