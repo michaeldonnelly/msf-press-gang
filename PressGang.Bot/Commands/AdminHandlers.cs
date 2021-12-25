@@ -20,6 +20,7 @@ namespace PressGang.Bot.Commands
         }
 
         [Command("wait")]
+        [RequireOwner]
         public async Task WaitCommand(CommandContext ctx, int milliseconds)
         {
             string response;

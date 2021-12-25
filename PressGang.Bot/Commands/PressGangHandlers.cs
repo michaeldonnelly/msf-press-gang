@@ -56,6 +56,7 @@ namespace PressGang.Bot.Commands
         }
       
         [Command("list")]
+        [RequireOwner]
         public async Task ListCommand(CommandContext ctx, string subject = null)
         {
             try
@@ -88,6 +89,7 @@ namespace PressGang.Bot.Commands
         }
 
         [Command("db")]
+        [RequireOwner]
         public async Task DbCommand(CommandContext ctx)
         {
             // TODO: restrict to owner
