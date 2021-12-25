@@ -47,6 +47,7 @@ namespace PressGang.Bot
             CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
             commands.RegisterCommands<AdminHandlers>();
             commands.RegisterCommands<HelpHandlers>();
+            commands.RegisterCommands<AllianceHandlers>();
             if (discordOptions.EnablePressGang)
             {
                 commands.RegisterCommands<PressGangHandlers>();
