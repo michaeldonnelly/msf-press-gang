@@ -25,7 +25,7 @@ namespace PressGang.Bot
                 Intents = DiscordIntents.AllUnprivileged
             };
             DiscordClient discordClient = new(discordConfiguration);
-            RegisterCommandListeners(discordClient, serviceProvider);            
+            RegisterCommandListeners(discordOptions, discordClient, serviceProvider);            
             return discordClient;
         }
 
@@ -36,7 +36,7 @@ namespace PressGang.Bot
             return token;
         }
 
-        private static void RegisterCommandListeners(DiscordClient discordClient, IServiceProvider serviceProvider)
+        private static void RegisterCommandListeners(DiscordOptions discordOptions, DiscordClient discordClient, IServiceProvider serviceProvider)
         {
             CommandsNextConfiguration commandsNextConfiguration = new()
             {
@@ -47,7 +47,10 @@ namespace PressGang.Bot
             CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
             commands.RegisterCommands<AdminHandlers>();
             commands.RegisterCommands<HelpHandlers>();
-            commands.RegisterCommands<PressGangHandlers>();
+            if (discordOptions.EnablePressGang)
+            {
+                commands.RegisterCommands<PressGangHandlers>();
+            }
         }
 
         //private static void RegisterErrorHandler(DiscordClient discordClient, DiscordOptions discordOptions)

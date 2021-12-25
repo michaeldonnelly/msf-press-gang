@@ -9,6 +9,7 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Options;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.DatabaseOperations;
@@ -17,7 +18,6 @@ using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
 
 
-// 559173272306974740
 namespace PressGang.Bot.Commands
 {
     public class PressGangHandlers : HandlerCore 

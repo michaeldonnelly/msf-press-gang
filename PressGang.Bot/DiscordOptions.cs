@@ -15,5 +15,7 @@ namespace PressGang.Bot
         public string BotName { get; set; } = "$BotName not set";
 
         public string AllianceName { get; set; } = "$AllianceName not set";
+
+        public bool EnablePressGang { get; set; }
     }
 }
