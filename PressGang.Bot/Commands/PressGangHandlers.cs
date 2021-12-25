@@ -174,22 +174,5 @@ namespace PressGang.Bot.Commands
                 await DiscordUtils.HandleError(ctx, ex);
             }
         }
-
-
-        [Command("campaign")]
-        public async Task CampaignCommand(CommandContext ctx)
-        {
-            DiscordMember discordUser = ctx.Member;
-            ShoppingList shoppingList = new(PressGangContext, discordUser.Id, discordUser.Username);
-            try
-            {
-                Queue<string> response = shoppingList.DisplayOpportunities(LocationType.CampaignNode);
-                await DiscordUtils.Respond(ctx, response);
-            }
-            catch (Exception ex)
-            {
-                await DiscordUtils.HandleError(ctx, ex);
-            }
-        }
     }
 }
