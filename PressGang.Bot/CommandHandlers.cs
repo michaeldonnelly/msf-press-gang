@@ -24,13 +24,6 @@ namespace PressGang.Bot.Commands
     {
         public PressGangContext PressGangContext { private get; set; }
         
-        [Command("hello")]
-        public async Task GreetCommand(CommandContext ctx)
-        {
-            DiscordMember discordMember = ctx.Member;
-            await DiscordUtils.Respond(ctx, "Greetings " + discordMember.Username);
-        }
-
         [Command("add")]
         public async Task AddCommand(CommandContext ctx, string characterName, int priorityLevel)
         {
