@@ -15,6 +15,7 @@ namespace PressGang.Bot
             IServiceCollection services = new ServiceCollection();
             StartUp startUp = new StartUp();
             startUp.ConfigureServices(services);
+            services.AddOptions<DiscordOptions>().Bind(startUp.Configuration.GetSection(DiscordOptions.Discord));            
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
             DiscordOptions discordOptions = new();

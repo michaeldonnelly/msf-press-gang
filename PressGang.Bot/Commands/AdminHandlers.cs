@@ -24,5 +24,7 @@ namespace PressGang.Bot.Commands
             string response = String.Format("Waited for {0} seconds", (milliseconds / 1000).ToString());
             await DiscordUtils.Respond(ctx, response);
         }
+
+
     }
 }
