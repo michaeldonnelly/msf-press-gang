@@ -16,5 +16,11 @@ namespace PressGang.Bot.Commands
             _options = options.Value;
         }
 
+        protected bool CallerIsOwner(CommandContext ctx)
+        {
+            ulong callerDiscordId = ctx.User.Id;
+            ulong ownerDiscordId = _options.OwnerUserId;
+            return (callerDiscordId == ownerDiscordId);
+        }
     }
 }
