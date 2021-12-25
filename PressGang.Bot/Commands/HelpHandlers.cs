@@ -1,27 +1,15 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using PressGang.Bot;
 
 namespace PressGang.Bot.Commands
 {
     public class HelpHandlers : BaseCommandModule
     {
-        //public DiscordOptions DiscordOptions { set; private get; }
-        private readonly IConfiguration _configuration;
         private readonly DiscordOptions _options;
-
-        private DiscordOptions Options()
-        {
-            DiscordOptions discordOptions = new DiscordOptions();
-            _configuration.GetSection(DiscordOptions.Discord).Bind(discordOptions);
-            return discordOptions;
-        }
 
         public HelpHandlers(IOptions<DiscordOptions> options)
         {
