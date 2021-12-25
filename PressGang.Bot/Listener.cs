@@ -9,6 +9,7 @@ using DSharpPlus.EventArgs;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
+using PressGang.Bot.Commands;
 
 namespace PressGang.Bot
 {
@@ -44,6 +45,7 @@ namespace PressGang.Bot
             };
 
             CommandsNextExtension commands = discordClient.UseCommandsNext(commandsNextConfiguration);
+            commands.RegisterCommands<AdminHandlers>();
             commands.RegisterCommands<CommandHandlers>();
         }
 

@@ -18,18 +18,12 @@ using PressGang.Core.UserModels;
 
 
 // 559173272306974740
-namespace PressGang.Bot
+namespace PressGang.Bot.Commands
 {
     public class CommandHandlers : BaseCommandModule 
     {
         public PressGangContext PressGangContext { private get; set; }
         
-        [Command("ping")]
-        public async Task PingCommand(CommandContext ctx)
-        {
-            await DiscordUtils.Respond(ctx, "ack");
-        }
-
         [Command("hello")]
         public async Task GreetCommand(CommandContext ctx)
         {
