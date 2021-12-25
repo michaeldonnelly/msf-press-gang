@@ -31,14 +31,6 @@ namespace PressGang.Bot.Commands
             await DiscordUtils.Respond(ctx, "Greetings " + discordMember.Username);
         }
 
-        [Command("wait")]
-        public async Task WaitCommand(CommandContext ctx, int milliseconds)
-        {
-            Thread.Sleep(milliseconds);
-            string response = String.Format("Waited for {0} seconds", (milliseconds / 1000).ToString());
-            await DiscordUtils.Respond(ctx, response);
-        }
-
         [Command("add")]
         public async Task AddCommand(CommandContext ctx, string characterName, int priorityLevel)
         {
