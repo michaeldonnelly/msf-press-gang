@@ -1,16 +1,20 @@
+** Compiling the code **
+
+in ~/PressGang.Bot
+dotnet publish -c Release
+
 ** Making the Docker image **
 
-cd PressGang.Bot
-dotnet publish -c Release
-docker build -t pressgang-bot -f Dockerfile .
+in ~/docker
+docker build -t pressgang-bot -f Dockerfile ..
 
 ** Making the container **
 
-cd docker
+in ~/docker
 docker compose build
 
 ** Running the container **
 
-cd docker
+in ~/docker
 docker compose start
 
