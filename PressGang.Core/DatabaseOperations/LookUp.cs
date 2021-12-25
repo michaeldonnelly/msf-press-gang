@@ -52,14 +52,21 @@ namespace PressGang.Core.DatabaseOperations
             return null;
         }
 
-        public static User User(PressGangContext context, ulong discordId)
+        public static User User(PressGangContext context, ulong discordId, string userName)
         {
             List<User> results = context.Users.Where(u => u.DiscordId == discordId).ToList();
+            User user;
             if (results.Count == 0)
             {
-                return null;
+                user = new(discordId, userName);
+                context.Users.Add(user);
+                context.SaveChanges();
             }
-            return results[0];
+            else
+            {
+                user = results[0];
+            }
+            return user;
         }
 
         public static string FindTableByName(DbContext dbContext, string subject)
