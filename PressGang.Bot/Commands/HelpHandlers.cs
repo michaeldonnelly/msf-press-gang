@@ -13,6 +13,7 @@ namespace PressGang.Bot.Commands
         { }
 
         [Command("hello")]
+        [Description("Say hi to the bot (it's friendly)")]
         public async Task GreetCommand(CommandContext ctx)
         {
             DiscordMember discordMember = ctx.Member;
@@ -20,6 +21,7 @@ namespace PressGang.Bot.Commands
         }
 
         [Command("info")]
+        [Description("Whose bot is this?")]
         public async Task InfoCommand(CommandContext ctx)
         {
             string botName = _options.BotName;

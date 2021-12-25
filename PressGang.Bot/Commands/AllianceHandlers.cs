@@ -17,7 +17,9 @@ namespace PressGang.Bot.Commands
         [Command("lanes")]
         [Description("Display raid lane maps")]
         [Aliases("lane")]
-        public async Task LanesCommand(CommandContext ctx, string raid = "all", int level = 0)
+        public async Task LanesCommand(CommandContext ctx,
+            [Description("Which raid; leave blank for all")] string raid = "all",
+            [Description("Which level of the raid; leave blank for all")] int level = 0)
         {
             List<RaidLane> raidLanes = _options.AllianceData.Maps.RaidLanes.Where(rl => RaidLaneMatchesQuery(rl, raid, level)).ToList();
             if (raidLanes.Count == 0)
