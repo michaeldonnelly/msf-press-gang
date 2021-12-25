@@ -140,7 +140,7 @@ namespace PressGang.Bot
             try
             {
                 DiscordMember discordUser = ctx.Member;
-                User user = LookUp.User(PressGangContext, discordUser.Id);
+                User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
                 CharacterPriorities characterPriorities = new(PressGangContext, user);
                 //if (subject == null)
                 //{
