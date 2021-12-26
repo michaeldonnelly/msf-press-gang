@@ -36,8 +36,16 @@ namespace PressGang.Core
 
         public static IConfiguration GetConfiguration()
         {
-            IConfigurationBuilder builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json");
+            IConfigurationBuilder builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json");
+
+            string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            if (!String.IsNullOrEmpty(environment))
+            {
+                string environmentSpecificConfig = $"appsettings.{environment}.json";
+                builder.AddJsonFile(environmentSpecificConfig, optional: true);
+            }
+
             return builder.Build();
         }
 

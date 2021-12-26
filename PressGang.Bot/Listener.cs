@@ -40,7 +40,7 @@ namespace PressGang.Bot
         {
             CommandsNextConfiguration commandsNextConfiguration = new()
             {
-                StringPrefixes = new[] { "/" },
+                StringPrefixes = new[] { discordOptions.CommandPrefix },
                 Services = serviceProvider
             };
 

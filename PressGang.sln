@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Console", "PressGang.Console\PressGang.Console.csproj", "{5194AA5F-FEC1-47B2-B759-477AB6E22667}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Core", "PressGang.Core\PressGang.Core.csproj", "{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Bot", "PressGang.Bot\PressGang.Bot.csproj", "{ADD9EDE7-12CD-405A-AAD4-ED02969AC23B}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5194AA5F-FEC1-47B2-B759-477AB6E22667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5194AA5F-FEC1-47B2-B759-477AB6E22667}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5194AA5F-FEC1-47B2-B759-477AB6E22667}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5194AA5F-FEC1-47B2-B759-477AB6E22667}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6C3C7DE-0184-410F-BDC7-E2C44115A24D}.Release|Any CPU.ActiveCfg = Release|Any CPU

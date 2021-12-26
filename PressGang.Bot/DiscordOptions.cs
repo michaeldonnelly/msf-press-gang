@@ -7,6 +7,8 @@ namespace PressGang.Bot
     {
         public const string Discord = nameof(Discord);
 
+        public string CommandPrefix { get; set; } = "/";
+
         public string TokenFilePath { get; set; }
 
         /// <summary>
