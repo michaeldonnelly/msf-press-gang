@@ -1,8 +1,39 @@
 {
   "Prerequisites" : [
     {
-      "Character": "Phoenix",
+      "Character": "Iron Man",
+      "YellowStars": 3,
       "DependsOn": [
+        "Agent Coulsen",
+        "Black Widow",
+        "Captain America",
+        "Hawkeye",
+        "Nick Fury",
+        "Quake",
+        "S.H.I.E.L.D. Assault",
+        "S.H.I.E.L.D. Medic",
+        "S.H.I.E.L.D. Operative",
+        "S.H.I.E.L.D. Security",
+        "S.H.I.E.L.D. Trooper"
+      ]
+    },
+    {
+      "Character": "Nick Fury",
+      "YellowStars": 3,
+      "DependsOn": [
+        "Kree Cyborg",
+        "Kree Noble",
+        "Kree Oracle",
+        "Kree Reaper",
+        "Kree Royal Guard"
+      ]
+    },
+    {
+      "Character": "Phoenix",
+      "YellowStars": 5,
+      "DependsOn": [
+        "Doctor Doom",
+        "Hand Assassin",
         "Hela",
         "Loki",
         "Mordo",
@@ -12,6 +43,7 @@
     },
     {
       "Character": "Black Bolt",
+      "YellowStars": 5,
       "DependsOn": [
         "Hela",
         "Loki",
@@ -22,6 +54,7 @@
     },
     {
       "Character": "Ebony Maw",
+      "YellowStars": 5,
       "DependsOn": [
         "Black Bolt",
         "Karnak",
@@ -33,6 +66,7 @@
     },
     {
       "Character": "Doctor Octopus",
+      "YellowStars": 5,
       "DependsOn": [
         "Cable",
         "Domino",
@@ -43,6 +77,7 @@
     },
     {
       "Character": "Jubilee",
+      "YellowStars": 5,
       "DependsOn": [
         "Ant-Man",
         "Wasp",
@@ -50,6 +85,106 @@
         "Stature",
         "Ghost"
       ]
-    }
+    },
+    {
+      "Character": "Adam Warlock",
+      "YellowStars": 5,
+      "DependsOn": [
+        "Jubilee",
+        "Longshot",
+        "Multiple Man",
+        "Polaris",
+        "Shatterstar"
+      ]
+    },
+    {
+      "Character": "Invisible Woman",
+      "YellowStars": 5,
+      "DependsOn": [
+        "Doctor Octopus",
+        "Electro",
+        "Green Goblin",
+        "Mysterio",
+        "Rhino",
+        "Shocker",
+        "Swarm",
+        "Vulture"
+      ]
+    },
+    {
+      "Character": "Omega Red",
+      "YellowStars": 5,
+      "DependsOn": [
+        "Nick Fury",
+        "Winter Soldier",
+        "Captain America (Sam)",
+        "Maria Hill",
+        "Sharon Carter"
+      ]
+    },
+    {
+      "Character": "Star-Lord",
+      "YellowStars": 4,
+      "DependsOn": [
+        "Drax",
+        "Gamora",
+        "Groot",
+        "Mantis",
+        "Ravager Boomer",
+        "Ravager Bruiser",
+        "Ravager Stitcher",
+        "Rocket Raccoon",
+        "Star-Lord (T'challa)",
+        "Yondu"
+      ]
+    },
+    {
+      "Character": "Shuri",
+      "YellowStars": 5,
+      "DependsOn": [
+        "Doctor Octopus",
+        "Electro",
+        "Green Goblin",
+        "Mysterio",
+        "Rhino",
+        "Shocker",
+        "Swarm",
+        "Vulture",
+        "Anti-Venom",
+        "Carnage",
+        "Scream",
+        "Spider-Man",
+        "Spider-Man (Miles)",
+        "Spider-Man (Symbiote)",
+        "Ghost-Spider",
+        "Scarlet Spider",
+        "Spider-Punk"
+      ]
+    },
+    {
+      "Character": "Magneto",
+      "YellowStars": 5,
+      "DependsOn": [
+        "Blob",
+        "Mystique",
+        "Sabretooth",
+        "Toad",
+        "Juggernaut",
+        "Pyro",
+        "Beast",
+        "Bishop",
+        "Colossus",
+        "Cyclops",
+        "Iceman",
+        "Jubilee",
+        "Kitty Pryde",
+        "Magik",
+        "Phoenix",
+        "Psylocke",
+        "Storm",
+        "Wolverine",
+        "X-23"
+      ]
+    },
   ]
 }

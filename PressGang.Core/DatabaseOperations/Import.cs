@@ -129,7 +129,7 @@ namespace PressGang.Core.DatabaseOperations
                     Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
                     if (prerequisite == null)
                     {
-                        prerequisite = new(character, dependsOn);
+                        prerequisite = new(character, dependsOn, entry.YellowStars);
                         context.Add(prerequisite);
                     }
                 }
@@ -243,6 +243,7 @@ namespace PressGang.Core.DatabaseOperations
     class PrerequisiteListEntry
     {
         public string Character { get; set; }
+        public int YellowStars { get; set; }
         public List<string> DependsOn { get; set; }
     }
 

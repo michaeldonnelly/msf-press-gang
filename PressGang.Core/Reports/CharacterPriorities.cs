@@ -201,6 +201,7 @@ namespace PressGang.Core.Reports
 
         private void AddPrereqsToList(Character character, int priority, ref Dictionary<Character, int> characterGoals)
         {
+            // TODO: use StaticReports.Prerequisites
             foreach (Prerequisite prerequisite in character.Prerequisites)
             {
                 Character dependsOn = prerequisite.DependsOn;
