@@ -6,12 +6,6 @@
     <RootNamespace>PressGang.Bot</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\bin\Debug</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\bin\Release</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\PressGang.Core\PressGang.Core.csproj" />
   </ItemGroup>
