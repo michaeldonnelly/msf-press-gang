@@ -48,6 +48,7 @@ namespace PressGang.Bot
             commands.RegisterCommands<AdminHandlers>();
             commands.RegisterCommands<HelpHandlers>();
             commands.RegisterCommands<AllianceHandlers>();
+            commands.RegisterCommands<StaticGameHandlers>();
             if (discordOptions.EnablePressGang)
             {
                 commands.RegisterCommands<PressGangHandlers>();
