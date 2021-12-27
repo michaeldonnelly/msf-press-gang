@@ -185,11 +185,7 @@ namespace PressGang.Core.DatabaseOperations
 
         private static bool IsPlayableCharacter(string characterName)
         {
-            if (characterName.StartsWith("S_"))
-            {
-                // summoned
-                return false;
-            }
+            
             if (characterName.Contains("Empowered"))
             {
                 return false;
@@ -197,6 +193,17 @@ namespace PressGang.Core.DatabaseOperations
 
             return true;
         }
+
+        private static bool IsSummonedCharacter(string characterName)
+        {
+            if (characterName.StartsWith("S_"))
+            {
+                return true;
+            }
+
+            return false; 
+        }
+
 
         private static string FormatCharacterName(string rawName, Dictionary<string, string> reformattedNameMap)
         {
@@ -226,6 +233,20 @@ namespace PressGang.Core.DatabaseOperations
             string jsonString = File.ReadAllText(path);
             Dictionary<string, string> map = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
             return map;
+        }
+
+        private static List<string> NonPlayableCharacters(string path)
+        {
+            List<string> npcs = new();
+            using (var reader = new StreamReader(path))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    npcs.Add(line);
+                }
+            }
+            return npcs;
         }
 
         private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
