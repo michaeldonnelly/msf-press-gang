@@ -11,6 +11,7 @@ using CsvHelper.Configuration.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PressGang.Core.DatabaseContext;
+using PressGang.Core.Reports;
 using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.DatabaseOperations
@@ -19,11 +20,29 @@ namespace PressGang.Core.DatabaseOperations
     {
         public static void ImportAll(PressGangContext context, string dataDirectory)
         {
+            Console.WriteLine("Importing datafiles (record count before / after)");
+
+            Precount(context, "Campaigns");
             ImportCampaigns(context, dataDirectory);
+            Postcount(context, "Campaigns");
+
+
             GenerateCampaignLevels(context);
             ImportStores(context, dataDirectory);
             ImportCharactersAndLocations(context, dataDirectory);
             ImportPrereqs(context, dataDirectory);
+        }
+
+        private static void Precount(PressGangContext context, string tableName)
+        {
+            int recordsBefore = StaticReports.RowsInTable(context, tableName);
+            Console.Write($"  {tableName} ({recordsBefore.ToString()} / ");
+        }
+
+        private static void Postcount(PressGangContext context, string tableName)
+        {
+            int recordsAfter = StaticReports.RowsInTable(context, tableName);
+            Console.WriteLine($"{recordsAfter.ToString()})");
         }
 
         private static void ImportCampaigns(PressGangContext context, string dataDirectory)
