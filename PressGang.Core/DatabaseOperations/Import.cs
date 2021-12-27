@@ -18,8 +18,9 @@ namespace PressGang.Core.DatabaseOperations
 {
     public static class Import
     {
-        public static void ImportAll(PressGangContext context, string dataDirectory)
+        public static void ImportAll(PressGangContext context, DataAccessOptions options)
         {
+            string dataDirectory = options.ImportDataDirectory;
             Console.WriteLine("Importing datafiles (record count before / after)");
 
             Precount(context, "Campaigns");

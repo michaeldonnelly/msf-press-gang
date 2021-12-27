@@ -19,7 +19,7 @@ namespace PressGang.Core.DatabaseContext
             }
             if (options.ImportData)
             {
-                Import.ImportAll(context, options.ImportDataDirectory);
+                Import.ImportAll(context, options);
             }
         }
     }
