@@ -147,15 +147,25 @@ namespace PressGang.Core.DatabaseOperations
             string reformatMapPath = dataDirectory + "/reformat-names.json";
             Dictionary<string, string> reformattedNameMap = ReformattedNameMap(reformatMapPath);
 
+            string npcPath = dataDirectory + "/non-playable-characters.txt";
+            List<string> npcs = NonPlayableCharacters(npcPath);
+
 
             int line = 0;
             foreach(CharacterAlias characterAlias in aliases)
             {
                 line++;
                 Console.Write($"    {line.ToString().PadLeft(4)}. {characterAlias.CharacterKey}: ");
-                if (!IsPlayableCharacter(characterAlias.CharacterKey))
+
+                if (IsSummonedCharacter(characterAlias.CharacterKey))
                 {
-                    Console.WriteLine("non-playable");
+                    Console.WriteLine("summoned");
+                    continue;
+                }
+
+                if (npcs.Contains(characterAlias.CharacterKey))
+                {
+                    Console.WriteLine("NPC");
                     continue;
                 }
 
@@ -196,12 +206,7 @@ namespace PressGang.Core.DatabaseOperations
 
         private static bool IsSummonedCharacter(string characterName)
         {
-            if (characterName.StartsWith("S_"))
-            {
-                return true;
-            }
-
-            return false; 
+            return characterName.StartsWith("S_");
         }
 
 
