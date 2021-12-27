@@ -12,7 +12,6 @@ namespace PressGang.Bot
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("DOTNET_ENVIRONMENT: " + Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT"));
 
             IServiceCollection services = new ServiceCollection();
             StartUp startUp = new StartUp();
@@ -22,7 +21,7 @@ namespace PressGang.Bot
 
             DiscordOptions discordOptions = new();
             startUp.Configuration.GetSection(DiscordOptions.Discord).Bind(discordOptions);
-            Console.WriteLine("Hello World!");
+            Console.WriteLine($"Starting bot {discordOptions.BotName} for environment {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}");
             DiscordClient discordClient = Listener.Initialize(discordOptions, serviceProvider);
             Listener.Connect(discordClient).GetAwaiter().GetResult();
         }
