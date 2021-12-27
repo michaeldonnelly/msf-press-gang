@@ -141,11 +141,15 @@ namespace PressGang.Core.DatabaseOperations
         {
             string path = dataDirectory + "/characterAlias.csv";
             List<CharacterAlias> aliases = ReadCharacters(path);
+            int line = 0;
             foreach(CharacterAlias characterAlias in aliases)
             {
+                line++;
+                Console.Write($"    {line.ToString().PadLeft(4)}. {characterAlias.CharacterKey}: ");
                 if (IsSummonedCharacter(characterAlias.CharacterKey))
                 {
-                    break;
+                    Console.WriteLine("summoned");
+                    continue;
                 }
 
                 Character character = context.Characters.Where<Character>(c => c.CharacterKey == characterAlias.CharacterKey).FirstOrDefault();
@@ -162,6 +166,11 @@ namespace PressGang.Core.DatabaseOperations
                         // TODO: add alias to character
                     }
                     context.Add(character);
+                    Console.WriteLine("added");
+                }
+                else
+                {
+                    Console.WriteLine("exists");
                 }
             }
             context.SaveChanges();
