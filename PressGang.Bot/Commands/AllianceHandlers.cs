@@ -31,7 +31,11 @@ namespace PressGang.Bot.Commands
             {
                 foreach (RaidLane lane in raidLanes)
                 {
-                    string title = $"{lane.Raid} {lane.Level}";
+                    string title = $"{_options.AllianceName} raid lanes for {lane.Raid}";
+                    if (lane.Level > 0)
+                    {
+                        title += $" level {lane.Level}";
+                    }
                     await DiscordUtils.Respond(ctx, title, lane.MapUrl);
                 }
             }
