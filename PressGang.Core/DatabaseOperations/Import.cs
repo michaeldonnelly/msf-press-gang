@@ -20,6 +20,7 @@ namespace PressGang.Core.DatabaseOperations
     {
         public static void ImportAll(PressGangContext context, DataAccessOptions options)
         {
+            // TODO: make this not a static class, have options as a member level variable, and only show debug messages based on an option
             string dataDirectory = options.ImportDataDirectory;
             Console.WriteLine("Importing datafiles (record count before / after)");
 
