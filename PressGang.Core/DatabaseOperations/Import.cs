@@ -163,7 +163,7 @@ namespace PressGang.Core.DatabaseOperations
                 if (character == null)
                 {
                     string firstAlias = characterAlias.Aliases.First<string>();
-                    string characterName = FormatCharacterName(firstAlias);
+                    string characterName = FormatCharacterName(firstAlias, reformattedNameMap);
                     character = new(characterName)
                     {
                         CharacterKey = characterAlias.CharacterKey
@@ -198,10 +198,14 @@ namespace PressGang.Core.DatabaseOperations
             return true;
         }
 
-        private static string FormatCharacterName(string rawName)
+        private static string FormatCharacterName(string rawName, Dictionary<string, string> reformattedNameMap)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             string characterName = textInfo.ToTitleCase(rawName);
+            if (reformattedNameMap.ContainsKey(characterName))
+            {
+                return reformattedNameMap[characterName];
+            }
             return characterName;
         }
 
