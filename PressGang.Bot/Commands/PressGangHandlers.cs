@@ -90,36 +90,6 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        [Command("db")]
-        [RequireOwner]
-        public async Task DbCommand(CommandContext ctx)
-        {
-            // TODO: restrict to owner
-            Queue<string> response = new();
-            response.Enqueue("PressGang Database Status");
-            response.Enqueue(DiscordUtils.MonospaceUnderline(25));
-            try
-            {
-                response.Enqueue("CanConnect: " + PressGangContext.Database.CanConnect().ToString());
-                response.Enqueue("ProviderName: " + PressGangContext.Database.ProviderName.ToString());
-                response.Enqueue("Record counts");
-                IRelationalModel relationalModel = PressGangContext.Model.GetRelationalModel();
-                foreach (ITable table in relationalModel.Tables)
-                {
-                    string tableName = table.Name;
-                    IEnumerable<object> set = (IEnumerable<object>)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
-                    int recordCount = set.Count();
-                    response.Enqueue(String.Format("\t{0}: {1}", tableName, recordCount.ToString()));
-                }
-
-                await DiscordUtils.Respond(ctx, response);
-            }
-            catch (Exception ex)
-            {
-                await DiscordUtils.HandleError(ctx, ex);
-            }
-        }
-
         [Command("my")]
         public async Task MyCommand(CommandContext ctx, string subject = "")
         {
