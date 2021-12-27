@@ -43,6 +43,7 @@ namespace PressGang.Core.DatabaseOperations
             Precount(context, "Prerequisites");
             ImportPrereqs(context, dataDirectory);
             Postcount(context, "Prerequisites");
+            Console.WriteLine("Import complete\r\n");
         }
 
         private static void Precount(PressGangContext context, string tableName)
