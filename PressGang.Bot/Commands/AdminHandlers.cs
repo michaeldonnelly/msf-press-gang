@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Options;
 using PressGang.Core.DatabaseContext;
+using PressGang.Core.Reports;
 
 namespace PressGang.Bot.Commands
 {
@@ -54,8 +55,7 @@ namespace PressGang.Bot.Commands
                 foreach (ITable table in relationalModel.Tables)
                 {
                     string tableName = table.Name;
-                    IEnumerable<object> set = (IEnumerable<object>)PressGangContext.GetType().GetProperty(tableName).GetValue(PressGangContext, null);
-                    int recordCount = set.Count();
+                    int recordCount = StaticReports.RowsInTable(PressGangContext, tableName);
                     response.Enqueue(String.Format("\t{0}: {1}", tableName, recordCount.ToString()));
                 }
 
@@ -66,9 +66,5 @@ namespace PressGang.Bot.Commands
                 await DiscordUtils.HandleError(ctx, ex);
             }
         }
-
-
-
-
     }
 }

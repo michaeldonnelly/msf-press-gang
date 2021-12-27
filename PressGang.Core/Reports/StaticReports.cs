@@ -19,5 +19,12 @@ namespace PressGang.Core.Reports
             }
             return dependsOn;
         }
+
+        public static int RowsInTable(PressGangContext context, string tableName)
+        {
+            IEnumerable<object> set = (IEnumerable<object>)context.GetType().GetProperty(tableName).GetValue(context, null);
+            int recordCount = set.Count();
+            return recordCount;
+        }
     }
 }
