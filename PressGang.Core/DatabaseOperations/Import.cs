@@ -35,13 +35,17 @@ namespace PressGang.Core.DatabaseOperations
             Postcount(context, "Locations");
 
             Precount(context, "Characters");
-            ImportCharactersAndLocations(context, dataDirectory);
+            ImportCharactersAndAliases(context, dataDirectory);
             Postcount(context, "Characters");
 
-            Precount(context, "Prerequisites");
-            ImportPrereqs(context, dataDirectory);
-            Postcount(context, "Prerequisites");
-            Console.WriteLine("Import complete\r\n");
+            //Precount(context, "Oppotunities");
+            //ImportCharactersAndLocations(context, dataDirectory);
+            //Postcount(context, "Oppotunities");
+
+            //Precount(context, "Prerequisites");
+            //ImportPrereqs(context, dataDirectory);
+            //Postcount(context, "Prerequisites");
+            //Console.WriteLine("Import complete\r\n");
         }
 
         private static void Precount(PressGangContext context, string tableName, string subType = "")
@@ -132,6 +136,61 @@ namespace PressGang.Core.DatabaseOperations
             }
             context.SaveChanges();
         }
+
+        private static void ImportCharactersAndAliases(PressGangContext context, string dataDirectory)
+        {
+            string path = dataDirectory + "/characterAlias.csv";
+            List<CharacterAlias> aliases = ReadCharacters(path);
+            foreach(CharacterAlias characterAlias in aliases)
+            {
+                if (IsSummonedCharacter(characterAlias.CharacterKey))
+                {
+                    break;
+                }
+
+                Character character = context.Characters.Where<Character>(c => c.CharacterKey == characterAlias.CharacterKey).FirstOrDefault();
+                if (character == null)
+                {
+                    string firstAlias = characterAlias.Aliases.First<string>();
+                    string characterName = FormatCharacterName(firstAlias);
+                    character = new(characterName)
+                    {
+                        CharacterKey = characterAlias.CharacterKey
+                    };
+                    foreach (string alias in characterAlias.Aliases.Skip(1))
+                    {
+                        // TODO: add alias to character
+                    }
+                    context.Add(character);
+                }
+            }
+            context.SaveChanges();
+        }
+
+        private static bool IsSummonedCharacter(string characterName)
+        {
+            return characterName.StartsWith("S_");
+        }
+
+        private static string FormatCharacterName(string rawName)
+        {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            string characterName = textInfo.ToTitleCase(rawName);
+            return characterName;
+        }
+
+        private static List<CharacterAlias> ReadCharacters(string path)
+        {
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                csv.Context.RegisterClassMap<CharacterAliasMap>();
+                IEnumerable<CharacterAlias> rows = csv.GetRecords<CharacterAlias>();
+                List<CharacterAlias> characters = rows.ToList<CharacterAlias>();
+                return characters;
+            }
+        }
+
 
         private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
         {
@@ -269,6 +328,21 @@ namespace PressGang.Core.DatabaseOperations
     class StoreList
     {
         public List<Location> Stores { get; set; }
+    }
+
+    class CharacterAlias
+    {
+        public string CharacterKey { get; set; }
+        public List<String> Aliases { get; set; }
+    }
+
+    sealed class CharacterAliasMap : ClassMap<CharacterAlias>
+    {
+        public CharacterAliasMap()
+        {
+            Map(ca => ca.CharacterKey);
+            Map(ca =>ca.Aliases).Index(1);
+        }
     }
 
     class PrerequisiteList
