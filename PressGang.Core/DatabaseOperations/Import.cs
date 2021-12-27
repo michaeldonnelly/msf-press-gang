@@ -141,16 +141,21 @@ namespace PressGang.Core.DatabaseOperations
 
         private static void ImportCharactersAndAliases(PressGangContext context, string dataDirectory)
         {
-            string path = dataDirectory + "/characterAlias.csv";
-            List<CharacterAlias> aliases = ReadCharacters(path);
+            string aliasesPath = dataDirectory + "/characterAlias.csv";
+            List<CharacterAlias> aliases = ReadCharacters(aliasesPath);
+
+            string reformatMapPath = dataDirectory + "/reformat-names.json";
+            Dictionary<string, string> reformattedNameMap = ReformattedNameMap(reformatMapPath);
+
+
             int line = 0;
             foreach(CharacterAlias characterAlias in aliases)
             {
                 line++;
                 Console.Write($"    {line.ToString().PadLeft(4)}. {characterAlias.CharacterKey}: ");
-                if (IsSummonedCharacter(characterAlias.CharacterKey))
+                if (!IsPlayableCharacter(characterAlias.CharacterKey))
                 {
-                    Console.WriteLine("summoned");
+                    Console.WriteLine("non-playable");
                     continue;
                 }
 
@@ -178,9 +183,19 @@ namespace PressGang.Core.DatabaseOperations
             context.SaveChanges();
         }
 
-        private static bool IsSummonedCharacter(string characterName)
+        private static bool IsPlayableCharacter(string characterName)
         {
-            return characterName.StartsWith("S_");
+            if (characterName.StartsWith("S_"))
+            {
+                // summoned
+                return false;
+            }
+            if (characterName.Contains("Empowered"))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private static string FormatCharacterName(string rawName)
@@ -202,6 +217,12 @@ namespace PressGang.Core.DatabaseOperations
             }
         }
 
+        private static Dictionary<string, string> ReformattedNameMap(string path)
+        {
+            string jsonString = File.ReadAllText(path);
+            Dictionary<string, string> map = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+            return map;
+        }
 
         private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
         {
