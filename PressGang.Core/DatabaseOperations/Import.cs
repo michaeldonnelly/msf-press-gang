@@ -26,11 +26,23 @@ namespace PressGang.Core.DatabaseOperations
             ImportCampaigns(context, dataDirectory);
             Postcount(context, "Campaigns");
 
-
+            Console.Write("Campaign levels: ");
+            Precount(context, "Locations");
             GenerateCampaignLevels(context);
+            Postcount(context, "Locations");
+
+            Console.Write("Stores: ");
+            Precount(context, "Locations");
             ImportStores(context, dataDirectory);
+            Postcount(context, "Locations");
+
+            Precount(context, "Characters");
             ImportCharactersAndLocations(context, dataDirectory);
+            Postcount(context, "Characters");
+
+            Precount(context, "Prerequisites");
             ImportPrereqs(context, dataDirectory);
+            Postcount(context, "Prerequisites");
         }
 
         private static void Precount(PressGangContext context, string tableName)
