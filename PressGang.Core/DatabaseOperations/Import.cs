@@ -26,13 +26,11 @@ namespace PressGang.Core.DatabaseOperations
             ImportCampaigns(context, dataDirectory);
             Postcount(context, "Campaigns");
 
-            Console.Write("Campaign levels: ");
-            Precount(context, "Locations");
+            Precount(context, "Locations", "Campaign Levels");
             GenerateCampaignLevels(context);
             Postcount(context, "Locations");
 
-            Console.Write("Stores: ");
-            Precount(context, "Locations");
+            Precount(context, "Locations", "Stores");
             ImportStores(context, dataDirectory);
             Postcount(context, "Locations");
 
@@ -46,10 +44,16 @@ namespace PressGang.Core.DatabaseOperations
             Console.WriteLine("Import complete\r\n");
         }
 
-        private static void Precount(PressGangContext context, string tableName)
+        private static void Precount(PressGangContext context, string tableName, string subType = "")
         {
             int recordsBefore = StaticReports.RowsInTable(context, tableName);
-            Console.Write($"  {tableName} ({recordsBefore.ToString()} / ");
+
+            string formattedSubtype = "";
+            if (!String.IsNullOrEmpty(subType))
+            {
+                formattedSubtype = $" [{subType}]";
+            }
+            Console.Write($"  {tableName}{formattedSubtype} ({recordsBefore.ToString()} / ");
         }
 
         private static void Postcount(PressGangContext context, string tableName)
