@@ -14,5 +14,7 @@ namespace PressGang.Core.DatabaseContext
         public bool RunMigrations { get; set; }
 
         public bool ImportData { get; set; }
+
+        public bool DebugImport { get; set; }
     }
 }
