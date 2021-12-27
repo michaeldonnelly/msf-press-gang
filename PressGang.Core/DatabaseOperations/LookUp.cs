@@ -35,6 +35,19 @@ namespace PressGang.Core.DatabaseOperations
                 return results[0];
             }
 
+            if (results.Count == 0)
+            {
+                return null;
+            }
+
+            foreach (Character character in results)
+            {
+                if (String.Compare(character.Name, name, true) == 0)
+                {
+                    return character;
+                }
+            }
+
             return null;
         }
 
