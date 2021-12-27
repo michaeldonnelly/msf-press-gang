@@ -14,6 +14,13 @@ namespace PressGang.Core.StaticModels
 
         public string Name { get; set; }
 
+        /// <summary>
+        /// The character key from msf.gg's alias file
+        /// </summary>
+        public string CharacterKey { get; set; }
+
+        //public List<string> Aliases { get; set; }
+
         public virtual List<Prerequisite> Prerequisites { get; set; } = new();
 
         public virtual Resource Shard { get; set; }
