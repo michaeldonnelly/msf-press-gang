@@ -9,7 +9,7 @@ dotnet publish -c Release -o ../build
 
 in ~/docker
 ```
-docker build -t pressgang-bot -f Dockerfile ..
+docker build -t michaeldonnelly/pressgang-bot -f Dockerfile ..
 ```
 
 #### (For local testing) Make and run the container 
@@ -24,8 +24,10 @@ docker compose start
 
 in ~/docker
 ```
-docker tag pressgang-bot michaeldonnelly/pressgang-bot:2021-12-26-1144
-docker push michaeldonnelly/pressgang-bot:2021-12-26-1144
+timestamp=$(date -u +"%Y-%m-%d-%H%M")
+docker tag michaeldonnelly/pressgang-bot michaeldonnelly/pressgang-bot:$timestamp
+docker push michaeldonnelly/pressgang-bot:$timestamp
+docker push michaeldonnelly/pressgang-bot
 ```
 
 #### (If needed) Get new data & config to the server 
