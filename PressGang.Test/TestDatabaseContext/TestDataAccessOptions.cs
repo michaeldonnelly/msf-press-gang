@@ -25,8 +25,8 @@ namespace PressGang.Test.TestDatabaseContext
         {
             Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", EnvironmentName);
 
-            StartUp startUp = new StartUp();
-            IConfiguration configuration = startUp.Configuration;
+            StartUp startUp = new StartUp(initializeDataBaseConnection: false);
+            IConfiguration configuration = startUp.Configuration;          
             configuration.GetSection(DataAccessOptions.DataAccess).Bind(Options);
         }
 
@@ -73,23 +73,14 @@ namespace PressGang.Test.TestDatabaseContext
 
     }
 
-
-
-
-    
-    public class TestDataAccessOptions
+    [TestClass]           
+    public class TestDataAccessOptionsProd : TestDataAccessOptionsBase
     {
-        private DataAccessOptions _dataAccessOptions = new();
+        private const string _environmentName = null;
+        private const string _expectedDataSource = "pressgang.sqlite3";
 
-        [TestInitialize]
-        public void StartUp()
-        {
-            Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT",null);
-
-            StartUp startUp = new StartUp();
-            IConfiguration configuration = startUp.Configuration;           
-            configuration.GetSection(DataAccessOptions.DataAccess).Bind(_dataAccessOptions);
-        }
+        public TestDataAccessOptionsProd() : base(_environmentName, _expectedDataSource)
+        { }
 
         [TestMethod]
         public void EnvironmentIsNullForProd()
@@ -98,18 +89,23 @@ namespace PressGang.Test.TestDatabaseContext
             Assert.IsNull(environment);
         }
 
-        [TestMethod]
-        public void ConnectionStringStartsWithDataSource()
-        {
-            bool connectionStringStartsWithDataSource = _dataAccessOptions.ConnectionString.StartsWith("Data Source");
-            Assert.IsTrue(connectionStringStartsWithDataSource);
-        }
+    }
+
+    [TestClass]
+    public class TestDataAccessOptionsTest : TestDataAccessOptionsBase
+    {
+        private const string _environmentName = "AutomatedTesting";
+        private const string _expectedDataSource = ":memory:";
+
+        public TestDataAccessOptionsTest() : base(_environmentName, _expectedDataSource)
+        { }
 
         [TestMethod]
-        public void ConnectionStringIsSqliteDb()
+        public void EnvironmentIsNullForProd()
         {
-            bool connectionStringIsSqliteDb = _dataAccessOptions.ConnectionString.EndsWith("pressgang.sqlite3");
-            Assert.IsTrue(connectionStringIsSqliteDb);
+            string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            Assert.AreEqual("AutomatedTesting", environment);
         }
+
     }
 }
