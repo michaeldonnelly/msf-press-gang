@@ -26,7 +26,7 @@ namespace PressGang.Bot.Commands
         {
             string botName = _options.BotName;
             string allianceName = _options.AllianceName;
-            string response = $"Hi I'm {botName}, the alliance support bot for {allianceName}.";
+            string response = $"Hi I'm {botName}, the alliance support bot for {allianceName}.  You can find my source code at https://github.com/michaeldonnelly/msf-press-gang";
             await DiscordUtils.Respond(ctx, response);
         }
     }
