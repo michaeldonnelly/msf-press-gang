@@ -50,8 +50,6 @@ namespace PressGang.Test.TestDatabaseContext
             }
             Assert.AreEqual(ExpectedDataSource, dataSource);
         }
-
-
     }
 
     [TestClass]
@@ -59,7 +57,6 @@ namespace PressGang.Test.TestDatabaseContext
     {
         private const string _environmentName = "Development";
         private const string _expectedDataSource = "pressgang-dev.sqlite3";
-
 
         public TestDataAccessOptionsDev() : base(_environmentName, _expectedDataSource)
         {  }
@@ -70,20 +67,6 @@ namespace PressGang.Test.TestDatabaseContext
             string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
             Assert.AreEqual("Development", environment);
         }
-
-        [TestMethod]
-        public void foo()
-        {
-
-            string appsettings = File.ReadAllText("appsettings.json");
-            Assert.IsNotNull(appsettings);
-            string appsettingsdev = File.ReadAllText("appsettings.Development.json");
-            Assert.IsNotNull(appsettingsdev);
-            string appsettingstest = File.ReadAllText("appsettings.AutomatedTesting.json");
-            Assert.IsNotNull(appsettingstest);
-
-        }
-
     }
 
     [TestClass]           
