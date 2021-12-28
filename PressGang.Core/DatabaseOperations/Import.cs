@@ -283,11 +283,11 @@ namespace PressGang.Core.DatabaseOperations
             }
         }
 
-        private static void AddFarms(PressGangContext context, List<FarmLocation> characterLocations)
+        private static void AddFarms(PressGangContext context, List<FarmLocation> farmLocations)
         {
-            foreach(FarmLocation characterLocation in characterLocations)
+            foreach(FarmLocation farm in farmLocations)
             {
-                string characterName = characterLocation.CharacterName;
+                string characterName = farm.CharacterName;
                 Resource characterShard;
 
                 try
@@ -305,7 +305,7 @@ namespace PressGang.Core.DatabaseOperations
                     context.SaveChanges();
                 }
 
-                Location location = FindLocation(context, characterLocation);
+                Location location = FindLocation(context, farm);
                 if (location != null)
                 {
                     try
