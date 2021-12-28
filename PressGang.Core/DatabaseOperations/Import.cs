@@ -44,10 +44,10 @@ namespace PressGang.Core.DatabaseOperations
             //ImportFarms(context, dataDirectory);
             //Postcount(context, "Opportunities");
 
-            //Precount(context, "Prerequisites");
-            //ImportPrereqs(context, dataDirectory);
-            //Postcount(context, "Prerequisites");
-            //Console.WriteLine("Import complete\r\n");
+            Precount(context, "Prerequisites");
+            ImportPrereqs(context, dataDirectory);
+            Postcount(context, "Prerequisites");
+            Console.WriteLine("Import complete\r\n");
         }
 
         private static void Precount(PressGangContext context, string tableName, string subType = "")
@@ -258,11 +258,6 @@ namespace PressGang.Core.DatabaseOperations
             foreach (PrerequisiteListEntry entry in prerequisiteList.Prerequisites)
             {
                 Character character = LookUp.Character(context, entry.Character);
-                if (character == null)
-                {
-                    character = new(entry.Character);
-                    context.Add(character);
-                }
                 foreach (string dependsOnName in entry.DependsOn)
                 {
                     Character dependsOn = LookUp.Character(context, dependsOnName);
