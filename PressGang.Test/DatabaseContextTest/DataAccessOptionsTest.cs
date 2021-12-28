@@ -5,17 +5,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
 
-namespace PressGang.Test.TestDatabaseContext
+namespace PressGang.Test.DatabaseContextTest
 {
-
-
-    public partial class TestDataAccessOptionsBase
+    public partial class DataAccessOptionsTestBase
     {
         public DataAccessOptions Options = new();
         public readonly string EnvironmentName;
         private readonly string ExpectedDataSource;
 
-        public TestDataAccessOptionsBase(string environmentName, string expectedDataSource)
+        public DataAccessOptionsTestBase(string environmentName, string expectedDataSource)
         {
             EnvironmentName = environmentName;
             ExpectedDataSource = expectedDataSource;
@@ -53,12 +51,12 @@ namespace PressGang.Test.TestDatabaseContext
     }
 
     [TestClass]
-    public class TestDataAccessOptionsDev : TestDataAccessOptionsBase
+    public class DataAccessOptionsTestDev : DataAccessOptionsTestBase
     {
         private const string _environmentName = "Development";
         private const string _expectedDataSource = "pressgang-dev.sqlite3";
 
-        public TestDataAccessOptionsDev() : base(_environmentName, _expectedDataSource)
+        public DataAccessOptionsTestDev() : base(_environmentName, _expectedDataSource)
         {  }
 
         [TestMethod]
@@ -70,12 +68,12 @@ namespace PressGang.Test.TestDatabaseContext
     }
 
     [TestClass]           
-    public class TestDataAccessOptionsProd : TestDataAccessOptionsBase
+    public class DataAccessOptionsTestProd : DataAccessOptionsTestBase
     {
         private const string _environmentName = null;
         private const string _expectedDataSource = "pressgang.sqlite3";
 
-        public TestDataAccessOptionsProd() : base(_environmentName, _expectedDataSource)
+        public DataAccessOptionsTestProd() : base(_environmentName, _expectedDataSource)
         { }
 
         [TestMethod]
@@ -88,12 +86,12 @@ namespace PressGang.Test.TestDatabaseContext
     }
 
     [TestClass]
-    public class TestDataAccessOptionsTest : TestDataAccessOptionsBase
+    public class DataAccessOptionsTestTest : DataAccessOptionsTestBase
     {
         private const string _environmentName = "AutomatedTesting";
         private const string _expectedDataSource = ":memory:";
 
-        public TestDataAccessOptionsTest() : base(_environmentName, _expectedDataSource)
+        public DataAccessOptionsTestTest() : base(_environmentName, _expectedDataSource)
         { }
 
         [TestMethod]
@@ -102,6 +100,5 @@ namespace PressGang.Test.TestDatabaseContext
             string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
             Assert.AreEqual("AutomatedTesting", environment);
         }
-
     }
 }
