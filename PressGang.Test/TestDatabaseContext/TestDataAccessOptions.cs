@@ -14,10 +14,10 @@ namespace PressGang.Test.TestDatabaseContext
         public readonly string EnvironmentName;
         private readonly string ExpectedDataSource;
 
-        public TestDataAccessOptionsBase(string environmentName)  //, string expectedDataSource)
+        public TestDataAccessOptionsBase(string environmentName, string expectedDataSource)
         {
             EnvironmentName = environmentName;
-            //ExpectedDataSource = expectedDataSource;
+            ExpectedDataSource = expectedDataSource;
         }
 
         [TestInitialize]
@@ -38,7 +38,7 @@ namespace PressGang.Test.TestDatabaseContext
         }
 
         [TestMethod]
-        public void ConnectionStringIsSqliteDb()
+        public void DataSourceIsSqliteDb()
         {
             string connectionString = Options.ConnectionString;
             string dataSource = connectionString.Split('=')[1];
@@ -57,16 +57,14 @@ namespace PressGang.Test.TestDatabaseContext
     public class TestDataAccessOptionsDev : TestDataAccessOptionsBase
     {
         private const string _environmentName = "Development";
+        private const string _expectedDataSource = "pressgang-dev.sqlite3";
 
-        public TestDataAccessOptionsDev() : base(_environmentName)
-        {
-            //string environmentName = ;
-            //string expectedDataSource = "pressgang.Development.sqlite3";
-            //return base(environmentName, expectedDataSource);
-        }
+
+        public TestDataAccessOptionsDev() : base(_environmentName, _expectedDataSource)
+        {  }
 
         [TestMethod]
-        public void EnvironmentIsRight()
+        public void EnvironmentIsDevelopment()
         {
             string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
             Assert.AreEqual("Development", environment);
