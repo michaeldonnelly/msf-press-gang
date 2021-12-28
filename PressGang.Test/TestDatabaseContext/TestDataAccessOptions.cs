@@ -6,12 +6,49 @@ using PressGang.Core.DatabaseContext;
 
 namespace PressGang.Test.TestDatabaseContext
 {
+
+
+    public partial class TestDataAccessOptionsBase
+    {
+        private DataAccessOptions Options = new();
+        public readonly string EnvironmentName;
+
+        public TestDataAccessOptionsBase(string environmentName)
+        {
+            EnvironmentName = environmentName;
+        }
+
+    }
+
+    [TestClass]
+    public class TestDataAccessOptionsDev : TestDataAccessOptionsBase
+    {
+        public TestDataAccessOptionsDev() : base("foo")
+        { }
+
+        [TestInitialize]
+        public void StartUp()
+        {
+            Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", EnvironmentName);
+        }
+
+        [TestMethod]
+        public void EnvironmentIsRight()
+        {
+            string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            Assert.AreEqual("foo", environment);
+        }
+
+
+    }
+
+
+
+
     [TestClass]
     public class TestDataAccessOptions
     {
         private DataAccessOptions _dataAccessOptions = new();
-
-
 
         [TestInitialize]
         public void StartUp()
@@ -43,8 +80,5 @@ namespace PressGang.Test.TestDatabaseContext
             bool connectionStringIsSqliteDb = _dataAccessOptions.ConnectionString.EndsWith("pressgang.sqlite3");
             Assert.IsTrue(connectionStringIsSqliteDb);
         }
-
-
-
     }
 }
