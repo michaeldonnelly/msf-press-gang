@@ -18,25 +18,24 @@ namespace PressGang.Test.TestDatabaseContext
             EnvironmentName = environmentName;
         }
 
-    }
-
-    [TestClass]
-    public class TestDataAccessOptionsDev : TestDataAccessOptionsBase
-    {
-        public TestDataAccessOptionsDev() : base("foo")
-        { }
-
         [TestInitialize]
         public void StartUp()
         {
             Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", EnvironmentName);
         }
+    }
+
+    [TestClass]
+    public class TestDataAccessOptionsDev : TestDataAccessOptionsBase
+    {
+        public TestDataAccessOptionsDev() : base("Development")
+        { }
 
         [TestMethod]
         public void EnvironmentIsRight()
         {
             string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-            Assert.AreEqual("foo", environment);
+            Assert.AreEqual("Development", environment);
         }
 
 
