@@ -9,7 +9,8 @@ namespace PressGang.Test.TestDatabaseContext
     [TestClass]
     public class TestDataAccessOptions
     {
-        private DataAccessOptions _dataAccessOptions;
+        private DataAccessOptions _dataAccessOptions = new();
+        string _foo;
 
         [TestInitialize]
         public void StartUp()
@@ -18,9 +19,28 @@ namespace PressGang.Test.TestDatabaseContext
 
             StartUp startUp = new StartUp();
             IConfiguration configuration = startUp.Configuration;
+            
             configuration.GetSection(DataAccessOptions.DataAccess).Bind(_dataAccessOptions);
 
+            _foo = "bar";
         }
+
+        [TestMethod]
+        public void TestFoo()
+        {
+            Assert.AreEqual("bar", _foo);
+
+            StartUp startUp = new StartUp();
+            IConfiguration configuration = startUp.Configuration;
+
+            configuration.GetSection(DataAccessOptions.DataAccess).Bind(_dataAccessOptions);
+            bool connectionStringStartsWithDataSource = _dataAccessOptions.ConnectionString.StartsWith("Data Source");
+            Assert.IsTrue(connectionStringStartsWithDataSource);
+
+
+
+        }
+
 
         [TestMethod]
         public void EnvironmentIsNullForProd()
