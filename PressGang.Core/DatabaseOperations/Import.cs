@@ -180,7 +180,8 @@ namespace PressGang.Core.DatabaseOperations
                     };
                     foreach (string alias in aliasImport.Aliases.Skip(1))
                     {
-                        // TODO: add alias to character
+                        CharacterAlias characterAlias = new(character, alias);
+                        context.Add(characterAlias);
                     }
                     context.Add(character);
                     Console.WriteLine("added");
