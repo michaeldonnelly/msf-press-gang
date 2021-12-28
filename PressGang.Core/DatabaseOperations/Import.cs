@@ -40,6 +40,10 @@ namespace PressGang.Core.DatabaseOperations
             ImportCharactersAndAliases(context, dataDirectory);
             Postcount(context, "Characters");
 
+            Precount(context, "Resources");
+            GenerateCharacterShards(context);
+            Postcount(context, "Resources");
+
             //Precount(context, "Opportunities");
             //ImportFarms(context, dataDirectory);
             //Postcount(context, "Opportunities");
@@ -241,6 +245,20 @@ namespace PressGang.Core.DatabaseOperations
                 }
             }
             return npcs;
+        }
+
+        private static void GenerateCharacterShards(PressGangContext context)
+        {
+            foreach (Character character in context.Characters)
+            {
+                Resource characterShard = LookUp.Shard(context, character);
+                if (characterShard == null)
+                {
+                    characterShard = new(character);
+                    context.Add(characterShard);
+                }
+            }
+            context.SaveChanges();
         }
 
         private static void ImportFarms(PressGangContext context, string dataDirectory)
