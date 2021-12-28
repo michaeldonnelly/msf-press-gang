@@ -32,8 +32,9 @@ namespace PressGang.Test.DatabaseContextTest
         [TestMethod]
         public void ConnectionStringStartsWithDataSource()
         {
-            bool connectionStringStartsWithDataSource = Options.ConnectionString.StartsWith("Data Source");
-            Assert.IsTrue(connectionStringStartsWithDataSource);
+            string connectionString = Options.ConnectionString;
+            bool connectionStringStartsWithDataSource = connectionString.StartsWith("Data Source");
+            Assert.IsTrue(connectionStringStartsWithDataSource, connectionString);
         }
 
         [TestMethod]
