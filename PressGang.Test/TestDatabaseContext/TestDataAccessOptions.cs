@@ -12,10 +12,12 @@ namespace PressGang.Test.TestDatabaseContext
     {
         public DataAccessOptions Options = new();
         public readonly string EnvironmentName;
+        private readonly string ExpectedDataSource;
 
-        public TestDataAccessOptionsBase(string environmentName)
+        public TestDataAccessOptionsBase(string environmentName)  //, string expectedDataSource)
         {
             EnvironmentName = environmentName;
+            //ExpectedDataSource = expectedDataSource;
         }
 
         [TestInitialize]
@@ -35,13 +37,33 @@ namespace PressGang.Test.TestDatabaseContext
             Assert.IsTrue(connectionStringStartsWithDataSource);
         }
 
+        [TestMethod]
+        public void ConnectionStringIsSqliteDb()
+        {
+            string connectionString = Options.ConnectionString;
+            string dataSource = connectionString.Split('=')[1];
+            if (dataSource.Contains("/"))
+            {
+                string[] pieces = dataSource.Split('/');
+                dataSource = pieces[pieces.Length - 1];
+            }
+            Assert.AreEqual(ExpectedDataSource, dataSource);
+        }
+
+
     }
 
     [TestClass]
     public class TestDataAccessOptionsDev : TestDataAccessOptionsBase
     {
-        public TestDataAccessOptionsDev() : base("Development")
-        { }
+        private const string _environmentName = "Development";
+
+        public TestDataAccessOptionsDev() : base(_environmentName)
+        {
+            //string environmentName = ;
+            //string expectedDataSource = "pressgang.Development.sqlite3";
+            //return base(environmentName, expectedDataSource);
+        }
 
         [TestMethod]
         public void EnvironmentIsRight()
