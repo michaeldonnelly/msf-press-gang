@@ -1,18 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
-using PressGang.Core.Reports;
-using System;
+using PressGang.Core.DatabaseOperations;
+using PressGang.Core.StaticModels;
 
-namespace PressGang.Test.ReportsTest
+namespace PressGang.Test.DatabaseOperationsTest
 {
     [TestClass]
-    public class StaticReportsTest
+    public class LookUpTest
     {
         private static TestContext ClassTestContext { get; set; } // global class test context
-
-        public DataAccessOptions Options = new();
 
         [ClassInitialize]
         public static void Init(TestContext testContext)
@@ -26,15 +26,12 @@ namespace PressGang.Test.ReportsTest
         }
 
         [TestMethod]
-        public void ()
+        public void CharacterExactMatch()
         {
             PressGangContext context = (PressGangContext)ClassTestContext.Properties["PressGangContext"];
-            int characterRows = StaticReports.RowsInTable(context, "Characters");
-
-
-            Assert.IsTrue(characterRows > 100);
+            Character falcon = LookUp.Character(context, "Falcon");
+            Assert.IsNotNull(falcon);
+            Assert.AreEqual("Falcon", falcon.Name);
         }
-
-
     }
 }

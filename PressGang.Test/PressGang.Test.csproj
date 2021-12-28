@@ -20,10 +20,12 @@
     <None Remove="Tests\" />
     <None Remove="Mock\" />
     <None Remove="ReportsTest\" />
+    <None Remove="DatabaseOperationsTest\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseContextTest\" />
     <Folder Include="Mock\" />
     <Folder Include="ReportsTest\" />
+    <Folder Include="DatabaseOperationsTest\" />
   </ItemGroup>
 </Project>
