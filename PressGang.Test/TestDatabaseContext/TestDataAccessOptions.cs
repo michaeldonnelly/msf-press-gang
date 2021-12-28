@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PressGang.Core;
@@ -70,6 +71,18 @@ namespace PressGang.Test.TestDatabaseContext
             Assert.AreEqual("Development", environment);
         }
 
+        [TestMethod]
+        public void foo()
+        {
+
+            string appsettings = File.ReadAllText("appsettings.json");
+            Assert.IsNotNull(appsettings);
+            string appsettingsdev = File.ReadAllText("appsettings.Development.json");
+            Assert.IsNotNull(appsettingsdev);
+            string appsettingstest = File.ReadAllText("appsettings.AutomatedTesting.json");
+            Assert.IsNotNull(appsettingstest);
+
+        }
 
     }
 
@@ -83,7 +96,7 @@ namespace PressGang.Test.TestDatabaseContext
         { }
 
         [TestMethod]
-        public void EnvironmentIsNullForProd()
+        public void EnvironmentIsNull()
         {
             string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
             Assert.IsNull(environment);
@@ -101,7 +114,7 @@ namespace PressGang.Test.TestDatabaseContext
         { }
 
         [TestMethod]
-        public void EnvironmentIsNullForProd()
+        public void EnvironmentIsAutomatedTesting()
         {
             string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
             Assert.AreEqual("AutomatedTesting", environment);
