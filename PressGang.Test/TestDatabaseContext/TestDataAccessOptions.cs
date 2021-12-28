@@ -10,7 +10,7 @@ namespace PressGang.Test.TestDatabaseContext
 
     public partial class TestDataAccessOptionsBase
     {
-        private DataAccessOptions Options = new();
+        public DataAccessOptions Options = new();
         public readonly string EnvironmentName;
 
         public TestDataAccessOptionsBase(string environmentName)
@@ -22,7 +22,19 @@ namespace PressGang.Test.TestDatabaseContext
         public void StartUp()
         {
             Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", EnvironmentName);
+
+            StartUp startUp = new StartUp();
+            IConfiguration configuration = startUp.Configuration;
+            configuration.GetSection(DataAccessOptions.DataAccess).Bind(Options);
         }
+
+        [TestMethod]
+        public void ConnectionStringStartsWithDataSource()
+        {
+            bool connectionStringStartsWithDataSource = Options.ConnectionString.StartsWith("Data Source");
+            Assert.IsTrue(connectionStringStartsWithDataSource);
+        }
+
     }
 
     [TestClass]
@@ -44,7 +56,7 @@ namespace PressGang.Test.TestDatabaseContext
 
 
 
-    [TestClass]
+    
     public class TestDataAccessOptions
     {
         private DataAccessOptions _dataAccessOptions = new();
