@@ -40,9 +40,9 @@ namespace PressGang.Core.DatabaseOperations
             ImportCharactersAndAliases(context, dataDirectory);
             Postcount(context, "Characters");
 
-            Precount(context, "Opportunities");
-            ImportCharactersAndLocations(context, dataDirectory);
-            Postcount(context, "Opportunities");
+            //Precount(context, "Opportunities");
+            //ImportFarms(context, dataDirectory);
+            //Postcount(context, "Opportunities");
 
             //Precount(context, "Prerequisites");
             //ImportPrereqs(context, dataDirectory);
@@ -243,12 +243,12 @@ namespace PressGang.Core.DatabaseOperations
             return npcs;
         }
 
-        private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
+        private static void ImportFarms(PressGangContext context, string dataDirectory)
         {
             string path = dataDirectory + "/shard-locations.csv";
-            List<FarmLocation> characterLocations = ReadFarmLocations(path);
-            Debug.WriteLine(characterLocations.Count);
-            AddCharacters(context, characterLocations);
+            List<FarmLocation> farmLocations = ReadFarmLocations(path);
+            Debug.WriteLine(farmLocations.Count);
+            AddFarms(context, farmLocations);
         }
 
         private static void ImportPrereqs(PressGangContext context , string dataDirectory)
@@ -283,7 +283,7 @@ namespace PressGang.Core.DatabaseOperations
             }
         }
 
-        private static void AddCharacters(PressGangContext context, List<FarmLocation> characterLocations)
+        private static void AddFarms(PressGangContext context, List<FarmLocation> characterLocations)
         {
             foreach(FarmLocation characterLocation in characterLocations)
             {
