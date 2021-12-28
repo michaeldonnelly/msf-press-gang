@@ -40,9 +40,9 @@ namespace PressGang.Core.DatabaseOperations
             ImportCharactersAndAliases(context, dataDirectory);
             Postcount(context, "Characters");
 
-            //Precount(context, "Oppotunities");
-            //ImportCharactersAndLocations(context, dataDirectory);
-            //Postcount(context, "Oppotunities");
+            Precount(context, "Opportunities");
+            ImportCharactersAndLocations(context, dataDirectory);
+            Postcount(context, "Opportunities");
 
             //Precount(context, "Prerequisites");
             //ImportPrereqs(context, dataDirectory);
@@ -258,7 +258,7 @@ namespace PressGang.Core.DatabaseOperations
         private static void ImportCharactersAndLocations(PressGangContext context, string dataDirectory)
         {
             string path = dataDirectory + "/shard-locations.csv";
-            List<CharacterLocation> characterLocations = ReadCharacterLocations(path);
+            List<FarmLocation> characterLocations = ReadFarmLocations(path);
             Debug.WriteLine(characterLocations.Count);
             AddCharacters(context, characterLocations);
         }
@@ -295,9 +295,9 @@ namespace PressGang.Core.DatabaseOperations
             }
         }
 
-        private static void AddCharacters(PressGangContext context, List<CharacterLocation> characterLocations)
+        private static void AddCharacters(PressGangContext context, List<FarmLocation> characterLocations)
         {
-            foreach(CharacterLocation characterLocation in characterLocations)
+            foreach(FarmLocation characterLocation in characterLocations)
             {
                 string characterName = characterLocation.CharacterName;
                 Resource characterShard;
@@ -337,7 +337,7 @@ namespace PressGang.Core.DatabaseOperations
             }
         }
 
-        private static Location FindLocation(PressGangContext context, CharacterLocation characterLocation)
+        private static Location FindLocation(PressGangContext context, FarmLocation characterLocation)
         {
             // TODO: Do we need this if we have all the stores built?
             try
@@ -369,13 +369,13 @@ namespace PressGang.Core.DatabaseOperations
         }
 
 
-        private static List<CharacterLocation> ReadCharacterLocations(string path)
+        private static List<FarmLocation> ReadFarmLocations(string path)
         {
             using (var reader = new StreamReader(path))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                IEnumerable<CharacterLocation> rows = csv.GetRecords<CharacterLocation>();
-                List<CharacterLocation> characterLocations = rows.ToList<CharacterLocation>();
+                IEnumerable<FarmLocation> rows = csv.GetRecords<FarmLocation>();
+                List<FarmLocation> characterLocations = rows.ToList<FarmLocation>();
                 return characterLocations;
             }
         }
@@ -420,7 +420,7 @@ namespace PressGang.Core.DatabaseOperations
         public List<string> DependsOn { get; set; }
     }
 
-    class CharacterLocation
+    class FarmLocation
     {
         [Name(CsvHeaders.CharacterName)]
         public string CharacterName { get; set; }
