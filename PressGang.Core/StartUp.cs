@@ -9,6 +9,7 @@ namespace PressGang.Core
     public class StartUp
     {
         public IConfiguration Configuration { get; }
+        public readonly PressGangContext PressGangContext;
 
         public StartUp(bool initializeDataBaseConnection = true)
         {
@@ -16,8 +17,8 @@ namespace PressGang.Core
             if (initializeDataBaseConnection)
             {
                 DataAccessOptions dataAccessOptions = GetDataAccessOptions(Configuration);
-                PressGangContext context = DbContext(dataAccessOptions);
-                DbInitializer.Initialize(context, dataAccessOptions);
+                PressGangContext PressGangContext = DbContext(dataAccessOptions);
+                DbInitializer.Initialize(PressGangContext, dataAccessOptions);
             }
         }
 
