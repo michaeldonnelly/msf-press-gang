@@ -19,7 +19,17 @@ namespace PressGang.Core.StaticModels
         /// </summary>
         public string CharacterKey { get; set; }
 
-        //public List<string> Aliases { get; set; }
+        public virtual List<CharacterAlias> CharacterAliases { get; set; }
+
+        public List<string> Aliases()
+        {
+            List<string> aliases = new();
+            foreach (CharacterAlias ca in CharacterAliases)
+            {
+                aliases.Add(ca.Alias);
+            }
+            return aliases;
+        }
 
         public virtual List<Prerequisite> Prerequisites { get; set; } = new();
 
