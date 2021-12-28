@@ -142,7 +142,7 @@ namespace PressGang.Core.DatabaseOperations
         private static void ImportCharactersAndAliases(PressGangContext context, string dataDirectory)
         {
             string aliasesPath = dataDirectory + "/characterAlias.csv";
-            List<CharacterAlias> aliases = ReadCharacters(aliasesPath);
+            List<CharacterAliasImport> aliases = ReadCharacters(aliasesPath);
 
             string reformatMapPath = dataDirectory + "/reformat-names.json";
             Dictionary<string, string> reformattedNameMap = ReformattedNameMap(reformatMapPath);
@@ -152,33 +152,33 @@ namespace PressGang.Core.DatabaseOperations
 
 
             int line = 0;
-            foreach(CharacterAlias characterAlias in aliases)
+            foreach(CharacterAliasImport aliasImport in aliases)
             {
                 line++;
-                Console.Write($"    {line.ToString().PadLeft(4)}. {characterAlias.CharacterKey}: ");
+                Console.Write($"    {line.ToString().PadLeft(4)}. {aliasImport.CharacterKey}: ");
 
-                if (IsSummonedCharacter(characterAlias.CharacterKey))
+                if (IsSummonedCharacter(aliasImport.CharacterKey))
                 {
                     Console.WriteLine("summoned");
                     continue;
                 }
 
-                if (npcs.Contains(characterAlias.CharacterKey))
+                if (npcs.Contains(aliasImport.CharacterKey))
                 {
                     Console.WriteLine("NPC");
                     continue;
                 }
 
-                Character character = context.Characters.Where<Character>(c => c.CharacterKey == characterAlias.CharacterKey).FirstOrDefault();
+                Character character = context.Characters.Where<Character>(c => c.CharacterKey == aliasImport.CharacterKey).FirstOrDefault();
                 if (character == null)
                 {
-                    string firstAlias = characterAlias.Aliases.First<string>();
+                    string firstAlias = aliasImport.Aliases.First<string>();
                     string characterName = FormatCharacterName(firstAlias, reformattedNameMap);
                     character = new(characterName)
                     {
-                        CharacterKey = characterAlias.CharacterKey
+                        CharacterKey = aliasImport.CharacterKey
                     };
-                    foreach (string alias in characterAlias.Aliases.Skip(1))
+                    foreach (string alias in aliasImport.Aliases.Skip(1))
                     {
                         // TODO: add alias to character
                     }
@@ -221,14 +221,14 @@ namespace PressGang.Core.DatabaseOperations
             return characterName;
         }
 
-        private static List<CharacterAlias> ReadCharacters(string path)
+        private static List<CharacterAliasImport> ReadCharacters(string path)
         {
             using (var reader = new StreamReader(path))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 csv.Context.RegisterClassMap<CharacterAliasMap>();
-                IEnumerable<CharacterAlias> rows = csv.GetRecords<CharacterAlias>();
-                List<CharacterAlias> characters = rows.ToList<CharacterAlias>();
+                IEnumerable<CharacterAliasImport> rows = csv.GetRecords<CharacterAliasImport>();
+                List<CharacterAliasImport> characters = rows.ToList<CharacterAliasImport>();
                 return characters;
             }
         }
@@ -392,13 +392,13 @@ namespace PressGang.Core.DatabaseOperations
         public List<Location> Stores { get; set; }
     }
 
-    class CharacterAlias
+    class CharacterAliasImport
     {
         public string CharacterKey { get; set; }
         public List<String> Aliases { get; set; }
     }
 
-    sealed class CharacterAliasMap : ClassMap<CharacterAlias>
+    sealed class CharacterAliasMap : ClassMap<CharacterAliasImport>
     {
         public CharacterAliasMap()
         {
