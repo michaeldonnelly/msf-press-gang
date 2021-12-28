@@ -29,23 +29,51 @@ namespace PressGang.Core.DatabaseOperations
 
         public static Character Character(PressGangContext context, string name)
         {
-            List<Character> results = context.Characters.Where(c => c.Name.ToLower().StartsWith(name.ToLower())).ToList();
-            if (results.Count == 1)
+            Character character = ExactMatch(context, name);
+            if (character == null)
             {
-                return results[0];
+                character = StartsWithMatch(context, name);
             }
 
-            if (results.Count == 0)
+            return character;
+        }
+
+        private static Character ExactMatch(PressGangContext context, string name)
+        {
+            name = name.ToLower();
+            List<Character> characters = context.Characters.Where(c => c.Name.ToLower() == name).ToList();
+            if (characters.Count == 1)
             {
-                return null;
+                return characters[0];
+            }
+         
+            List<CharacterAlias> aliases = context.CharacterAliases.Where(a => a.Alias.ToLower() == name).ToList();
+            if (aliases.Count == 1)
+            {
+                Character character = aliases[0].Character;
+                return character;
             }
 
-            foreach (Character character in results)
+            return null;
+        }
+
+        private static Character StartsWithMatch(PressGangContext context, string name)
+        {
+            name = name.ToLower();
+            List<Character> characters = context.Characters.Where(c => c.Name.ToLower().StartsWith(name)).ToList();
+            List<CharacterAlias> aliases = context.CharacterAliases.Where(a => a.Alias.ToLower().StartsWith(name)).ToList();
+            foreach (CharacterAlias alias in aliases)
             {
-                if (String.Compare(character.Name, name, true) == 0)
+                Character character = alias.Character;
+                if (!characters.Contains(character))
                 {
-                    return character;
+                    characters.Add(character);
                 }
+            }
+
+            if (characters.Count == 1)
+            {
+                return characters[0];
             }
 
             return null;
