@@ -16,4 +16,12 @@
   <ItemGroup>
     <ProjectReference Include="..\PressGang.Core\PressGang.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Tests\" />
+    <None Remove="Mock\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestDatabaseContext\" />
+    <Folder Include="Mock\" />
+  </ItemGroup>
 </Project>
