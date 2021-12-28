@@ -194,22 +194,10 @@ namespace PressGang.Core.DatabaseOperations
             context.SaveChanges();
         }
 
-        private static bool IsPlayableCharacter(string characterName)
-        {
-            
-            if (characterName.Contains("Empowered"))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         private static bool IsSummonedCharacter(string characterName)
         {
             return characterName.StartsWith("S_");
         }
-
 
         private static string FormatCharacterName(string rawName, Dictionary<string, string> reformattedNameMap)
         {
