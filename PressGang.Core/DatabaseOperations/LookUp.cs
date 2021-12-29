@@ -46,12 +46,20 @@ namespace PressGang.Core.DatabaseOperations
             {
                 return characters[0];
             }
-         
-            List<CharacterAlias> aliases = context.CharacterAliases.Where(a => a.Alias.ToLower() == name).ToList();
-            if (aliases.Count == 1)
+
+            List<CharacterAlias> aliases = context.CharacterAliases.ToList(); // .Where(a => a.Alias.ToLower() == name).ToList();
+            foreach(CharacterAlias alias in aliases)
             {
-                Character character = aliases[0].Character;
-                return character;
+                if (!characters.Contains(alias.Character))
+                {
+                    characters.Add(alias.Character);
+                }
+            }
+
+
+            if (characters.Count == 1)
+            {
+                return characters[0];
             }
 
             return null;
