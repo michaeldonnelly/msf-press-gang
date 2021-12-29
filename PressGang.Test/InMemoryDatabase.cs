@@ -19,9 +19,12 @@ namespace PressGang.Test
             return context;
         }
 
-        public static PressGangContext InitializeContext()
+        public static PressGangContext InitializeContext(PressGangContext context = null)
         {
-            PressGangContext context = GetContext();
+            if (context == null)
+            {
+                context = GetContext();
+            }
             DataAccessOptions options = new()
             {
                 EnsureCreated = true,
