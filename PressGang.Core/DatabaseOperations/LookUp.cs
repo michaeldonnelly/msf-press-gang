@@ -47,19 +47,11 @@ namespace PressGang.Core.DatabaseOperations
                 return characters[0];
             }
 
-            List<CharacterAlias> aliases = context.CharacterAliases.Include("Character").ToList(); // .Where(a => a.Alias.ToLower() == name).ToList();
-            foreach(CharacterAlias alias in aliases)
+            List<CharacterAlias> aliases = context.CharacterAliases.Where(a => a.Alias.ToLower() == name).Include("Character").ToList();           
+            if (aliases.Count == 1)
             {
-                if (!characters.Contains(alias.Character))
-                {
-                    characters.Add(alias.Character);
-                }
-            }
-
-
-            if (characters.Count == 1)
-            {
-                return characters[0];
+                Character character = aliases[0].Character;
+                return character;
             }
 
             return null;
@@ -69,7 +61,7 @@ namespace PressGang.Core.DatabaseOperations
         {
             name = name.ToLower();
             List<Character> characters = context.Characters.Where(c => c.Name.ToLower().StartsWith(name)).ToList();
-            List<CharacterAlias> aliases = context.CharacterAliases.Where(a => a.Alias.ToLower().StartsWith(name)).ToList();
+            List<CharacterAlias> aliases = context.CharacterAliases.Where(a => a.Alias.ToLower().StartsWith(name)).Include("Character").ToList();
             foreach (CharacterAlias alias in aliases)
             {
                 Character character = alias.Character;
