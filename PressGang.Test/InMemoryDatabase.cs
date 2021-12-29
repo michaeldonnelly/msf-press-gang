@@ -9,12 +9,16 @@ namespace PressGang.Test
     {
         public static string ConnectionString = "DataSource=myshareddb;mode=memory;cache=shared";
 
-        public static PressGangContext GetContext()
+        public static string SoloConnectionString = "DataSource=myshareddb;mode=memory";
+
+        public static PressGangContext GetContext(bool shared = true)
         {
             DbContextOptionsBuilder<PressGangContext> optionsBuilder = new();
-            optionsBuilder.UseSqlite(ConnectionString);
+            string connectionString = GetConnectionString(shared);
+            optionsBuilder.UseSqlite(connectionString);
             DbContextOptions<PressGangContext> options = optionsBuilder.Options;
             PressGangContext context = new PressGangContext(options);
+            context.Database.EnsureCreated();
             return context;
         }
 
@@ -31,11 +35,24 @@ namespace PressGang.Test
             return context;
         }
 
-        public static SqliteConnection RawSqliteConnection()
+        public static SqliteConnection RawSqliteConnection(bool shared = true)
         {
-            return new SqliteConnection(ConnectionString);
+            string connectionString = GetConnectionString(shared);
+            return new SqliteConnection(connectionString);
         }
-        
+
+        private static string GetConnectionString(bool shared)
+        {
+            if (shared)
+            {
+                return ConnectionString;
+            }
+            else
+            {
+                return SoloConnectionString;
+            }
+        }
+
 
 
     }

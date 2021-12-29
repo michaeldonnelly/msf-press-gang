@@ -37,7 +37,7 @@ namespace PressGang.Test.DatabaseContextTest
             Assert.IsTrue(connectionStringStartsWithDataSource, connectionString);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void DataSourceIsSqliteDb()
         {
             string connectionString = Options.ConnectionString;
