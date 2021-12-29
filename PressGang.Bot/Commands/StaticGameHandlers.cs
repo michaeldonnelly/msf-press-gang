@@ -26,7 +26,9 @@ namespace PressGang.Bot.Commands
         {
         }
 
-        [Command("prereq")]
+        [Command("unlock")]
+        [Aliases("prereq", "ul")]
+        [Description("List the prerequisites for a character's legendary unlock event")]
         public async Task AddCommand(CommandContext ctx, string characterName)
         {
             try
