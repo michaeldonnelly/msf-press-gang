@@ -69,6 +69,46 @@ namespace PressGang.Test.ReportsTest
             }
         }
 
+        [TestMethod]
+        public void NickFury()
+        {
+            List<string> prereqs = Prereqs("fury");
+            List<string> expectedList = new()
+            {
+                "Kree Cyborg",
+                "Kree Noble",
+                "Kree Oracle",
+                "Kree Reaper",
+                "Kree Royal Guard"
+            };
+
+            foreach (string expected in expectedList)
+            {
+                AssertListContains(prereqs, expected);
+            }
+        }
+
+        [TestMethod]
+        public void JeanGrey()
+        {
+            List<string> prereqs = Prereqs("fury");
+            List<string> expectedList = new()
+            {
+                "Doctor Doom",
+                "Hand Assassin",
+                "Hela",
+                "Loki",
+                "Mordo",
+                "Nobu",
+                "Ronan the Accuser"
+            };
+
+            foreach (string expected in expectedList)
+            {
+                AssertListContains(prereqs, expected);
+            }
+        }
+
 
 
 
