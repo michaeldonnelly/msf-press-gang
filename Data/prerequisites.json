@@ -4,7 +4,7 @@
       "Character": "Iron Man",
       "YellowStars": 3,
       "DependsOn": [
-        "Agent Coulsen",
+        "Agent Coulson",
         "Black Widow",
         "Captain America",
         "Hawkeye",
@@ -134,7 +134,6 @@
         "Ravager Bruiser",
         "Ravager Stitcher",
         "Rocket Raccoon",
-        "Star-Lord (T'challa)",
         "Yondu"
       ]
     },

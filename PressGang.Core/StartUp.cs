@@ -9,13 +9,17 @@ namespace PressGang.Core
     public class StartUp
     {
         public IConfiguration Configuration { get; }
+        public readonly PressGangContext PressGangContext;
 
-        public StartUp()
+        public StartUp(bool initializeDataBaseConnection = true)
         {
             Configuration = GetConfiguration();
-            DataAccessOptions dataAccessOptions = GetDataAccessOptions(Configuration);
-            PressGangContext context = DbContext(dataAccessOptions);
-            DbInitializer.Initialize(context, dataAccessOptions);
+            if (initializeDataBaseConnection)
+            {
+                DataAccessOptions dataAccessOptions = GetDataAccessOptions(Configuration);
+                PressGangContext PressGangContext = DbContext(dataAccessOptions);
+                DbInitializer.Initialize(PressGangContext, dataAccessOptions);
+            }
         }
 
         private PressGangContext DbContext(DataAccessOptions dataAccessOptions)
