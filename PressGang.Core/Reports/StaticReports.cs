@@ -20,6 +20,17 @@ namespace PressGang.Core.Reports
             return dependsOn;
         }
 
+        public static List<string> Unlocks(PressGangContext context, Character character)
+        {
+            List<Character> prerequisites = Prerequisites(context, character);
+            List<string> response = new();
+            foreach(Character prereq in prerequisites)
+            {
+                response.Add(prereq.Name);
+            }
+            return response;
+        }
+
         public static int RowsInTable(PressGangContext context, string tableName)
         {
             IEnumerable<object> set = (IEnumerable<object>)context.GetType().GetProperty(tableName).GetValue(context, null);
