@@ -27,12 +27,26 @@ namespace PressGang.Test.DatabaseOperationsTest
         [DataRow("FALCON")]
         [DataRow("fal")]
         [DataRow("falc")]
-        public void FalconByName(string characterName)
+        public void Falcon(string characterName)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
             Character falcon = LookUp.Character(context, characterName);
             Assert.IsNotNull(falcon);
             Assert.AreEqual("Falcon", falcon.Name, characterName);
+        }
+
+        [DataTestMethod]
+        [DataRow("NickFury")]
+        [DataRow("Nick Fury")]
+        [DataRow("NF")]
+        [DataRow("Fury")]
+        [DataRow("Nick")]
+        public void NickFury(string characterName)
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character nickfury = LookUp.Character(context, characterName);
+            Assert.IsNotNull(nickfury, "searched for " + characterName);
+            Assert.AreEqual("Nick Fury", nickfury.Name, "searched for " + characterName);
         }
 
     }
