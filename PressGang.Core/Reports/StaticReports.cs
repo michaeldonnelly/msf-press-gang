@@ -15,6 +15,7 @@ namespace PressGang.Core.Reports
             List<Character> dependsOn = new();
             foreach (Prerequisite prerequisite in character.Prerequisites)
             {
+                context.Entry(prerequisite).Reference("DependsOn").Load();
                 dependsOn.Add(prerequisite.DependsOn);
             }
             return dependsOn;
