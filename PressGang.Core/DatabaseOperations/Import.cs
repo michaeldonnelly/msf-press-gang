@@ -278,16 +278,29 @@ namespace PressGang.Core.DatabaseOperations
                 Character character = LookUp.Character(context, entry.Character);
                 foreach (string dependsOnName in entry.DependsOn)
                 {
-                    Character dependsOn = LookUp.Character(context, dependsOnName);
-                    Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
-                    if (prerequisite == null)
+                    AddPrereqByName(context, character, dependsOnName, entry.YellowStars, false);
+                }
+                if (entry.Requires != null)
+                {
+                    foreach (string dependsOnName in entry.Requires)
                     {
-                        prerequisite = new(character, dependsOn, entry.YellowStars);
-                        context.Add(prerequisite);
+                        AddPrereqByName(context, character, dependsOnName, entry.YellowStars, true);
                     }
                 }
                 context.SaveChanges();
             }
+        }
+
+        private static void AddPrereqByName(PressGangContext context, Character character, string dependsOnName, int yellowStars, bool required)
+        {
+            Character dependsOn = LookUp.Character(context, dependsOnName);
+            Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
+            if (prerequisite == null)
+            {
+                prerequisite = new(character, dependsOn, yellowStars, required);
+                context.Add(prerequisite);
+            }
+
         }
 
         private static void AddFarms(PressGangContext context, List<FarmLocation> farmLocations)
@@ -413,6 +426,7 @@ namespace PressGang.Core.DatabaseOperations
         public string Character { get; set; }
         public int YellowStars { get; set; }
         public List<string> DependsOn { get; set; }
+        public List<string> Requires { get; set; }
     }
 
     class FarmLocation

@@ -56,12 +56,14 @@
       "Character": "Ebony Maw",
       "YellowStars": 5,
       "DependsOn": [
-        "Black Bolt",
         "Karnak",
         "Quake",
         "Crystal",
         "Ms. Marvel",
         "Yo-Yo"
+      ],
+      "Requires": [
+        "Black Bolt"    
       ]
     },
     {
