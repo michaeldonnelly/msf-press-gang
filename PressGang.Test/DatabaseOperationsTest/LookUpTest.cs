@@ -21,13 +21,18 @@ namespace PressGang.Test.DatabaseOperationsTest
             InMemoryDatabase.InitializeContext();
         }
 
-        [TestMethod]
-        public void FalconByName()
+        [DataTestMethod]
+        [DataRow("Falcon")]
+        [DataRow("falcon")]
+        [DataRow("FALCON")]
+        [DataRow("fal")]
+        [DataRow("falc")]
+        public void FalconByName(string characterName)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
-            Character falcon = LookUp.Character(context, "falcon");
+            Character falcon = LookUp.Character(context, characterName);
             Assert.IsNotNull(falcon);
-            Assert.AreEqual("Falcon", falcon.Name);
+            Assert.AreEqual("Falcon", falcon.Name, characterName);
         }
 
     }
