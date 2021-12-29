@@ -7,11 +7,12 @@ namespace PressGang.Core.StaticModels
         {
         }
 
-        public Prerequisite(Character character, Character dependsOn, int yellowStars)
+        public Prerequisite(Character character, Character dependsOn, int yellowStars, bool required = false)
         {
             Character = character;
             DependsOn = dependsOn;
             YellowStars = yellowStars;
+            Required = required;
             Name = dependsOn.Name + " -> " + character.Name;
            
         }
@@ -27,6 +28,8 @@ namespace PressGang.Core.StaticModels
         public int DependsOnId { get; set; }
 
         public virtual Character DependsOn { get; set; }
+
+        public bool Required { get; set; }
 
         public int YellowStars { get; set; }
 
