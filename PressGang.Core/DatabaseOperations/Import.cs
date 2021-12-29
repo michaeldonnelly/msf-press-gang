@@ -40,17 +40,17 @@ namespace PressGang.Core.DatabaseOperations
             ImportCharactersAndAliases(context, dataDirectory);
             Postcount(context, "Characters");
 
-            Precount(context, "Resources");
-            GenerateCharacterShards(context);
-            Postcount(context, "Resources");
+            //Precount(context, "Resources");
+            //GenerateCharacterShards(context);
+            //Postcount(context, "Resources");
 
-            //Precount(context, "Opportunities");
-            //ImportFarms(context, dataDirectory);
-            //Postcount(context, "Opportunities");
+            ////Precount(context, "Opportunities");
+            ////ImportFarms(context, dataDirectory);
+            ////Postcount(context, "Opportunities");
 
-            Precount(context, "Prerequisites");
-            ImportPrereqs(context, dataDirectory);
-            Postcount(context, "Prerequisites");
+            //Precount(context, "Prerequisites");
+            //ImportPrereqs(context, dataDirectory);
+            //Postcount(context, "Prerequisites");
             Console.WriteLine("Import complete\r\n");
         }
 
@@ -145,7 +145,8 @@ namespace PressGang.Core.DatabaseOperations
 
         private static void ImportCharactersAndAliases(PressGangContext context, string dataDirectory)
         {
-            string aliasesPath = dataDirectory + "/characterAlias.csv";
+            //string aliasesPath = dataDirectory + "/characterAlias.csv";
+            string aliasesPath = dataDirectory + "/aliasFoo.csv";
             List<CharacterAliasImport> aliases = ReadCharacters(aliasesPath);
 
             string reformatMapPath = dataDirectory + "/reformat-names.json";
@@ -182,12 +183,14 @@ namespace PressGang.Core.DatabaseOperations
                     {
                         CharacterKey = aliasImport.CharacterKey
                     };
+                    context.Characters.Add(character);
+                    context.SaveChanges();
+
                     foreach (string alias in aliasImport.Aliases.Skip(1))
                     {
                         CharacterAlias characterAlias = new(character, alias);
                         context.Add(characterAlias);
                     }
-                    context.Add(character);
                     Console.WriteLine("added");
                 }
                 else
