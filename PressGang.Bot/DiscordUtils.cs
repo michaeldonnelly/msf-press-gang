@@ -26,7 +26,7 @@ namespace PressGang.Bot
                     responseString += codeMarkdown;
                     ctx.RespondAsync(responseString);
                     responseString = codeMarkdown;
-                    Thread.Sleep(250);
+                    Thread.Sleep(1000);
                 }
                 responseString += line;
                 responseString += "\r\n";
