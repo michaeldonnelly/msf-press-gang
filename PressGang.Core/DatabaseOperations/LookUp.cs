@@ -47,7 +47,7 @@ namespace PressGang.Core.DatabaseOperations
                 return characters[0];
             }
 
-            List<CharacterAlias> aliases = context.CharacterAliases.ToList(); // .Where(a => a.Alias.ToLower() == name).ToList();
+            List<CharacterAlias> aliases = context.CharacterAliases.Include("Character").ToList(); // .Where(a => a.Alias.ToLower() == name).ToList();
             foreach(CharacterAlias alias in aliases)
             {
                 if (!characters.Contains(alias.Character))
