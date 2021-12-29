@@ -279,12 +279,6 @@ namespace PressGang.Core.DatabaseOperations
                 foreach (string dependsOnName in entry.DependsOn)
                 {
                     Character dependsOn = LookUp.Character(context, dependsOnName);
-                    if (dependsOn == null)
-                    {
-                        dependsOn = new(dependsOnName);
-                        context.Add(dependsOn);
-                    }
-
                     Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
                     if (prerequisite == null)
                     {
