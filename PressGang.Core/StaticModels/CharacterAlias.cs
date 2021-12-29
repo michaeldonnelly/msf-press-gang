@@ -9,7 +9,7 @@ namespace PressGang.Core.StaticModels
         public CharacterAlias(Character character, string alias)
         {
             Character = character;
-            Alias = alias;
+            Alias = alias.Trim();
             Name = $"{Alias} -> {Character.Name}";
         }
 
