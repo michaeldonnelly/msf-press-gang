@@ -51,7 +51,7 @@ namespace PressGang.Bot.Commands
                 }
                 else
                 {
-                    List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character);
+                    List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars, out bool hasRequiredChars);
                     if (dependsOn.Count == 0)
                     {
                         string response = $"{character.Name} is not a legendary unlock (or my data are out of date)";
@@ -60,10 +60,14 @@ namespace PressGang.Bot.Commands
                     else
                     {
                         Queue<string> response = new();
-                        response.Enqueue($"To unlock {character.Name} you will need 5 of:");
+                        response.Enqueue($"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars:");
                         foreach (string prereq in dependsOn)
                         {
                             response.Enqueue($"  - {prereq}");
+                        }
+                        if (hasRequiredChars)
+                        {
+                            response.Enqueue("\r\n    * = required");
                         }
                         await DiscordUtils.Respond(ctx, response);
                     }

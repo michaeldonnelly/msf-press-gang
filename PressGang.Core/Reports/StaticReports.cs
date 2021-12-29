@@ -21,13 +21,28 @@ namespace PressGang.Core.Reports
             return dependsOn;
         }
 
-        public static List<string> Unlocks(PressGangContext context, Character character)
+        public static List<string> Unlocks(PressGangContext context, Character character, out int yellowStars, out bool hasRequiredChars)
         {
-            List<Character> prerequisites = Prerequisites(context, character);
+            hasRequiredChars = false;
+            yellowStars = 0;
+
             List<string> response = new();
-            foreach(Character prereq in prerequisites)
+            foreach (Prerequisite prerequisite in character.Prerequisites)
             {
-                response.Add(prereq.Name);
+                context.Entry(prerequisite).Reference("DependsOn").Load();
+                string characterName = prerequisite.DependsOn.Name;
+
+                if (prerequisite.Required)
+                {
+                    hasRequiredChars = true;
+                    characterName += " *";
+                }
+
+                if (prerequisite.YellowStars > yellowStars)
+                {
+                    yellowStars = prerequisite.YellowStars;
+                }
+                response.Add(characterName);
             }
 
             response.Sort();
