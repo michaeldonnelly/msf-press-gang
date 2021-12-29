@@ -3,39 +3,32 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PressGang.Core;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.DatabaseOperations;
+using PressGang.Core.Reports;
 using PressGang.Core.StaticModels;
+using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
 
 namespace PressGang.Test.DatabaseOperationsTest
 {
-    //[TestClass]
-    //public class LookUpTest
-    //{
-    //    private static TestContext ClassTestContext { get; set; } // global class test context
+    [TestClass]
+    public class LookUpTest
+    {
+        [ClassInitialize]
+        public static void Init(TestContext testContext)
+        {
+            var keepalive = InMemoryDatabase.RawSqliteConnection();
+            keepalive.Open();
+            InMemoryDatabase.InitializeContext();
+        }
 
-    //    [ClassInitialize]
-    //    public static void Init(TestContext testContext)
-    //    {
-    //        ClassTestContext = testContext;
+        [TestMethod]
+        public void FalconByName()
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character falcon = LookUp.Character(context, "falcon");
+            Assert.IsNotNull(falcon);
+            Assert.AreEqual("Falcon", falcon.Name);
+        }
 
-    //        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "AutomatedTesting");
-    //        StartUp startUp = new StartUp();
-    //        PressGangContext pressGangContext = startUp.PressGangContext;
-    //        ClassTestContext.Properties["PressGangContext"] = pressGangContext;
-    //    }
-
-    //    [TestMethod]
-    //    public void foo()
-    //    {
-    //        Assert.IsTrue(true);
-    //    }
-
-    //    [TestMethod]
-    //    public void CharacterExactMatch()
-    //    {
-    //        PressGangContext context = (PressGangContext)ClassTestContext.Properties["PressGangContext"];
-    //        Character falcon = LookUp.Character(context, "Falcon");
-    //        Assert.IsNotNull(falcon);
-    //        Assert.AreEqual("Falcon", falcon.Name);
-    //    }
-    //}
+    }
 }
