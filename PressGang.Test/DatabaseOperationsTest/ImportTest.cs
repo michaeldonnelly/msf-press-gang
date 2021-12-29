@@ -44,6 +44,30 @@ namespace PressGang.Test.DatabaseOperationsTest
             }
         }
 
+        [TestMethod]
+        public void ImportTwiceDoesntAddData()
+        {
+            string dbName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            SqliteConnection db = InMemoryDatabase.RawSqliteConnection(dbName);
+            db.Open();
+
+            PressGangContext context = InMemoryDatabase.InitializeContext(dbName);
+
+            Dictionary<string, int> countsAfterFirstImport = new();
+            foreach(string tableName in Tables())
+            {
+                countsAfterFirstImport[tableName] = StaticReports.RowsInTable(context, tableName);
+            }
+
+            InMemoryDatabase.InitializeContext(context);
+
+
+            foreach (string tableName in Tables())
+            {
+                int expectedRows = countsAfterFirstImport[tableName];
+                AssertRowsInTable(context, tableName, expectedRows: expectedRows);
+            }            
+        }
 
         private List<string> Tables()
         {
@@ -64,11 +88,11 @@ namespace PressGang.Test.DatabaseOperationsTest
             int actualRows = StaticReports.RowsInTable(context, tableName);
             if (expectedRows.HasValue)
             {
-                Assert.AreEqual((int)expectedRows, actualRows);
+                Assert.AreEqual((int)expectedRows, actualRows, tableName);
             }
 
-            Assert.IsTrue(actualRows >= minimumRows, actualRows.ToString());
-            Assert.IsTrue(actualRows <= maximumRows, actualRows.ToString());            
+            Assert.IsTrue(actualRows >= minimumRows, actualRows.ToString(), tableName);
+            Assert.IsTrue(actualRows <= maximumRows, actualRows.ToString(), tableName);            
         }
 
     }

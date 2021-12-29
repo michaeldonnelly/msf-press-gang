@@ -19,12 +19,14 @@ namespace PressGang.Test
             return context;
         }
 
-        public static PressGangContext InitializeContext(PressGangContext context = null)
+        public static PressGangContext InitializeContext(string dbName = "pressgang-test")
         {
-            if (context == null)
-            {
-                context = GetContext();
-            }
+            PressGangContext context = GetContext(dbName);
+            return InitializeContext(context);
+        }
+
+        public static PressGangContext InitializeContext(PressGangContext context)
+        {
             DataAccessOptions options = new()
             {
                 EnsureCreated = true,
