@@ -38,6 +38,12 @@ namespace PressGang.Test.ReportsTest
             return prereqs;
         }
 
+        private void AssertListContains(List<string> actual, string expected)
+        {
+            bool listContainsExpectedString = actual.Contains(expected);
+            Assert.IsTrue(listContainsExpectedString, $"{expected} is in list");
+        }
+
         [TestMethod]
         public void IronMan()
         {
@@ -63,11 +69,7 @@ namespace PressGang.Test.ReportsTest
             }
         }
 
-        private void AssertListContains(List<string> actual, string expected)
-        {
-            bool listContainsExpectedString = actual.Contains(expected);
-            Assert.IsTrue(listContainsExpectedString, $"{expected} is in list");
-        }
+
 
 
     }
