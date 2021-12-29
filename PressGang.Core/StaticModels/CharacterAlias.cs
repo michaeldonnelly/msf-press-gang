@@ -10,14 +10,22 @@ namespace PressGang.Core.StaticModels
         {
             Character = character;
             Alias = alias;
+            Name = $"{Alias} -> {Character.Name}";
         }
 
         public int Id { get; set; }
+
+        public string Name { get; set; }
 
         public int CharacterId { get; set; }
 
         public virtual Character Character { get; set; }
 
         public string Alias { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
