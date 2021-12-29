@@ -100,7 +100,7 @@ namespace PressGang.Test.ReportsTest
                 "Loki",
                 "Mordo",
                 "Nobu",
-                "Ronan the Accuser"
+                "Ronan The Accuser"
             };
 
             foreach (string expected in expectedList)
@@ -108,6 +108,58 @@ namespace PressGang.Test.ReportsTest
                 AssertListContains(prereqs, expected);
             }
         }
+
+        [TestMethod]
+        public void BlackagarBoltagon()
+        {
+            List<string> prereqs = Prereqs("blackbolt");
+            List<string> expectedList = new()
+            {
+                "Hela",
+                "Loki",
+                "Thor",
+                "Sif",
+                "Heimdall"
+            };
+
+            foreach (string expected in expectedList)
+            {
+                AssertListContains(prereqs, expected);
+            }
+        }
+
+        [TestMethod]
+        public void Shuri()
+        {
+            List<string> prereqs = Prereqs("SHURI");
+            List<string> expectedList = new()
+            {
+                "Doctor Octopus",
+                "Electro",
+                "Green Goblin",
+                "Mysterio",
+                "Rhino",
+                "Shocker",
+                "Swarm",
+                "Vulture",
+                "Anti-Venom",
+                "Carnage",
+                "Scream",
+                "Spider-Man",
+                "Spider-Man (Miles)",
+                "Spider-Man (Symbiote)",
+                "Ghost-Spider",
+                "Scarlet Spider",
+                "Spider-Punk"
+            };
+
+            foreach (string expected in expectedList)
+            {
+                AssertListContains(prereqs, expected);
+            }
+        }
+
+
 
 
 
