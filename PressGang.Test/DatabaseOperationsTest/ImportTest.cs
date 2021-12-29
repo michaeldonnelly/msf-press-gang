@@ -22,9 +22,9 @@ namespace PressGang.Test.DatabaseOperationsTest
         [TestMethod]
         public void InitialDatabaseIsEmpty()
         {
-            SqliteConnection db = InMemoryDatabase.RawSqliteConnection(shared: false);
+            SqliteConnection db = InMemoryDatabase.RawSqliteConnection("foo");
             db.Open();
-            PressGangContext context = InMemoryDatabase.GetContext(shared: false);
+            PressGangContext context = InMemoryDatabase.GetContext("foo");
             int characterRows = StaticReports.RowsInTable(context, "Characters");
             Assert.AreEqual(0, characterRows);
         }
