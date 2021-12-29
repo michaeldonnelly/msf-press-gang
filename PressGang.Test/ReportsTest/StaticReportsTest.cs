@@ -91,7 +91,7 @@ namespace PressGang.Test.ReportsTest
         [TestMethod]
         public void JeanGrey()
         {
-            List<string> prereqs = Prereqs("fury");
+            List<string> prereqs = Prereqs("phoenix");
             List<string> expectedList = new()
             {
                 "Doctor Doom",
