@@ -29,6 +29,8 @@ namespace PressGang.Core.Reports
             {
                 response.Add(prereq.Name);
             }
+
+            response.Sort();
             return response;
         }
 
