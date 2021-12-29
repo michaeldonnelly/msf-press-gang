@@ -34,7 +34,7 @@ namespace PressGang.Test.ReportsTest
         {
             PressGangContext context = InMemoryDatabase.GetContext();
             Character character = LookUp.Character(context, characterName);
-            List<string> prereqs = StaticReports.Unlocks(context, character);
+            List<string> prereqs = StaticReports.Unlocks(context, character, out int _, out bool _);
             return prereqs;
         }
 
