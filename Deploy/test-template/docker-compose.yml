@@ -1,0 +1,19 @@
+version: '3.2'
+services:
+  pressgang-bot:
+    container_name: zola-test
+    image: "michaeldonnelly/pressgang-bot:latest"
+    environment:
+      TZ: 'America/Chicago'
+    volumes:
+      - type: bind
+        source: ./appsettings.Test.json
+        target: /App/appsettings.json
+      - type: bind
+        source: ./Data
+        target: /Data
+      - type: bind
+        source: ./Import
+        target: /Import
+    restart: unless-stopped
+    privileged: true

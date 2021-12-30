@@ -10,3 +10,5 @@ discord-token.txt
 /Data/pressgang.sqlite3-wal
 *.tar
 *.gz
+/Deploy/msf-press-gang/
+/Deploy/zola*
