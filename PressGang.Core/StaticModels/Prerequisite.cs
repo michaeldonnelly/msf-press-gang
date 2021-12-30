@@ -33,6 +33,12 @@ namespace PressGang.Core.StaticModels
 
         public int YellowStars { get; set; }
 
+        public int? CharacterLevel { get; set; }
+
+        public int? GearTier { get; set; }
+
+        public int? Iso8ClassLevel { get; set; }
+
         public override string ToString()
         {
             return Name;
