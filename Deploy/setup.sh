@@ -14,12 +14,13 @@ then
   echo
   echo "Making directory for zola-test"
   mkdir zola-test
-  cp -r msf-press-gang/PressGang.Core/appsettings.Development.json zola/
+  cp msf-press-gang/PressGang.Core/appsettings.json zola-test/
+  cp msf-press-gang/PressGang.Core/appsettings.Development.json zola-test/
 
   echo
   echo "Making directory for zola"
   mkdir zola
-  cp -r msf-press-gang/PressGang.Core/appsettings.json zola/
+  cp msf-press-gang/PressGang.Core/appsettings.json zola/
 
   ln -s msf-press-gang/Deploy/update-files.sh ./update-files.sh
 fi
