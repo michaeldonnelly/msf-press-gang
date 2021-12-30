@@ -91,12 +91,17 @@
     {
       "Character": "Adam Warlock",
       "YellowStars": 5,
+      "CharacterLevel": 65,
+      "GearTier": 12,
+      "Iso8ClassLevel": 3,
       "DependsOn": [
-        "Jubilee",
         "Longshot",
         "Multiple Man",
         "Polaris",
         "Shatterstar"
+      ],
+      "Requires": [
+        "Jubilee"        
       ]
     },
     {

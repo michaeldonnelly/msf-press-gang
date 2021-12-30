@@ -21,7 +21,8 @@ namespace PressGang.Core.Reports
             return dependsOn;
         }
 
-        public static List<string> Unlocks(PressGangContext context, Character character, out int yellowStars, out bool hasRequiredChars)
+        public static List<string> Unlocks(PressGangContext context, Character character, out int yellowStars,
+            out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel)
         {
             hasRequiredChars = false;
             yellowStars = 0;
@@ -45,6 +46,9 @@ namespace PressGang.Core.Reports
                 response.Add(characterName);
             }
 
+            characterLevel = character.Prerequisites[0].CharacterLevel;
+            gearTier = character.Prerequisites[0].GearTier;
+            iso8ClassLevel = character.Prerequisites[0].Iso8ClassLevel;
             response.Sort();
             return response;
         }

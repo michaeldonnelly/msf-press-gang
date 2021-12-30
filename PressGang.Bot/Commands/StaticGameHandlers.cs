@@ -51,7 +51,8 @@ namespace PressGang.Bot.Commands
                 }
                 else
                 {
-                    List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars, out bool hasRequiredChars);
+                    List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars,
+                        out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel);
                     if (dependsOn.Count == 0)
                     {
                         string response = $"{character.Name} is not a legendary unlock (or my data are out of date)";
@@ -59,8 +60,13 @@ namespace PressGang.Bot.Commands
                     }
                     else
                     {
+                        string header = $"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars";
+                        if (characterLevel != null) { header += $" + level {characterLevel}"; }
+                        if (gearTier != null) { header += $" + gear tier {gearTier}"; }
+                        if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
+
                         Queue<string> response = new();
-                        response.Enqueue($"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars:");
+                        response.Enqueue(header);
                         foreach (string prereq in dependsOn)
                         {
                             response.Enqueue($"  - {prereq}");
