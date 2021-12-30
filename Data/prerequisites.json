@@ -63,7 +63,7 @@
         "Yo-Yo"
       ],
       "Requires": [
-        "Black Bolt"    
+        "Black Bolt"
       ]
     },
     {
@@ -116,6 +116,9 @@
     {
       "Character": "Omega Red",
       "YellowStars": 5,
+      "CharacterLevel": 65,
+      "GearTier": 12,
+      "Iso8ClassLevel": 3,
       "DependsOn": [
         "Nick Fury",
         "Winter Soldier",

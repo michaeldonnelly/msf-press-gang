@@ -278,26 +278,31 @@ namespace PressGang.Core.DatabaseOperations
                 Character character = LookUp.Character(context, entry.Character);
                 foreach (string dependsOnName in entry.DependsOn)
                 {
-                    AddPrereqByName(context, character, dependsOnName, entry.YellowStars, false);
+                    AddPrereqByName(context, character, dependsOnName, entry.YellowStars, false, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
                 }
                 if (entry.Requires != null)
                 {
                     foreach (string dependsOnName in entry.Requires)
                     {
-                        AddPrereqByName(context, character, dependsOnName, entry.YellowStars, true);
+                        AddPrereqByName(context, character, dependsOnName, entry.YellowStars, true, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
                     }
                 }
                 context.SaveChanges();
             }
         }
 
-        private static void AddPrereqByName(PressGangContext context, Character character, string dependsOnName, int yellowStars, bool required)
+        private static void AddPrereqByName(PressGangContext context, Character character, string dependsOnName, int yellowStars, bool required, int? characterLevel, int? gearTier, int? iso8ClassLevel)
         {
             Character dependsOn = LookUp.Character(context, dependsOnName);
             Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
             if (prerequisite == null)
             {
-                prerequisite = new(character, dependsOn, yellowStars, required);
+                prerequisite = new(character, dependsOn, yellowStars, required)
+                {
+                    CharacterLevel = characterLevel,
+                    GearTier = gearTier,
+                    Iso8ClassLevel = iso8ClassLevel
+                };
                 context.Add(prerequisite);
             }
 
@@ -427,6 +432,9 @@ namespace PressGang.Core.DatabaseOperations
         public int YellowStars { get; set; }
         public List<string> DependsOn { get; set; }
         public List<string> Requires { get; set; }
+        public int? CharacterLevel { get; set; }
+        public int? GearTier { get; set; }
+        public int? Iso8ClassLevel { get; set; }
     }
 
     class FarmLocation
