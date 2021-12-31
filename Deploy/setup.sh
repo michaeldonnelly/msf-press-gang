@@ -16,6 +16,7 @@ then
   mkdir zola-test
   cp msf-press-gang/PressGang.Core/appsettings.json zola-test/
   cp msf-press-gang/PressGang.Core/appsettings.Development.json zola-test/
+  cp msf-press-gang/Deploy/test-template/.env zola-test/
 
   echo
   echo "Making directory for zola"
