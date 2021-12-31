@@ -12,7 +12,8 @@ namespace PressGang.Bot
     {
         static void Main(string[] args)
         {
-
+            string environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            Console.WriteLine($"Starting PressGang for environment {environment}");
             IServiceCollection services = new ServiceCollection();
             StartUp startUp = new StartUp();
             startUp.ConfigureServices(services);
