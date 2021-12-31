@@ -20,6 +20,7 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="DatabaseOperations\" />
     <None Remove="Reports\" />
+    <None Remove="Import\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="StaticModels\" />
@@ -27,6 +28,7 @@
     <Folder Include="DatabaseContext\" />
     <Folder Include="DatabaseOperations\" />
     <Folder Include="Reports\" />
+    <Folder Include="Import\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
@@ -46,6 +48,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="appsettings.AutomatedTesting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Import\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
