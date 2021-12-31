@@ -1,54 +1,21 @@
-### Build and publish the code
+## Publishing a new Docker image
 
-in ~/PressGang.Bot
-```
-dotnet publish -c Release -o ../build
-```
+This will make an image and publish it to Docker Hub [https://hub.docker.com/repository/docker/michaeldonnelly/pressgang-bot]. The image is published with 2 tags, one with a timestamp and the other tagged "latest."
 
-### Make the Docker image 
 
-in ~/docker
-```
-docker build -t michaeldonnelly/pressgang-bot -f Dockerfile ..
-```
-
-#### (For local testing) Make and run the container 
-
-in ~/docker
-```
-docker compose build
-docker compose start
-```
-
-### Push the container to dockerhub 
-
-in ~/docker
-```
-timestamp=$(date -u +"%Y-%m-%d-%H%M")
-docker tag michaeldonnelly/pressgang-bot michaeldonnelly/pressgang-bot:$timestamp
-docker push michaeldonnelly/pressgang-bot:$timestamp
-docker push michaeldonnelly/pressgang-bot
-```
-
-#### (If needed) Get new data & config to the server 
-
-in ~
-```
-tar cvzf data.tar.gz Data
-scp data.tar.gz docker.robothijinks.com:
-scp build/appsettings.* docker.robothijinks.com:
-```
-
-### Upgrade the container on the server
+### Build the code and create the image
 
 ```
-ssh docker.robothijinks.com
-cd pressgang-bot
-sudo docker-compose down
-nano docker-compose.yml
-```
-Update to use the the new tag
-```
-sudo docker-compose up -d
+cd docker
+./build.sh
 ```
 
+### Publish to Docker Hub
+
+```
+./publish.sh
+```
+
+### Deploy to staging and prod
+
+Go to the server and follow the instructions to deploy the bot [https://github.com/michaeldonnelly/msf-press-gang/blob/master/Deploy/README.md]
