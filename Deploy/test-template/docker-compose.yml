@@ -7,11 +7,8 @@ services:
       TZ: 'America/Chicago'
     volumes:
       - type: bind
-        source: ./appsettings.json
-        target: /App/appsettings.json
-      - type: bind
         source: ./appsettings.Staging.json
-        target: /App/appsettings.Staging.json
+        target: /App/appsettings.json
       - type: bind
         source: ../Data
         target: /Data
