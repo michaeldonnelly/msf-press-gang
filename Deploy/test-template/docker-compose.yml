@@ -7,13 +7,16 @@ services:
       TZ: 'America/Chicago'
     volumes:
       - type: bind
-        source: ./appsettings.Test.json
+        source: ./appsettings.json
         target: /App/appsettings.json
+      - type: bind
+        source: ./appsettings.Staging.json
+        target: /App/appsettings.Staging.json
       - type: bind
         source: ./Data
         target: /Data
       - type: bind
-        source: ./Import
+        source: ../msf-press-gang/PressGang.Core/Import
         target: /Import
     restart: unless-stopped
     privileged: true
