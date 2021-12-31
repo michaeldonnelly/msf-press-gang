@@ -1,4 +1,4 @@
 sudo docker-compose pull
-sudo docker-compose down
+sudo docker stop zola
 sudo docker rm zola
 sudo docker-compose up
