@@ -17,6 +17,6 @@ services:
         target: /Data
       - type: bind
         source: ../msf-press-gang/PressGang.Core/Import
-        target: /Import
+        target: /App/Import
     restart: unless-stopped
     privileged: true
