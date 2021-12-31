@@ -12,3 +12,4 @@ discord-token.txt
 *.gz
 /Deploy/msf-press-gang/
 /Deploy/zola*
+foo
