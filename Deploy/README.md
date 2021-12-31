@@ -48,3 +48,31 @@ cd zola
 sudo docker-compose up -d
 ```
 
+## Updating the bot
+
+1. Get updates to 
+  - import files 
+  - appsettings
+  - docker-compose
+
+In the core directory where you have the bots and their files (the one with the Data directory under it)
+```
+./update-files.sh
+```
+
+2. Update the test bot
+
+```
+cd zola-test
+./update-bot.sh
+```
+
+3. Verify that it worked
+
+4. Repeat for prod
+
+```
+cd ..
+cd zola
+./update-bot.sh
+```
