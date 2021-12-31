@@ -9,17 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Bot", "PressGang.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PressGang.Test", "PressGang.Test\PressGang.Test.csproj", "{53F2F279-B4DA-4253-82F5-0A217F6CD9B0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Import", "Import", "{D625EA58-F1E0-4BB4-A6A5-7897CD23C825}"
-	ProjectSection(SolutionItems) = preProject
-		Import\stores.json = Import\stores.json
-		Import\shard-locations.csv = Import\shard-locations.csv
-		Import\reformat-names.json = Import\reformat-names.json
-		Import\prerequisites.json = Import\prerequisites.json
-		Import\non-playable-characters.txt = Import\non-playable-characters.txt
-		Import\characterAlias.csv = Import\characterAlias.csv
-		Import\campaigns.json = Import\campaigns.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
