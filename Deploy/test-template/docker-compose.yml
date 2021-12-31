@@ -13,7 +13,7 @@ services:
         source: ./appsettings.Staging.json
         target: /App/appsettings.Staging.json
       - type: bind
-        source: ./Data
+        source: ../Data
         target: /Data
       - type: bind
         source: ../msf-press-gang/PressGang.Core/Import
