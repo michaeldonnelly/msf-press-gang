@@ -10,8 +10,11 @@ services:
         source: ./appsettings.json
         target: /App/appsettings.json
       - type: bind
-        source: ./Data
+        source: ../Data
         target: /Data
+      - type: bind
+        source: ../msf-press-gang/PressGang.Core/Import
+        target: /App/Import
     restart: unless-stopped
     privileged: true
 
