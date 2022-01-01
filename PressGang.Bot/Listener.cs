@@ -66,7 +66,8 @@ namespace PressGang.Bot
 
         public static async Task Connect(DiscordClient discordClient)
         {
-            await discordClient.ConnectAsync();
+            DiscordActivity discordActivity = new("'/help' shows what I can do!");
+            await discordClient.ConnectAsync(discordActivity);
             await Task.Delay(-1);
         }
 
