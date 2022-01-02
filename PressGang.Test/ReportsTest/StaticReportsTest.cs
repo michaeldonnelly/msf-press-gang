@@ -159,6 +159,18 @@ namespace PressGang.Test.ReportsTest
             }
         }
 
+        [TestMethod]
+        public void UnlockLevelBelowMinThrowsException()
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character character = LookUp.Character(context, "Phoenix");
+            int unlockAtStars = 4;
+            Assert.ThrowsException<Exception>(() =>
+                _ = StaticReports.Unlocks(context, character, unlockAtStars, out _, out _, out _, out _, out _)
+                );
+
+        }
+
         [DataTestMethod]
         [DataRow("fury", 3, 3)]
         public void RequiredStars(string characterName, int unlockAtStars, int expectedRequiredStars)

@@ -24,6 +24,11 @@ namespace PressGang.Core.Reports
         public static List<string> Unlocks(PressGangContext context, Character character, int unlockAt,
             out int yellowStars, out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel)
         {
+            if (unlockAt < character.MinimumUnlockStars)
+            {
+                throw new Exception($"{character.Name} opens at {character.MinimumUnlockStars} yellow stars");
+            }
+
             hasRequiredChars = false;
             yellowStars = 0;
 
