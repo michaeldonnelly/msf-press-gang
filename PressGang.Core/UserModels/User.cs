@@ -21,7 +21,7 @@ namespace PressGang.Core.UserModels
 
         public string UserName { get; set; }
 
-        public virtual List<Goal> Goals { get; set; } = new();
+        public virtual List<YellowStarGoal> YellowStarGoals { get; set; } = new();
 
         public override string ToString()
         {

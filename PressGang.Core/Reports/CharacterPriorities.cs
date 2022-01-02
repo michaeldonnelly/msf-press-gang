@@ -42,13 +42,13 @@ namespace PressGang.Core.Reports
             farmGuide.Enqueue("Priority  Character             Location");
             farmGuide.Enqueue("--------  --------------------  --------------------");
 
-            SortedDictionary<int, List<Goal>> goals = Goals();
-            foreach(KeyValuePair<int, List<Goal>> kvp in goals)
+            SortedDictionary<int, List<YellowStarGoal>> goals = Goals();
+            foreach(KeyValuePair<int, List<YellowStarGoal>> kvp in goals)
             {
                 int priority = kvp.Key;
-                foreach(Goal goal in kvp.Value)
+                foreach(YellowStarGoal yellowStarGoal in kvp.Value)
                 {
-                    Character character = goal.Character;
+                    Character character = yellowStarGoal.Character;
                     Resource shard = character.Shard;
                     foreach (Opportunity opportunity in shard.Opportunities)
                     {
@@ -64,36 +64,34 @@ namespace PressGang.Core.Reports
             return farmGuide;
         }
 
-        private SortedDictionary<int, List<Goal>> Goals()
+        private SortedDictionary<int, List<YellowStarGoal>> Goals()
         {
-            SortedDictionary<int, List<Goal>> goals = new();
-            foreach (Goal goal in User.Goals)
+            SortedDictionary<int, List<YellowStarGoal>> yellowStarGoals = new();
+            foreach (YellowStarGoal goal in User.YellowStarGoals)
             {
-                if (goal.GoalType == GoalType.YellowStarRank)
+                int priority = goal.Priority;
+                if (yellowStarGoals.ContainsKey(priority))
                 {
-                    int priority = goal.Priority;
-                    if (goals.ContainsKey(priority))
-                    {
-                        goals[priority].Add(goal);
-                    }
-                    else
-                    {
-                        List<Goal> l = new();
-                        l.Add(goal);
-                        goals.Add(priority, l);
-                    }
+                    yellowStarGoals[priority].Add(goal);
                 }
+                else
+                {
+                    List<YellowStarGoal> l = new();
+                    l.Add(goal);
+                    yellowStarGoals.Add(priority, l);
+                }
+
             }
-            return goals;
+            return yellowStarGoals;
         }
 
-        public Goal Add(Character character, int priority)
+        public YellowStarGoal Add(Character character, int priority)
         {
             Dictionary<Character, int> characterGoals = BaseList();
-            Goal goal;
+            YellowStarGoal goal;
             if (characterGoals.ContainsKey(character))
             {
-                goal = User.Goals.Where(g => g.Character == character).First();
+                goal = User.YellowStarGoals.Where(g => g.Character == character).First();
                 if (goal.Priority != priority)
                 {
                     goal.Priority = priority;
@@ -158,12 +156,10 @@ namespace PressGang.Core.Reports
         private Dictionary<Character, int> BaseList()
         {
             Dictionary<Character, int> characterGoals = new();
-            foreach (Goal goal in User.Goals)
+            foreach (YellowStarGoal goal in User.YellowStarGoals)
             {
-                if (goal.GoalType == GoalType.YellowStarRank)
-                {
+
                     characterGoals.Add(goal.Character, goal.Priority);
-                }
             }
             return characterGoals;
         }
