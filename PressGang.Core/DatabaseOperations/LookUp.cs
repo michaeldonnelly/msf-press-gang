@@ -40,7 +40,7 @@ namespace PressGang.Core.DatabaseOperations
                 return null;
             }
 
-            context.Entry(character).Collection(c => c.Prerequisites).Load();
+            context.Entry(character).Collection(c => c.PrerequisiteCharacters).Load();
             context.Entry(character).Collection(c => c.CharacterAliases).Load();
             context.Entry(character).Reference(c => c.Shard).Load();
             return character;
@@ -87,9 +87,9 @@ namespace PressGang.Core.DatabaseOperations
             return null;
         }
 
-        public static Prerequisite Prerequisite(PressGangContext context, Character character, Character dependsOn)
+        public static PrerequisiteCharacter PrerequisiteCharacter(PressGangContext context, Character character, Character dependsOn)
         {
-            List<Prerequisite> results = context.Prerequisites
+            List<PrerequisiteCharacter> results = context.PrerequisiteCharacters
                 .Where(p => (p.Character == character) && (p.DependsOn == dependsOn))
                 .ToList();
 
@@ -99,6 +99,15 @@ namespace PressGang.Core.DatabaseOperations
             }
 
             return null;
+        }
+
+        public static PrerequisiteStats PrerequisiteStats(PressGangContext context, Character character, int yellowStars)
+        {
+            List<PrerequisiteStats> results = context.PrerequisiteStats
+                .Where(ps => (ps.Character == character) && (ps.YellowStars == yellowStars))
+                .ToList();
+
+            return results.FirstOrDefault();
         }
 
         public static User User(PressGangContext context, ulong discordId, string userName)

@@ -48,9 +48,9 @@ namespace PressGang.Core.DatabaseOperations
             //ImportFarms(context, dataDirectory);
             //Postcount(context, "Opportunities");
 
-            Precount(context, "Prerequisites");
+            Precount(context, "PrerequisiteCharacters");
             ImportPrereqs(context, dataDirectory);
-            Postcount(context, "Prerequisites");
+            Postcount(context, "PrerequisiteCharacters");
             Console.WriteLine("Import complete\r\n");
         }
 
@@ -273,9 +273,17 @@ namespace PressGang.Core.DatabaseOperations
         {
             string jsonString = File.ReadAllText(dataDirectory + "/prerequisites.json");
             PrerequisiteList prerequisiteList = JsonConvert.DeserializeObject<PrerequisiteList>(jsonString);
+
+
+
             foreach (PrerequisiteListEntry entry in prerequisiteList.Prerequisites)
             {
                 Character character = LookUp.Character(context, entry.Character);
+                if (character.MinimumUnlockStars == null)
+                {
+                    character.MinimumUnlockStars = entry.YellowStars;
+                    context.SaveChanges();
+                }
                 foreach (string dependsOnName in entry.DependsOn)
                 {
                     AddPrereqByName(context, character, dependsOnName, entry.YellowStars, false, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
@@ -287,22 +295,43 @@ namespace PressGang.Core.DatabaseOperations
                         AddPrereqByName(context, character, dependsOnName, entry.YellowStars, true, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
                     }
                 }
+
+                if (entry.Stats != null)
+                {
+                    foreach (PrerequisiteStatsEntry statsEntry in entry.Stats)
+                    {
+                        PrerequisiteStats prerequisiteStats = LookUp.PrerequisiteStats(context, character, statsEntry.YellowStars);
+                        if (prerequisiteStats == null)
+                        {
+                            prerequisiteStats = new()
+                            {
+                                Character = character,
+                                YellowStars = statsEntry.YellowStars,
+                                CharacterLevel = statsEntry.CharacterLevel,
+                                GearTier = statsEntry.GearTier,
+                                Iso8ClassLevel = statsEntry.Iso8ClassLevel
+                            };
+                            context.Add(prerequisiteStats);
+                        }
+                        //        else
+                        //        {
+                        //            // TODO: handle if anything has changed
+                        //        }
+                    }
+                }
+
                 context.SaveChanges();
+
             }
         }
 
         private static void AddPrereqByName(PressGangContext context, Character character, string dependsOnName, int yellowStars, bool required, int? characterLevel, int? gearTier, int? iso8ClassLevel)
         {
             Character dependsOn = LookUp.Character(context, dependsOnName);
-            Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
+            PrerequisiteCharacter prerequisite = LookUp.PrerequisiteCharacter(context, character, dependsOn);
             if (prerequisite == null)
             {
-                prerequisite = new(character, dependsOn, yellowStars, required)
-                {
-                    CharacterLevel = characterLevel,
-                    GearTier = gearTier,
-                    Iso8ClassLevel = iso8ClassLevel
-                };
+                prerequisite = new(character, dependsOn, required);
                 context.Add(prerequisite);
             }
 
@@ -432,9 +461,20 @@ namespace PressGang.Core.DatabaseOperations
         public int YellowStars { get; set; }
         public List<string> DependsOn { get; set; }
         public List<string> Requires { get; set; }
+        public List<PrerequisiteStatsEntry> Stats { get; set; }
+
+        // TODO: remove below here
         public int? CharacterLevel { get; set; }
         public int? GearTier { get; set; }
         public int? Iso8ClassLevel { get; set; }
+    }
+
+    class PrerequisiteStatsEntry
+    {
+        public int YellowStars { get; set; }
+        public int CharacterLevel { get; set; }
+        public int GearTier { get; set; }
+        public int Iso8ClassLevel { get; set; }
     }
 
     class FarmLocation

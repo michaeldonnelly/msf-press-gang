@@ -29,60 +29,75 @@ namespace PressGang.Bot.Commands
         [Command("unlock")]
         [Aliases("prereq", "ul")]
         [Description("List the prerequisites for a character's legendary unlock event")]
-        public async Task AddCommand(CommandContext ctx, string characterName, string c2 = null, string c3 = null)
+        public async Task AddCommand(CommandContext ctx, params string[] args)
         {
-            //TODO: handle arbitrary parameters rather than this garbage
-            if (!String.IsNullOrWhiteSpace(c2))
+            string characterName;
+            int unlockAt = 0;
+
+            if (Int32.TryParse(args[0], out unlockAt))
             {
-                characterName += " " + c2;
-                if (!String.IsNullOrWhiteSpace(c3))
-                {
-                    characterName += " " + c3;
-                }
+                characterName = String.Join(" ", args, 1, args.Length - 1);
+            }
+            else
+            {
+                characterName = String.Join(" ", args);
             }
 
             try
             {
-                Character character = LookUp.Character(PressGangContext, characterName);
-                if (character == null)
-                {
-                    string response = "Not found: " + characterName;
-                    await DiscordUtils.Respond(ctx, response);
-                }
-                else
-                {
-                    List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars,
-                        out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel);
-                    if (dependsOn.Count == 0)
-                    {
-                        string response = $"{character.Name} is not a legendary unlock (or my data are out of date)";
-                        await DiscordUtils.Respond(ctx, response);
-                    }
-                    else
-                    {
-                        string header = $"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars";
-                        if (characterLevel != null) { header += $" + level {characterLevel}"; }
-                        if (gearTier != null) { header += $" + gear tier {gearTier}"; }
-                        if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
-
-                        Queue<string> response = new();
-                        response.Enqueue(header);
-                        foreach (string prereq in dependsOn)
-                        {
-                            response.Enqueue($"  - {prereq}");
-                        }
-                        if (hasRequiredChars)
-                        {
-                            response.Enqueue("\r\n    * = required");
-                        }
-                        await DiscordUtils.Respond(ctx, response);
-                    }
-                }
+                Queue<string> response = Unlock(characterName, unlockAt);
+                await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
                 await DiscordUtils.HandleError(ctx, ex);
             }
+        }
+
+        private Queue<string> Unlock (string characterName, int unlockAt)
+        {
+            Queue<string> response = new();
+
+            Character character = LookUp.Character(PressGangContext, characterName);
+            if (character == null)
+            {
+                response.Enqueue("Not found: " + characterName);
+                return response;
+            }
+
+            if (unlockAt == 0)
+            {
+                unlockAt = (int)character.MinimumUnlockStars;   // Safe because every legendary has a minimum unlock
+            }
+            else if (unlockAt < character.MinimumUnlockStars)
+            {
+                response.Enqueue($"The minimum unlock for {character.Name} is {character.MinimumUnlockStars} stars");
+                return response;
+            }
+
+            List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, unlockAt, out int yellowStars,
+                out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel);
+            if (dependsOn.Count == 0)
+            {
+                response.Enqueue($"{character.Name} is not a legendary unlock (or my data are out of date)");
+                return response;
+            }
+
+            string header = $"To unlock {character.Name} at {unlockAt} yellow stars you will need 5 of the following characters at {yellowStars} yellow stars";
+            if (characterLevel != null) { header += $" + level {characterLevel}"; }
+            if (gearTier != null) { header += $" + gear tier {gearTier}"; }
+            if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
+
+            response.Enqueue(header);
+            foreach (string prereq in dependsOn)
+            {
+                response.Enqueue($"  - {prereq}");
+            }
+            if (hasRequiredChars)
+            {
+                response.Enqueue("\r\n    * = required");
+            }
+            return response;
         }
     }
 }
