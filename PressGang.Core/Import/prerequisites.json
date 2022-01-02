@@ -130,6 +130,26 @@
         "Captain America (Sam)",
         "Maria Hill",
         "Sharon Carter"
+      ],
+      "Stats": [
+        {
+          "YellowStars": 5,
+          "CharacterLevel": 65,
+          "GearTier": 12,
+          "Iso8ClassLevel": 3
+        },
+        {
+          "YellowStars": 6,
+          "CharacterLevel": 65,
+          "GearTier": 13,
+          "Iso8ClassLevel": 4
+        },
+        {
+          "YellowStars": 7,
+          "CharacterLevel": 65,
+          "GearTier": 14,
+          "Iso8ClassLevel": 5
+        }
       ]
     },
     {

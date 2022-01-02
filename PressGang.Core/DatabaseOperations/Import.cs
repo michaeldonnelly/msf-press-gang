@@ -437,9 +437,20 @@ namespace PressGang.Core.DatabaseOperations
         public int YellowStars { get; set; }
         public List<string> DependsOn { get; set; }
         public List<string> Requires { get; set; }
+        public List<PrerequisiteStatsEntry> Stats { get; set; }
+
+        // TODO: remove below here
         public int? CharacterLevel { get; set; }
         public int? GearTier { get; set; }
         public int? Iso8ClassLevel { get; set; }
+    }
+
+    class PrerequisiteStatsEntry
+    {
+        public int YellowStars { get; set; }
+        public int CharacterLevel { get; set; }
+        public int GearTier { get; set; }
+        public int Iso8ClassLevel { get; set; }
     }
 
     class FarmLocation
