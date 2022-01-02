@@ -40,7 +40,7 @@ namespace PressGang.Bot.Commands
             }
             else if (Int32.TryParse(args[args.Length - 1], out unlockAt))
             {
-                characterName = String.Join(" ", args, 0, args.Length - 2);
+                characterName = String.Join(" ", args, 0, args.Length - 1);
             }
             else
             {
@@ -66,6 +66,12 @@ namespace PressGang.Bot.Commands
             if (character == null)
             {
                 response.Enqueue("Not found: " + characterName);
+                return response;
+            }
+
+            if (unlockAt > 7)
+            {
+                response.Enqueue($"You can't upgrade a character higher than 7 stars");
                 return response;
             }
 
