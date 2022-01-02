@@ -33,7 +33,7 @@ namespace PressGang.Core.StaticModels
 
         public int? MinimumUnlockStars { get; set; }
 
-        public virtual List<PrerequisiteCharacter> Prerequisites { get; set; } = new();
+        public virtual List<PrerequisiteCharacter> PrerequisiteCharacters { get; set; } = new();
 
         public virtual Resource Shard { get; set; }
 

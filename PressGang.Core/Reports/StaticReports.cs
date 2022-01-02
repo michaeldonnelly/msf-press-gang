@@ -13,7 +13,7 @@ namespace PressGang.Core.Reports
         public static List<Character> Prerequisites(PressGangContext context, Character character)
         {
             List<Character> dependsOn = new();
-            foreach (PrerequisiteCharacter prerequisite in character.Prerequisites)
+            foreach (PrerequisiteCharacter prerequisite in character.PrerequisiteCharacters)
             {
                 context.Entry(prerequisite).Reference("DependsOn").Load();
                 dependsOn.Add(prerequisite.DependsOn);
@@ -33,7 +33,7 @@ namespace PressGang.Core.Reports
             yellowStars = 0;
 
             List<string> response = new();
-            foreach (PrerequisiteCharacter prerequisite in character.Prerequisites)
+            foreach (PrerequisiteCharacter prerequisite in character.PrerequisiteCharacters)
             {
                 context.Entry(prerequisite).Reference("DependsOn").Load();
                 string characterName = prerequisite.DependsOn.Name;
@@ -51,9 +51,9 @@ namespace PressGang.Core.Reports
                 response.Add(characterName);
             }
 
-            characterLevel = character.Prerequisites[0].RequiredCharacterLevel;
-            gearTier = character.Prerequisites[0].RequiredGearTier;
-            iso8ClassLevel = character.Prerequisites[0].RequiredIso8ClassLevel;
+            characterLevel = character.PrerequisiteCharacters[0].RequiredCharacterLevel;
+            gearTier = character.PrerequisiteCharacters[0].RequiredGearTier;
+            iso8ClassLevel = character.PrerequisiteCharacters[0].RequiredIso8ClassLevel;
             response.Sort();
             return response;
         }

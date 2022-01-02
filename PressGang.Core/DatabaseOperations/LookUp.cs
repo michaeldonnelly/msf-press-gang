@@ -40,7 +40,7 @@ namespace PressGang.Core.DatabaseOperations
                 return null;
             }
 
-            context.Entry(character).Collection(c => c.Prerequisites).Load();
+            context.Entry(character).Collection(c => c.PrerequisiteCharacters).Load();
             context.Entry(character).Collection(c => c.CharacterAliases).Load();
             context.Entry(character).Reference(c => c.Shard).Load();
             return character;

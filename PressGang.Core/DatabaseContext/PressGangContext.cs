@@ -45,7 +45,7 @@ namespace PressGang.Core.DatabaseContext
 
             modelBuilder.Entity<PrerequisiteCharacter>()
                 .HasOne(p => p.Character)
-                .WithMany(c => c.Prerequisites);
+                .WithMany(c => c.PrerequisiteCharacters);
 
             modelBuilder.Entity<PrerequisiteCharacter>()
                 .HasOne(p => p.DependsOn);
