@@ -38,6 +38,10 @@ namespace PressGang.Bot.Commands
             {
                 characterName = String.Join(" ", args, 1, args.Length - 1);
             }
+            else if (Int32.TryParse(args[args.Length - 1], out unlockAt))
+            {
+                characterName = String.Join(" ", args, 0, args.Length - 2);
+            }
             else
             {
                 characterName = String.Join(" ", args);
