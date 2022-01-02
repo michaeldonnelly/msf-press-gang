@@ -77,7 +77,8 @@ namespace PressGang.Test.DatabaseOperationsTest
                 "Locations",
                 "Characters",
                 "Resources",
-                "PrerequisiteCharacters"
+                "PrerequisiteCharacters",
+                "PrerequisiteStats"
             };
 
             return tables;
