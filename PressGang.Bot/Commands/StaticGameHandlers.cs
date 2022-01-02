@@ -82,26 +82,22 @@ namespace PressGang.Bot.Commands
                 response.Enqueue($"{character.Name} is not a legendary unlock (or my data are out of date)");
                 return response;
             }
-            else
+
+            string header = $"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars";
+            if (characterLevel != null) { header += $" + level {characterLevel}"; }
+            if (gearTier != null) { header += $" + gear tier {gearTier}"; }
+            if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
+
+            response.Enqueue(header);
+            foreach (string prereq in dependsOn)
             {
-                string header = $"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars";
-                if (characterLevel != null) { header += $" + level {characterLevel}"; }
-                if (gearTier != null) { header += $" + gear tier {gearTier}"; }
-                if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
-
-                response.Enqueue(header);
-                foreach (string prereq in dependsOn)
-                {
-                    response.Enqueue($"  - {prereq}");
-                }
-                if (hasRequiredChars)
-                {
-                    response.Enqueue("\r\n    * = required");
-                }
-                return response;
+                response.Enqueue($"  - {prereq}");
             }
-            
-
+            if (hasRequiredChars)
+            {
+                response.Enqueue("\r\n    * = required");
+            }
+            return response;
         }
     }
 }
