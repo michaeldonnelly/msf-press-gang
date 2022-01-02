@@ -26,7 +26,7 @@ namespace PressGang.Core.DatabaseContext
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterAlias> CharacterAliases { get; set; }
-        public DbSet<PrerequisiteCharacter> Prerequisites { get; set; }
+        public DbSet<PrerequisiteCharacter> PrerequisiteCharacters { get; set; }
         public DbSet<PrerequisiteStats> PrerequisiteStats { get; set; }
 
         public DbSet<Location> Locations { get; set; }

@@ -89,7 +89,7 @@ namespace PressGang.Core.DatabaseOperations
 
         public static PrerequisiteCharacter Prerequisite(PressGangContext context, Character character, Character dependsOn)
         {
-            List<PrerequisiteCharacter> results = context.Prerequisites
+            List<PrerequisiteCharacter> results = context.PrerequisiteCharacters
                 .Where(p => (p.Character == character) && (p.DependsOn == dependsOn))
                 .ToList();
 
