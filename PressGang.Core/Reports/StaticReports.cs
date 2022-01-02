@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PressGang.Core.DatabaseContext;
+using PressGang.Core.DatabaseOperations;
 using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
 
@@ -18,32 +19,38 @@ namespace PressGang.Core.Reports
                 throw new Exception($"{character.Name} opens at {character.MinimumUnlockStars} yellow stars");
             }
 
+            // Add prerequisite characters
             hasRequiredChars = false;
-            yellowStars = 0;
-
             List<string> response = new();
             foreach (PrerequisiteCharacter prerequisite in character.PrerequisiteCharacters)
             {
                 context.Entry(prerequisite).Reference("DependsOn").Load();
                 string characterName = prerequisite.DependsOn.Name;
-
                 if (prerequisite.Required)
                 {
                     hasRequiredChars = true;
                     characterName += " *";
                 }
-
-                if (prerequisite.RequiredYellowStars > yellowStars)
-                {
-                    yellowStars = prerequisite.RequiredYellowStars;
-                }
                 response.Add(characterName);
             }
-
-            characterLevel = character.PrerequisiteCharacters[0].RequiredCharacterLevel;
-            gearTier = character.PrerequisiteCharacters[0].RequiredGearTier;
-            iso8ClassLevel = character.PrerequisiteCharacters[0].RequiredIso8ClassLevel;
             response.Sort();
+
+            // Add prerequisite stats (though generally yellowStars will be the only one
+            yellowStars = unlockAt;
+            PrerequisiteStats prerequisiteStats = LookUp.PrerequisiteStats(context, character, unlockAt);
+            if (prerequisiteStats != null)
+            {
+                characterLevel = prerequisiteStats.RequiredCharacterLevel;
+                gearTier = prerequisiteStats.RequiredGearTier;
+                iso8ClassLevel = prerequisiteStats.RequiredIso8ClassLevel;
+            }
+            else
+            {
+                characterLevel = null;
+                gearTier = null;
+                iso8ClassLevel = null;
+            }
+
             return response;
         }
 
