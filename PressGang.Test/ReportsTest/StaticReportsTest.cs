@@ -173,6 +173,10 @@ namespace PressGang.Test.ReportsTest
 
         [DataTestMethod]
         [DataRow("fury", 3, 3)]
+        [DataRow("fury", 4, 4)]
+        [DataRow("fury", 5, 5)]
+        [DataRow("jubilee", 5, 5)]
+        [DataRow("omega red", 5, 5)]
         public void RequiredStars(string characterName, int unlockAtStars, int expectedRequiredStars)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
@@ -184,6 +188,8 @@ namespace PressGang.Test.ReportsTest
         [DataTestMethod]
         [DataRow("fury", 3, null)]
         [DataRow("omega red", 5, 65)]
+        [DataRow("omega red", 6, 65)]
+        [DataRow("omega red", 7, 65)]
         public void RequiredClassLevel(string characterName, int unlockAtStars, int? expectedRequiredClassLevel)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
@@ -195,6 +201,8 @@ namespace PressGang.Test.ReportsTest
         [DataTestMethod]
         [DataRow("fury", 3, null)]
         [DataRow("omega red", 5, 12)]
+        [DataRow("omega red", 6, 13)]
+        [DataRow("omega red", 7, 14)]
         public void RequiredGearTier(string characterName, int unlockAtStars, int? expectedRequiredGearTier)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
@@ -206,6 +214,8 @@ namespace PressGang.Test.ReportsTest
         [DataTestMethod]
         [DataRow("fury", 3, null)]
         [DataRow("omega red", 5, 3)]
+        [DataRow("omega red", 6, 4)]
+        [DataRow("omega red", 7, 5)]
         public void RequiredIso8ClassLevel(string characterName, int unlockAtStars, int? expectedRequiredIso8ClassLevel)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
@@ -213,10 +223,5 @@ namespace PressGang.Test.ReportsTest
             _ = StaticReports.Unlocks(context, character, unlockAtStars, out _, out _, out _, out _, out int? requiredIso8ClassLevel);
             Assert.AreEqual(expectedRequiredIso8ClassLevel, requiredIso8ClassLevel, $"requiredIso8ClassLevel for {character.Name}");
         }
-
-
-
-
-
     }
 }

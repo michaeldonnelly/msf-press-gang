@@ -12,8 +12,7 @@ namespace PressGang.Core.StaticModels
             Character = character;
             DependsOn = dependsOn;
             Required = required;
-            Name = dependsOn.Name + " -> " + character.Name;
-           
+            Name = dependsOn.Name + " -> " + character.Name;           
         }
 
         public int Id { get; set; }
