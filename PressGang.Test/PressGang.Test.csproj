@@ -21,11 +21,13 @@
     <None Remove="Mock\" />
     <None Remove="ReportsTest\" />
     <None Remove="DatabaseOperationsTest\" />
+    <None Remove="StaticModelsTest\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseContextTest\" />
     <Folder Include="Mock\" />
     <Folder Include="ReportsTest\" />
     <Folder Include="DatabaseOperationsTest\" />
+    <Folder Include="StaticModelsTest\" />
   </ItemGroup>
 </Project>

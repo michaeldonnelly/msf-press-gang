@@ -276,6 +276,11 @@ namespace PressGang.Core.DatabaseOperations
             foreach (PrerequisiteListEntry entry in prerequisiteList.Prerequisites)
             {
                 Character character = LookUp.Character(context, entry.Character);
+                if (character.MinimumUnlockStars == null)
+                {
+                    character.MinimumUnlockStars = entry.YellowStars;
+                    context.SaveChanges();
+                }
                 foreach (string dependsOnName in entry.DependsOn)
                 {
                     AddPrereqByName(context, character, dependsOnName, entry.YellowStars, false, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
