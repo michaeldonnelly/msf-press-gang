@@ -6,7 +6,7 @@ This will make an image and publish it to Docker Hub [https://hub.docker.com/rep
 ### Build the code and create the image
 
 ```
-cd docker
+cd Docker
 ./build.sh
 ```
 
