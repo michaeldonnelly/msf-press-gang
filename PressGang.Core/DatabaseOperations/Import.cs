@@ -312,7 +312,6 @@ namespace PressGang.Core.DatabaseOperations
                                 RequiredIso8ClassLevel = statsEntry.Iso8ClassLevel
                             };
                             context.Add(prerequisiteStats);
-                            context.SaveChanges();
                         }
                         //        else
                         //        {
@@ -320,6 +319,9 @@ namespace PressGang.Core.DatabaseOperations
                         //        }
                     }
                 }
+
+                context.SaveChanges();
+
             }
         }
 
