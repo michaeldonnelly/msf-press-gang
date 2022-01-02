@@ -7,11 +7,10 @@ namespace PressGang.Core.StaticModels
         {
         }
 
-        public PrerequisiteCharacter(Character character, Character dependsOn, int yellowStars, bool required = false)
+        public PrerequisiteCharacter(Character character, Character dependsOn, bool required = false)
         {
             Character = character;
             DependsOn = dependsOn;
-            RequiredYellowStars = yellowStars;
             Required = required;
             Name = dependsOn.Name + " -> " + character.Name;
            
