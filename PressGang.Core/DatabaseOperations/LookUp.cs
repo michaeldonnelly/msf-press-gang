@@ -101,6 +101,15 @@ namespace PressGang.Core.DatabaseOperations
             return null;
         }
 
+        public static PrerequisiteStats PrerequisiteStats(PressGangContext context, Character character, int yellowStars)
+        {
+            List<PrerequisiteStats> results = context.PrerequisiteStats
+                .Where(ps => (ps.Character == character) && (ps.YellowStars == yellowStars))
+                .ToList();
+
+            return results.FirstOrDefault();
+        }
+
         public static User User(PressGangContext context, ulong discordId, string userName)
         {
             List<User> results = context.Users.Where(u => u.DiscordId == discordId).ToList();

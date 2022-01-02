@@ -273,6 +273,9 @@ namespace PressGang.Core.DatabaseOperations
         {
             string jsonString = File.ReadAllText(dataDirectory + "/prerequisites.json");
             PrerequisiteList prerequisiteList = JsonConvert.DeserializeObject<PrerequisiteList>(jsonString);
+
+
+
             foreach (PrerequisiteListEntry entry in prerequisiteList.Prerequisites)
             {
                 Character character = LookUp.Character(context, entry.Character);
@@ -292,7 +295,25 @@ namespace PressGang.Core.DatabaseOperations
                         AddPrereqByName(context, character, dependsOnName, entry.YellowStars, true, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
                     }
                 }
-                context.SaveChanges();
+                foreach (PrerequisiteStatsEntry statsEntry in entry.Stats)
+                {
+                    PrerequisiteStats prerequisiteStats = LookUp.PrerequisiteStats(context, character, statsEntry.YellowStars);
+                    if (prerequisiteStats == null)
+                    {
+                        prerequisiteStats = new()
+                        {
+                            RequiredCharacterLevel = statsEntry.CharacterLevel,
+                            RequiredGearTier = statsEntry.GearTier,
+                            RequiredIso8ClassLevel = statsEntry.Iso8ClassLevel
+                        };
+                        context.Add(prerequisiteStats);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        // TODO: handle if anything has changed
+                    }
+                }
             }
         }
 
