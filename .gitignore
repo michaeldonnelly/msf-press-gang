@@ -13,3 +13,4 @@ discord-token.txt
 /Deploy/msf-press-gang/
 /Deploy/zola*
 foo
+*.sqlite3-shm
