@@ -75,7 +75,7 @@ namespace PressGang.Bot.Commands
                 return response;
             }
 
-            List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars,
+            List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, unlockAt, out int yellowStars,
                 out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel);
             if (dependsOn.Count == 0)
             {

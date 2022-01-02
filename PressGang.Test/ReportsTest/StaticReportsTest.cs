@@ -30,11 +30,11 @@ namespace PressGang.Test.ReportsTest
             Assert.IsTrue(characterRows > 100, characterRows.ToString());
         }
 
-        private List<string> Prereqs(string characterName)
+        private List<string> Prereqs(string characterName, int unlockAt)
         {
             PressGangContext context = InMemoryDatabase.GetContext();
             Character character = LookUp.Character(context, characterName);
-            List<string> prereqs = StaticReports.Unlocks(context, character, out int _, out bool _, out int? _, out int? _, out int? _);
+            List<string> prereqs = StaticReports.Unlocks(context, character, unlockAt, out int _, out bool _, out int? _, out int? _, out int? _);
             return prereqs;
         }
 
@@ -47,7 +47,7 @@ namespace PressGang.Test.ReportsTest
         [TestMethod]
         public void IronMan()
         {
-            List<string> prereqs = Prereqs("Iron Man");
+            List<string> prereqs = Prereqs("Iron Man", 3);
             List<string> expectedList = new()
             {
                 "Agent Coulson",
@@ -72,7 +72,7 @@ namespace PressGang.Test.ReportsTest
         [TestMethod]
         public void NickFury()
         {
-            List<string> prereqs = Prereqs("fury");
+            List<string> prereqs = Prereqs("fury", 3);
             List<string> expectedList = new()
             {
                 "Kree Cyborg",
@@ -91,7 +91,7 @@ namespace PressGang.Test.ReportsTest
         [TestMethod]
         public void JeanGrey()
         {
-            List<string> prereqs = Prereqs("phoenix");
+            List<string> prereqs = Prereqs("phoenix", 5);
             List<string> expectedList = new()
             {
                 "Doctor Doom",
@@ -112,7 +112,7 @@ namespace PressGang.Test.ReportsTest
         [TestMethod]
         public void BlackagarBoltagon()
         {
-            List<string> prereqs = Prereqs("blackbolt");
+            List<string> prereqs = Prereqs("blackbolt", 5);
             List<string> expectedList = new()
             {
                 "Hela",
@@ -131,7 +131,7 @@ namespace PressGang.Test.ReportsTest
         [TestMethod]
         public void Shuri()
         {
-            List<string> prereqs = Prereqs("SHURI");
+            List<string> prereqs = Prereqs("SHURI", 5);
             List<string> expectedList = new()
             {
                 "Doctor Octopus",
