@@ -65,7 +65,11 @@ namespace PressGang.Bot.Commands
                 return response;
             }
 
-            if ((unlockAt > 0) && (unlockAt < character.MinimumUnlockStars))
+            if (unlockAt == 0)
+            {
+                unlockAt = (int)character.MinimumUnlockStars;   // Safe because every legendary has a minimum unlock
+            }
+            else if (unlockAt < character.MinimumUnlockStars)
             {
                 response.Enqueue($"The minimum unlock for {character.Name} is {character.MinimumUnlockStars} stars");
                 return response;
