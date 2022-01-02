@@ -24,7 +24,7 @@ namespace PressGang.Bot
             startUp.Configuration.GetSection(DiscordOptions.Discord).Bind(discordOptions);
             Console.WriteLine($"Starting bot {discordOptions.BotName} for environment {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}");
             DiscordClient discordClient = Listener.Initialize(discordOptions, serviceProvider);
-            Listener.Connect(discordClient).GetAwaiter().GetResult();
+            Listener.Connect(discordOptions, discordClient).GetAwaiter().GetResult();
         }
     }
 }

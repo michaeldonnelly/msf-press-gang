@@ -16,8 +16,7 @@ namespace PressGang.Bot
     public static class Listener
     {
         public static DiscordClient Initialize(DiscordOptions discordOptions, IServiceProvider serviceProvider)
-        {
-            
+        {            
             DiscordConfiguration discordConfiguration = new()
             {
                 Token = DiscordToken(discordOptions),
@@ -64,9 +63,10 @@ namespace PressGang.Bot
         //{
         //}
 
-        public static async Task Connect(DiscordClient discordClient)
+        public static async Task Connect(DiscordOptions discordOptions, DiscordClient discordClient)
         {
-            DiscordActivity discordActivity = new("'/help' shows what I can do!");
+            string status = "you! '" + discordOptions.CommandPrefix + "help' shows what I can do!";
+            DiscordActivity discordActivity = new(status, ActivityType.ListeningTo);
             await discordClient.ConnectAsync(discordActivity);
             await Task.Delay(-1);
         }
