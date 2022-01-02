@@ -30,7 +30,7 @@ namespace PressGang.Test
             DataAccessOptions options = new()
             {
                 EnsureCreated = true,
-                ImportDataDirectory = "/Users/donnelly/Repos/msf-press-gang/Import",
+                ImportDataDirectory = "Import",
                 ImportData = true
             };
             DbInitializer.Initialize(context, options);
