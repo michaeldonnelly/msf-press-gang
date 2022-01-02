@@ -45,8 +45,8 @@ namespace PressGang.Bot.Commands
                     DiscordMember discordUser = ctx.Member;
                     User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
                     CharacterPriorities characterPriorities = new(PressGangContext, user);
-                    Goal goal = characterPriorities.Add(character, priorityLevel);
-                    response = "Added " + goal.Character.Name;
+                    YellowStarGoal yellowStarGoal = characterPriorities.Add(character, priorityLevel);
+                    response = "Added " + yellowStarGoal.Character.Name;
                 }
 
                 await DiscordUtils.Respond(ctx, response);
