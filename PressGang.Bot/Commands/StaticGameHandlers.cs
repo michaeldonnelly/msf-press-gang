@@ -57,10 +57,17 @@ namespace PressGang.Bot.Commands
         private Queue<string> Unlock (string characterName, int unlockAt)
         {
             Queue<string> response = new();
+
             Character character = LookUp.Character(PressGangContext, characterName);
             if (character == null)
             {
                 response.Enqueue("Not found: " + characterName);
+                return response;
+            }
+
+            if ((unlockAt > 0) && (unlockAt < character.MinimumUnlockStars))
+            {
+                response.Enqueue($"The minimum unlock for {character.Name} is {character.MinimumUnlockStars} stars");
                 return response;
             }
 
