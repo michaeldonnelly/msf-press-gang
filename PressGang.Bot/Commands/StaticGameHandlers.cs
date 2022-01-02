@@ -58,7 +58,8 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        [Command("unlock")]        
+        [Command("legends")]
+        [Description("List all the legendary characters who have special unlock events")]
         public async Task AddCommand(CommandContext ctx)
         {
             try
