@@ -63,34 +63,33 @@ namespace PressGang.Bot.Commands
                 response.Enqueue("Not found: " + characterName);
                 return response;
             }
+
+            List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars,
+                out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel);
+            if (dependsOn.Count == 0)
+            {
+                response.Enqueue($"{character.Name} is not a legendary unlock (or my data are out of date)");
+                return response;
+            }
             else
             {
-                List<string> dependsOn = StaticReports.Unlocks(PressGangContext, character, out int yellowStars,
-                    out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel);
-                if (dependsOn.Count == 0)
-                {
-                    response.Enqueue($"{character.Name} is not a legendary unlock (or my data are out of date)");
-                    return response;
-                }
-                else
-                {
-                    string header = $"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars";
-                    if (characterLevel != null) { header += $" + level {characterLevel}"; }
-                    if (gearTier != null) { header += $" + gear tier {gearTier}"; }
-                    if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
+                string header = $"To unlock {character.Name} you will need 5 of the following at {yellowStars} yellow stars";
+                if (characterLevel != null) { header += $" + level {characterLevel}"; }
+                if (gearTier != null) { header += $" + gear tier {gearTier}"; }
+                if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
 
-                    response.Enqueue(header);
-                    foreach (string prereq in dependsOn)
-                    {
-                        response.Enqueue($"  - {prereq}");
-                    }
-                    if (hasRequiredChars)
-                    {
-                        response.Enqueue("\r\n    * = required");
-                    }
-                    return response;
+                response.Enqueue(header);
+                foreach (string prereq in dependsOn)
+                {
+                    response.Enqueue($"  - {prereq}");
                 }
+                if (hasRequiredChars)
+                {
+                    response.Enqueue("\r\n    * = required");
+                }
+                return response;
             }
+            
 
         }
     }
