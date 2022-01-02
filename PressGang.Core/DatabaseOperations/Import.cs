@@ -295,23 +295,29 @@ namespace PressGang.Core.DatabaseOperations
                         AddPrereqByName(context, character, dependsOnName, entry.YellowStars, true, entry.CharacterLevel, entry.GearTier, entry.Iso8ClassLevel);
                     }
                 }
-                foreach (PrerequisiteStatsEntry statsEntry in entry.Stats)
+
+                if (entry.Stats != null)
                 {
-                    PrerequisiteStats prerequisiteStats = LookUp.PrerequisiteStats(context, character, statsEntry.YellowStars);
-                    if (prerequisiteStats == null)
+                    foreach (PrerequisiteStatsEntry statsEntry in entry.Stats)
                     {
-                        prerequisiteStats = new()
+                        PrerequisiteStats prerequisiteStats = LookUp.PrerequisiteStats(context, character, statsEntry.YellowStars);
+                        if (prerequisiteStats == null)
                         {
-                            RequiredCharacterLevel = statsEntry.CharacterLevel,
-                            RequiredGearTier = statsEntry.GearTier,
-                            RequiredIso8ClassLevel = statsEntry.Iso8ClassLevel
-                        };
-                        context.Add(prerequisiteStats);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        // TODO: handle if anything has changed
+                            prerequisiteStats = new()
+                            {
+                                Character = character,
+                                YellowStars = statsEntry.YellowStars,
+                                RequiredCharacterLevel = statsEntry.CharacterLevel,
+                                RequiredGearTier = statsEntry.GearTier,
+                                RequiredIso8ClassLevel = statsEntry.Iso8ClassLevel
+                            };
+                            context.Add(prerequisiteStats);
+                            context.SaveChanges();
+                        }
+                        //        else
+                        //        {
+                        //            // TODO: handle if anything has changed
+                        //        }
                     }
                 }
             }
