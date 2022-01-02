@@ -77,7 +77,8 @@ namespace PressGang.Bot.Commands
         {
             List<IPressGangRecord> characters = StaticReports.LegendaryCharacters(PressGangContext);
             Queue<string> response = new();
-            PressGang.Core.Reports.Format.AddListToQueue(characters, ref response, sortFirst: true);
+            response.Enqueue("Legendary characters");
+            PressGang.Core.Reports.Format.AddListToQueue(characters, ref response, bullets: true, sort: true);
 
 
             //List<string> names = new();
@@ -88,7 +89,6 @@ namespace PressGang.Bot.Commands
             //names.Sort();
 
             //Queue<string> response = new();
-            //response.Enqueue("Legendary characters");
             //foreach (string name in names)
             //{
             //    response.Enqueue(" - " + name);
