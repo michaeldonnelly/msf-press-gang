@@ -169,6 +169,18 @@ namespace PressGang.Test.ReportsTest
             Assert.AreEqual(expectedRequiredStars, requiredStars, $"requiredStars for {character.Name}");
         }
 
+        [DataTestMethod]
+        [DataRow("fury", 3, null)]
+        [DataRow("omega red", 5, 65)]
+        public void RequiredClassLevel(string characterName, int unlockAtStars, int? expectedRequiredClassLevel)
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character character = LookUp.Character(context, characterName);
+            _ = StaticReports.Unlocks(context, character, unlockAtStars, out _, out _, out int? requiredCharacterLevel, out _, out _);
+            Assert.AreEqual(expectedRequiredClassLevel, requiredCharacterLevel, $"requiredClassLevel for {character.Name}");
+        }
+
+
 
 
 
