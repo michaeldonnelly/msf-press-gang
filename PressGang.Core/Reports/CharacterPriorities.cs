@@ -185,7 +185,7 @@ namespace PressGang.Core.Reports
         private bool FivePrereqsInList(Character character, int priority, Dictionary<Character, int> characterGoals)
         {
             int prereqsInList = 0;
-            foreach (Prerequisite prerequisite in character.Prerequisites)
+            foreach (PrerequisiteCharacter prerequisite in character.Prerequisites)
             {
                 Character dependsOn = prerequisite.DependsOn;
                 if (characterGoals.ContainsKey(dependsOn))
@@ -202,7 +202,7 @@ namespace PressGang.Core.Reports
         private void AddPrereqsToList(Character character, int priority, ref Dictionary<Character, int> characterGoals)
         {
             // TODO: use StaticReports.Prerequisites
-            foreach (Prerequisite prerequisite in character.Prerequisites)
+            foreach (PrerequisiteCharacter prerequisite in character.Prerequisites)
             {
                 Character dependsOn = prerequisite.DependsOn;
                 if (characterGoals.ContainsKey(dependsOn))

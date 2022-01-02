@@ -13,7 +13,7 @@ namespace PressGang.Core.Reports
         public static List<Character> Prerequisites(PressGangContext context, Character character)
         {
             List<Character> dependsOn = new();
-            foreach (Prerequisite prerequisite in character.Prerequisites)
+            foreach (PrerequisiteCharacter prerequisite in character.Prerequisites)
             {
                 context.Entry(prerequisite).Reference("DependsOn").Load();
                 dependsOn.Add(prerequisite.DependsOn);
@@ -33,7 +33,7 @@ namespace PressGang.Core.Reports
             yellowStars = 0;
 
             List<string> response = new();
-            foreach (Prerequisite prerequisite in character.Prerequisites)
+            foreach (PrerequisiteCharacter prerequisite in character.Prerequisites)
             {
                 context.Entry(prerequisite).Reference("DependsOn").Load();
                 string characterName = prerequisite.DependsOn.Name;

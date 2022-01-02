@@ -87,9 +87,9 @@ namespace PressGang.Core.DatabaseOperations
             return null;
         }
 
-        public static Prerequisite Prerequisite(PressGangContext context, Character character, Character dependsOn)
+        public static PrerequisiteCharacter Prerequisite(PressGangContext context, Character character, Character dependsOn)
         {
-            List<Prerequisite> results = context.Prerequisites
+            List<PrerequisiteCharacter> results = context.Prerequisites
                 .Where(p => (p.Character == character) && (p.DependsOn == dependsOn))
                 .ToList();
 

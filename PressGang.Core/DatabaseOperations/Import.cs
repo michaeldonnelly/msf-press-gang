@@ -299,7 +299,7 @@ namespace PressGang.Core.DatabaseOperations
         private static void AddPrereqByName(PressGangContext context, Character character, string dependsOnName, int yellowStars, bool required, int? characterLevel, int? gearTier, int? iso8ClassLevel)
         {
             Character dependsOn = LookUp.Character(context, dependsOnName);
-            Prerequisite prerequisite = LookUp.Prerequisite(context, character, dependsOn);
+            PrerequisiteCharacter prerequisite = LookUp.Prerequisite(context, character, dependsOn);
             if (prerequisite == null)
             {
                 prerequisite = new(character, dependsOn, yellowStars, required)

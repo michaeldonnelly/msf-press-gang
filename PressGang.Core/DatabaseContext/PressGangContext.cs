@@ -26,7 +26,7 @@ namespace PressGang.Core.DatabaseContext
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<CharacterAlias> CharacterAliases { get; set; }
-        public DbSet<Prerequisite> Prerequisites { get; set; }
+        public DbSet<PrerequisiteCharacter> Prerequisites { get; set; }
 
         public DbSet<Location> Locations { get; set; }
         public DbSet<Resource> Resources { get; set; }
@@ -42,11 +42,11 @@ namespace PressGang.Core.DatabaseContext
                 .HasOne(a => a.Character)
                 .WithMany(c => c.CharacterAliases);
 
-            modelBuilder.Entity<Prerequisite>()
+            modelBuilder.Entity<PrerequisiteCharacter>()
                 .HasOne(p => p.Character)
                 .WithMany(c => c.Prerequisites);
 
-            modelBuilder.Entity<Prerequisite>()
+            modelBuilder.Entity<PrerequisiteCharacter>()
                 .HasOne(p => p.DependsOn);
 
             modelBuilder.Entity<Resource>()

@@ -1,13 +1,13 @@
 ﻿using System;
 namespace PressGang.Core.StaticModels
 {
-    public class Prerequisite
+    public class PrerequisiteCharacter
     {
-        public Prerequisite()
+        public PrerequisiteCharacter()
         {
         }
 
-        public Prerequisite(Character character, Character dependsOn, int yellowStars, bool required = false)
+        public PrerequisiteCharacter(Character character, Character dependsOn, int yellowStars, bool required = false)
         {
             Character = character;
             DependsOn = dependsOn;
