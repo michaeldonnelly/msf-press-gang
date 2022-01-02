@@ -10,17 +10,6 @@ namespace PressGang.Core.Reports
 {
     public static class StaticReports
     {
-        public static List<Character> Prerequisites(PressGangContext context, Character character)
-        {
-            List<Character> dependsOn = new();
-            foreach (PrerequisiteCharacter prerequisite in character.PrerequisiteCharacters)
-            {
-                context.Entry(prerequisite).Reference("DependsOn").Load();
-                dependsOn.Add(prerequisite.DependsOn);
-            }
-            return dependsOn;
-        }
-
         public static List<string> Unlocks(PressGangContext context, Character character, int unlockAt,
             out int yellowStars, out bool hasRequiredChars, out int? characterLevel, out int? gearTier, out int? iso8ClassLevel)
         {
