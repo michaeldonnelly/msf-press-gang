@@ -39,16 +39,16 @@ namespace PressGang.Core.Reports
                     characterName += " *";
                 }
 
-                if (prerequisite.YellowStars > yellowStars)
+                if (prerequisite.RequiredYellowStars > yellowStars)
                 {
-                    yellowStars = prerequisite.YellowStars;
+                    yellowStars = prerequisite.RequiredYellowStars;
                 }
                 response.Add(characterName);
             }
 
-            characterLevel = character.Prerequisites[0].CharacterLevel;
-            gearTier = character.Prerequisites[0].GearTier;
-            iso8ClassLevel = character.Prerequisites[0].Iso8ClassLevel;
+            characterLevel = character.Prerequisites[0].RequiredCharacterLevel;
+            gearTier = character.Prerequisites[0].RequiredGearTier;
+            iso8ClassLevel = character.Prerequisites[0].RequiredIso8ClassLevel;
             response.Sort();
             return response;
         }

@@ -304,9 +304,9 @@ namespace PressGang.Core.DatabaseOperations
             {
                 prerequisite = new(character, dependsOn, yellowStars, required)
                 {
-                    CharacterLevel = characterLevel,
-                    GearTier = gearTier,
-                    Iso8ClassLevel = iso8ClassLevel
+                    RequiredCharacterLevel = characterLevel,
+                    RequiredGearTier = gearTier,
+                    RequiredIso8ClassLevel = iso8ClassLevel
                 };
                 context.Add(prerequisite);
             }
