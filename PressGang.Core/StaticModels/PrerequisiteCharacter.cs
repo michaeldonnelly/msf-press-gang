@@ -30,16 +30,6 @@ namespace PressGang.Core.StaticModels
 
         public bool Required { get; set; }
 
-        public int UnlockAtStars { get; set; }
-
-        public int RequiredYellowStars { get; set; }
-
-        public int? RequiredCharacterLevel { get; set; }
-
-        public int? RequiredGearTier { get; set; }
-
-        public int? RequiredIso8ClassLevel { get; set; }
-
         public override string ToString()
         {
             return Name;
