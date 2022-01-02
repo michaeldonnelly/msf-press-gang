@@ -159,7 +159,15 @@ namespace PressGang.Test.ReportsTest
             }
         }
 
-
+        [DataTestMethod]
+        [DataRow("fury", 3, 3)]
+        public void RequiredStars(string characterName, int unlockAtStars, int expectedRequiredStars)
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character character = LookUp.Character(context, characterName);
+            _ = StaticReports.Unlocks(context, character, unlockAtStars, out int requiredStars, out _, out _, out _, out _);
+            Assert.AreEqual(expectedRequiredStars, requiredStars, $"requiredStars for {character.Name}");
+        }
 
 
 
