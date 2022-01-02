@@ -27,45 +27,43 @@ namespace PressGang.Bot.Commands
         }
 
         [Command("unlock")]
+        [Aliases("prereq", "ul")]
         [Description("List the prerequisites for a character's legendary unlock event")]
-        public async Task AddCommand(CommandContext ctx)
+        public async Task AddCommand(CommandContext ctx, [Description("The name of the character and optionally the yellow star rank")]params string[] character)
         {
+            string characterName;
+            int unlockAt = 0;
+
+            if (Int32.TryParse(character[0], out unlockAt))
+            {
+                characterName = String.Join(" ", character, 1, character.Length - 1);
+            }
+            else if (Int32.TryParse(character[character.Length - 1], out unlockAt))
+            {
+                characterName = String.Join(" ", character, 0, character.Length - 1);
+            }
+            else
+            {
+                characterName = String.Join(" ", character);
+            }
+
             try
             {
-                Queue<string> response = LegendaryCharacters();
+                Queue<string> response = Unlock(characterName, unlockAt);
                 await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
             {
                 await DiscordUtils.HandleError(ctx, ex);
             }
-
         }
 
-        [Command("unlock")]
-        [Aliases("prereq", "ul")]
-        [Description("List the prerequisites for a character's legendary unlock event")]
-        public async Task AddCommand(CommandContext ctx, params string[] args)
+        [Command("unlock")]        
+        public async Task AddCommand(CommandContext ctx)
         {
-            string characterName;
-            int unlockAt = 0;
-
-            if (Int32.TryParse(args[0], out unlockAt))
-            {
-                characterName = String.Join(" ", args, 1, args.Length - 1);
-            }
-            else if (Int32.TryParse(args[args.Length - 1], out unlockAt))
-            {
-                characterName = String.Join(" ", args, 0, args.Length - 1);
-            }
-            else
-            {
-                characterName = String.Join(" ", args);
-            }
-
             try
             {
-                Queue<string> response = Unlock(characterName, unlockAt);
+                Queue<string> response = LegendaryCharacters();
                 await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
