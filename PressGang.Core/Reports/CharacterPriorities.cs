@@ -67,17 +67,17 @@ namespace PressGang.Core.Reports
         private SortedDictionary<int, List<YellowStarGoal>> Goals()
         {
             SortedDictionary<int, List<YellowStarGoal>> yellowStarGoals = new();
-            foreach (YellowStarGoal goal in User.YellowStarGoals)
+            foreach (YellowStarGoal yellowStarGoal in User.YellowStarGoals)
             {
-                int priority = goal.Priority;
+                int priority = yellowStarGoal.Priority;
                 if (yellowStarGoals.ContainsKey(priority))
                 {
-                    yellowStarGoals[priority].Add(goal);
+                    yellowStarGoals[priority].Add(yellowStarGoal);
                 }
                 else
                 {
                     List<YellowStarGoal> l = new();
-                    l.Add(goal);
+                    l.Add(yellowStarGoal);
                     yellowStarGoals.Add(priority, l);
                 }
 
@@ -88,22 +88,22 @@ namespace PressGang.Core.Reports
         public YellowStarGoal Add(Character character, int priority)
         {
             Dictionary<Character, int> characterGoals = BaseList();
-            YellowStarGoal goal;
+            YellowStarGoal yellowStarGoal;
             if (characterGoals.ContainsKey(character))
             {
-                goal = User.YellowStarGoals.Where(g => g.Character == character).First();
-                if (goal.Priority != priority)
+                yellowStarGoal = User.YellowStarGoals.Where(g => g.Character == character).First();
+                if (yellowStarGoal.Priority != priority)
                 {
-                    goal.Priority = priority;
+                    yellowStarGoal.Priority = priority;
                 }
             }
             else
             {
-                goal = new(User, character, priority, null);
-                _pressGangContext.Add(goal);
+                yellowStarGoal = new(User, character, priority);
+                _pressGangContext.Add(yellowStarGoal);
             }
             _pressGangContext.SaveChanges();
-            return goal;
+            return yellowStarGoal;
         }
 
         private List<T> DictToList<T>(SortedDictionary<int, List<T>> d)
@@ -156,10 +156,10 @@ namespace PressGang.Core.Reports
         private Dictionary<Character, int> BaseList()
         {
             Dictionary<Character, int> characterGoals = new();
-            foreach (YellowStarGoal goal in User.YellowStarGoals)
+            foreach (YellowStarGoal yellowStarGoal in User.YellowStarGoals)
             {
 
-                    characterGoals.Add(goal.Character, goal.Priority);
+                    characterGoals.Add(yellowStarGoal.Character, yellowStarGoal.Priority);
             }
             return characterGoals;
         }
