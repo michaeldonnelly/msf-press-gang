@@ -54,6 +54,20 @@ namespace PressGang.Core.Reports
             return response;
         }
 
+        public static List<Character> LegendaryCharacters(PressGangContext context)
+        {
+            List<Character> characters = new();
+            foreach (PrerequisiteCharacter entry in context.PrerequisiteCharacters.ToList())
+            {
+                Character character = entry.Character;
+                if (!characters.Contains(character))
+                {
+                    characters.Add(character);
+                }
+            }
+            return characters;
+        }
+
         public static int RowsInTable(PressGangContext context, string tableName)
         {
             IEnumerable<object> set = (IEnumerable<object>)context.GetType().GetProperty(tableName).GetValue(context, null);
