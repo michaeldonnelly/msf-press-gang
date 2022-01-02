@@ -29,18 +29,8 @@ namespace PressGang.Bot.Commands
         [Command("unlock")]
         [Aliases("prereq", "ul")]
         [Description("List the prerequisites for a character's legendary unlock event")]
-        public async Task AddCommand(CommandContext ctx, string characterName, string c2 = null, string c3 = null)
+        public async Task AddCommand(CommandContext ctx, [RemainingText] string characterName)
         {
-            //TODO: handle arbitrary parameters rather than this garbage
-            if (!String.IsNullOrWhiteSpace(c2))
-            {
-                characterName += " " + c2;
-                if (!String.IsNullOrWhiteSpace(c3))
-                {
-                    characterName += " " + c3;
-                }
-            }
-
             try
             {
                 Character character = LookUp.Character(PressGangContext, characterName);
