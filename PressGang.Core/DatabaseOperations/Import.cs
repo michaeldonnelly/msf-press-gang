@@ -331,12 +331,7 @@ namespace PressGang.Core.DatabaseOperations
             PrerequisiteCharacter prerequisite = LookUp.PrerequisiteCharacter(context, character, dependsOn);
             if (prerequisite == null)
             {
-                prerequisite = new(character, dependsOn, yellowStars, required)
-                {
-                    RequiredCharacterLevel = characterLevel,
-                    RequiredGearTier = gearTier,
-                    RequiredIso8ClassLevel = iso8ClassLevel
-                };
+                prerequisite = new(character, dependsOn, yellowStars, required);
                 context.Add(prerequisite);
             }
 
