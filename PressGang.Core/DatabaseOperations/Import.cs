@@ -48,9 +48,9 @@ namespace PressGang.Core.DatabaseOperations
             //ImportFarms(context, dataDirectory);
             //Postcount(context, "Opportunities");
 
-            Precount(context, "Prerequisites");
+            Precount(context, "PrerequisiteCharacters");
             ImportPrereqs(context, dataDirectory);
-            Postcount(context, "Prerequisites");
+            Postcount(context, "PrerequisiteCharacters");
             Console.WriteLine("Import complete\r\n");
         }
 
