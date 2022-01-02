@@ -11,7 +11,7 @@ namespace PressGang.Core.StaticModels
         {
             Character = character;
             DependsOn = dependsOn;
-            YellowStars = yellowStars;
+            RequiredYellowStars = yellowStars;
             Required = required;
             Name = dependsOn.Name + " -> " + character.Name;
            
@@ -31,13 +31,15 @@ namespace PressGang.Core.StaticModels
 
         public bool Required { get; set; }
 
-        public int YellowStars { get; set; }
+        public int UnlockAtStars { get; set; }
 
-        public int? CharacterLevel { get; set; }
+        public int RequiredYellowStars { get; set; }
 
-        public int? GearTier { get; set; }
+        public int? RequiredCharacterLevel { get; set; }
 
-        public int? Iso8ClassLevel { get; set; }
+        public int? RequiredGearTier { get; set; }
+
+        public int? RequiredIso8ClassLevel { get; set; }
 
         public override string ToString()
         {
