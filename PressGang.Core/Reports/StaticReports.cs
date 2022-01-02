@@ -57,9 +57,10 @@ namespace PressGang.Core.Reports
         public static List<Character> LegendaryCharacters(PressGangContext context)
         {
             List<Character> characters = new();
-            foreach (PrerequisiteCharacter entry in context.PrerequisiteCharacters.ToList())
+            foreach (PrerequisiteCharacter prereqChar in context.PrerequisiteCharacters.ToList())
             {
-                Character character = entry.Character;
+                context.Entry(prereqChar).Reference("Character").Load();
+                Character character = prereqChar.Character;
                 if (!characters.Contains(character))
                 {
                     characters.Add(character);

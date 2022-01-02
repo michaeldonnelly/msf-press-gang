@@ -27,6 +27,22 @@ namespace PressGang.Bot.Commands
         }
 
         [Command("unlock")]
+        [Description("List the prerequisites for a character's legendary unlock event")]
+        public async Task AddCommand(CommandContext ctx)
+        {
+            try
+            {
+                Queue<string> response = LegendaryCharacters();
+                await DiscordUtils.Respond(ctx, response);
+            }
+            catch (Exception ex)
+            {
+                await DiscordUtils.HandleError(ctx, ex);
+            }
+
+        }
+
+        [Command("unlock")]
         [Aliases("prereq", "ul")]
         [Description("List the prerequisites for a character's legendary unlock event")]
         public async Task AddCommand(CommandContext ctx, params string[] args)
@@ -57,6 +73,26 @@ namespace PressGang.Bot.Commands
                 await DiscordUtils.HandleError(ctx, ex);
             }
         }
+
+        private Queue<string> LegendaryCharacters()
+        {
+            List<Character> characters = StaticReports.LegendaryCharacters(PressGangContext);
+            List<string> names = new();
+            foreach (Character character in characters)
+            {
+                names.Add(character.Name);
+            }
+            names.Sort();
+
+            Queue<string> response = new();
+            response.Enqueue("Legendary characters");
+            foreach (string name in names)
+            {
+                response.Enqueue(" - " + name);
+            }
+            return response;
+        }
+
 
         private Queue<string> Unlock (string characterName, int unlockAt)
         {
