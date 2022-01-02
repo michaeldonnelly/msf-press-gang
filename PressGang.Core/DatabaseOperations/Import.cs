@@ -307,9 +307,9 @@ namespace PressGang.Core.DatabaseOperations
                             {
                                 Character = character,
                                 YellowStars = statsEntry.YellowStars,
-                                RequiredCharacterLevel = statsEntry.CharacterLevel,
-                                RequiredGearTier = statsEntry.GearTier,
-                                RequiredIso8ClassLevel = statsEntry.Iso8ClassLevel
+                                CharacterLevel = statsEntry.CharacterLevel,
+                                GearTier = statsEntry.GearTier,
+                                Iso8ClassLevel = statsEntry.Iso8ClassLevel
                             };
                             context.Add(prerequisiteStats);
                         }

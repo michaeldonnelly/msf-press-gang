@@ -40,9 +40,9 @@ namespace PressGang.Core.Reports
             PrerequisiteStats prerequisiteStats = LookUp.PrerequisiteStats(context, character, unlockAt);
             if (prerequisiteStats != null)
             {
-                characterLevel = prerequisiteStats.RequiredCharacterLevel;
-                gearTier = prerequisiteStats.RequiredGearTier;
-                iso8ClassLevel = prerequisiteStats.RequiredIso8ClassLevel;
+                characterLevel = prerequisiteStats.CharacterLevel;
+                gearTier = prerequisiteStats.GearTier;
+                iso8ClassLevel = prerequisiteStats.Iso8ClassLevel;
             }
             else
             {
