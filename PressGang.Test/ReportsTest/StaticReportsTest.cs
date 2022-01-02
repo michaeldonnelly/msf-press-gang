@@ -180,6 +180,28 @@ namespace PressGang.Test.ReportsTest
             Assert.AreEqual(expectedRequiredClassLevel, requiredCharacterLevel, $"requiredClassLevel for {character.Name}");
         }
 
+        [DataTestMethod]
+        [DataRow("fury", 3, null)]
+        [DataRow("omega red", 5, 12)]
+        public void RequiredGearTier(string characterName, int unlockAtStars, int? expectedRequiredGearTier)
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character character = LookUp.Character(context, characterName);
+            _ = StaticReports.Unlocks(context, character, unlockAtStars, out _, out _, out _, out int? requiredGearTier, out _);
+            Assert.AreEqual(expectedRequiredGearTier, requiredGearTier, $"requiredGearTier for {character.Name}");
+        }
+
+        [DataTestMethod]
+        [DataRow("fury", 3, null)]
+        [DataRow("omega red", 5, 3)]
+        public void RequiredIso8ClassLevel(string characterName, int unlockAtStars, int? expectedRequiredIso8ClassLevel)
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            Character character = LookUp.Character(context, characterName);
+            _ = StaticReports.Unlocks(context, character, unlockAtStars, out _, out _, out _, out _, out int? requiredIso8ClassLevel);
+            Assert.AreEqual(expectedRequiredIso8ClassLevel, requiredIso8ClassLevel, $"requiredIso8ClassLevel for {character.Name}");
+        }
+
 
 
 
