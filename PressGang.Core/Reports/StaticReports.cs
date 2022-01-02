@@ -33,7 +33,6 @@ namespace PressGang.Core.Reports
                 }
                 response.Add(characterName);
             }
-            response.Sort();
 
             // Add prerequisite stats (though generally yellowStars will be the only one
             yellowStars = unlockAt;

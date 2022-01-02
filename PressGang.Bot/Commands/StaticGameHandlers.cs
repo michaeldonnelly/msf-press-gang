@@ -137,12 +137,10 @@ namespace PressGang.Bot.Commands
             if (characterLevel != null) { header += $" + level {characterLevel}"; }
             if (gearTier != null) { header += $" + gear tier {gearTier}"; }
             if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
-
             response.Enqueue(header);
-            foreach (string prereq in dependsOn)
-            {
-                response.Enqueue($"  - {prereq}");
-            }
+
+            Format.AddListToQueue(dependsOn, ref response, bullets: true, sort: true);
+
             if (hasRequiredChars)
             {
                 response.Enqueue("\r\n    * = required");
