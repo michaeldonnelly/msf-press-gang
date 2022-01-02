@@ -35,6 +35,8 @@ namespace PressGang.Core.StaticModels
 
         public virtual List<PrerequisiteCharacter> PrerequisiteCharacters { get; set; } = new();
 
+        public virtual List<PrerequisiteStats> PrerequisiteStats { get; set; } = new();
+
         public virtual Resource Shard { get; set; }
 
         public override string ToString()
