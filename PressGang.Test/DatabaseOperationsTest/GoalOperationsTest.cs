@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.DatabaseOperations;
+using PressGang.Core.Reports;
 using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
 
@@ -82,7 +83,7 @@ namespace PressGang.Test.DatabaseOperationsTest
             ysgList.Add(sg);
 
             List<IGoal> goalList = new List<IGoal>(ysgList);
-            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            Dictionary<int, IGoal> goalDict = Format.GoalListToDictionary(goalList);
 
             Assert.AreSame(wg, goalDict[2]);
             Assert.AreSame(sg, goalDict[1]);
@@ -96,7 +97,7 @@ namespace PressGang.Test.DatabaseOperationsTest
             InitExampleGoals(context, user);
             List<YellowStarGoal> ysgList = user.YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
-            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            Dictionary<int, IGoal> goalDict = Format.GoalListToDictionary(goalList);
             AssertGoalIsForCharacter(Storm(context), goalDict[1]);
             AssertGoalIsForCharacter(Beast(context), goalDict[2]);
         }
@@ -117,7 +118,7 @@ namespace PressGang.Test.DatabaseOperationsTest
 
             List<YellowStarGoal> ysgList = user.YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
-            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            Dictionary<int, IGoal> goalDict = Format.GoalListToDictionary(goalList);
             AssertGoalIsForCharacter(Storm(context), goalDict[1]);
             AssertGoalIsForCharacter(Beast(context), goalDict[2]);
             AssertGoalIsForCharacter(Bishop(context), goalDict[3]);
@@ -133,7 +134,7 @@ namespace PressGang.Test.DatabaseOperationsTest
 
             List<YellowStarGoal> ysgList = user.YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
-            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            Dictionary<int, IGoal> goalDict = Format.GoalListToDictionary(goalList);
             AssertGoalIsForCharacter(Bishop(context), goalDict[1]);
             AssertGoalIsForCharacter(Storm(context), goalDict[2]);
             AssertGoalIsForCharacter(Beast(context), goalDict[3]);
@@ -149,7 +150,7 @@ namespace PressGang.Test.DatabaseOperationsTest
 
             List<YellowStarGoal> ysgList = user.YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
-            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            Dictionary<int, IGoal> goalDict = Format.GoalListToDictionary(goalList);
             AssertGoalIsForCharacter(Storm(context), goalDict[1]);
             AssertGoalIsForCharacter(Bishop(context), goalDict[2]);
             AssertGoalIsForCharacter(Beast(context), goalDict[3]);
