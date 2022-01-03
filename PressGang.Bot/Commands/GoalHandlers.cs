@@ -41,16 +41,88 @@ namespace PressGang.Bot.Commands
             await DiscordUtils.Respond(ctx, response);
         }
 
+        private void ParseParameters(string[] paramsString, out string characterName, out int? priority, out int? yellowStars, out bool top)
+        {
+            priority = null;
+            yellowStars = null;
+            top = false;
+
+            List<string> paramsList = new(paramsString);
+            List<string> modifiedParamsList = new List<string>(paramsList);
+            foreach (string piece in paramsList)
+            {
+                if (int.TryParse(piece, out int p))
+                {
+                    priority = p;
+                    modifiedParamsList.Remove(piece);
+                    continue;
+                }
+
+                if (TryParseYellowStars(piece, out int ys))
+                {
+                    yellowStars = ys;
+                    modifiedParamsList.Remove(piece);
+                    continue;
+                }
+
+                if (piece.ToLower() == "top")
+                {
+                    top = true;
+                    modifiedParamsList.Remove(piece);
+                    continue;
+                }
+            }
+
+            characterName = String.Join(" ", modifiedParamsList.ToArray());
+        }
+
+        private bool TryParseYellowStars(string s, out int yellowStars)
+        {
+            yellowStars = 0;
+
+            if (s.Length != 3)
+            {
+                return false;
+            }
+
+            if (s.Substring(1,2).ToLower() != "ys")
+            {
+                return false;
+            }
+
+            string firstChar = s.Substring(0, 1);
+            if (!int.TryParse(firstChar, out int result))
+            {
+                return false;
+            }
+
+            if (result > 7)
+            {
+                return false;
+            }
+
+            if (result < 1)
+            {
+                return false;
+            }
+
+            yellowStars = result;
+            return true;
+        }
+
+
         [Command("add")]
-        public async Task AddCommand(CommandContext ctx, string characterName)
+        public async Task AddCommand(CommandContext ctx, params string[] parameters)
         {
             Console.WriteLine("add");
             try
             {
+                ParseParameters(parameters, out string characterName, out int? priority, out int? yellowStars, out bool top);
+
                 DiscordMember discordUser = ctx.Member;
                 User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
                 Character character = LookUp.Character(PressGangContext, characterName);
-                GoalOperations.AddYellowStarGoal(PressGangContext, user, character);
+                GoalOperations.AddYellowStarGoal(PressGangContext, user, character, top, priority);
 
                 string response = "Added " + character.Name;
                 await DiscordUtils.Respond(ctx, response);

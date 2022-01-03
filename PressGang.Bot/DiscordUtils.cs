@@ -37,7 +37,8 @@ namespace PressGang.Bot
 
         public static Task HandleError(CommandContext ctx, Exception ex)
         {
-            return ctx.RespondAsync(ex.ToString());
+            string error = ex.ToString();
+            return ctx.RespondAsync(error);
 
             //if (ctx.User.Id == 559173272306974740)
             //{
