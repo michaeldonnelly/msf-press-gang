@@ -17,7 +17,6 @@ namespace PressGang.Test.DatabaseOperationsTest
             var keepalive = InMemoryDatabase.RawSqliteConnection();
             keepalive.Open();
             InMemoryDatabase.InitializeContext();
-            //InitExampleGoals();
         }
 
         private static void InitExampleGoals(PressGangContext context, User user)
@@ -50,7 +49,6 @@ namespace PressGang.Test.DatabaseOperationsTest
             return LookUp.User(context, Constants.Hawkshaw.DiscordId, Constants.Hawkshaw.UserName);
         }
 
-
         private static User SampleUser(PressGangContext context, string testName)
         {
             User user = new()
@@ -77,14 +75,8 @@ namespace PressGang.Test.DatabaseOperationsTest
         [TestMethod]
         public void YellowStarGoalListToDictionary()
         {
-            YellowStarGoal wg = new(Constants.Hawkshaw, Constants.Logan)
-            {
-                Priority = 2
-            };
-            YellowStarGoal sg = new(Constants.Hawkshaw, Constants.Peter)
-            {
-                Priority = 1
-            };
+            YellowStarGoal wg = new(Constants.Hawkshaw, Constants.Logan, priority: 2);
+            YellowStarGoal sg = new(Constants.Hawkshaw, Constants.Peter, priority: 1);
             List<YellowStarGoal> ysgList = new();
             ysgList.Add(wg);
             ysgList.Add(sg);
@@ -95,7 +87,6 @@ namespace PressGang.Test.DatabaseOperationsTest
             Assert.AreSame(wg, goalDict[2]);
             Assert.AreSame(sg, goalDict[1]);
         }
-
 
         [TestMethod]
         public void DbHasSampleGoals()
