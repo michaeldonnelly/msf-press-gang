@@ -3,7 +3,7 @@ using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.UserModels
 {
-    public partial class Goal
+    public partial class Goal : IGoal
     {
         public Goal()
         {
