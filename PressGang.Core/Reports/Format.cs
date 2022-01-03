@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PressGang.Core.UserModels;
 
 namespace PressGang.Core.Reports
 {
@@ -30,6 +31,16 @@ namespace PressGang.Core.Reports
                 }
                 queue.Enqueue(line);
             }
+        }
+
+        public static Dictionary<int, IGoal> GoalListToDictionary(List<IGoal> list)
+        {
+            Dictionary<int, IGoal> dictionary = new();
+            foreach (IGoal entry in list)
+            {
+                dictionary.Add(entry.Priority, entry);
+            }
+            return dictionary;
         }
     }
 }
