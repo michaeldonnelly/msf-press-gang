@@ -11,18 +11,17 @@ namespace PressGang.Test.DatabaseOperationsTest
     [TestClass]
     public class GoalOperationsTest
     {
-        [TestInitialize]
-        public void Init()
+        [ClassInitialize]
+        public static void Init(TestContext testContext)
         {
             var keepalive = InMemoryDatabase.RawSqliteConnection();
             keepalive.Open();
             InMemoryDatabase.InitializeContext();
-            InitExampleGoals();
+            //InitExampleGoals();
         }
 
-        private void InitExampleGoals()
+        private static void InitExampleGoals(PressGangContext context)
         {
-            PressGangContext context = InMemoryDatabase.GetContext();
             YellowStarGoal sg = new(Hawkshaw(context), Storm(context), priority: 1);
             YellowStarGoal bg = new(Hawkshaw(context), Beast(context), priority: 2);
 
@@ -31,17 +30,17 @@ namespace PressGang.Test.DatabaseOperationsTest
             context.SaveChanges();
         }
 
-        private Character Storm(PressGangContext context)
+        private static Character Storm(PressGangContext context)
         {
             return LookUp.Character(context, "Storm");
         }
 
-        private Character Beast(PressGangContext context)
+        private static Character Beast(PressGangContext context)
         {
             return LookUp.Character(context, "Beast");
         }
 
-        private User Hawkshaw(PressGangContext context)
+        private static User Hawkshaw(PressGangContext context)
         {
             return LookUp.User(context, Constants.Hawkshaw.DiscordId, Constants.Hawkshaw.UserName);
         }
@@ -75,6 +74,7 @@ namespace PressGang.Test.DatabaseOperationsTest
         public void DbHasSampleGoals()
         {
             PressGangContext context = InMemoryDatabase.GetContext();
+            InitExampleGoals(context);
             List<YellowStarGoal> ysgList = Hawkshaw(context).YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
             Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
