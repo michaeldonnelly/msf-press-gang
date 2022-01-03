@@ -40,6 +40,11 @@ namespace PressGang.Test.DatabaseOperationsTest
             return LookUp.Character(context, "Beast");
         }
 
+        private static Character Bishop(PressGangContext context)
+        {
+            return LookUp.Character(context, "Bishop");
+        }
+
         private static User Hawkshaw(PressGangContext context)
         {
             return LookUp.User(context, Constants.Hawkshaw.DiscordId, Constants.Hawkshaw.UserName);
@@ -82,24 +87,26 @@ namespace PressGang.Test.DatabaseOperationsTest
             AssertGoalIsForCharacter(Beast(context), goalDict[2]);
         }
 
-
         private void AssertGoalIsForCharacter(Character expected, IGoal actual)
         {
             YellowStarGoal yellowStarGoal = (YellowStarGoal)actual;
             Assert.AreSame(expected, yellowStarGoal.Character);
         }
 
+        [TestMethod]
+        public void AddYellowStarGoalToBottom()
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            InitExampleGoals(context);
+            GoalOperations.AddYellowStarGoal(context, Hawkshaw(context), Bishop(context));
 
-
-        //    [TestMethod]
-        //public void AddYellowStarGoalBottom()
-        //{
-        //    PressGangContext context = InMemoryDatabase.GetContext();
-        //    Character bishop = LookUp.Character(context, "Bishop");
-        //    GoalOperations.AddYellowStarGoal(context, Constants.Hawkshaw, bishop);
-
-
-        //}
+            List<YellowStarGoal> ysgList = Hawkshaw(context).YellowStarGoals;
+            List<IGoal> goalList = new(ysgList);
+            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            AssertGoalIsForCharacter(Storm(context), goalDict[1]);
+            AssertGoalIsForCharacter(Beast(context), goalDict[2]);
+            AssertGoalIsForCharacter(Bishop(context), goalDict[3]);
+        }
 
 
 
