@@ -78,13 +78,8 @@ namespace PressGang.Test.DatabaseOperationsTest
             List<YellowStarGoal> ysgList = Hawkshaw(context).YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
             Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
-
-            YellowStarGoal firstGoal = (YellowStarGoal)goalDict[1];
-            YellowStarGoal secondGoal = (YellowStarGoal)goalDict[2];
-
-            Assert.AreSame(Storm(context), firstGoal.Character);
-            Assert.AreSame(Beast(context), secondGoal.Character);
-
+            AssertGoalIsForCharacter(Storm(context), goalDict[1]);
+            AssertGoalIsForCharacter(Beast(context), goalDict[2]);
         }
 
 
