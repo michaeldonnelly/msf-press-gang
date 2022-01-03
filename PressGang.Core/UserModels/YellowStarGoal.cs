@@ -9,7 +9,7 @@ namespace PressGang.Core.UserModels
         {
         }
 
-        public YellowStarGoal(User user, Character character, int? rank) : base()
+        public YellowStarGoal(User user, Character character, int? rank = null) : base()
         {
             User = user;
             Character = character;
