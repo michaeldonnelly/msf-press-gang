@@ -20,10 +20,10 @@ namespace PressGang.Test.DatabaseOperationsTest
             //InitExampleGoals();
         }
 
-        private static void InitExampleGoals(PressGangContext context)
+        private static void InitExampleGoals(PressGangContext context, User user)
         {
-            YellowStarGoal sg = new(Hawkshaw(context), Storm(context), priority: 1);
-            YellowStarGoal bg = new(Hawkshaw(context), Beast(context), priority: 2);
+            YellowStarGoal sg = new(user, Storm(context), priority: 1);
+            YellowStarGoal bg = new(user, Beast(context), priority: 2);
 
             context.Add(sg);
             context.Add(bg);
@@ -51,6 +51,28 @@ namespace PressGang.Test.DatabaseOperationsTest
         }
 
 
+        private static User SampleUser(PressGangContext context, string testName)
+        {
+            User user = new()
+            {
+                UserName = $"user for {testName}",
+                DiscordId = StringToUlong(testName)
+            };
+            context.Add(user);
+            context.SaveChanges();
+            return user;
+        }
+
+        private static ulong StringToUlong(string stringToHash)
+        {
+            ulong hash = 0;
+            for (int cursor = 0; cursor < stringToHash.Length; cursor++)
+            {
+                char c = stringToHash[cursor];
+                hash += (ulong)c;
+            }
+            return hash;
+        }
 
         [TestMethod]
         public void YellowStarGoalListToDictionary()
@@ -79,8 +101,9 @@ namespace PressGang.Test.DatabaseOperationsTest
         public void DbHasSampleGoals()
         {
             PressGangContext context = InMemoryDatabase.GetContext();
-            InitExampleGoals(context);
-            List<YellowStarGoal> ysgList = Hawkshaw(context).YellowStarGoals;
+            User user = SampleUser(context, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            InitExampleGoals(context, user);
+            List<YellowStarGoal> ysgList = user.YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
             Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
             AssertGoalIsForCharacter(Storm(context), goalDict[1]);
@@ -97,15 +120,32 @@ namespace PressGang.Test.DatabaseOperationsTest
         public void AddYellowStarGoalToBottom()
         {
             PressGangContext context = InMemoryDatabase.GetContext();
-            InitExampleGoals(context);
-            GoalOperations.AddYellowStarGoal(context, Hawkshaw(context), Bishop(context));
+            User user = SampleUser(context, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            InitExampleGoals(context, user);
+            GoalOperations.AddYellowStarGoal(context, user, Bishop(context));
 
-            List<YellowStarGoal> ysgList = Hawkshaw(context).YellowStarGoals;
+            List<YellowStarGoal> ysgList = user.YellowStarGoals;
             List<IGoal> goalList = new(ysgList);
             Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
             AssertGoalIsForCharacter(Storm(context), goalDict[1]);
             AssertGoalIsForCharacter(Beast(context), goalDict[2]);
             AssertGoalIsForCharacter(Bishop(context), goalDict[3]);
+        }
+
+        [TestMethod]
+        public void AddYellowStarGoalToTop()
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            User user = SampleUser(context, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            InitExampleGoals(context, user);
+            GoalOperations.AddYellowStarGoal(context, user, Bishop(context), top: true);
+
+            List<YellowStarGoal> ysgList = user.YellowStarGoals;
+            List<IGoal> goalList = new(ysgList);
+            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            AssertGoalIsForCharacter(Bishop(context), goalDict[1]);
+            AssertGoalIsForCharacter(Storm(context), goalDict[2]);
+            AssertGoalIsForCharacter(Beast(context), goalDict[3]);
         }
 
 
