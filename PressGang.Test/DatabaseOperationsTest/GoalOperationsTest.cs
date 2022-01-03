@@ -23,17 +23,30 @@ namespace PressGang.Test.DatabaseOperationsTest
         private void InitExampleGoals()
         {
             PressGangContext context = InMemoryDatabase.GetContext();
-            Character storm = LookUp.Character(context, "Storm");
-            Character beast = LookUp.Character(context, "Beast");
-            User hawkshaw = LookUp.User(context, Constants.Hawkshaw.DiscordId, Constants.Hawkshaw.UserName);
-
-            YellowStarGoal sg = new(hawkshaw, storm, priority: 1);
-            YellowStarGoal bg = new(hawkshaw, beast, priority: 2);
+            YellowStarGoal sg = new(Hawkshaw(context), Storm(context), priority: 1);
+            YellowStarGoal bg = new(Hawkshaw(context), Beast(context), priority: 2);
 
             context.Add(sg);
             context.Add(bg);
             context.SaveChanges();
         }
+
+        private Character Storm(PressGangContext context)
+        {
+            return LookUp.Character(context, "Storm");
+        }
+
+        private Character Beast(PressGangContext context)
+        {
+            return LookUp.Character(context, "Beast");
+        }
+
+        private User Hawkshaw(PressGangContext context)
+        {
+            return LookUp.User(context, Constants.Hawkshaw.DiscordId, Constants.Hawkshaw.UserName);
+        }
+
+
 
         [TestMethod]
         public void YellowStarGoalListToDictionary()
@@ -57,11 +70,41 @@ namespace PressGang.Test.DatabaseOperationsTest
             Assert.AreSame(sg, goalDict[1]);
         }
 
+
         [TestMethod]
-        public void AddYellowStarGoalBottom()
+        public void DbHasSampleGoals()
         {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            List<YellowStarGoal> ysgList = Hawkshaw(context).YellowStarGoals;
+            List<IGoal> goalList = new(ysgList);
+            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+
+            YellowStarGoal firstGoal = (YellowStarGoal)goalDict[1];
+            YellowStarGoal secondGoal = (YellowStarGoal)goalDict[2];
+
+            Assert.AreSame(Storm(context), firstGoal.Character);
+            Assert.AreSame(Beast(context), secondGoal.Character);
 
         }
+
+
+        private void AssertGoalIsForCharacter(Character expected, IGoal actual)
+        {
+            YellowStarGoal yellowStarGoal = (YellowStarGoal)actual;
+            Assert.AreSame(expected, yellowStarGoal.Character);
+        }
+
+
+
+        //    [TestMethod]
+        //public void AddYellowStarGoalBottom()
+        //{
+        //    PressGangContext context = InMemoryDatabase.GetContext();
+        //    Character bishop = LookUp.Character(context, "Bishop");
+        //    GoalOperations.AddYellowStarGoal(context, Constants.Hawkshaw, bishop);
+
+
+        //}
 
 
 
