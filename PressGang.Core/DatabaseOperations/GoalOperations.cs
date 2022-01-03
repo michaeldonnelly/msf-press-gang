@@ -38,7 +38,7 @@ namespace PressGang.Core.DatabaseOperations
                 priority = goals.Count + 1;
             }
 
-            for (int position = (int)priority; position < goals.Count; position++)
+            for (int position = (int)priority; position <= goals.Count; position++)
             {
                 goals[position].Priority += 1;
                 context.Update(goals[position]);
