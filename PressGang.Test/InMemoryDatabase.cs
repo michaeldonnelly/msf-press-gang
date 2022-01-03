@@ -2,6 +2,7 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using PressGang.Core.DatabaseContext;
+using PressGang.Core.UserModels;
 
 namespace PressGang.Test
 {
@@ -34,7 +35,15 @@ namespace PressGang.Test
                 ImportData = true
             };
             DbInitializer.Initialize(context, options);
+            AddConstantRecords(context);
             return context;
+        }
+
+        private static void AddConstantRecords(PressGangContext context)
+        {
+            User user = Constants.Hawkshaw;
+            context.Add(user);
+            context.SaveChanges();
         }
 
         public static SqliteConnection RawSqliteConnection(string dbName = "pressgang-test")
