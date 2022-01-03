@@ -148,8 +148,20 @@ namespace PressGang.Test.DatabaseOperationsTest
             AssertGoalIsForCharacter(Beast(context), goalDict[3]);
         }
 
+        [TestMethod]
+        public void AddYellowStarGoalToMiddle()
+        {
+            PressGangContext context = InMemoryDatabase.GetContext();
+            User user = SampleUser(context, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            InitExampleGoals(context, user);
+            GoalOperations.AddYellowStarGoal(context, user, Bishop(context), priority: 2);
 
-
-
+            List<YellowStarGoal> ysgList = user.YellowStarGoals;
+            List<IGoal> goalList = new(ysgList);
+            Dictionary<int, IGoal> goalDict = GoalOperations.GoalListToDictionary(goalList);
+            AssertGoalIsForCharacter(Storm(context), goalDict[1]);
+            AssertGoalIsForCharacter(Bishop(context), goalDict[2]);
+            AssertGoalIsForCharacter(Beast(context), goalDict[3]);
+        }
     }
 }
