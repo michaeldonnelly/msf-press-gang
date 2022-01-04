@@ -17,6 +17,18 @@ namespace PressGang.Core.DatabaseOperations
             AddGoal(context, dictionary, yellowStarGoal, top, priority);
         }
 
+        public static void RemoveYellowStarGoal(PressGangContext context, User user, Character character)
+        {
+            YellowStarGoal goaltoRemove = context.YellowStarGoals.Where(g =>
+                g.User == user &
+                g.Character == character
+            ).FirstOrDefault();
+
+            SortedDictionary<int, IGoal> dictionary = GoalDict(context, user);
+            RemoveGoal(context, dictionary, goaltoRemove);
+
+        }
+
         private static SortedDictionary<int, IGoal> GoalDict(PressGangContext context, User user)
         {
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
@@ -57,23 +69,5 @@ namespace PressGang.Core.DatabaseOperations
             context.Remove(goalToRemove);
             context.SaveChanges();
         }
-
-        public static void RemoveYellowStarGoal(PressGangContext context, User user, Character character)
-        {
-            YellowStarGoal goaltoRemove = context.YellowStarGoals.Where(g =>
-                g.User == user &
-                g.Character == character
-            ).FirstOrDefault();
-
-            SortedDictionary<int, IGoal> dictionary = GoalDict(context, user);
-            RemoveGoal(context, dictionary, goaltoRemove);
-
-        }
-
-
-
-
-
-
     }
 }
