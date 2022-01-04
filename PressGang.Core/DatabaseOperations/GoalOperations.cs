@@ -14,11 +14,11 @@ namespace PressGang.Core.DatabaseOperations
             YellowStarGoal yellowStarGoal = new(user, character);
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
             List<IGoal> goals = new(yellowStarGoals);
-            Dictionary<int, IGoal> dictionary = GoalReports.GoalListToDictionary(goals);
+            SortedDictionary<int, IGoal> dictionary = GoalReports.GoalListToDictionary(goals);
             AddGoal(context, dictionary, yellowStarGoal, top, priority);
         }
 
-        private static void AddGoal(PressGangContext context, Dictionary<int, IGoal> goals, IGoal goal, bool top = false, int? priority = null)
+        private static void AddGoal(PressGangContext context, SortedDictionary<int, IGoal> goals, IGoal goal, bool top = false, int? priority = null)
         {
             if (top)
             {

@@ -10,14 +10,34 @@ namespace PressGang.Core.Reports
 {
     public static class GoalReports
     {
-        public static Dictionary<int, IGoal> GoalListToDictionary(List<IGoal> list)
+        public static SortedDictionary<int, IGoal> GoalListToDictionary(List<IGoal> list)
         {
-            Dictionary<int, IGoal> dictionary = new();
+            SortedDictionary<int, IGoal> dictionary = new();
             foreach (IGoal entry in list)
             {
                 dictionary.Add(entry.Priority, entry);
             }
+
             return dictionary;
+        }
+
+        public static void GoalsToQueue(List<IGoal> goalsList, ref Queue<string> queue, bool numbered = true)
+        {
+            SortedDictionary<int, IGoal> goalsDict = GoalListToDictionary(goalsList);
+            foreach (var entry in goalsDict)
+            {
+                IGoal goal = entry.Value;
+                string line;
+                if (numbered)
+                {
+                    line = $" {goal.Priority}. {goal.Name}";
+                }
+                else
+                {
+                    line = goal.Name;
+                }
+                queue.Enqueue(line);
+            }
         }
     }
 }
