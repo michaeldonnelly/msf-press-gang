@@ -34,11 +34,17 @@ namespace PressGang.Bot.Commands
             Console.WriteLine("list");
             DiscordMember discordUser = ctx.Member;
             User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
-            List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
-            List<IPressGangRecord> goals = new(yellowStarGoals);
             Queue<string> response = new();
-            Core.Reports.Format.AddListToQueue(goals, ref response, bullets: true);
+            response.Enqueue($"Character goals for {user.UserName}");
+            AddGoalsToQueue(user, ref response);
             await DiscordUtils.Respond(ctx, response);
+        }
+
+        private void AddGoalsToQueue(User user, ref Queue<string> queue)
+        {
+            List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
+            List<IGoal> goals = new(yellowStarGoals);
+            GoalReports.GoalsToQueue(goals, ref queue);
         }
 
         private void ParseParameters(string[] paramsString, out string characterName, out int? priority, out int? yellowStars, out bool top)
@@ -124,7 +130,11 @@ namespace PressGang.Bot.Commands
                 Character character = LookUp.Character(PressGangContext, characterName);
                 GoalOperations.AddYellowStarGoal(PressGangContext, user, character, top, priority);
 
-                string response = "Added " + character.Name;
+                Queue<string> response = new();
+                response.Enqueue("Added " + character.Name);
+                response.Enqueue("\r\n");
+                response.Enqueue("Your character goals are now");
+                AddGoalsToQueue(user, ref response);
                 await DiscordUtils.Respond(ctx, response);
             }
             catch (Exception ex)
