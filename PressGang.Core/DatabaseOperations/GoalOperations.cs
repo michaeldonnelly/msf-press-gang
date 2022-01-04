@@ -40,7 +40,16 @@ namespace PressGang.Core.DatabaseOperations
         {
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
             List<IGoal> goals = new(yellowStarGoals);
-            SortedDictionary<int, IGoal> dictionary = GoalReports.GoalListToDictionary(goals);
+            SortedDictionary<int, IGoal> dictionary;
+            try
+            {
+                dictionary = GoalReports.GoalListToDictionary(goals);
+            }
+            catch(ArgumentException)
+            {
+                CleanupGoals(context, goals);
+                dictionary = GoalReports.GoalListToDictionary(goals);
+            }
             return dictionary;
         }
 
@@ -74,6 +83,24 @@ namespace PressGang.Core.DatabaseOperations
                 context.Update(goals[position]);
             }
             context.Remove(goalToRemove);
+            context.SaveChanges();
+        }
+
+        public static void CleanupGoals(PressGangContext context, List<IGoal> goals)
+        {
+            IGoal[] goalArray = goals.OrderBy(g => g.Priority).ToArray();
+            int priority = 0;
+            for (int i = 0; i < goalArray.Length; i++)
+            {
+                priority++;
+                IGoal entry = goalArray[i];
+                if (entry.Priority != priority)
+                {
+                    entry.Priority = priority;
+                    context.Update(entry);
+                }
+            }
+
             context.SaveChanges();
         }
     }
