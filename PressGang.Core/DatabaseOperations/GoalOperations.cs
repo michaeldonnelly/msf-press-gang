@@ -47,19 +47,26 @@ namespace PressGang.Core.DatabaseOperations
             context.SaveChanges();
         }
 
+        private static void RemoveGoal(PressGangContext context, SortedDictionary<int, IGoal> goals, IGoal goalToRemove)
+        {
+            for (int position = goalToRemove.Priority + 1; position <= goals.Count; position++)
+            {
+                goals[position].Priority -= 1;
+                context.Update(goals[position]);
+            }
+            context.Remove(goalToRemove);
+            context.SaveChanges();
+        }
+
         public static void RemoveYellowStarGoal(PressGangContext context, User user, Character character)
         {
-            List<YellowStarGoal> goals = context.YellowStarGoals.Where(g =>
+            YellowStarGoal goaltoRemove = context.YellowStarGoals.Where(g =>
                 g.User == user &
                 g.Character == character
-            ).ToList();
+            ).FirstOrDefault();
 
-            foreach(YellowStarGoal entry in goals)
-            {
-                context.Remove(entry);
-            }
-            context.SaveChanges();
-
+            SortedDictionary<int, IGoal> dictionary = GoalDict(context, user);
+            RemoveGoal(context, dictionary, goaltoRemove);
 
         }
 
