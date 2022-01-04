@@ -77,7 +77,7 @@ namespace PressGang.Bot.Commands
         {
             try
             {
-                string tableName = LookUp.FindTableByName(PressGangContext, subject);
+                string tableName = LookUp.FindTableByName(PressGangContext, subject.ToLower());
                 if (tableName == null)
                 {
                     string error = "Sorry, I can't find a table named '" + subject + "'\r\n";

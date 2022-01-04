@@ -153,6 +153,11 @@ namespace PressGang.Core.DatabaseOperations
             string tableName = null;
             foreach (ITable table in relationalModel.Tables)
             {
+                if ((subject != null) && (table.Name.ToLower() == subject))
+                {
+                    return table.Name;
+                }
+
                 if (
                     ((subject != null) && (table.Name.ToLower().Contains(subject)))
                    ||
