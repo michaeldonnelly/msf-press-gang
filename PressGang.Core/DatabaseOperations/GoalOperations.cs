@@ -4,6 +4,7 @@ using PressGang.Core.UserModels;
 using PressGang.Core.DatabaseContext;
 using System.Collections.Generic;
 using PressGang.Core.Reports;
+using System.Linq;
 
 namespace PressGang.Core.DatabaseOperations
 {
@@ -40,7 +41,22 @@ namespace PressGang.Core.DatabaseOperations
             context.SaveChanges();
         }
 
-        
+        public static void RemoveYellowStarGoal(PressGangContext context, User user, Character character)
+        {
+            List<YellowStarGoal> goals = context.YellowStarGoals.Where(g =>
+                g.User == user &
+                g.Character == character
+            ).ToList();
+
+            foreach(YellowStarGoal entry in goals)
+            {
+                context.Remove(entry);
+            }
+            context.SaveChanges();
+        }
+
+
+
 
     }
 }
