@@ -48,10 +48,11 @@ namespace PressGang.Bot
             commands.RegisterCommands<HelpHandlers>();
             commands.RegisterCommands<AllianceHandlers>();
             commands.RegisterCommands<StaticGameHandlers>();
-            if (discordOptions.EnablePressGang)
-            {
-                commands.RegisterCommands<PressGangHandlers>();
-            }
+            commands.RegisterCommands<GoalHandlers>();
+            //if (discordOptions.EnablePressGang)
+            //{
+            //    commands.RegisterCommands<PressGangHandlers>();
+            //}
         }
 
         //private static void RegisterErrorHandler(DiscordClient discordClient, DiscordOptions discordOptions)

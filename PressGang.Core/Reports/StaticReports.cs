@@ -33,7 +33,6 @@ namespace PressGang.Core.Reports
                 }
                 response.Add(characterName);
             }
-            response.Sort();
 
             // Add prerequisite stats (though generally yellowStars will be the only one
             yellowStars = unlockAt;
@@ -54,9 +53,9 @@ namespace PressGang.Core.Reports
             return response;
         }
 
-        public static List<Character> LegendaryCharacters(PressGangContext context)
+        public static List<IPressGangRecord> LegendaryCharacters(PressGangContext context)
         {
-            List<Character> characters = new();
+            List<IPressGangRecord> characters = new();
             foreach (PrerequisiteCharacter prereqChar in context.PrerequisiteCharacters.ToList())
             {
                 context.Entry(prereqChar).Reference("Character").Load();

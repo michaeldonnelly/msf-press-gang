@@ -58,7 +58,9 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        [Command("unlock")]        
+        [Command("legends")]
+        [Aliases("legend")]
+        [Description("List all the legendary characters who have special unlock events")]
         public async Task AddCommand(CommandContext ctx)
         {
             try
@@ -74,20 +76,24 @@ namespace PressGang.Bot.Commands
 
         private Queue<string> LegendaryCharacters()
         {
-            List<Character> characters = StaticReports.LegendaryCharacters(PressGangContext);
-            List<string> names = new();
-            foreach (Character character in characters)
-            {
-                names.Add(character.Name);
-            }
-            names.Sort();
-
+            List<IPressGangRecord> characters = StaticReports.LegendaryCharacters(PressGangContext);
             Queue<string> response = new();
             response.Enqueue("Legendary characters");
-            foreach (string name in names)
-            {
-                response.Enqueue(" - " + name);
-            }
+            PressGang.Core.Reports.Format.AddListToQueue(characters, ref response, bullets: true, sort: true);
+
+
+            //List<string> names = new();
+            //foreach (Character character in characters)
+            //{
+            //    names.Add(character.Name);
+            //}
+            //names.Sort();
+
+            //Queue<string> response = new();
+            //foreach (string name in names)
+            //{
+            //    response.Enqueue(" - " + name);
+            //}
             return response;
         }
 
@@ -131,12 +137,10 @@ namespace PressGang.Bot.Commands
             if (characterLevel != null) { header += $" + level {characterLevel}"; }
             if (gearTier != null) { header += $" + gear tier {gearTier}"; }
             if (iso8ClassLevel != null) { header += $" + ISO-8 class level {iso8ClassLevel}"; }
-
             response.Enqueue(header);
-            foreach (string prereq in dependsOn)
-            {
-                response.Enqueue($"  - {prereq}");
-            }
+
+            Format.AddListToQueue(dependsOn, ref response, bullets: true, sort: true);
+
             if (hasRequiredChars)
             {
                 response.Enqueue("\r\n    * = required");

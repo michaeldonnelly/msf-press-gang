@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PressGang.Core.StaticModels
 {
-    public class Character
+    public class Character : IPressGangRecord
     {
         public Character(string name)
         {
