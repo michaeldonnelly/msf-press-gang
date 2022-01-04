@@ -21,7 +21,7 @@ namespace PressGang.Core.UserModels
 
         public override string ToString()
         {
-            return Name;
+            return $"{Name} for {User}";
         }
     }
 }
