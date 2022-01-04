@@ -20,7 +20,6 @@ namespace PressGang.Core.UserModels
             {
                 name += $" at {Rank} YS";
             }
-            name += $" for {User.UserName}";
             Name = name;
 
             if (priority != null)
