@@ -31,7 +31,6 @@ namespace PressGang.Bot.Commands
         [Command("list")]
         public async Task ListCommand(CommandContext ctx)
         {
-            Console.WriteLine("list");
             DiscordMember discordUser = ctx.Member;
             User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
             Queue<string> response = new();
@@ -120,7 +119,6 @@ namespace PressGang.Bot.Commands
         [Command("add")]
         public async Task AddCommand(CommandContext ctx, params string[] parameters)
         {
-            Console.WriteLine("add");
             try
             {
                 ParseParameters(parameters, out string characterName, out int? priority, out int? yellowStars, out bool top);
