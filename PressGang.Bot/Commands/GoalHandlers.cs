@@ -31,12 +31,19 @@ namespace PressGang.Bot.Commands
         [Command("list")]
         public async Task ListCommand(CommandContext ctx)
         {
-            DiscordMember discordUser = ctx.Member;
-            User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
-            Queue<string> response = new();
-            response.Enqueue($"Character goals for {user.UserName}");
-            AddGoalsToQueue(user, ref response);
-            await DiscordUtils.Respond(ctx, response);
+            try
+            {
+                DiscordMember discordUser = ctx.Member;
+                User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
+                Queue<string> response = new();
+                response.Enqueue($"Character goals for {user.UserName}");
+                AddGoalsToQueue(user, ref response);
+                await DiscordUtils.Respond(ctx, response);
+            }
+            catch(Exception ex)
+            {
+                await DiscordUtils.HandleError(ctx, ex);
+            }
         }
 
         private void AddGoalsToQueue(User user, ref Queue<string> queue)
