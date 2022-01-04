@@ -122,6 +122,7 @@ namespace PressGang.Bot.Commands
             try
             {
                 ParseParameters(parameters, out string characterName, out int? priority, out int? yellowStars, out bool top);
+                // TODO: actually use the yellow stars
 
                 DiscordMember discordUser = ctx.Member;
                 User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
