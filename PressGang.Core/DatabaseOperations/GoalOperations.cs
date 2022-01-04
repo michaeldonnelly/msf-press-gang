@@ -26,7 +26,6 @@ namespace PressGang.Core.DatabaseOperations
 
             SortedDictionary<int, IGoal> dictionary = GoalDict(context, user);
             RemoveGoal(context, dictionary, goaltoRemove);
-
         }
 
         private static SortedDictionary<int, IGoal> GoalDict(PressGangContext context, User user)
