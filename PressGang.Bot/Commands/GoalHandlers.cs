@@ -140,7 +140,29 @@ namespace PressGang.Bot.Commands
             {
                 await DiscordUtils.HandleError(ctx, ex);
             }
+        }
 
+        [Command("remove")]
+        [Aliases("delete", "del", "rm")]
+        public async Task RemoveCommand(CommandContext ctx, [RemainingText] string characterName)
+        {
+            try
+            {
+                DiscordMember discordUser = ctx.Member;
+                User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
+                Character character = LookUp.Character(PressGangContext, characterName);
+                GoalOperations.RemoveYellowStarGoal(PressGangContext, user, character);
+                Queue<string> response = new();
+                response.Enqueue("Removed " + character.Name);
+                response.Enqueue("\r\n");
+                response.Enqueue("Your character goals are now");
+                AddGoalsToQueue(user, ref response);
+                await DiscordUtils.Respond(ctx, response);
+            }
+            catch (Exception ex)
+            {
+                await DiscordUtils.HandleError(ctx, ex);
+            }
         }
     }
 }
