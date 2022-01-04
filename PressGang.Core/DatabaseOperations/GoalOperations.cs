@@ -13,10 +13,16 @@ namespace PressGang.Core.DatabaseOperations
         public static void AddYellowStarGoal(PressGangContext context, User user, Character character, bool top = false, int? priority = null)
         {
             YellowStarGoal yellowStarGoal = new(user, character);
+            SortedDictionary<int, IGoal> dictionary = GoalDict(context, user);
+            AddGoal(context, dictionary, yellowStarGoal, top, priority);
+        }
+
+        private static SortedDictionary<int, IGoal> GoalDict(PressGangContext context, User user)
+        {
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
             List<IGoal> goals = new(yellowStarGoals);
             SortedDictionary<int, IGoal> dictionary = GoalReports.GoalListToDictionary(goals);
-            AddGoal(context, dictionary, yellowStarGoal, top, priority);
+            return dictionary;
         }
 
         private static void AddGoal(PressGangContext context, SortedDictionary<int, IGoal> goals, IGoal goal, bool top = false, int? priority = null)
@@ -53,7 +59,11 @@ namespace PressGang.Core.DatabaseOperations
                 context.Remove(entry);
             }
             context.SaveChanges();
+
+
         }
+
+
 
 
 
