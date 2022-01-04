@@ -14,7 +14,7 @@ namespace PressGang.Core.DatabaseOperations
             YellowStarGoal yellowStarGoal = new(user, character);
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
             List<IGoal> goals = new(yellowStarGoals);
-            Dictionary<int, IGoal> dictionary = Format.GoalListToDictionary(goals);
+            Dictionary<int, IGoal> dictionary = GoalReports.GoalListToDictionary(goals);
             AddGoal(context, dictionary, yellowStarGoal, top, priority);
         }
 
