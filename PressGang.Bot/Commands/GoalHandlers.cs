@@ -20,7 +20,7 @@ using PressGang.Core.UserModels;
 namespace PressGang.Bot.Commands
 {
     [Group("goals")]
-    [Aliases("goal")]
+    [Aliases("goal", "g")]
     public class GoalHandlers : HandlerCore
     {
         public PressGangContext PressGangContext { private get; set; }
@@ -29,6 +29,7 @@ namespace PressGang.Bot.Commands
         { }
 
         [Command("list")]
+        [Aliases("ls")]
         public async Task ListCommand(CommandContext ctx)
         {
             try
