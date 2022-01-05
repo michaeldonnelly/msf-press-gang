@@ -54,7 +54,11 @@ namespace PressGang.Core.Reports
                     foreach (Opportunity opportunity in resource.Opportunities)
                     {
                         context.Entry(opportunity).Reference(o => o.Location).Load();
-                        farmAt += opportunity.Location.ToString() + " ";
+                        if (!String.IsNullOrWhiteSpace(farmAt))
+                        {
+                            farmAt += ", ";
+                        }
+                        farmAt += opportunity.Location.ToString();
                     }
                     if (!String.IsNullOrWhiteSpace(farmAt))
                     {
