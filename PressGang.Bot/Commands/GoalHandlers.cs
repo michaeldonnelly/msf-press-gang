@@ -51,7 +51,7 @@ namespace PressGang.Bot.Commands
             PressGangContext.Entry(user).Collection(u => u.YellowStarGoals).Load();
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
             List<IGoal> goals = new(yellowStarGoals);
-            GoalReports.GoalsToQueue(PressGangContext, goals, ref queue, farm: false);
+            GoalReports.GoalsToQueue(PressGangContext, goals, ref queue);
         }
 
         private void ParseParameters(string[] paramsString, out string characterName, out int? priority, out int? yellowStars, out bool top)
