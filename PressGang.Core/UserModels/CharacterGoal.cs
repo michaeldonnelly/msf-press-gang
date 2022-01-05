@@ -15,7 +15,7 @@ namespace PressGang.Core.UserModels
 
         public virtual Character Character { get; set; }
 
-        public Resource Resource(PressGangContext context)
+        new public Resource Resource(PressGangContext context)
         {
             return LookUp.Shard(context, Character);
         }
