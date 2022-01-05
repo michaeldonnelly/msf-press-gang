@@ -4,7 +4,7 @@ using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.UserModels
 {
-    public partial class Goal : IGoal
+    public abstract class Goal : IGoal
     {
         public Goal()
         {
@@ -20,11 +20,7 @@ namespace PressGang.Core.UserModels
 
         public int Priority { get; set; }
 
-        public Resource Resource(PressGangContext context)
-        {
-            // Each kind of goal needs to implement this for itself
-            throw new NotImplementedException();
-        }
+        public abstract Resource Resource(PressGangContext context);     
 
         public override string ToString()
         {
