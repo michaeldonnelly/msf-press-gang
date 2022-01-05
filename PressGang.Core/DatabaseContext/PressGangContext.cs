@@ -31,7 +31,7 @@ namespace PressGang.Core.DatabaseContext
 
         public DbSet<Location> Locations { get; set; }
         public DbSet<Resource> Resources { get; set; }
-        public DbSet<Opportunity> Opportunties { get; set; }
+        public DbSet<Opportunity> Opportunities { get; set; }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Priority> Priorities { get; set; }
