@@ -32,13 +32,25 @@ namespace PressGang.Bot.Commands
         [Aliases("ls")]
         public async Task ListCommand(CommandContext ctx)
         {
+            await ListGoals(ctx, false);
+        }
+
+        [Command("farm")]
+        [Aliases("f")]
+        public async Task FarmCommand(CommandContext ctx)
+        {
+            await ListGoals(ctx, true);
+        }
+
+        private async Task ListGoals(CommandContext ctx, bool farm)
+        { 
             try
             {
                 DiscordMember discordUser = ctx.Member;
                 User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
                 Queue<string> response = new();
                 response.Enqueue($"Character goals for {user.UserName}");
-                AddGoalsToQueue(user, ref response);
+                AddGoalsToQueue(user, ref response, farm);
                 await DiscordUtils.Respond(ctx, response);
             }
             catch(Exception ex)
@@ -47,12 +59,12 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        private void AddGoalsToQueue(User user, ref Queue<string> queue)
+        private void AddGoalsToQueue(User user, ref Queue<string> queue, bool farm = false)
         {
             PressGangContext.Entry(user).Collection(u => u.YellowStarGoals).Load();
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
             List<IGoal> goals = new(yellowStarGoals);
-            GoalReports.GoalsToQueue(PressGangContext, goals, ref queue);
+            GoalReports.GoalsToQueue(PressGangContext, goals, ref queue, farm: farm);
         }
 
         private void ParseParameters(string[] paramsString, out string characterName, out int? priority, out int? yellowStars, out bool top)
