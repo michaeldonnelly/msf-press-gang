@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PressGang.Core.DatabaseContext;
+using PressGang.Core.DatabaseOperations;
 using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
 
@@ -21,9 +22,18 @@ namespace PressGang.Core.Reports
             return dictionary;
         }
 
-        public static void GoalsToQueue(List<IGoal> goalsList, ref Queue<string> queue, bool numbered = true)
+        public static void GoalsToQueue(PressGangContext context, List<IGoal> goalsList, ref Queue<string> queue, bool numbered = true, bool farm = true)
         {
-            SortedDictionary<int, IGoal> goalsDict = GoalListToDictionary(goalsList);
+            SortedDictionary<int, IGoal> goalsDict;
+            try
+            {
+                goalsDict = GoalListToDictionary(goalsList);
+            }
+            catch (ArgumentException)
+            {
+                GoalOperations.CleanupGoals(context, goalsList);
+                goalsDict = GoalListToDictionary(goalsList);
+            }
             foreach (var entry in goalsDict)
             {
                 IGoal goal = entry.Value;
@@ -36,6 +46,17 @@ namespace PressGang.Core.Reports
                 {
                     line = goal.Name;
                 }
+                if (farm)
+                {
+                    string farmAt = "";
+                    Resource resource = goal.Resource(context);
+                    foreach (Opportunity opportunity in resource.Opportunities)
+                    {
+                        farmAt += opportunity.Location.ToString() + " ";
+                    }
+                    line += $" => {farmAt}";
+                }
+
                 queue.Enqueue(line);
             }
         }
