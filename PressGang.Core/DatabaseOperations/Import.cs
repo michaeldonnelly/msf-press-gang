@@ -44,9 +44,9 @@ namespace PressGang.Core.DatabaseOperations
             GenerateCharacterShards(context);
             Postcount(context, "Resources");
 
-            //Precount(context, "Opportunities");
-            //ImportFarms(context, dataDirectory);
-            //Postcount(context, "Opportunities");
+            Precount(context, "Opportunities");
+            ImportFarms(context, dataDirectory);
+            Postcount(context, "Opportunities");
 
             Precount(context, "PrerequisiteCharacters");
             ImportPrereqs(context, dataDirectory);
@@ -265,7 +265,7 @@ namespace PressGang.Core.DatabaseOperations
         {
             string path = dataDirectory + "/shard-locations.csv";
             List<FarmLocation> farmLocations = ReadFarmLocations(path);
-            Debug.WriteLine(farmLocations.Count);
+            //Debug.WriteLine(farmLocations.Count);
             AddFarms(context, farmLocations);
         }
 
@@ -364,7 +364,7 @@ namespace PressGang.Core.DatabaseOperations
                 {
                     try
                     {
-                        _ = context.Opportunties.First(o =>
+                        _ = context.Opportunities.First(o =>
                             (o.Resource == characterShard)
                             && (o.Location == location)
                         );
