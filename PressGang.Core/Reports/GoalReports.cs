@@ -47,11 +47,13 @@ namespace PressGang.Core.Reports
                     line = goal.Name;
                 }
                 if (farm)
-                {
+                {                    
                     string farmAt = "";
                     Resource resource = goal.Resource(context);
+                    context.Entry(resource).Collection(r => r.Opportunities).Load();
                     foreach (Opportunity opportunity in resource.Opportunities)
                     {
+                        context.Entry(opportunity).Reference(o => o.Location).Load();
                         farmAt += opportunity.Location.ToString() + " ";
                     }
                     line += $" => {farmAt}";
