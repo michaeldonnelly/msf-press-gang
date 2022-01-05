@@ -56,7 +56,10 @@ namespace PressGang.Core.Reports
                         context.Entry(opportunity).Reference(o => o.Location).Load();
                         farmAt += opportunity.Location.ToString() + " ";
                     }
-                    line += $" => {farmAt}";
+                    if (!String.IsNullOrWhiteSpace(farmAt))
+                    {
+                        line += $" => {farmAt}";
+                    }
                 }
 
                 queue.Enqueue(line);
