@@ -1,4 +1,5 @@
 ﻿using System;
+using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
 
 namespace PressGang.Core.UserModels
@@ -18,6 +19,12 @@ namespace PressGang.Core.UserModels
         public virtual User User { get; set; }
 
         public int Priority { get; set; }
+
+        public Resource Resource(PressGangContext context)
+        {
+            // Each kind of goal needs to implement this for itself
+            throw new NotImplementedException();
+        }
 
         public override string ToString()
         {
