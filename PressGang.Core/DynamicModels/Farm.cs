@@ -6,8 +6,11 @@ namespace PressGang.Core.DynamicModels
 {
     public class Farm
     {
-        public Farm()
+        public Farm(int priority, Resource resource, Opportunity opportunity)
         {
+            Priority = priority;
+            Resource = resource;
+            Opportunity = opportunity;
         }
 
         public int Priority { get; set; }
