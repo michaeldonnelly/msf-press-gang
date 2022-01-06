@@ -32,17 +32,17 @@ namespace PressGang.Bot.Commands
         [Aliases("ls")]
         public async Task ListCommand(CommandContext ctx)
         {
-            await ListGoals(ctx, false);
+            await ListGoals(ctx, false, true, false);
         }
 
         [Command("farm")]
         [Aliases("f")]
         public async Task FarmCommand(CommandContext ctx)
         {
-            await ListGoals(ctx, true);
+            await ListGoals(ctx, true, false, true);
         }
 
-        private async Task ListGoals(CommandContext ctx, bool farm)
+        private async Task ListGoals(CommandContext ctx, bool farm, bool numbered, bool includePrereqs)
         { 
             try
             {
@@ -50,7 +50,7 @@ namespace PressGang.Bot.Commands
                 User user = LookUp.User(PressGangContext, discordUser.Id, discordUser.Username);
                 Queue<string> response = new();
                 response.Enqueue($"Character goals for {user.UserName}");
-                AddGoalsToQueue(user, ref response, farm);
+                AddGoalsToQueue(user, ref response, numbered, farm, includePrereqs);
                 await DiscordUtils.Respond(ctx, response);
             }
             catch(Exception ex)
@@ -59,12 +59,31 @@ namespace PressGang.Bot.Commands
             }
         }
 
-        private void AddGoalsToQueue(User user, ref Queue<string> queue, bool farm = false)
+        private void AddGoalsToQueue(User user, ref Queue<string> queue, bool numbered = true, bool farm = false, bool includePrereqs = false)
         {
             PressGangContext.Entry(user).Collection(u => u.YellowStarGoals).Load();
             List<YellowStarGoal> yellowStarGoals = user.YellowStarGoals;
+            if (includePrereqs)
+            {
+                List<YellowStarGoal> combinedGoals = new();
+                foreach (YellowStarGoal yellowStarGoal in yellowStarGoals)
+                {
+                    combinedGoals.Add(yellowStarGoal);
+                    PressGangContext.Entry(yellowStarGoal).Reference(g => g.Character).Load();
+                    Character character = yellowStarGoal.Character;
+                    PressGangContext.Entry(character).Collection(c => c.PrerequisiteCharacters).Load();
+                    foreach (PrerequisiteCharacter prereq in character.PrerequisiteCharacters)
+                    {
+                        PressGangContext.Entry(prereq).Reference(pr => pr.DependsOn).Load();
+                        Character prereqCharacter = prereq.DependsOn;
+                        YellowStarGoal prereqGoal = new(null, prereqCharacter);
+                        combinedGoals.Add(prereqGoal);
+                    }
+                }
+                yellowStarGoals = combinedGoals;
+            }
             List<IGoal> goals = new(yellowStarGoals);
-            GoalReports.GoalsToQueue(PressGangContext, goals, ref queue, farm: farm);
+            GoalReports.GoalsToQueue(PressGangContext, goals, ref queue, numbered, farm);
         }
 
         private void ParseParameters(string[] paramsString, out string characterName, out int? priority, out int? yellowStars, out bool top)
