@@ -17,6 +17,7 @@ namespace PressGang.Core.ViewModels
         {
             Context = context;
             User = user;
+            Update();
         }
 
         public void Update()
@@ -26,11 +27,12 @@ namespace PressGang.Core.ViewModels
             Goals = new(User.YellowStarGoals);
             foreach (IGoal goal in Goals)
             {
-                Context.Entry(goal).Reference(g => g.Resource).Load();
-
-
-
-
+                Resource resource = goal.Resource(Context);
+                Context.Entry(resource).Collection(r => r.Opportunities).Load();
+                foreach (Opportunity opportunity in resource.Opportunities)
+                {
+                    Context.Entry(opportunity).Reference(o => o.Location).Load();
+                }
             }
         }
 
