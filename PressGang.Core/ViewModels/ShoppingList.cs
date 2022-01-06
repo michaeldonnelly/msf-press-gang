@@ -20,8 +20,14 @@ namespace PressGang.Core.ViewModels
             Update();
         }
 
+        private List<IGoal> Goals;
+
+        private Dictionary<LocationType, Dictionary<Opportunity, int>> Opportunities;
+
         public void Update()
         {
+            Opportunities = new();
+
             // Later, this will merge multiple kinds of goals
             Context.Entry(User).Collection(u => u.YellowStarGoals).Load();
             Goals = new(User.YellowStarGoals);
@@ -32,11 +38,20 @@ namespace PressGang.Core.ViewModels
                 foreach (Opportunity opportunity in resource.Opportunities)
                 {
                     Context.Entry(opportunity).Reference(o => o.Location).Load();
+                    AddOpportunity(opportunity, goal.Priority);
                 }
             }
         }
 
-        private List<IGoal> Goals;
+        private void AddOpportunity(Opportunity opportunity, int priority)
+        {
+            LocationType locationType = opportunity.Location.LocationType;
+            if (Opportunities[locationType] == null)
+            {
+                Opportunities.Add(locationType, new Dictionary<Opportunity, int>());
+            }
+            Opportunities[locationType].Add(opportunity, priority);
+        }        
 
         public List<Opportunity> Farm(LocationType locationType)
         {
@@ -44,11 +59,8 @@ namespace PressGang.Core.ViewModels
             return farm;
         }
 
-        /// <summary>
-        /// Get the shard the user wants most from the Heroes campaign
-        /// </summary>
         public Opportunity Heroes()
-        {
+        {            
             return null;
         }
 
@@ -59,5 +71,8 @@ namespace PressGang.Core.ViewModels
         {
             return null;
         }
+
+        
+
     }
 }
