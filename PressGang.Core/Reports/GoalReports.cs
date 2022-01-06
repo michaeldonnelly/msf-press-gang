@@ -70,27 +70,5 @@ namespace PressGang.Core.Reports
                 queue.Enqueue(line);
             }
         }
-
-        public static List<Target> GoalsToTargets(PressGangContext context, List<IGoal> goals)
-        {
-            List<Target> targets = new();
-            foreach (IGoal goal in goals)
-            {
-                Resource resource = goal.Resource(context);
-                context.Entry(resource).Collection(r => r.Opportunities).Load();
-                foreach (Opportunity opportunity in resource.Opportunities)
-                {
-                    context.Entry(opportunity).Reference(o => o.Location).Load();
-                    Target target = new()
-                    {
-                        Priority = goal.Priority,
-                        Goal = goal,
-                        Location = opportunity.Location
-                    };
-                    targets.Add(target);
-                }
-            }
-            return targets;
-        }
     }
 }
