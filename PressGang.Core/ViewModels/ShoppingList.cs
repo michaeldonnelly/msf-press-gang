@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PressGang.Core.DatabaseContext;
 using PressGang.Core.StaticModels;
 using PressGang.Core.UserModels;
+using System.Linq;
 
 namespace PressGang.Core.ViewModels
 {
@@ -16,6 +17,21 @@ namespace PressGang.Core.ViewModels
         {
             Context = context;
             User = user;
+        }
+
+        public void Update()
+        {
+            // Later, this will merge multiple kinds of goals
+            Context.Entry(User).Collection(u => u.YellowStarGoals).Load();
+            Goals = new(User.YellowStarGoals);
+            foreach (IGoal goal in Goals)
+            {
+                Context.Entry(goal).Reference(g => g.Resource).Load();
+
+
+
+
+            }
         }
 
         private List<IGoal> Goals;
