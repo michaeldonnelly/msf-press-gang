@@ -21,6 +21,7 @@
     <None Remove="DatabaseOperations\" />
     <None Remove="Reports\" />
     <None Remove="Import\" />
+    <None Remove="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="StaticModels\" />
@@ -29,6 +30,7 @@
     <Folder Include="DatabaseOperations\" />
     <Folder Include="Reports\" />
     <Folder Include="Import\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
