@@ -73,7 +73,7 @@ namespace PressGang.Core.ViewModels
 
         private Campaign VillainsCampaign()
         {
-            Campaign campaign = Context.Campaigns.Where(c => c.NickName == "Heroes").FirstOrDefault();
+            Campaign campaign = Context.Campaigns.Where(c => c.NickName == "Villains").FirstOrDefault();
             return campaign;
         }
 
