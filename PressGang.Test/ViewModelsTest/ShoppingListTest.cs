@@ -29,7 +29,7 @@ namespace PressGang.Test.ViewModelsTest
         }
 
         [TestMethod]
-        public void DailyObjectives()
+        public void DailyObjectivesReturnsSingleCharacter()
         {
             PressGangContext context = InMemoryDatabase.GetContext();
             User user = context.Users.Where(u => u.UserName == "Hawkshaw").FirstOrDefault();
@@ -44,16 +44,16 @@ namespace PressGang.Test.ViewModelsTest
             Opportunity o02 = shoppingList.Villains();
             Assert.IsNull(o02, "Opportunity from villians when none was set");
 
-            Character ultimateSpidey = LookUp.Character(context, "Miles");
-            GoalOperations.AddYellowStarGoal(context, user, ultimateSpidey);
+            Character danvers = LookUp.Character(context, "Captain Marvel");
+            GoalOperations.AddYellowStarGoal(context, user, danvers);
             shoppingList.Update();
             Opportunity o03 = shoppingList.Heroes();
             AssertOpportunity(o03, bucky, "Heroes");
 
-            GoalOperations.AddYellowStarGoal(context, user, ultimateSpidey, top: true);
+            GoalOperations.AddYellowStarGoal(context, user, danvers, top: true);
             shoppingList.Update();
             Opportunity o04 = shoppingList.Heroes();
-            AssertOpportunity(o04, ultimateSpidey, "Heroes");
+            AssertOpportunity(o04, danvers, "Heroes");
 
 
         }
