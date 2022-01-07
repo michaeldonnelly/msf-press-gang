@@ -46,7 +46,7 @@ namespace PressGang.Core.ViewModels
         private void AddOpportunity(Opportunity opportunity, int priority)
         {
             LocationType locationType = opportunity.Location.LocationType;
-            if (Opportunities[locationType] == null)
+            if (!Opportunities.ContainsKey(locationType))
             {
                 Opportunities.Add(locationType, new Dictionary<Opportunity, int>());
             }
