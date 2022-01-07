@@ -39,9 +39,22 @@ namespace PressGang.Test.ViewModelsTest
             GoalOperations.AddYellowStarGoal(context, user, bucky);
             ShoppingList shoppingList = new(context, user);
 
-            Opportunity opportunity = shoppingList.Heroes();
-            AssertOpportunity(opportunity, bucky, "Heroes");
-            
+            Opportunity o01 = shoppingList.Heroes();
+            AssertOpportunity(o01, bucky, "Heroes");
+            Opportunity o02 = shoppingList.Villains();
+            Assert.IsNull(o02, "Opportunity from villians when none was set");
+
+            Character ultimateSpidey = LookUp.Character(context, "Miles");
+            GoalOperations.AddYellowStarGoal(context, user, ultimateSpidey);
+            shoppingList.Update();
+            Opportunity o03 = shoppingList.Heroes();
+            AssertOpportunity(o03, bucky, "Heroes");
+
+            GoalOperations.AddYellowStarGoal(context, user, ultimateSpidey, top: true);
+            Opportunity o04 = shoppingList.Heroes();
+            AssertOpportunity(o04, ultimateSpidey, "Heroes");
+
+
         }
 
         private void AssertOpportunity(Opportunity opportunity, Character character, string campaignName)
