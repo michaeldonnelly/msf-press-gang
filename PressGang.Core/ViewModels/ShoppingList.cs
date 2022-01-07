@@ -51,17 +51,30 @@ namespace PressGang.Core.ViewModels
                 Opportunities.Add(locationType, new Dictionary<Opportunity, int>());
             }
             Opportunities[locationType].Add(opportunity, priority);
-        }        
+        }
 
-        public List<Opportunity> Farm(LocationType locationType)
+        public Dictionary<Opportunity, int> Farm(LocationType locationType)        
         {
-            List<Opportunity> farm = new();
+            Dictionary<Opportunity, int> farm = Opportunities[locationType];
+            farm.OrderBy(o => o.Value);
             return farm;
         }
 
+        private Campaign HeroesCampaign()
+        {
+            Campaign campaign = Context.Campaigns.Where(c => c.NickName == "Heroes").FirstOrDefault();
+            return campaign;
+        }
+
         public Opportunity Heroes()
-        {            
-            return null;
+        {
+            return FirstOpportunityForCampaign(HeroesCampaign());
+        }
+
+        private Campaign VillainsCampaign()
+        {
+            Campaign campaign = Context.Campaigns.Where(c => c.NickName == "Heroes").FirstOrDefault();
+            return campaign;
         }
 
         /// <summary>
@@ -69,10 +82,22 @@ namespace PressGang.Core.ViewModels
         /// </summary>
         public Opportunity Villains()
         {
-            return null;
+            return FirstOpportunityForCampaign(VillainsCampaign());
         }
 
-        
+        private Opportunity FirstOpportunityForCampaign(Campaign campaign)
+        {
+            foreach (KeyValuePair<Opportunity, int> kvp in Farm(LocationType.CampaignNode))
+            {
+                Opportunity opportunity = kvp.Key;
+                Location location = opportunity.Location;
 
+                if (location.Campaign == campaign)
+                {
+                    return opportunity;
+                }
+            }
+            return null;
+        }
     }
 }
