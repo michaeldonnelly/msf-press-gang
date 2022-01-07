@@ -53,10 +53,15 @@ namespace PressGang.Core.ViewModels
             Opportunities[locationType].Add(opportunity, priority);
         }
 
-        public Dictionary<Opportunity, int> Farm(LocationType locationType)        
+        public List<Opportunity> Farm(LocationType locationType)        
         {
-            Dictionary<Opportunity, int> farm = Opportunities[locationType];
-            farm.OrderBy(o => o.Value);
+            Dictionary<Opportunity, int> opportunitiesInMode = Opportunities[locationType];
+            IOrderedEnumerable<KeyValuePair<Opportunity, int>>farmPriority = opportunitiesInMode.OrderBy(o => o.Value);
+            List<Opportunity> farm = new();
+            foreach(KeyValuePair<Opportunity, int> entry in farmPriority)
+            {
+                farm.Add(entry.Key);
+            }
             return farm;
         }
 
@@ -87,11 +92,10 @@ namespace PressGang.Core.ViewModels
 
         private Opportunity FirstOpportunityForCampaign(Campaign campaign)
         {
-            foreach (KeyValuePair<Opportunity, int> kvp in Farm(LocationType.CampaignNode))
+            List<Opportunity> farm = Farm(LocationType.CampaignNode);
+            foreach (Opportunity opportunity in farm)
             {
-                Opportunity opportunity = kvp.Key;
                 Location location = opportunity.Location;
-
                 if (location.Campaign == campaign)
                 {
                     return opportunity;
