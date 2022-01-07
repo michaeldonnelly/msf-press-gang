@@ -51,6 +51,7 @@ namespace PressGang.Test.ViewModelsTest
             AssertOpportunity(o03, bucky, "Heroes");
 
             GoalOperations.AddYellowStarGoal(context, user, ultimateSpidey, top: true);
+            shoppingList.Update();
             Opportunity o04 = shoppingList.Heroes();
             AssertOpportunity(o04, ultimateSpidey, "Heroes");
 
@@ -60,7 +61,8 @@ namespace PressGang.Test.ViewModelsTest
         private void AssertOpportunity(Opportunity opportunity, Character character, string campaignName)
         {
             Assert.AreEqual(campaignName, opportunity.Location.Campaign.NickName);
-            Assert.AreSame(character, opportunity.Resource.Character);
+            Character opportunityCharacter = opportunity.Resource.Character;
+            Assert.AreSame(character, opportunityCharacter, $"{opportunityCharacter.Name} == {character.Name}");
         }
 
 
