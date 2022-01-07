@@ -55,7 +55,13 @@ namespace PressGang.Test.ViewModelsTest
             Opportunity o04 = shoppingList.Heroes();
             AssertOpportunity(o04, ultimateSpidey, "Heroes");
 
-
+            Character wasp = LookUp.Character(context, "Wasp");
+            GoalOperations.AddYellowStarGoal(context, user, wasp);
+            shoppingList.Update();
+            Opportunity o05 = shoppingList.Heroes();
+            AssertOpportunity(o05, ultimateSpidey, "Heroes");
+            Opportunity o06 = shoppingList.Villains();
+            AssertOpportunity(o06, wasp, "Villains");
         }
 
         private void AssertOpportunity(Opportunity opportunity, Character character, string campaignName)
