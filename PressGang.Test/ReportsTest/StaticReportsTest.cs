@@ -100,7 +100,7 @@ namespace PressGang.Test.ReportsTest
                 "Loki",
                 "Mordo",
                 "Nobu",
-                "Ronan The Accuser"
+                "Ronan the Accuser"
             };
 
             foreach (string expected in expectedList)
