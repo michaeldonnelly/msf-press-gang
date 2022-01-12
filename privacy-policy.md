@@ -5,5 +5,5 @@ If you tell PressGang your upgrade goals, it will create a user record for you. 
 - This application never correlates any information you share with it with any other information about you that may be available on the Internet or anywhere else.  
 - We will never share your individually identified data with anyone.  
 - We may in the future use statistical data aggregated across all users of PressGang.  
-- You can delete your user account and all data associated with it using a command in the bot.  
+- We will delete your user account and all data associated with it on request. 
 
