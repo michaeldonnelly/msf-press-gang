@@ -50,7 +50,7 @@ namespace PressGang.Bot
             //}
         }
 
-        public static Task Respond(CommandContext ctx, string title, string imageUrl)
+        public static Task RespondImage(CommandContext ctx, string title, string imageUrl)
         {
             DiscordEmbedBuilder embed = new()
             {
@@ -59,6 +59,17 @@ namespace PressGang.Bot
             };
             return ctx.RespondAsync(embed);
         }
+
+        public static Task Respond(CommandContext ctx, string responseString, string url)
+        {
+            DiscordEmbedBuilder embed = new()
+            {
+                Title = responseString,
+                Url = url
+            };
+            return ctx.RespondAsync(embed);
+        }
+
 
         public static string MonospaceUnderline(int length)
         {

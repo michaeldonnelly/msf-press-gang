@@ -31,12 +31,20 @@ namespace PressGang.Bot.Commands
             {
                 foreach (RaidLane lane in raidLanes)
                 {
-                    string title = $"{_options.AllianceName} raid lanes for {lane.Raid}";
+                    string response = $"{_options.AllianceName} raid lanes for {lane.Raid}";
                     if (lane.Level > 0)
                     {
-                        title += $" level {lane.Level}";
+                        response += $" level {lane.Level}";
                     }
-                    await DiscordUtils.Respond(ctx, title, lane.MapUrl);
+
+                    if (lane.IsImage)
+                    {
+                        await DiscordUtils.RespondImage(ctx, response, lane.Url);
+                    }
+                    else
+                    {
+                        await DiscordUtils.Respond(ctx, response, lane.Url);
+                    }
                 }
             }
         }

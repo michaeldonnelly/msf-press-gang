@@ -39,6 +39,7 @@ namespace PressGang.Bot
     {
         public string Raid { get; set; }
         public int Level { get; set; }
-        public string MapUrl { get; set; }
+        public string Url { get; set; }
+        public Boolean IsImage { get; set; }
     }
 }
