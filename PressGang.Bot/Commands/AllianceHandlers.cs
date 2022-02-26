@@ -21,6 +21,7 @@ namespace PressGang.Bot.Commands
             [Description("Which raid; leave blank for all")] string raid = "all",
             [Description("Which level of the raid; leave blank for all")] int level = 0)
         {
+            raid = NormalizeRaidName(raid);
             List<RaidLane> raidLanes = _options.AllianceData.Maps.RaidLanes.Where(rl => RaidLaneMatchesQuery(rl, raid, level)).ToList();
             if (raidLanes.Count == 0)
             {
@@ -47,6 +48,27 @@ namespace PressGang.Bot.Commands
                     }
                 }
             }
+        }
+
+        private string NormalizeRaidName(string raid)
+        {
+            raid = raid.ToLower();
+            string startsWith = raid.Substring(0, 1);
+            switch (startsWith)
+            {
+                case "u":
+                    return "ultimus";
+                case "a":
+                    return "alpha";
+                case "b":
+                    return "beta";
+                case "c":
+                case "g":
+                    return "gamma";
+                default:
+                    return "all";
+            }
+
         }
 
         private bool RaidLaneMatchesQuery(RaidLane raidLane, string raid, int level)
