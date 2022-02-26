@@ -24,7 +24,7 @@ namespace PressGang.Bot.Commands
             List<RaidLane> raidLanes = _options.AllianceData.Maps.RaidLanes.Where(rl => RaidLaneMatchesQuery(rl, raid, level)).ToList();
             if (raidLanes.Count == 0)
             {
-                string response = "We don't have that lane defined yet.";
+                string response = "We don't have that lane defined yet. Try searching less specifically (i.e. leave out the level number).";
                 await DiscordUtils.Respond(ctx, response);
             }
             else
