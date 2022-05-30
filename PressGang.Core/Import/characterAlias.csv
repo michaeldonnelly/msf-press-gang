@@ -1,213 +1,227 @@
 CharacterKey,Alias
-GhostSpider,ghostspider, gs, ghosts, ghost spider
-ScarletSpider,scarletspider, scarlets, scarlet spider
-SpiderPunk,spiderpunk, punk, spiderp, spider punk
-Magik,magik, mag
-Coulson,agent coulson, coulson, agent, agent c, acoulson, agc, aco, coul, cou, phil, phil coulson, agentcoulson, son of coul
-AdamWarlock,adamwarlock, adam warlock, adam, warlock, aw, him, magus
-AimDmg_Speed,a.i.m. assaulter, aim assaulter, assaulter, a assaulter, aimassaulter, aim assault, aimass, aim ass, aimdmg_speed, aa, aima, aass, a.i.m.assaulter, aimassault
-AimControl_Infect,a.i.m. infector, aim infector, infector, ai, aiminfector, infect, infecto, aim infecto, aimi, inf, aiminf, a infector, aimcontrol_infect, aim inf, aim infestor, aim infest, infest, infestor, a.i.m.infector
-AimDmg_Offense,a.i.m. monstrosity, monstrosity, aim monstrosity, aimm, monster, monst, amonstrosity, amonst, aimdmg_offense, amo, monstr, mons, mons, a.i.m.monstrosity
-AimSupport_Heal,a.i.m. researcher, aim researcher, researcher, aimresearcher, aim research, research, ar, aimr, aimres, aimsupport_heal, a.i.m.researcher
-AimTank_Taunt,a.i.m. security, aim security, as, aimsec, a sec, asec, a security, aimsecurity, asecurity, aimtank_taunt, security, sec, aim sec, aims, a.i.m.security
-AmericaChavez,america chavez, americachavez, america, ac, chavez
-AntiVenom,anti, av, antivenom, anti-venom, anti venom, aven
-AntMan,ant-man, antman, ant man, ant, am
+AdamWarlock,adam, adam warlock, adamwarlock, aw, him, magus, warlock
+AgathaHarkness,agatha, agatha harkness, agathaharkness, agnes, ah, harkness
+AimControl_Infect,a infector, a.i.m. infector, a.i.m.infector, ai, aim inf, aim infecto, aim infector, aim infest, aim infestor, aimcontrol_infect, aimi, aiminf, aiminfector, inf, infect, infecto, infector, infest, infestor
+AimDmg_Offense,a.i.m. monstrosity, a.i.m.monstrosity, aim monstrosity, aimdmg_offense, aimm, amo, amonst, amonstrosity, mons, monst, monster, monstr, monstrosity
+AimDmg_Speed,a assaulter, a.i.m. assaulter, a.i.m.assaulter, aa, aass, aim ass, aim assault, aim assaulter, aima, aimass, aimassault, aimassaulter, aimdmg_speed, assaulter
+AimSupport_Heal,a.i.m. researcher, a.i.m.researcher, aim research, aim researcher, aimr, aimres, aimresearcher, aimsupport_heal, ar, research, researcher
+AimTank_Taunt,a sec, a security, a.i.m. security, a.i.m.security, aim sec, aim security, aims, aimsec, aimsecurity, aimtank_taunt, as, asec, asecurity, sec, security
+AmericaChavez,ac, america, america chavez, americachavez, chavez
+AntiVenom,anti, anti venom, anti-venom, antivenom, av, aven
+AntMan,am, ant, ant man, ant-man, antman
+BaronMordo,baron, baron mordo, baronmordo, bm, mor, mord, mordo
 Beast,beast, bst, hank
-Bishop,bishop, bish, lucas, lucas bishop
-BlackBolt,black bolt, blackbolt, bb, blackb, bbolt, bolt
-BlackPanther,blackpanther, bp, black panther, panther, blackp
-BlackWidow,black widow, widow, bw, blackw, natasha, nat, blackwidow
-Blob,blob, bl, blo
-Bullseye,bullseye, be, bull, bulls
-Cable,cable, cab
-CaptainAmerica,captain america, cap america, cap, ca, captain, cap murica, capa, cap a, steve, captainamerica
-CaptainMarvel,captain marvel, cm, captainmarvel, capmarvel, cap marvel, cm, cap m, capm, marvel, carol, cd
-Carnage,carnage, carn, car
-Colossus,colossus, col, colos
-ColleenWing,colleenwing, colleen, coleen, cw, wing
-CorvusGlaive,corvus glaive, corvusglaive, corvus, glaive, cg, corv, glai, cor, corvos, glai, glayve, corvusg, cog, cglaive, corgusg
-Cloak,cloak, demon of darkness, tyrone johnson, tyrone, johnson
-Crossbones,crossbones, xbones, xb, cb, crossbone, xbone, cbone, cbones, crossb
-Crystal,crystal, krystal, crys, cryst, cristal, kristal
-CullObsidian,cull obsidian, cull, co, obsidian, cullo, cullobsidian, cool, cu, cul, obs, obsid, obsi, obsidi
-Cyclops,cyclops, cyc, cycl, cyclop, syke, cyke, scott
-Daredevil,daredevil, dd, dared, devil, dare, ddevil
-Dagger,dagger, lady light, tandy bowen, tandy, bowen
-DarkPhoenix,dark phoenix, darkphoenix, darkp, dphoenix, d p, dph, dpho, d phoenix, dpheonix, darkpheonix, dark pheonix, dphx, d phx, dark phx
-Deadpool,deadpool, dp, deadp, dpool, pool, merc with a mouth, wade, wade wilson
-Deathpool,deathpool, death, mortem, dhp
-DoctorOctopus,doctoroctopus, doctor octopus, docock, doc ock, ock, dococ, dr oct, doc-oc, octo
-DoctorStrange,doctor strange, dr strange, strange, doctor, dr, ds, dr. strange, doc, doc strange, doctorstrange, drstrange
+Bishop,bish, bishop, lucas, lucas bishop
+BlackBolt,bb, bbolt, black bolt, blackb, blackbolt, bolt
+BlackPanther,black panther, blackp, blackpanther, bp, panther
+BlackWidow,black widow, blackw, blackwidow, bw, nat, natasha, widow
+Blob,bl, blo, blob
+Bullseye,be, bull, bulls, bullseye
+Cable,cab, cable
+CaptainAmerica,ca, cap, cap a, cap america, cap murica, capa, captain, captain america, captainamerica, steve
+CaptainMarvel,cap m, cap marvel, capm, capmarvel, captain marvel, captainmarvel, carol, cd, cm, marvel
+Carnage,car, carn, carnage
+Cloak,cloak, demon of darkness, johnson, tyrone, tyrone johnson
+ColleenWing,coleen, colleen, colleenwing, cw, wing
+Colossus,col, colos, colossus
+CorvusGlaive,cg, cglaive, cog, cor, corgusg, corv, corvos, corvus, corvus glaive, corvusg, corvusglaive, glai, glaive, glayve
+Coulson,aco, acoulson, agc, agent, agent c, agent coulson, agentcoulson, cou, coul, coulson, phil, phil coulson, son of coul
+Crossbones,cb, cbone, cbones, crossb, crossbone, crossbones, xb, xbone, xbones
+Crystal,cristal, crys, cryst, crystal, kristal, krystal
+CullObsidian,co, cool, cu, cul, cull, cull obsidian, cullo, cullobsidian, obs, obsi, obsid, obsidi, obsidian
+Cyclops,cyc, cycl, cyclop, cyclops, cyke, scott, syke
+Dagger,bowen, dagger, lady light, tandy, tandy bowen
+Daredevil,dare, dared, daredevil, dd, ddevil, devil
+DarkPhoenix,d p, d phoenix, d phx, dark pheonix, dark phoenix, dark phx, darkp, darkpheonix, darkphoenix, dph, dpheonix, dpho, dphoenix, dphx
+Dazzler,daz, dazzler, disco, tdd
+Deadpool,deadp, deadpool, dp, dpool, merc with a mouth, pool, wade, wade wilson
+Deathpool,death, deathpool, dhp, mortem
+DoctorOctopus,doc ock, doc-oc, dococ, docock, doctor octopus, doctoroctopus, dr oct, ock, octo
+DoctorStrange,doc strange, docs, doctor strange, doctorstrange, dr strange, dr. strange, drstrange, ds, strange
+DoctorVoodoo,doc voodoo, doctor voodoo, doctorvoodoo, docv, dr voodoo, dr. voodoo, drvoodoo, dv, voodoo
 Domino,dom, domino
-Doom,dr doom, ddoom, doom, dr. doom, drdoom
-Dormammu,dormammu, dor, dorm, dormie, mormammu, the dread one, dormy, doormat, daddy dormy, dormouse, doorman, flyx
-Drax,drax, dra, drx
-EbonyMaw,ebony maw, ebonymaw, ebony, maw, emaw, em, ebm, the maw
+Doom,ddoom, doom, dr doom, dr. doom, drdoom
+Dormammu,daddy dormy, doorman, doormat, dor, dorm, dormammu, dormie, dormouse, dormy, flyx, mormammu, the dread one
+Drax,dra, drax, drx
+EbonyMaw,ebm, ebony, ebony maw, ebonymaw, em, emaw, maw, the maw
+Echo,echo, lopez, maya, maya lopez
 Electro,electro, francine frye
-Elektra,elektra, elek, ele, el, electra, elec, elecktra
-ElsaBloodstone,elsa bloodstone, elsa, eb, bloodstone, blood, elsabloodstone
-EmmaFrost,emma frost, emma, frost, ef
-Thanos,thanos, than, tha, thanatos
-Falcon,falcon, fal, falc
-Gamora,gamora, gam, gams, gamms, gamo, gamor
-Ghost,ghost, ghos, gst
-GhostRider,ghost rider, ghostrider, rider, gr, ghr
-Graviton,graviton, grav, gravi, gravitron, groovytron, groovitron, grooviton, groove, groovy, groovyton, gravy
-UltGreenGoblin,green goblin, greengoblin, gg, goblin, greeng, green, greengob, gob, ultgreengoblin
-Groot,groot, groo, i am groot, tree
-HandDmg_Unbuff,hand archer, archer, harcher, handarcher, handdmg_unbuff, har
-HandControl_HealBlock,hand assassin, hass, has, hassassin, assassin, handass, hand ass, h ass, handcontrol_healblock, handassassin
-HandDmg_Bonus,hand blademaster, blademaster, handblademaster, hb, hbm, bladem, handblade, hblade, handdmg_bonus
-HandTank_Stealth,hand sentry, sentry, hs, hands, hsentry, handsentry, handsent, handsen, sent, sentr, handtank_stealth
-HandSupport_Heal,hand sorceress, hand sorc, sorc, sorceress, sorce, sorcere, haso, hso, handsupport_heal, hsorc, handsorceress, handsorc
-Hawkeye,hawkeye, he, hawk, hawki, clint, barton
-Heimdall,heimdall, heimdal, heim, heimd
-Hela,hela, hel, hella
-Hulk,hulk, hul
-HumanTorch,human torch, torch, ht, johnny, johnny storm, huto, humantorch
-HydraTank_Taunt,hydra armored guard, hag, hydraarmoredguard, armored guard, guard, armored, hydra guard, hydra ag, hydratank_taunt, h ag, armoredguard
-HydraDmg_AoE,hydra grenadier, hg, hyg, hygr, gren, grenadier, grenade, hydradmg_aoe, hydragrenadier
-HydraDmg_Buff,hydra rifle trooper, hrt, rt, hydra trooper, htrooper, rifle trooper, hydradmg_buff, hydrarifletrooper
-HydraSupport_Heal,hydra scientist, hsc, hydsc, h scientist, h sc, hydrasupport_heal, hydrascientist, hsci, hysci, hysc
-HydraDmg_Single,hydra sniper, hsniper, h sniper, hy sniper, hyd sniper, hsn, hysn, hydradmg_single, hydrasniper
-Iceman,iceman, ice, icm, drake, frosty, bobby
-Ikaris,ikaris, ika, ike, ike harris, prime eternal
-InvisibleWoman,invisible woman, iw, invisiblewoman, sue, invisible, iwoman, invisiblew, invis, invisib, susan, woman
-IronFist,iron fist, if, ironf, iron f, ironfist, ifist, fist
-Ironheart,ironheart, ih, riri, ironh, iheart, iron heart
-IronMan,iron man, ironman, im, ironm, iman, stark, tony
-JessicaJones,jessica jones, jj, jessica, jessicajones, jones, jess, jessicaj
-Jubilee,jubilee, jub, jubs, jubes, jubilation, lee, wondra, firecracker
-Juggernaut,juggernaut, jug, jugg, juggs, jugs, jugger, jugernaut, juggernnaut
-Karnak,karnak, kar, karn, karna, carnak, carnac, karnac
-Sybil,kestrel, sybil, kes, kest, k$
-Killmonger,killmonger, km, killm, kill, monger, killmong
-Kingpin,kingpin, kp, kingp, kpin, fisk, wilson fisk
-KittyPryde,kittypryde, kitty pryde, kpryde, kitty pride, kittypride, kitypryde, pryde, kate
-Korath,korath, korath the pursuer, kor, ktp, koraththepursuer, kora, korat
-KreeDmg_Offense,kree cyborg, cyborg, kc, kreec, kcyborg, kreecyborg, kreedmg_offense
-KreeControl_Assist,kree noble, noble, knoble, kn, kreen, kreenoble, nobl, kreecontrol_assist
-KreeSupport_HoT,kree oracle, oracle, k oracle, kreeo, koracle, ko, kreesupport_hot, kreeoracle
-KreeDmg_Speed,kree reaper, reaper, kreaper, kreeper, creeper, kreeaper, kr, reap, kreedmg_speed, kreereaper
-KreeTank_Counter,kree royal guard, krg, royal guard, royalguard, kreeroyalguard, k royal guard, kree guard, kreetank_counter, royal
-LadyDeathstrike,ladydeathstrike, lady deathstrike, lady, deathstrike, ld, lds, yuriko oyama, yuriko, oyama, strikes, lady dee
-Loki,loki, lok
-LokiMinion,lokim, lokmin, loki minion, lm
-Longshot,longshot, long, ls
-LukeCage,luke cage, lukecage, lc, cage, lukec, luke
-MBaku,m'baku, mbaku, baku, mba, m baku, mb, bak, mbak
-Magneto,magneto, mag, mags, magenta, mageto, magn, magnet
-MariaHill,maria hill, maria, hill, mh
-Mantis,mantis, mant
-MercTank_Taunt,mercenary bodyguard, mbg, merc bodyguard, bodyguard, merc bg, kp summon, merctank_taunt, mercenarybodyguard
-MercSupport_Buffs,mercenary lieutenant, merc lieutenant, mlt, lieutenant, merc lt, merclt, ml, mercsupport_buffs, lt, mercenarylieutenant
-MercTank_Debuff,mercenary riot guard, riot guard, mrg, merc riot guard, merc rg, merc guard, m riot guard, merctank_debuff, mercenaryriotguard, riot
-MercDmg_Single,mercenary sniper, merc sniper, msn, msniper, mercsn, m sniper, mercdmg_single, sniper, mercsniper, mercenarysniper
-MercDmg_General,mercenary soldier, merc soldier, mso, soldier, mercsoldier, mercenarysoldier, msoldier, m soldier, mercdmg_general
-Minerva,minn-erva, minn, minnerva, minerva, me, min, merva, minnie, minny
-BaronMordo,mordo, baron mordo, baronmordo, mor, mord, baron, bm
-MistyKnight,mistyknight, misty, mik, knight
-Moondragon,moondragon, heather douglas, heather, md, baldy
-MoonKnight,moonknight, mk, moon, marc spector, marc, spector
-MrFantastic,mister fantastic, fantastic, mrf, mr, mister, mf, reed, misterfantastic, fan, mfan, mrfan, mr fantastic, mr. fantastic, mr. fan, mr.fantastic
-MrSinister,mr. sinister, mr sinister, mrs, mr.s, mister sinister, sinister, msin, mrsin, mr s, mr. s, sin, sinis, mistersinister, mrsinister
-MsMarvel,ms. marvel, ms marvel, mm, msm, ms. m, kk, mmarvel, miss marvel, missmarvel, kamala, khan, kamala khan, ms, msmarvel, ms.m, ms.marvel
-MultipleMan,multipleman, multiple, mum, multi, jamie madrox, jamie, madrox
-Mysterio,mysterio, myste, myster, misterio
-MysterioMinion,mysterio minion, mystmin, mmin
-Mystique,mystique, mysti, mystiq, mystik, mystike, mistique
-Namor,namor, nam, namo
-Nebula,nebula, nebs, neb, nebbs, nebu, nebul
-Negasonic,nega, warhead, teenage, ntw
-NickFury,nick fury, nickfury, fury, nf, nfury, nick, nickf, furry
-S_ShieldTank_Stun,fury tank
-S_ShieldSupport_Stealth,fury op
-NightNurse,night nurse, nn, nurse, nnurse, nightn, night, night n, nightnurse
-Nobu,nobu, kagenobu
+Elektra,el, ele, elec, elecktra, electra, elek, elektra
+ElsaBloodstone,blood, bloodstone, eb, elsa, elsa bloodstone, elsabloodstone
+EmmaFrost,ef, emma, emma frost, frost
+EmpoweredGamora,eg, egamora, empowered gamora, empoweredgamora, gamora e, gamora emp, gamora empowered, gamorae, gamoraempowered, ge, gemp, gempowered
+EmpoweredThanos,e thanos, emp, emp t, emp thanos, empowered, empowered thanos, empoweredthanos, empthanos, et, ethanos, stoned thanos, stonedthanos, te, temp, thanos e, thanos emp, thanos empowered, thanose, thanosempowered
+Falcon,fal, falc, falcon
+Fantomex,fantomex, fm, fmex, mex
+Gambit,gamb, gambit, le diable blanc, ragin cajun, remy, tauna
+Gamora,gam, gamms, gamo, gamor, gamora, gams
+Ghost,ghos, ghost, gst
+GhostRider,ghost rider, ghostrider, ghr, gr, rider
+GhostSpider,ghost spider, ghosts, ghostspider, gs, gwen
+Graviton,grav, gravi, graviton, gravitron, gravy, groove, grooviton, groovitron, groovy, groovyton, groovytron
+Greg,greg, ua, unas, undead, undead asgardian, undeadasgardian
+Groot,groo, groot, i am groot, tree
+HandControl_HealBlock,assassin, h ass, hand ass, hand assassin, handass, handassassin, handcontrol_healblock, has, hass, hassassin
+HandDmg_Bonus,bladem, blademaster, hand blademaster, handblade, handblademaster, handdmg_bonus, hb, hblade, hbm
+HandDmg_Unbuff,archer, hand archer, handarcher, handdmg_unbuff, har, harcher
+HandSupport_Heal,hand sorc, hand sorceress, handsorc, handsorceress, handsupport_heal, haso, hso, hsorc, sorc, sorce, sorcere, sorceress
+HandTank_Stealth,hand sentry, hands, handsen, handsent, handsentry, handtank_stealth, hs, hsentry, sent, sentr, sentry
+Hawkeye,barton, clint, hawk, hawkeye, hawki, he
+Heimdall,heim, heimd, heimdal, heimdall
+Hela,hel, hela, hella
+Hulk,hul, hulk
+HumanTorch,ht, human torch, humantorch, huto, johnny, johnny storm, torch
+HydraDmg_AoE,gren, grenade, grenadier, hg, hydra grenadier, hydradmg_aoe, hydragrenadier, hyg, hygr
+HydraDmg_Buff,hrt, htrooper, hydra rifle trooper, hydra trooper, hydradmg_buff, hydrarifletrooper, rifle trooper, rt
+HydraDmg_Single,h sniper, hsn, hsniper, hy sniper, hyd sniper, hydra sniper, hydradmg_single, hydrasniper, hysn
+HydraSupport_Heal,h sc, h scientist, hsc, hsci, hydra scientist, hydrascientist, hydrasupport_heal, hydsc, hysc, hysci
+HydraTank_Taunt,armored, armored guard, armoredguard, guard, h ag, hag, hydra ag, hydra armored guard, hydra guard, hydraarmoredguard, hydratank_taunt
+Iceman,bobby, drake, frosty, ice, iceman, icm
+Ikaris,ika, ikaris, ike, ike harris, prime eternal
+InvisibleWoman,invis, invisib, invisible, invisible woman, invisiblew, invisiblewoman, iw, iwoman, sue, susan, woman
+IronFist,fist, if, ifist, iron f, iron fist, ironf, ironfist
+Ironheart,ih, iheart, iron heart, ironh, ironheart, riri
+IronMan,im, iman, iron man, ironm, ironman, stark, tony
+JessicaJones,jess, jessica, jessica jones, jessicaj, jessicajones, jj, jones
+Jubilee,firecracker, jub, jubes, jubilation, jubilee, jubs, lee, wondra
+Juggernaut,jug, jugernaut, jugg, jugger, juggernaut, juggernnaut, juggs, jugs
+Karnak,carnac, carnak, kar, karn, karna, karnac, karnak
+KateBishop,hawkette, kate, kate bishop, katebishop, kb, lady hawkeye, lady hawkguy
+Killmonger,kill, killm, killmong, killmonger, km, monger
+Kingpin,fisk, kingp, kingpin, kp, kpin, wilson fisk
+KittyPryde,kitty pride, kitty pryde, kittypride, kittypryde, kitypryde, kpryde, pryde
+Korath,kor, kora, korat, korath, korath the pursuer, koraththepursuer, ktp
+KreeControl_Assist,kn, knoble, kree noble, kreecontrol_assist, kreen, kreenoble, nobl, noble
+KreeDmg_Offense,cyborg, kc, kcyborg, kree cyborg, kreec, kreecyborg, kreedmg_offense
+KreeDmg_Speed,creeper, kr, kreaper, kree reaper, kreeaper, kreedmg_speed, kreeper, kreereaper, reap, reaper
+KreeSupport_HoT,k oracle, ko, koracle, kree oracle, kreeo, kreeoracle, kreesupport_hot, oracle
+KreeTank_Counter,k royal guard, kree guard, kree royal guard, kreeroyalguard, kreetank_counter, krg, royal, royal guard, royalguard
+LadyDeathstrike,deathstrike, lady, lady deathstrike, lady dee, ladydeathstrike, ld, lds, oyama, strikes, yuriko, yuriko oyama
+Loki,lok, loki
+LokiMinion,lm, loki minion, lokim, lokmin
+Longshot,long, longshot, ls
+LukeCage,cage, lc, luke, luke cage, lukec, lukecage
+MadelynePryor,anodyne, goblin queen, gq, lynne, maddy, madelyne, madelynepryor, mp, pryor
+Magik,mag, magik
+Magneto,mag, magenta, mageto, magn, magnet, magneto, mags
+Mantis,mant, mantis
+MariaHill,hill, maria, maria hill, mh
+MBaku,bak, baku, m baku, m'baku, mb, mba, mbak, mbaku
+MercDmg_General,m soldier, merc soldier, mercdmg_general, mercenary soldier, mercenarysoldier, mercsoldier, mso, msoldier, soldier
+MercDmg_Single,m sniper, merc sniper, mercdmg_single, mercenary sniper, mercenarysniper, mercsn, mercsniper, msn, msniper, sniper
+MercSupport_Buffs,lieutenant, lt, merc lieutenant, merc lt, mercenary lieutenant, mercenarylieutenant, merclt, mercsupport_buffs, ml, mlt
+MercTank_Debuff,m riot guard, merc guard, merc rg, merc riot guard, mercenary riot guard, mercenaryriotguard, merctank_debuff, mrg, riot, riot guard
+MercTank_Taunt,bodyguard, kp summon, mbg, merc bg, merc bodyguard, mercenary bodyguard, mercenarybodyguard, merctank_taunt
+Minerva,me, merva, min, minerva, minn, minn-erva, minnerva, minnie, minny
+MistyKnight,knight, mik, misty, mistyknight
+Moondragon,baldy, heather, heather douglas, md, moondragon
+MoonKnight,marc, marc spector, mk, moon, moonknight, spector
+Morbius,michael, morbius, tlv, vampire
+MorganLeFay,fay, le fay, lefay, mlf, morgaine, morgan, morgana, morgana le fae, morganlefay
+MrFantastic,fan, fantastic, mf, mfan, mister, mister fantastic, misterfantastic, mr, mr fantastic, mr. fan, mr. fantastic, mr.fantastic, mrf, mrfan, reed
+MrSinister,mister sinister, mistersinister, mr s, mr sinister, mr. s, mr. sinister, mr.s, mrs, mrsin, mrsinister, msin, sin, sinis, sinister
+MsMarvel,kamala, kamala khan, khan, kk, miss marvel, missmarvel, mm, mmarvel, ms, ms marvel, ms. m, ms. marvel, ms.m, ms.marvel, msm, msmarvel
+MultipleMan,jamie, jamie madrox, madrox, multi, multiple, multipleman, mum
+Mysterio,misterio, myste, myster, mysterio
+MysterioMinion,mmin, mysterio minion, mystmin
+Mystique,mistique, mysti, mystik, mystike, mystiq, mystique
+Namor,nam, namo, namor
+Nebula,neb, nebbs, nebs, nebu, nebul, nebula
+Negasonic,nega, ntw, teenage, warhead
+NickFury,furry, fury, nf, nfury, nick, nick fury, nickf, nickfury
+NicoMinoru,minoru, nico, nico minoru, nicominoru, sister grimm
+NightNurse,night, night n, night nurse, nightn, nightnurse, nn, nnurse, nurse
+Nobu,kagenobu, nobu
+Okoye,koye, ok, oko, okoy, okoye
+OmegaRed,arkady, arkady rossovich, omega, omega red, omegared, or, red death, rossovich
+Phoenix,jean, jean grey, jeangrey, ph, phenix, pheonix, pho, phoe, phoen, phoenix, phonix, phx
+PhylaVell,martyr, phy, phyla, phyla-vell, phylavell, pv, vell
+Polaris,dane, lorna, lorna dane, pol, polaris
+ProximaMidnight,midnight, pm, pmidnight, pro, prox, proxima, proxima midnight, proximam, proximamidnight, proxy
+Psylocke,ps, psy, psyl, psylo, psyloc, psylock, psylocke, psylok
+Punisher,pun, punish, punisher
+Pyro,py, pyo, pyr, pyro
+Quake,q, qu, qua, quak, quake
+RavagerDmg_AoE,boom, boomer, ok boomer, okboomer, rav boomer, ravager boomer, ravagerboomer, ravagerdmg_aoe, ravboomer, rbo
+RavagerSupport_Heal,r stitcher, rav stitcher, ravager stitch, ravager stitcher, ravagerstitcher, ravagersupport_heal, rstitcher, stitch, stitcher
+RavagerTank_Taunt,brui, bruis, bruise, bruiser, rav bruiser, ravager bruiser, ravagerbruiser, ravagertank_taunt, ravbr, rbr
+RedGuardian,red guard, red guardian, redguard, rg
+RedSkull,r skull, red s, red skull, reds, redsk, redskull, rs, skull
+Rescue,pep, pepp, pepper, res, resc, rescue
+Rhino,rhi, rhin, rhino, rhyno
+RocketRaccoon,rabbit, rocket, rocket raccoon, rocketraccoon, rr
+Ronan,accuser, ron, rona, ronan, ronan the accuser, ronantheaccuser, ronn, rta
 S_HandDmg_Bonus,nobu blade
 S_HandDmg_Unbuff,nobu archer
-Okoye,okoye, oko, okoy, koye, ok
-OmegaRed,omegared, omega red, omega, red death, arkady rossovich, arkady, rossovich
-Phoenix,phoenix, pho, phoe, phoen, phonix, phenix, ph, jean, jean grey, jeangrey, pheonix, phx
-PhylaVell,phylavell, phyla-vell, phyla, vell, phy, pv, martyr
-ProximaMidnight,proxima midnight, proximamidnight, pm, proxima, midnight, prox, proxy, pmidnight, proximam, pro
-Psylocke,psylocke, psy, psylock, psylok, psyloc, psyl, psylo, ps
-Polaris,polaris, pol, lorna dane, lorna, dane
-Punisher,punisher, pun, punish
-Pyro,pyro, pyr, pyo, py
-Quake,quake, q, qu, qua, quak
-RavagerDmg_AoE,ravager boomer, boomer, boom, rbo, ravboomer, rav boomer, ravagerdmg_aoe, ravagerboomer, ok boomer, okboomer
-RavagerTank_Taunt,ravager bruiser, bruiser, rav bruiser, ravbr, rbr, bruise, bruis, brui, ravagertank_taunt, ravagerbruiser
-RavagerSupport_Heal,ravager stitcher, stitcher, ravagerstitcher, rav stitcher, r stitcher, rstitcher, stitch, ravager stitch, ravagersupport_heal
-S_RavagerDmg_AoE,y boom
-S_RavagerSupport_Heal,y stitch
-RedSkull,red skull, skull, reds, redskull, red s, r skull, redsk, rs
-RedGuardian,red guardian, rg, red guard, redguard
 S_HydraDmg_Buff,red rifle
 S_HydraDmg_Single,red trooper
 S_HydraSupport_Heal,red heal
-Rescue,rescue, resc, res, pep, pepp, pepper
-Rhino,rhino, rhyno, rhi, rhin
-RocketRaccoon,rocket raccoon, rocket, rocketraccoon, rr, rabbit
-Ronan,ronan the accuser, ronan, rta, accuser, ron, rona, ronn, ronantheaccuser
 S_KreeControl_Assist,ronan noble
 S_KreeDmg_Speed,ronan reaper
-Sabretooth,sabretooth, sabertooth, sabre, saber, stooth, sabret, st
-SamWilson,sam wilson, sam, wilson, captain falcon, captain sam
-ScarletWitch,scarlet witch, switch, sw, witch, scarlet, scarletwitch, scarletw, wanda
-ScientistSupreme,scientist supreme, scientistsupreme, scs, scis, scisup, ssup, scsup, scientist, supreme, ssu, ss
-Scream,scr, scre, screa, scream, donna, donna diego
-Sersi,sersi, ser, mesmer, serse, circe
-ShangChi,shangchi, shang-chi, shang chi, shang, chi
-SharonCarter,sharon carter, sharon, carter, sc, agent 13, shary
-Shatterstar,shatterstar, shat, shatter, sstar, benji
-SheHulk,sh, shulk, sheh, shehulk, she-hulk, jennifer
-ShieldDmg_AoE,s.h.i.e.l.d. assault, shield assault, assault, shield assaulter, s assault, shield ass, sass, shielddmg_aoe, sa, s.h.i.e.l.d.assault
-ShieldSupport_Heal,s.h.i.e.l.d. medic, shield medic, shieldmedic, s medic, medic, shield m, shieldm, med, smed, smedic, shieldsupport_heal, s.h.i.e.l.d.medic
-ShieldSupport_Stealth,s.h.i.e.l.d. operative, shield operative, operative, op, sop, shield op, shieldop, shop, shieldsupport_stealth, s.h.i.e.l.d.operative
-ShieldTank_Stun,s.h.i.e.l.d. security, shield security, shieldtank_stun, shieldsecurity, non-lethal, nonlethal, non lethal, shield sec, ssec, ssecurity, ssecurity, s.h.i.e.l.d.security
-ShieldDmg_Defense,s.h.i.e.l.d. trooper, shield trooper, trooper, s trooper, strooper, troop, shieldt, sht, shielddmg_defense, s.h.i.e.l.d.trooper
-Shocker,shocker, shock, sho, shoc, herman
-Shuri,shuri, shu, shur, disney princess, actual disney princess, disneyprincess, actualdisneyprincess
-Sif,sif, lady sif
-SilverSamurai,silversamurai, silver samurai, sisa, kenichiro harada, kenichiro, harada, ken, kenny
-SilverSurfer,silversurfer, silver surfer, silver, surfer, sis, sisu, $$, norrin radd, norrin, ags
-SpiderMan,spider-man, spiderman, spider man, sm, spider, spooder, spiderm, sman, spidey
-UltSpiderMan,spider-man (miles), miles, milesmorales, miles morales, ultimate spider-man, ultimate spiderman, ultimatespider-man, ultimatespider man, ultspider, smiles, smmiles, sm miles, sm (miles), smm, mil, usm, ultspiderman, ultimate spidey, ult spidey, spider miles, spiderman miles, spiderman (miles), spidermiles, spider-man(miles)
-SquirrelGirl,squirrel girl, squirrel, sg, doreen
-StarLord,star-lord, starlord, starl, slord, sl, star, lord, star lord, quill
+S_RavagerDmg_AoE,y boom
+S_RavagerSupport_Heal,y stitch
+S_ShieldSupport_Stealth,fury op
+S_ShieldTank_Stun,fury tank
+Sabretooth,saber, sabertooth, sabre, sabret, sabretooth, st, stooth
+SamWilson,captain falcon, captain sam, sam, sam wilson, wilson
+ScarletSpider,scarlet spider, scarlets, scarletspider
+ScarletWitch,scarlet, scarlet witch, scarletw, scarletwitch, sw, switch, wanda, witch
+ScientistSupreme,scientist, scientist supreme, scientistsupreme, scis, scisup, scs, scsup, ss, ssu, ssup, supreme
+Scream,donna, donna diego, scr, scre, screa, scream
+Sersi,circe, mesmer, ser, serse, sersi
+ShangChi,chi, shang, shang chi, shang-chi, shangchi
+SharonCarter,agent 13, carter, sc, sharon, sharon carter, shary
+Shatterstar,benji, shat, shatter, shatterstar, sstar
+SheHulk,jennifer, sh, she-hulk, sheh, shehulk, shulk
+ShieldDmg_AoE,assault, s assault, s.h.i.e.l.d. assault, s.h.i.e.l.d.assault, sa, sass, shield ass, shield assault, shield assaulter, shielddmg_aoe
+ShieldDmg_Defense,s trooper, s.h.i.e.l.d. trooper, s.h.i.e.l.d.trooper, shield trooper, shielddmg_defense, shieldt, sht, strooper, troop, trooper
+ShieldSupport_Heal,med, medic, s medic, s.h.i.e.l.d. medic, s.h.i.e.l.d.medic, shield m, shield medic, shieldm, shieldmedic, shieldsupport_heal, smed, smedic
+ShieldSupport_Stealth,op, operative, s.h.i.e.l.d. operative, s.h.i.e.l.d.operative, shield op, shield operative, shieldop, shieldsupport_stealth, shop, sop
+ShieldTank_Stun,non lethal, non-lethal, nonlethal, s.h.i.e.l.d. security, s.h.i.e.l.d.security, shield sec, shield security, shieldsecurity, shieldtank_stun, ssec, ssecurity
+Shocker,herman, sho, shoc, shock, shocker
+Shuri,actual disney princess, actualdisneyprincess, disney princess, disneyprincess, shu, shur, shuri
+Sif,lady sif, sif
+SilverSamurai,harada, ken, kenichiro, kenichiro harada, kenny, silver samurai, silversamurai, sisa
+SilverSurfer,$$, ags, norrin, norrin radd, silver, silver surfer, silversurfer, sis, sisu, surfer
+SpiderMan,sm, sman, spider, spider man, spider-man, spiderm, spiderman, spidey, spooder
+SpiderPunk,punk, spider punk, spiderp, spiderpunk
+SpiderWoman,jessica drew, s-w, spider-woman, spiderwoman, swo, swoman
+SquirrelGirl,doreen, sg, squirrel, squirrel girl
+StarLord,lord, quill, sl, slord, star, star lord, star-lord, starl, starlord
 Stature,stat, statu, statur, stature
-Storm,storm, stor, torm, sto, ororo
-Stryfe,stryfe, str, stry, stryf, strife
-SymbioteSpiderMan,spider-man (symbiote), spider-man(symbiote), symbiotespiderman, sym spiderman, sym spider-man, sym spider, symspider, symspiderman, ssm, symsm, syms, sysm, sys, symbiote spider-man, symbiote spiderman, sm (symbiote), spiderman (symbiote), sym s, sym sm, symb sm, symb spider, symbspider, symbsm, spider-man symbiote, spiderman symbiote, sspider, s spider, sspiderman, s spiderman, s spider-man
-Swarm,swarm, fritz, fritz von meyer, meyer
-Taskmaster,taskmaster, task, taskm, taskmanager, task manager, tm, tmaster, task master
-TChalla,tchalla, challa, slt
-Toad,toad, todd, toa, tod
-EmpoweredGamora,empowered gamora, empoweredgamora, eg, gamoraempowered, gamora empowered, gamora e, gamorae, ge, egamora, gamora emp, gempowered, gemp
-EmpoweredThanos,empowered thanos, empoweredthanos, et, thanosempowered, thanos empowered, thanos e, thanose, te, et, ethanos, e thanos, empowered, thanos emp, emp, temp, emp thanos, emp t, stoned thanos, stonedthanos, empthanos
-Thing,the thing, thing, thething, thin, ben, tt, thi, the
-Thor,thor, tho, thr, thunder
-Ultimus,ultimus, ulti, ultim
-Ultron,ultron, ul, u, ult, ultr, ultro, toaster
-UltronDmg_Speed,ultron accelerator, accelerator, u accelerator, ultron accel, u accel, speedbot, botspeed, turnbot, turnmeterbot, botturn, botturnmeter, ultrondmg_speed, ult accelerator, ultronaccelerator, redbot, redbot1
-UltronSupport_Heal,ultron fabricator, fabricator, ultron fab, ultron fabric, greenbot, ultrongreen, botgreen, healbot, botheal, regenbot, botregen, u fabricator, ultronsupport_heal, ult fabricator, ultronfabricator
-UltronDmg_Defense,ultron fortifier, ultrondmg_defense, ultronfortifier, defbot, defupbot, fortifier, bluebot, bluebot1, u fortifier, ufortifier
-UltronDmg_Offense,ultron incinerator, incinerator, u incinerator, ult incinerator, ultron incin, damagebot, botdamage, offupbot, botoffup, botoffense, offensebot, ultrondmg_offense, offbot, botoff, offenseupbot, botoffenseup, ultronincinerator, redbot2
-UltronTank_Taunt,ultron reinforcer, ultronreinforcer, reinforcer, bluebot2, tankbot, bottank, ultron tank, ultrontank, ultrontank_taunt, tauntbot
-Greg,greg, undead asgardian, undead, unas, ua, undeadasgardian
-Venom,venom, ve, ven, veno
-Vision,vision, vis, vi, visi, visio, vison, viz
-Vulture,vulture, vul, vult, vultur, vol
-WarMachine,war machine, warmachine, wm, warm, wmachine, war, machine
-Wasp,wasp, was, wap, wsp, janet, waspman
-WhiteTiger,whitetiger, wt, angela
-WinterSoldier,winter soldier, ws, wintersoldier, winter, bucky, winters, bucky barnes, barnes, wsoldier, wint, win
-Wolverine,wolverine, wolv, wolver, wol, wolvie, logan
-X23,x23, laura
-Yelena,yelena, yelenabelova, yelena belova, yb, russkiya
-Yellowjacket,yell, yellow, yj, yellowjaket, yellowjacket
-Yondu,yondu, yon, yond
-Zemo,zemo, baron zemo, bz, ze
-YoYo,yoyo, yy, yo-yo, yoy, yo
+Storm,ororo, sto, stor, storm, torm
+StrangeSupreme,dsh, evildoc, evilstrange, heartless, strange supreme, stranges, strangesupreme, sts, stsu
+Stryfe,str, strife, stry, stryf, stryfe
+Swarm,fritz, fritz von meyer, meyer, swarm
+Sybil,k$, kes, kest, kestrel, sybil
+SymbioteSpiderMan,s spider, s spider-man, s spiderman, sm (symbiote), spider-man (symbiote), spider-man symbiote, spider-man(symbiote), spiderman (symbiote), spiderman symbiote, ssm, sspider, sspiderman, sym s, sym sm, sym spider, sym spider-man, sym spiderman, symb sm, symb spider, symbiote spider-man, symbiote spiderman, symbiotespiderman, symbsm, symbspider, syms, symsm, symspider, symspiderman, sys, sysm
+Taskmaster,task, task manager, task master, taskm, taskmanager, taskmaster, tm, tmaster
+TChalla,challa, slt, tchalla
+Thanos,tha, than, thanatos, thanos
+Thing,ben, the, the thing, thething, thi, thin, thing, tt
+Thor,tho, thor, thr, thunder
+Toad,toa, toad, tod, todd
+UltGreenGoblin,gg, gob, goblin, green, green goblin, greeng, greengob, greengoblin, ultgreengoblin
+Ultimus,ulti, ultim, ultimus
+Ultron,toaster, u, ul, ult, ultr, ultro, ultron
+UltronDmg_Defense,bluebot, bluebot1, defbot, defupbot, fortifier, u fortifier, ufortifier, ultron fortifier, ultrondmg_defense, ultronfortifier
+UltronDmg_Offense,botdamage, botoff, botoffense, botoffenseup, botoffup, damagebot, incinerator, offbot, offensebot, offenseupbot, offupbot, redbot2, u incinerator, ult incinerator, ultron incin, ultron incinerator, ultrondmg_offense, ultronincinerator
+UltronDmg_Speed,accelerator, botspeed, botturn, botturnmeter, redbot, redbot1, speedbot, turnbot, turnmeterbot, u accel, u accelerator, ult accelerator, ultron accel, ultron accelerator, ultronaccelerator, ultrondmg_speed
+UltronSupport_Heal,botgreen, botheal, botregen, fabricator, greenbot, healbot, regenbot, u fabricator, ult fabricator, ultron fab, ultron fabric, ultron fabricator, ultronfabricator, ultrongreen, ultronsupport_heal
+UltronTank_Taunt,bluebot2, bottank, reinforcer, tankbot, tauntbot, ultron reinforcer, ultron tank, ultronreinforcer, ultrontank, ultrontank_taunt
+UltSpiderMan,mil, miles, miles morales, milesmorales, sm (miles), sm miles, smiles, smm, smmiles, spider miles, spider-man (miles), spider-man(miles), spiderman (miles), spiderman miles, spidermiles, ult spidey, ultimate spider-man, ultimate spiderman, ultimate spidey, ultimatespider man, ultimatespider-man, ultspider, ultspiderman, usm
+Venom,ve, ven, veno, venom
+Vision,vi, vis, visi, visio, vision, vison, viz
+Vulture,vol, vul, vult, vultur, vulture
+WarMachine,machine, war, war machine, warm, warmachine, wm, wmachine
+Wasp,janet, wap, was, wasp, waspman, wsp
+WhiteTiger,angela, whitetiger, wt
+WinterSoldier,barnes, bucky, bucky barnes, win, wint, winter, winter soldier, winters, wintersoldier, ws, wsoldier
+Wolverine,logan, wol, wolv, wolver, wolverine, wolvie
+Wong,beyonce, wong
+X23,laura, x23
+Yelena,russkiya, yb, yelena, yelena belova, yelenabelova
+Yellowjacket,yell, yellow, yellowjacket, yellowjaket, yj
+Yondu,yon, yond, yondu
+YoYo,yo, yo-yo, yoy, yoyo, yy
+Zemo,baron zemo, bz, ze, zemo
