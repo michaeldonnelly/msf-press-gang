@@ -44,6 +44,8 @@
     {
       "Character": "Black Bolt",
       "YellowStars": 5,
+      "GearTier": 12,
+      "Iso8ClassLevel": 3,
       "DependsOn": [
         "Hela",
         "Loki",
@@ -101,7 +103,27 @@
         "Shatterstar"
       ],
       "Requires": [
-        "Jubilee"        
+        "Jubilee"
+      ],
+      "Stats": [
+        {
+          "YellowStars": 5,
+          "CharacterLevel": 65,
+          "GearTier": 12,
+          "Iso8ClassLevel": 3
+        },
+        {
+          "YellowStars": 6,
+          "CharacterLevel": 70,
+          "GearTier": 13,
+          "Iso8ClassLevel": 4
+        },
+        {
+          "YellowStars": 7,
+          "CharacterLevel": 75,
+          "GearTier": 14,
+          "Iso8ClassLevel": 5
+        }
       ]
     },
     {
@@ -140,13 +162,13 @@
         },
         {
           "YellowStars": 6,
-          "CharacterLevel": 65,
+          "CharacterLevel": 70,
           "GearTier": 13,
           "Iso8ClassLevel": 4
         },
         {
           "YellowStars": 7,
-          "CharacterLevel": 65,
+          "CharacterLevel": 75,
           "GearTier": 14,
           "Iso8ClassLevel": 5
         }
