@@ -14,3 +14,5 @@ discord-token.txt
 /Deploy/zola*
 foo
 *.sqlite3-shm
+Zola.MsfClient/kiota
+iterate.sh
