@@ -23,6 +23,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore Zola.Discord -c Release -o ./build
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: binaries
+        path: build
     - name: Test
       run: dotnet test --no-build --verbosity normal
