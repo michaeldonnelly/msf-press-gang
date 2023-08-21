@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zola.Database;
 
@@ -10,9 +11,11 @@ using Zola.Database;
 namespace Zola.Database.Migrations
 {
     [DbContext(typeof(MsfDbContext))]
-    partial class MsfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230821175124_users")]
+    partial class users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
@@ -82,9 +85,11 @@ namespace Zola.Database.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("MsfPid")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MsfRefreshToken")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -26,6 +26,8 @@ namespace Zola.Database
         public DbSet<Effect> Effects { get; set; }
 
         public DbSet<EffectIndex> EffectIndices { get; set; }
+
+        public DbSet<User> Users { get; set; }
      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {           

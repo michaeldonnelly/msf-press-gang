@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zola.Database;
 
@@ -10,9 +11,11 @@ using Zola.Database;
 namespace Zola.Database.Migrations
 {
     [DbContext(typeof(MsfDbContext))]
-    partial class MsfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230821180207_msf id can be null")]
+    partial class msfidcanbenull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");

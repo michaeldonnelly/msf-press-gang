@@ -35,6 +35,9 @@ namespace Zola.Discord
                 case "status-effect-search":
                     await StatusEffectSearch(command);
                     break;
+                case "link":
+                    await Link(command);
+                    break;
                 default:
                     await command.RespondAsync($"Unknown command: {command.CommandName}");
                     break;
@@ -81,7 +84,43 @@ namespace Zola.Discord
             await command.RespondAsync(response);
         }
 
+        private async Task Link(SocketSlashCommand command)
+        {
+            Console.WriteLine("Link");
+            string response = "";
 
+
+            response += $"Number of users: {_dbContext.Users.Count()}";
+
+            response += $"\r\nDiscord ID: {command.User.Id.ToString()}";
+
+
+            ulong discordId = command.User.Id;
+
+            User? user = _dbContext.Users.Where(u => u.DiscordId == discordId).FirstOrDefault();
+
+            if (user is null)
+            {
+                user = new User()
+                {
+                    DiscordId = discordId
+                };
+                _dbContext.Add(user);
+                _dbContext.SaveChanges();
+                response += "\r\nCreated user";
+
+
+            }
+            else
+            {
+                response += "\r\nUser exists";
+            }
+
+
+            response += $"\r\nUser ID: {user.Id}";
+
+            await command.RespondAsync(response);
+        }
     }
 }
 

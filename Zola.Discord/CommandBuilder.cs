@@ -33,6 +33,7 @@ namespace Zola.Discord
 
         public async void Register()
 		{
+            Console.WriteLine("Registering slash commands.");
             //var guildCommand = new SlashCommandBuilder();
             //guildCommand.WithName("first-command");
             //guildCommand.WithDescription("This is my first guild slash command!");
@@ -65,6 +66,11 @@ namespace Zola.Discord
                 .AddOption(effectOptions);
 
 
+            SlashCommandBuilder link = new SlashCommandBuilder()
+                .WithName("link")
+                .WithDescription("Connect Zola to your MSF account");
+                
+
             //        .AddOption(new SlashCommandOptionBuilder()
             //            .WithName("effect")
             //            .WithDescription("The status effect for which you want to search")
@@ -80,6 +86,7 @@ namespace Zola.Discord
 
             commands.Add(zola.Build());
             commands.Add(statusEffectSearch.Build());
+            commands.Add(link.Build());
             
 
 
