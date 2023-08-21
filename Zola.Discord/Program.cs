@@ -76,7 +76,7 @@ namespace Zola.Discord
         public async Task Client_Ready()
         {
             CommandBuilder commandBuilder = new(_dbContext, _discordClient, _guildId);
-            //commandBuilder.Register();
+            commandBuilder.Register();
             //commandBuilder.Deregister();
         }
 

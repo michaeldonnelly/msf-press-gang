@@ -95,6 +95,10 @@ namespace Zola.Discord
             response += $"\r\nDiscord ID: {command.User.Id.ToString()}";
 
 
+
+
+
+
             ulong discordId = command.User.Id;
 
             User? user = _dbContext.Users.Where(u => u.DiscordId == discordId).FirstOrDefault();
@@ -116,8 +120,21 @@ namespace Zola.Discord
                 response += "\r\nUser exists";
             }
 
-
             response += $"\r\nUser ID: {user.Id}";
+
+            SocketSlashCommandDataOption? codeOption = command.Data.Options.Where(o => o.Name == "code").FirstOrDefault();
+
+            if (codeOption is null)
+            {
+                response += "\r\nHere's a link to link your accounts.";
+            } else
+            {
+                string code = (string)codeOption.Value;
+                response += $"\r\nAuth code: {code}";
+            }
+
+
+            
 
             await command.RespondAsync(response);
         }
