@@ -126,7 +126,9 @@ namespace Zola.Discord
 
             if (codeOption is null)
             {
-                response += "\r\nHere's a link to link your accounts.";
+                string ticket = Guid.NewGuid().ToString();
+                string url = "http://localhost:8443/Home/Link?ticket=" + ticket;
+                response += $"\r\n{url}";
             } else
             {
                 string code = (string)codeOption.Value;

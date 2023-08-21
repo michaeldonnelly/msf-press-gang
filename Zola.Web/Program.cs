@@ -23,5 +23,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute("callback", "{controller=Home}/{action=Callback}");
 
 app.Run();
