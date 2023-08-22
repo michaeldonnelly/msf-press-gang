@@ -11,6 +11,14 @@ namespace Zola.MsfClient.Authentication
             IAuthenticationProvider authenticationProvider = new BearerTokenPlusApiKeyAuthenticationProvider(accessTokenProvider, apiSettings.ApiKey, ApiSettings.ApiKeyHeaderName);
             return authenticationProvider;
         }
+
+        public static IAuthenticationProvider PlayerAuthenticationProvider(ApiSettings apiSettings, string refreshToken)
+        {
+            IAccessTokenProvider accessTokenProvider = new RefreshTokenProvider(apiSettings, refreshToken);
+            IAuthenticationProvider authenticationProvider = new BearerTokenPlusApiKeyAuthenticationProvider(accessTokenProvider, apiSettings.ApiKey, ApiSettings.ApiKeyHeaderName);
+            return authenticationProvider;
+        }
+
     }
 }
 
