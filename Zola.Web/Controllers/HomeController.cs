@@ -53,34 +53,6 @@ public class HomeController : Controller
             return BadRequest($"Unknown ticket {ticket}");
         }
 
-
-        /*
-        string state = ticketRecord.State;  // Guid.NewGuid().ToString();
-        string clientId = "27558d21-595e-4e82-bf9a-629e68c56d50";
-        string scope = "m3p.f.pr.pro m3p.f.pr.ros m3p.f.pr.inv m3p.f.pr.act m3p.f.ar.pro offline";
-        string redirectUri = "http://localhost:8443/callback";
-        Dictionary<string, string> queryParameters = new()
-        {
-            { "client_id", clientId },
-            { "response_type", "code" },
-            { "redirect_uri", redirectUri },
-            { "scope", scope },
-            { "state", state },
-        };
-
-        string url = "https://hydra-public.prod.m3.scopelypv.com/oauth2/auth";
-        UriBuilder uriBuilder = new(url);
-        NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(uriBuilder.Query);
-        foreach (KeyValuePair<string, string> kvp in queryParameters)
-        {
-            nameValueCollection[kvp.Key] = kvp.Value;
-        }
-        uriBuilder.Query = nameValueCollection.ToString();
-
-        Console.WriteLine(uriBuilder.ToString());
-        RedirectResult redirectResult = new RedirectResult(uriBuilder.ToString(), false);
-        return redirectResult;
-        */
         return GetAuthorizationCode(ticketRecord);
     }
 
