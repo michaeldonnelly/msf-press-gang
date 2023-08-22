@@ -122,7 +122,7 @@ namespace Zola.Discord
 
             response += $"\r\nUser ID: {user.Id}";
 
-            if (user.MsfRefreshToken is null)
+            if (user.RefreshToken is null)
             {
                 Ticket ticket = _dbContext.NewTicket(user);
                 string url = "http://localhost:8443/Home/Link?ticket=" + ticket.Id;

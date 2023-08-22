@@ -50,9 +50,6 @@ public class HomeController : Controller
     public IActionResult Link(string ticket)
     {
         _logger.LogInformation($"Link for ticket {ticket}");
-
-
-        //Ticket? ticketRecord = _msfDbContext.Tickets.Where(t => t.Id == ticket).FirstOrDefault();
         Ticket? ticketRecord = _msfDbContext.RetrieveTicket(TicketStatus.GivenToUser, ticketId: ticket);
 
         if (ticketRecord is null)
@@ -109,12 +106,10 @@ public class HomeController : Controller
         // TODO: async
         TokenResponse tokenResponse = GetAuthorizationTokenAsync(code).Result;
 
-        Console.WriteLine($"\r\n\r\n     TOKEN RESPONSE      \r\n\r\n{tokenResponse.Raw}\r\n     --------------      \r\n");
-        Console.WriteLine($"\r\n REFRESH TOKEN:  {tokenResponse.RefreshToken}");
-
-
+        _logger.LogInformation($"Token response: {tokenResponse.Raw}");
+        
         string? refreshToken = tokenResponse.RefreshToken;
-        ticket.User.MsfRefreshToken = refreshToken;
+        ticket.User.RefreshToken = refreshToken;
 
         _msfDbContext.SaveChanges();
 
@@ -128,7 +123,7 @@ public class HomeController : Controller
     private Task<int> SaveTokensToUser(TokenResponse tokenResponse, User user)
     {
         _logger.LogDebug("SaveTokensToUser");
-        user.MsfRefreshToken = tokenResponse.RefreshToken;
+        user.RefreshToken = tokenResponse.RefreshToken;
         return _msfDbContext.SaveChangesAsync();
     }
 
@@ -169,16 +164,6 @@ public class HomeController : Controller
             _logger.LogError(exception.Message);
             throw exception;
         }
-
-        //Console.WriteLine($"access token: {response.AccessToken}");
-
-        string tokenResponseString = $"TokenType: {response.TokenType}";
-        tokenResponseString += "\r\n";
-        tokenResponseString += $"AccessToken: {response.AccessToken}";
-        tokenResponseString += "\r\n";
-        tokenResponseString += $"Raw: {response.Raw}";
-        tokenResponseString += "\r\n";
-        Console.WriteLine("tokenResponseString:  \r\n", tokenResponseString);
 
         _logger.LogInformation(response.ToString());
         return response;
