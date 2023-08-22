@@ -23,6 +23,7 @@ builder.Services.AddOptions<ApiSettings>().Bind(config);
 //builder.Services.AddOptions<DbSettings>().Bind(config);
 builder.Services.AddDbContext<MsfDbContext>();
 
+builder.Services.AddSingleton<IConfiguration>(config);
 // TODO: add apisettings - maybe IConfiguration?
 
 
@@ -49,6 +50,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-app.MapControllerRoute("callback", "{controller=Home}/{action=Callback}"); // TODO: nix
+//app.MapControllerRoute("callback", "{controller=Home}/{action=Callback}"); // TODO: nix
 
 app.Run();

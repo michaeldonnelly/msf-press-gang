@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Zola.Database;
+using Zola.Database.Models;
 using Zola.MsfClient;
 using Zola.Web.Models;
 
@@ -21,7 +22,12 @@ public class HomeController : Controller
     {
         _logger = logger;
         _msfDbContext = dbContext;
-        
+
+        ApiSettings apiSettings = new(configuration);
+
+        Console.WriteLine(apiSettings.ApiKey);
+
+
 
         //var foo = apiOptions.Value;
         //Console.WriteLine(foo.GetType());
@@ -49,9 +55,19 @@ public class HomeController : Controller
 
     public IActionResult Link(string ticket)
     {
+        _logger.LogInformation($"Link for ticket {ticket}");
 
 
-        string state = Guid.NewGuid().ToString();
+        Ticket? ticketRecord = _msfDbContext.Tickets.Where(t => t.Id == ticket).FirstOrDefault();
+        if (ticketRecord is null)
+        {
+            _logger.LogWarning("Ticket not found");
+            return BadRequest($"Unknown ticket {ticket}");
+        }
+
+
+
+        string state = ticketRecord.State;  // Guid.NewGuid().ToString();
         string clientId = "27558d21-595e-4e82-bf9a-629e68c56d50";
         string scope = "m3p.f.pr.pro m3p.f.pr.ros m3p.f.pr.inv m3p.f.pr.act m3p.f.ar.pro offline";
         string redirectUri = "http://localhost:8443/callback";
@@ -81,9 +97,12 @@ public class HomeController : Controller
     [Route("/callback")]
     public IActionResult Callback(string? code, string? state, string? error, string? error_description)
     {
+
         if (error is null)
         {
             Console.WriteLine($"code: {code}\r\nstate: {state}");
+            Ticket? ticket = _msfDbContext.Tickets.Where(t => t.State == state).FirstOrDefault();
+
         }
         else
         {
@@ -91,6 +110,12 @@ public class HomeController : Controller
         }
         return View();
     }
+
+
+    //private string GetAccessToken(string code)
+    //{
+
+    //}
 
     public IActionResult Redirect(string code, string state)  // TODO: nix
     {
