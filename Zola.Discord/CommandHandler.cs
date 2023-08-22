@@ -122,20 +122,16 @@ namespace Zola.Discord
 
             response += $"\r\nUser ID: {user.Id}";
 
-            SocketSlashCommandDataOption? codeOption = command.Data.Options.Where(o => o.Name == "code").FirstOrDefault();
-
-            if (codeOption is null)
+            if (user.MsfRefreshToken is null)
             {
                 Ticket ticket = _dbContext.NewTicket(user);
                 string url = "http://localhost:8443/Home/Link?ticket=" + ticket.Id;
                 response += $"\r\n{url}";
-            } else
-            {
-                string code = (string)codeOption.Value;
-                response += $"\r\nAuth code: {code}";
             }
-
-
+            else
+            {
+                response += "\r\nAccount is linked to MSF.";
+            }
             
 
             await command.RespondAsync(response);

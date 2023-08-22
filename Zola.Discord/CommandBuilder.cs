@@ -66,16 +66,16 @@ namespace Zola.Discord
                 .AddOption(effectOptions);
 
 
-            SlashCommandOptionBuilder codeOption = new SlashCommandOptionBuilder()
-                .WithName("code")
-                .WithDescription("OAuth 2.0 authorization code")
-                .WithRequired(false)
-                .WithType(ApplicationCommandOptionType.String);
+            //SlashCommandOptionBuilder codeOption = new SlashCommandOptionBuilder()
+            //    .WithName("code")
+            //    .WithDescription("OAuth 2.0 authorization code")
+            //    .WithRequired(false)
+            //    .WithType(ApplicationCommandOptionType.String);
 
             SlashCommandBuilder link = new SlashCommandBuilder()
                 .WithName("link")
-                .WithDescription("Connect Zola to your MSF account")
-                .AddOption(codeOption);
+                .WithDescription("Connect Zola to your MSF account");
+                //.AddOption(codeOption);
                 
 
             //        .AddOption(new SlashCommandOptionBuilder()
