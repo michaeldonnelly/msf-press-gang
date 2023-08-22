@@ -56,15 +56,21 @@ namespace Zola.Discord
         {
             Download download = new(_apiClient, _dbContext);
 
-
-            string tableName = "Characters";
-
-
-
-
-            IEnumerable<object> set = (IEnumerable<object>)_dbContext.GetType().GetProperty(tableName).GetValue(_dbContext, null);
-            int recordCount = set.Count();
-            Console.WriteLine($"Records in {tableName}: {recordCount}");
+            try
+            {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                string tableName = "Characters";
+                IEnumerable<object> set = (IEnumerable<object>)_dbContext.GetType().GetProperty(tableName).GetValue(_dbContext, null);
+                int recordCount = set.Count();
+                Console.WriteLine($"Records in {tableName}: {recordCount}");
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
 
 
