@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web;
@@ -9,32 +10,19 @@ using Zola.Database;
 using Zola.Database.Models;
 using Zola.MsfClient;
 using Zola.Web.Models;
-
 namespace Zola.Web.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly IOptions<ApiSettings> _options;
     private readonly MsfDbContext _msfDbContext;
+    private readonly ApiSettings _apiSettings;
 
     public HomeController(ILogger<HomeController> logger, MsfDbContext dbContext, IConfiguration configuration)
     {
         _logger = logger;
         _msfDbContext = dbContext;
-
-        ApiSettings apiSettings = new(configuration);
-
-        Console.WriteLine(apiSettings.ApiKey);
-
-
-
-        //var foo = apiOptions.Value;
-        //Console.WriteLine(foo.GetType());
-
-        //ApiSettings apiSettings1 = apiOptions.Value;
-        //Console.WriteLine(apiSettings1.ApiKey);
-        //_options = options;
+        _apiSettings = new(configuration);
     }
 
     public IActionResult Index()
@@ -66,7 +54,7 @@ public class HomeController : Controller
         }
 
 
-
+        /*
         string state = ticketRecord.State;  // Guid.NewGuid().ToString();
         string clientId = "27558d21-595e-4e82-bf9a-629e68c56d50";
         string scope = "m3p.f.pr.pro m3p.f.pr.ros m3p.f.pr.inv m3p.f.pr.act m3p.f.ar.pro offline";
@@ -91,6 +79,32 @@ public class HomeController : Controller
 
         Console.WriteLine(uriBuilder.ToString());
         RedirectResult redirectResult = new RedirectResult(uriBuilder.ToString(), false);
+        return redirectResult;
+        */
+        return GetAuthorizationCode(ticketRecord);
+    }
+
+    private RedirectResult GetAuthorizationCode(Ticket ticket)
+    {
+        Dictionary<string, string> queryParameters = new()
+        {
+            { "client_id", _apiSettings.ClientId },
+            { "response_type", "code" },
+            { "redirect_uri", _apiSettings.RedirectUri },
+            { "scope", ApiSettings.Scope },
+            { "state", ticket.State },
+        };
+
+        UriBuilder uriBuilder = new(ApiSettings.AuthUrl);
+        NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(uriBuilder.Query);
+        foreach (KeyValuePair<string, string> kvp in queryParameters)
+        {
+            nameValueCollection[kvp.Key] = kvp.Value;
+        }
+        uriBuilder.Query = nameValueCollection.ToString();
+        string url = uriBuilder.ToString();
+        _logger.LogInformation($"Auth code URL: {url}");
+        RedirectResult redirectResult = new RedirectResult(url, false);
         return redirectResult;
     }
 

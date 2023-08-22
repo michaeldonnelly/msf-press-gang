@@ -30,9 +30,13 @@ namespace Zola.MsfClient
 
         public string RedirectUri { get; set; }
 
+        public static string Scope => "m3p.f.pr.pro m3p.f.pr.ros m3p.f.pr.inv m3p.f.pr.act m3p.f.ar.pro offline";
+
         public static string ApiKeyHeaderName => "x-api-key";
 
         public string ApiKey { get; set; }
+
+        public static string AuthUrl => "https://hydra-public.prod.m3.scopelypv.com/oauth2/auth";
 
         public static string TokenUrl => "https://hydra-public.prod.m3.scopelypv.com/oauth2/token";
 
