@@ -126,12 +126,7 @@ namespace Zola.Discord
 
             if (codeOption is null)
             {
-                Ticket ticket = new();
-                ticket.UserId = user.Id;
-                _dbContext.Add(ticket);
-                _dbContext.SaveChanges();
-
-
+                Ticket ticket = _dbContext.NewTicket(user);
                 string url = "http://localhost:8443/Home/Link?ticket=" + ticket.Id;
                 response += $"\r\n{url}";
             } else

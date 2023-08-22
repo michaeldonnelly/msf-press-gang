@@ -10,10 +10,20 @@ namespace Zola.Database.Models
 
         public DateTime Expiration { get; set; } = DateTime.Now + new TimeSpan(0, 5, 0);
 
-        public string UserId { get; set; }
+        public User User { get; set; } 
         
         public string State { get; set; } = Guid.NewGuid().ToString();
 
+        public TicketStatus TicketStatus { get; set; } = TicketStatus.New;
+        
+    }
+
+    public enum TicketStatus
+    {
+        New,
+        GivenToUser,
+        CodeRequested,
+        Deleted
     }
 }
 

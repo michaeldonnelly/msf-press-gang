@@ -92,6 +92,23 @@ namespace Zola.Database
             return traitsFromDatabase;
         }
 
+        public Ticket NewTicket(User user)
+        {
+            return Operations.TicketOperations.NewTicket(this, user);
+        }
+
+
+        public Ticket? RetrieveTicket(TicketStatus expectedStatus, string? ticketId = null, string? state = null)
+        {
+            return Operations.TicketOperations.RetrieveTicket(this, expectedStatus, ticketId, state);
+        }
+
+        public void SetTicketStatus(Ticket ticket, TicketStatus status)
+        {
+            ticket.TicketStatus = status;
+            this.SaveChanges();
+        }
+
     }
 }
 
