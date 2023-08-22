@@ -26,6 +26,7 @@ const bool downloadPhoenix = false;
 const bool downloadAllCharacters = false;
 const bool prydeReport = false;
 const bool indexEffects = false;
+const bool getUserProfiler = true;
 #endif
 
 ConfigurationBuilder configurationBuilder = new();
@@ -34,7 +35,10 @@ configurationBuilder.AddUserSecrets<ApiSettings>();
 IConfiguration config = configurationBuilder.Build();
 
 ApiSettings apiSettings = new(config);
-IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(apiSettings);
+//IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(apiSettings);
+IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.PlayerAuthenticationProvider(apiSettings, "v79mhVeZT5-dxkjjOn0j-B8YH4TM2CtDKZhutujCJi4.B2YtOpjwzwdGWgk8kZtzjxB5uJqEYKCb_3M351ng0hw");
+
+
 IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
 ApiClient client = new ApiClient(requestAdapter);
 
@@ -104,6 +108,14 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
     {
         Indexer indexer = new(dbContext);
         Console.WriteLine($"indexer.IndexEffects: {indexer.IndexEffects()}");
+    }
+
+
+    if (getUserProfiler)
+    {
+        PlayerCard playerCard = (await client.Player.V1.Card.GetAsync()).Data;
+        Console.WriteLine($"Retrieved player card\r\n  Name: {playerCard.Name}\r\n  TCP: {playerCard.Tcp}");
+
     }
 
 //Console.WriteLine(gameReports.CharactersWithEffect("27a82af8-3380-43c2-8893-8b9796391aba"));

@@ -97,6 +97,14 @@ public class HomeController : Controller
 
         _logger.LogInformation($"code: {code}\r\nstate: {state}");
 
+        if (code is null)
+        {
+            error_description = "Auth response has no error but also no code";
+            _logger.LogError(error_description);
+            return BadRequest(error_description);
+
+        }
+
         Ticket? ticket = _msfDbContext.RetrieveTicket(TicketStatus.CodeRequested, state: state);
         if (ticket is null)
         {

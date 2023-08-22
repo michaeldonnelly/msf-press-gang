@@ -31,7 +31,7 @@ namespace Zola.Discord
         }
 
 
-        public async void Register()
+        public async Task<Boolean> Register()
 		{
             Console.WriteLine("Registering slash commands.");
             //var guildCommand = new SlashCommandBuilder();
@@ -94,7 +94,7 @@ namespace Zola.Discord
             commands.Add(zola.Build());
             commands.Add(statusEffectSearch.Build());
             commands.Add(link.Build());
-            
+
 
 
             try
@@ -108,17 +108,20 @@ namespace Zola.Discord
                     await _guild.BulkOverwriteApplicationCommandAsync(commands.ToArray());
                 }
 
-
+                return true;
                 //await _guild.CreateApplicationCommandAsync(guildCommand.Build());
                 //await _discordClient.CreateGlobalApplicationCommandAsync(globalCommand.Build());
             }
+#pragma warning disable CS0618 // Type or member is obsolete
             catch (ApplicationCommandException exception)
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 // If our command was invalid, we should catch an ApplicationCommandException. This exception contains the path of the error as well as the error message. You can serialize the Error field in the exception to get a visual of where your error is.
                 var json = JsonConvert.SerializeObject(exception.Errors, Formatting.Indented);
 
                 // You can send this error somewhere or just print it to the console, for this example we're just going to print it.
                 Console.WriteLine(json);
+                return false;
             }
         }
 

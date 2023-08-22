@@ -26,41 +26,52 @@ namespace Zola.Discord
         private DiscordSocketClient _discordClient;
         private ApiClient _apiClient;
         private MsfDbContext _dbContext;
+        private ApiSettings _apiSettings;
+        private BotSettings _botSettings;
 
-        public async Task MainAsync()
+        public Program()
         {
             ConfigurationBuilder configurationBuilder = new();
             configurationBuilder.AddUserSecrets<ApiSettings>();
             // https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=linux
             IConfiguration config = configurationBuilder.Build();
 
-            ApiSettings apiSettings = new(config);
-            BotSettings botSettings = new(config);
-            _guildId = botSettings.GuildId;
-            IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(apiSettings);
+            _apiSettings = new(config);
+            _botSettings = new(config);
+            _guildId = _botSettings.GuildId;
+            IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(_apiSettings);
             IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
             _apiClient = new ApiClient(requestAdapter);
 
             DbSettings dbSettings = new(config);
             _dbContext = new(dbSettings);
             DbInitializer.Initialize(_dbContext, dbSettings);
+
+            _discordClient = new DiscordSocketClient();
+            _discordClient.Log += Log;
+            _discordClient.Ready += Client_Ready;
+        }
+
+        public async Task MainAsync()
+        {
             Download download = new(_apiClient, _dbContext);
 
 
             string tableName = "Characters";
+
+
+
+
             IEnumerable<object> set = (IEnumerable<object>)_dbContext.GetType().GetProperty(tableName).GetValue(_dbContext, null);
             int recordCount = set.Count();
             Console.WriteLine($"Records in {tableName}: {recordCount}");
 
 
-            _discordClient = new DiscordSocketClient();
-            _discordClient.Log += Log;
-            _discordClient.Ready += Client_Ready;
 
             CommandHandler commandHandler = new(_dbContext, _discordClient);
             _discordClient.SlashCommandExecuted += commandHandler.SlashCommandHandler;
 
-            await _discordClient.LoginAsync(TokenType.Bot, botSettings.Token);
+            await _discordClient.LoginAsync(TokenType.Bot, _botSettings.Token);
             await _discordClient.StartAsync();
 
             // Block this task until the program is closed.
@@ -76,7 +87,7 @@ namespace Zola.Discord
         public async Task Client_Ready()
         {
             CommandBuilder commandBuilder = new(_dbContext, _discordClient, _guildId);
-            commandBuilder.Register();
+            await commandBuilder.Register();
             //commandBuilder.Deregister();
         }
 
