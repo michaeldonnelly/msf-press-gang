@@ -26,25 +26,36 @@ const bool downloadPhoenix = false;
 const bool downloadAllCharacters = false;
 const bool prydeReport = false;
 const bool indexEffects = false;
-const bool getUserProfiler = true;
 #endif
+
+const bool getUserProfile = true;
+const bool usePlayerAuth = getUserProfile;
 
 ConfigurationBuilder configurationBuilder = new();
 configurationBuilder.AddUserSecrets<ApiSettings>();
 // https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=linux
 IConfiguration config = configurationBuilder.Build();
-
 ApiSettings apiSettings = new(config);
-//IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(apiSettings);
-IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.PlayerAuthenticationProvider(apiSettings, "v79mhVeZT5-dxkjjOn0j-B8YH4TM2CtDKZhutujCJi4.B2YtOpjwzwdGWgk8kZtzjxB5uJqEYKCb_3M351ng0hw");
+DbSettings dbSettings = new(config);
+MsfDbContext dbContext = new(dbSettings);
+DbInitializer.Initialize(dbContext, dbSettings);
+
+IAuthenticationProvider authenticationProvider;
+if (usePlayerAuth)
+{
+    ulong discordId = 559173272306974740;  // this is hard coded for testing
+    ZolaUserTokenStore userTokenStore = new(dbContext, discordId);
+    authenticationProvider = MsfAuthenticationProviders.PlayerAuthenticationProvider(apiSettings, userTokenStore);
+}
+else
+{
+    authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(apiSettings);
+}
 
 
 IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
 ApiClient client = new ApiClient(requestAdapter);
 
-DbSettings dbSettings = new(config);
-MsfDbContext dbContext = new(dbSettings);
-DbInitializer.Initialize(dbContext, dbSettings);
 Download download = new(client, dbContext);
 
 
@@ -111,7 +122,7 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
     }
 
 
-    if (getUserProfiler)
+    if (getUserProfile)
     {
         PlayerCard playerCard = (await client.Player.V1.Card.GetAsync()).Data;
         Console.WriteLine($"Retrieved player card\r\n  Name: {playerCard.Name}\r\n  TCP: {playerCard.Tcp}");

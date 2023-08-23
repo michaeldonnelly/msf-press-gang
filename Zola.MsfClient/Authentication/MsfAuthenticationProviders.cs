@@ -13,9 +13,9 @@ namespace Zola.MsfClient.Authentication
         }
 
         // NOTE: THis isn't tested yet.  It might never have worked.
-        public static IAuthenticationProvider PlayerAuthenticationProvider(ApiSettings apiSettings, string refreshToken)
+        public static IAuthenticationProvider PlayerAuthenticationProvider(ApiSettings apiSettings, IUserTokenStore userTokenStorage)
         {
-            IAccessTokenProvider accessTokenProvider = new RefreshTokenProvider(apiSettings, refreshToken);
+            IAccessTokenProvider accessTokenProvider = new RefreshTokenProvider(apiSettings, userTokenStorage);
             IAuthenticationProvider authenticationProvider = new BearerTokenPlusApiKeyAuthenticationProvider(accessTokenProvider, apiSettings.ApiKey, ApiSettings.ApiKeyHeaderName);
             return authenticationProvider;
         }

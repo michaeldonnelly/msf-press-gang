@@ -118,6 +118,9 @@ public class HomeController : Controller
         
         string? refreshToken = tokenResponse.RefreshToken;
         ticket.User.RefreshToken = refreshToken;
+        ticket.User.AccessToken = tokenResponse.AccessToken;
+        TimeSpan expiresIn = new(0, 0, tokenResponse.ExpiresIn);
+        ticket.User.AccessTokenExpiration = DateTime.Now + expiresIn;
 
         _msfDbContext.SaveChanges();
 

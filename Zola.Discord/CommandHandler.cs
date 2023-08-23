@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Zola.Database;
 using Zola.Database.Models;
 using Zola.Database.Reports;
+using Zola.MsfClient.Authentication;
 
 namespace Zola.Discord
 {
@@ -13,7 +14,6 @@ namespace Zola.Discord
         private DiscordSocketClient _discordClient;
         private MsfDbContext _dbContext;
         private GameReports _gameReports;
-
 
         public CommandHandler(MsfDbContext dbContext, DiscordSocketClient discordClient)
 		{
@@ -37,6 +37,12 @@ namespace Zola.Discord
                     break;
                 case "link":
                     await Link(command);
+                    break;
+                case "relink":
+                    await Link(command, forceLink: true);
+                    break;
+                case "unlink":
+                    await Unlink(command);
                     break;
                 default:
                     await command.RespondAsync($"Unknown command: {command.CommandName}");
@@ -84,7 +90,36 @@ namespace Zola.Discord
             await command.RespondAsync(response);
         }
 
-        private async Task Link(SocketSlashCommand command)
+        private async Task Unlink(SocketSlashCommand command)
+        {
+            ulong discordId = command.User.Id;
+            User? user = _dbContext.Users.Where(u => u.DiscordId == discordId).FirstOrDefault();
+            string response;
+            if (user is null)
+            {
+                response = "Your account is not linked.";
+            }
+            else
+            {
+                if (user.RefreshToken is null)
+                {
+                    response = "Your account is not linked.";
+                }
+                else
+                {
+
+                    user.AccessToken = null;
+                    user.AccessTokenExpiration = null;
+                    user.RefreshToken = null;
+                    _ = _dbContext.SaveChangesAsync();  
+                    response = "Your account has been unlinked.";
+                }
+            }
+            await command.RespondAsync(response);
+        }
+
+
+        private async Task Link(SocketSlashCommand command, Boolean forceLink = false)
         {
             Console.WriteLine("Link");
             string response = "";
@@ -100,31 +135,13 @@ namespace Zola.Discord
 
 
             ulong discordId = command.User.Id;
+            ZolaUserTokenStore userTokenStore = new(_dbContext, discordId);
+            
+            response += $"\r\nUser ID: {userTokenStore.UserId}";
 
-            User? user = _dbContext.Users.Where(u => u.DiscordId == discordId).FirstOrDefault();
-
-            if (user is null)
+            if ((userTokenStore.RefreshToken is null) || forceLink)
             {
-                user = new User()
-                {
-                    DiscordId = discordId
-                };
-                _dbContext.Add(user);
-                _dbContext.SaveChanges();
-                response += "\r\nCreated user";
-
-
-            }
-            else
-            {
-                response += "\r\nUser exists";
-            }
-
-            response += $"\r\nUser ID: {user.Id}";
-
-            if (user.RefreshToken is null)
-            {
-                Ticket ticket = _dbContext.NewTicket(user);
+                Ticket ticket = _dbContext.NewTicket(userTokenStore.User);
                 string url = "http://localhost:8443/Home/Link?ticket=" + ticket.Id;
                 response += $"\r\n{url}";
             }

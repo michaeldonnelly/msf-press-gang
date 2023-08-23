@@ -75,25 +75,21 @@ namespace Zola.Discord
             SlashCommandBuilder link = new SlashCommandBuilder()
                 .WithName("link")
                 .WithDescription("Connect Zola to your MSF account");
-                //.AddOption(codeOption);
-                
 
-            //        .AddOption(new SlashCommandOptionBuilder()
-            //            .WithName("effect")
-            //            .WithDescription("The status effect for which you want to search")
-            //            .WithRequired(true)
-            //            .AddChoice("Terrible", 1)
-            //            .AddChoice("Meh", 2)
-            //            .AddChoice("Good", 3)
-            //            .AddChoice("Lovely", 4)
-            //            .AddChoice("Excellent!", 5)
-            //            .WithType(ApplicationCommandOptionType.Integer)
-            //);
+            SlashCommandBuilder relink = new SlashCommandBuilder()
+                .WithName("relink")
+                .WithDescription("Reconnect Zola to your MSF account (get a new refresh token)");
+
+            SlashCommandBuilder unlink = new SlashCommandBuilder()
+                .WithName("unlink")
+                .WithDescription("Delete the connection from Zola to your MSF account");
 
 
             commands.Add(zola.Build());
             commands.Add(statusEffectSearch.Build());
             commands.Add(link.Build());
+            commands.Add(relink.Build());
+            commands.Add(unlink.Build());
 
 
 
