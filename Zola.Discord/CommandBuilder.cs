@@ -84,12 +84,16 @@ namespace Zola.Discord
                 .WithName("unlink")
                 .WithDescription("Delete the connection from Zola to your MSF account");
 
+            SlashCommandBuilder userInfo = new SlashCommandBuilder()
+                .WithName("userinfo")
+                .WithDescription("For debugging, get the calling user's Discord, MSF, and Zola user details.");
 
             commands.Add(zola.Build());
             commands.Add(statusEffectSearch.Build());
             commands.Add(link.Build());
             commands.Add(relink.Build());
             commands.Add(unlink.Build());
+            commands.Add(userInfo.Build());
 
 
 

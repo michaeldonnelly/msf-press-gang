@@ -2,10 +2,15 @@
 using Discord;
 using Discord.WebSocket;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Kiota.Abstractions;
+using Microsoft.Kiota.Abstractions.Authentication;
+using Microsoft.Kiota.Http.HttpClientLibrary;
 using Zola.Database;
 using Zola.Database.Models;
 using Zola.Database.Reports;
+using Zola.MsfClient;
 using Zola.MsfClient.Authentication;
+using Zola.MsfClient.Models;
 
 namespace Zola.Discord
 {
@@ -14,12 +19,14 @@ namespace Zola.Discord
         private DiscordSocketClient _discordClient;
         private MsfDbContext _dbContext;
         private GameReports _gameReports;
+        private ApiSettings _apiSettings;
 
-        public CommandHandler(MsfDbContext dbContext, DiscordSocketClient discordClient)
+        public CommandHandler(MsfDbContext dbContext, DiscordSocketClient discordClient, ApiSettings apiSettings)
 		{
             _dbContext = dbContext;
             _discordClient = discordClient;
             _gameReports = new(_dbContext);
+            _apiSettings = apiSettings;
         }
 
         public async Task SlashCommandHandler(SocketSlashCommand command)
@@ -31,6 +38,9 @@ namespace Zola.Discord
             {
                 case "zola":
                     await Zola(command);
+                    break;
+                case "userinfo":
+                    await UserInfo(command);
                     break;
                 case "status-effect-search":
                     await StatusEffectSearch(command);
@@ -52,7 +62,37 @@ namespace Zola.Discord
 
         private async Task Zola(SocketSlashCommand command)
         {
-            await command.RespondAsync("I am alive.");
+
+            string response = $"Hello {command.User.Username}.";
+            response += "I'm ready to roll.";
+            
+            await command.RespondAsync(response);
+        }
+
+        private async Task UserInfo(SocketSlashCommand command)
+        {
+            SocketUser discordUser = command.User;
+            ZolaUserTokenStore userTokenStore = new(_dbContext, discordUser.Id);
+            User zolaUser = userTokenStore.User;
+            IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.PlayerAuthenticationProvider(_apiSettings, userTokenStore);
+            IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
+            ApiClient client = new ApiClient(requestAdapter);
+            PlayerCard? msfUser = (await client.Player.V1.Card.GetAsync()).Data;
+
+            string response = "";
+            response += $"Discord\r\n  id: {discordUser.Id}\r\n  username: {discordUser.Username}\r\n  global name: {discordUser.GlobalName}\r\n";
+            response += $"Zola\r\n  id: {zolaUser.Id}\r\n  access token expiration: {zolaUser.AccessTokenExpiration}\r\n";
+            response += "MSF\r\n";
+            if (msfUser is not null)
+            {
+                response += $"  name: {msfUser.Name}\r\n  tcp: {msfUser.Tcp}\r\n  arena rank: {msfUser.LatestArena}";
+            }
+            else
+            {
+                response += "  failed to retrieve";
+            }
+
+            await command.RespondAsync(response);
         }
 
         private async Task StatusEffectSearch(SocketSlashCommand command)

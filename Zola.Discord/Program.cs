@@ -74,7 +74,7 @@ namespace Zola.Discord
 
 
 
-            CommandHandler commandHandler = new(_dbContext, _discordClient);
+            CommandHandler commandHandler = new(_dbContext, _discordClient, _apiSettings);
             _discordClient.SlashCommandExecuted += commandHandler.SlashCommandHandler;
 
             await _discordClient.LoginAsync(TokenType.Bot, _botSettings.Token);

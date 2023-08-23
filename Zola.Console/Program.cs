@@ -125,7 +125,7 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
     if (getUserProfile)
     {
         PlayerCard playerCard = (await client.Player.V1.Card.GetAsync()).Data;
-        Console.WriteLine($"Retrieved player card\r\n  Name: {playerCard.Name}\r\n  TCP: {playerCard.Tcp}");
+        Console.WriteLine($"Retrieved player card\r\n  Name: {playerCard.Name}\r\n  TCP: {playerCard.Tcp}\r\n  Arena rank: {playerCard.LatestArena}");
 
     }
 
