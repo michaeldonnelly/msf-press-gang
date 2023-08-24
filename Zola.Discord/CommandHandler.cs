@@ -69,27 +69,54 @@ namespace Zola.Discord
             await command.RespondAsync(response);
         }
 
-        private async Task UserInfo(SocketSlashCommand command)
+        private ZolaUserTokenStore? UserTokenStore(SocketSlashCommand command, out string error)
         {
             SocketUser discordUser = command.User;
             ZolaUserTokenStore userTokenStore = new(_dbContext, discordUser.Id);
-            User zolaUser = userTokenStore.User;
-            IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.PlayerAuthenticationProvider(_apiSettings, userTokenStore);
-            IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
-            ApiClient client = new ApiClient(requestAdapter);
-            PlayerCard? msfUser = (await client.Player.V1.Card.GetAsync()).Data;
-
-            string response = "";
-            response += $"Discord\r\n  id: {discordUser.Id}\r\n  username: {discordUser.Username}\r\n  global name: {discordUser.GlobalName}\r\n";
-            response += $"Zola\r\n  id: {zolaUser.Id}\r\n  access token expiration: {zolaUser.AccessTokenExpiration}\r\n";
-            response += "MSF\r\n";
-            if (msfUser is not null)
+            if (userTokenStore.RefreshToken is not null)
             {
-                response += $"  name: {msfUser.Name}\r\n  tcp: {msfUser.Tcp}\r\n  arena rank: {msfUser.LatestArena}";
+                error = "";
+                return userTokenStore;
+            }
+
+            // TODO: prompt the user to link their account instead
+            error = "First use the /link command to link to your account MSF.";
+            return null;
+        }
+
+        private async Task UserInfo(SocketSlashCommand command)
+        {
+            string response = "";
+
+            response += "Discord\r\n  ";
+            SocketUser discordUser = command.User;            
+            response += "  id: {discordUser.Id}\r\n  username: {discordUser.Username}\r\n  global name: {discordUser.GlobalName}\r\n";
+
+            response += "Zola\r\n";
+            //ZolaUserTokenStore userTokenStore = new(_dbContext, discordUser.Id);
+            ZolaUserTokenStore? userTokenStore = UserTokenStore(command, out string userTokenStoreError);
+            if (userTokenStore is null)
+            {
+                response += "  " + userTokenStoreError;
             }
             else
             {
-                response += "  failed to retrieve";
+                User zolaUser = userTokenStore.User;
+                response += $"  id: {zolaUser.Id}\r\n  access token expiration: {zolaUser.AccessTokenExpiration}\r\n";
+
+                response += "MSF\r\n";
+                IAuthenticationProvider authenticationProvider = MsfAuthenticationProviders.PlayerAuthenticationProvider(_apiSettings, userTokenStore);
+                IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
+                ApiClient client = new ApiClient(requestAdapter);
+                PlayerCard? msfUser = (await client.Player.V1.Card.GetAsync()).Data;
+                if (msfUser is not null)
+                {
+                    response += $"  name: {msfUser.Name}\r\n  tcp: {msfUser.Tcp}\r\n  arena rank: {msfUser.LatestArena}";
+                }
+                else
+                {
+                    response += "  Failed to retrieve MSF player card.";
+                }
             }
 
             await command.RespondAsync(response);
