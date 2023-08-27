@@ -1,0 +1,4 @@
+[] make the later image builds depend on core
+[] manage secrets in a non-dev way
+[] deploy images on commit
+
