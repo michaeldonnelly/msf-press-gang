@@ -9,10 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      timestamp: $(date -u +"%Y-%m-%d-%H%M")
     steps:
     - uses: actions/checkout@v3
+    - run: |
+        echo "action_state=yellow" >> "$GITHUB_ENV"
+    - run: |
+        echo "$(date -u +"%Y-%m-%d-%H%M")"
+    - run: |
+        echo "timestamp=$(date -u +"%Y-%m-%d-%H%M")" >> "$GITHUB_ENV"
     - run: echo $timestamp
     - run: ls
     - run: ls Docker
