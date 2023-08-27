@@ -1,0 +1,21 @@
+services:
+  web:
+    image: "michaeldonnelly/zola-web"
+    ports:
+      - "5000:80"
+    environment:
+      # should be defined Development-env to allow loading user-secrets located on the local computer.
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.local/share:/root/.local/share:rw
+  redis:
+    image: "redis:alpine"
+  discord:
+    image: "michaeldonnelly/zola-discord"
+    environment:
+      # should be defined Development-env to allow loading user-secrets located on the local computer.
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.local/share:/root/.local/share:rw
