@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: cd Docker & docker build . --file Dockerfile --tag michaeldonnelly/pressgang-bot:$(date +%s)
+      run: cd Docker & ./build.sh
