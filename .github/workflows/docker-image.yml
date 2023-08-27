@@ -18,6 +18,6 @@ jobs:
       run: pwd & ls
     - name: Build the Docker image
       run: cd Docker
-      run: pwd
-      run: ls
-      run: ./build.sh
+    - run: pwd
+    - run: ls
+    - run: ./build.sh
