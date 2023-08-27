@@ -17,4 +17,4 @@ jobs:
     - name: Where the heck are we?
       run: pwd & ls
     - name: Build the Docker image
-      run: cd Docker & ./build.sh
+      run: cd Docker & pwd & ls & ./build.sh
