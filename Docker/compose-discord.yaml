@@ -1,5 +1,5 @@
 services:
-  console:
+  discord:
     image: "michaeldonnelly/zola-discord"
     environment:
       # should be defined Development-env to allow loading user-secrets located on the local computer.

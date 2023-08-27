@@ -1,8 +1,7 @@
 # syntax=docker/dockerfile:1
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-#COPY src/Zola.*/*.csproj .
 
 COPY src/Zola.Console/Zola.Console.csproj ./Zola.Console/Zola.Console.csproj
 COPY src/Zola.MsfClient/Zola.MsfClient.csproj ./Zola.MsfClient/Zola.MsfClient.csproj
@@ -14,7 +13,11 @@ COPY src/Zola.sln .
 RUN dotnet restore
 
 COPY src .
-#RUN dotnet publish -c Release
 RUN dotnet publish -c Release -o /publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /publish
+
+COPY --from=build /publish ./
+
 #COPY /publish .

@@ -1,0 +1,27 @@
+services:
+  web-test:
+    image: "dotnet-docker-web"
+    ports:
+      - "5001:80"
+    environment:
+      # should be defined Development-env to allow loading user-secrets located on the local computer.
+      - ASPNETCORE_ENVIRONMENT=Development
+  web:
+    image: "michaeldonnelly/zola-web"
+    #image: "dotnet-docker"
+    ports:
+      #- "8443"
+      #- "5000:8443"
+      - "5000:80"
+      - "5002:8443"
+    environment:
+      # should be defined Development-env to allow loading user-secrets located on the local computer.
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.local/share:/root/.local/share:rw
+  redis:
+    image: "redis:alpine"
+
+
+#  docker compose -f compose-web.yaml up
