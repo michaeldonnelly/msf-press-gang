@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/donnelly/Projects/msf-press-gang/src/Zola.MsfClient/Zola.MsfClient.csproj": {}
+  },
+  "projects": {
+    "/Users/donnelly/Projects/msf-press-gang/src/Zola.MsfClient/Zola.MsfClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/donnelly/Projects/msf-press-gang/src/Zola.MsfClient/Zola.MsfClient.csproj",
+        "projectName": "Zola.MsfClient",
+        "projectPath": "/Users/donnelly/Projects/msf-press-gang/src/Zola.MsfClient/Zola.MsfClient.csproj",
+        "packagesPath": "/Users/donnelly/.nuget/packages/",
+        "outputPath": "/Users/donnelly/Projects/msf-press-gang/src/Zola.MsfClient/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/donnelly/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "IdentityModel": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Kiota.Abstractions": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "Microsoft.Kiota.Http.HttpClientLibrary": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "Microsoft.Kiota.Serialization.Form": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "Microsoft.Kiota.Serialization.Json": {
+              "target": "Package",
+              "version": "[1.0.7, )"
+            },
+            "Microsoft.Kiota.Serialization.Text": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.307/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

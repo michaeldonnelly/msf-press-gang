@@ -1,0 +1,8 @@
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema Iso8 is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema Scope is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema Stats is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema Item is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema Trait is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/ - The schema StatBoost is a polymorphic type but does not define a discriminator. This will result in a serialization errors.
+Warning: KiotaBuilder OpenAPI warning: #/components/schemas/URL - The format uri is not supported by Kiota and the string type will be used.
+Warning: KiotaBuilder API client was generated with version (null) and the current version is 1.3.0, it will be upgraded and you should upgrade dependencies
