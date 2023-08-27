@@ -1,6 +1,4 @@
 # syntax=docker/dockerfile:1
-FROM michaeldonnelly/zola-core as core
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 as runtime
+FROM michaeldonnelly/zola-core
 WORKDIR /publish
-COPY --from=core /publish .
 ENTRYPOINT ["dotnet", "Zola.Console.dll"]

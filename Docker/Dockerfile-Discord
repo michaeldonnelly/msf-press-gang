@@ -1,7 +1,4 @@
 # syntax=docker/dockerfile:1
-
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 as runtime
-FROM michaeldonnelly/zola-core as core
+FROM michaeldonnelly/zola-core
 WORKDIR /publish
-#COPY --from=core * .
 ENTRYPOINT ["dotnet", "Zola.Discord.dll"]
