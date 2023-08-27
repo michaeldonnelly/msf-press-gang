@@ -1,7 +1,7 @@
 
 .vs
-*/bin/*
-*/obj/*
+src/*/bin/*
+src/*/obj/*
 .DS_Store
 *.sqlite3
 /Data/token.txt
