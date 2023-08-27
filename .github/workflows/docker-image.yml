@@ -14,10 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Where the heck are we?
-      run: pwd & ls
-    - name: Build the Docker image
-      run: cd Docker
     - run: pwd
     - run: ls
-    - run: ./build.sh
+    - run: ls Docker
+    - name: Build the Docker image for zola-core
+      run: docker build . --file Docker/Dockerfile-Core --tag michaeldonnelly/zola-core:$(date -u +"%Y-%m-%d-%H%M")
+    - name: Build the Docker image for Discord
+      run: docker build . --file Docker/Dockerfile-Discord --tag michaeldonnelly/zola-discord:$(date -u +"%Y-%m-%d-%H%M")
+    - name: Build the Docker image for the web site
+      run: docker build . --file Docker/Dockerfile-Web --tag michaeldonnelly/zola-web:$(date -u +"%Y-%m-%d-%H%M")
