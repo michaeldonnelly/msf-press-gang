@@ -3,3 +3,4 @@
 [] deploy images on commit
 [] https for the web site
 [] don't run in dev mode
+[] after account link, send back to Discord
