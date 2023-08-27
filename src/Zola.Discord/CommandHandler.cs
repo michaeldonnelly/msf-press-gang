@@ -209,7 +209,7 @@ namespace Zola.Discord
             if ((userTokenStore.RefreshToken is null) || forceLink)
             {
                 Ticket ticket = _dbContext.NewTicket(userTokenStore.User);
-                string url = "http://localhost:8443/Home/Link?ticket=" + ticket.Id;
+                string url = _apiSettings.RedirectUri + "Link?ticket=" + ticket.Id;
                 response += $"\r\n{url}";
             }
             else
