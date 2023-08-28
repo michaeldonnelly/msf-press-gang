@@ -8,7 +8,8 @@ namespace Zola.MsfClient
 	{
         public ApiSettings(IConfiguration config)
         {
-            foreach (string key in [ "Client:ClientId", "Client:ClientSecret", "Client:RedirectUri", "Client:LinkUri" ])
+            List<string> keys = new() { "Client:ClientId", "Client:ClientSecret", "Client:RedirectUri", "Client:LinkUri" };
+            foreach (string key in keys)
             {
                 if (config[key] is null)
                 {
@@ -26,7 +27,7 @@ namespace Zola.MsfClient
             {
                 // This should be impossible given the check above, but leaving this check here is the least intrusive way to appease VS
                 throw new Exception("Can't create ApiSettings; missing value in secrets");
-            }
+            } 
 
             ClientId = clientId;
             ClientSecret = clientSecret;
