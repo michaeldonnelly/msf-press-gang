@@ -1,6 +1,4 @@
 [] make the later image builds depend on core
-[] manage secrets in a non-dev way
 [] deploy images on commit
 [] https for the web site
-[] don't run in dev mode
-[] after account link, send back to Discord
+[] after account link, link back to Discord (not sure how possible this is across mobile/web/native)
