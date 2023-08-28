@@ -9,32 +9,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - image: michaeldonnelly/zola-core
-            dockerfile: Docker/Dockerfile-Core
-          - image: michaeldonnelly/zola-discord
-            dockerfile: Docker/Dockerfile-Discord
-          - image: michaeldonnelly/zola-web
-            dockerfile: Docker/Dockerfile-Web
     steps:
     - uses: actions/checkout@v3
+    - name: Build the Docker image for zola-core
+      run: docker build . --file Docker/Dockerfile-Core --tag michaeldonnelly/zola-core
+    - name: Build the Docker image for the Discord bot
+      run: docker build . --file Docker/Dockerfile-Discord --tag michaeldonnelly/zola-discord
+    - name: Build the Docker image for the web site
+      run: docker build . --file Docker/Dockerfile-Web --tag michaeldonnelly/zola-web
     - name: Log in to Docker Hub
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Extract metadata (tags, labels) for Docker
-      id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: ${{ matrix.image }}
-    - name: Build and push
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        file: ${{ matrix.dockerfile }}
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+    - name: Tag and publish docker images
+      run: Docker/publish.sh
