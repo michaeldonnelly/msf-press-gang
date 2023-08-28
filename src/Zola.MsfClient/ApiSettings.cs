@@ -14,7 +14,7 @@ namespace Zola.MsfClient
             string? linkUri = config["Client:LinkUri"];
             string? apiKey = config["Client:ApiKey"];
 
-            if ((clientId is null) || (clientSecret is null) || (redirectUri is null) || (LinkUri is null) || (apiKey is null))
+            if ((clientId is null) || (clientSecret is null) || (redirectUri is null) || (linkUri is null) || (apiKey is null))
             {
                 throw new Exception("Can't create ApiSettings; missing value in secrets");
             }
@@ -22,6 +22,7 @@ namespace Zola.MsfClient
             ClientId = clientId;
             ClientSecret = clientSecret;
             RedirectUri = redirectUri;
+            LinkUri = linkUri;
             ApiKey = apiKey;
         }
 
