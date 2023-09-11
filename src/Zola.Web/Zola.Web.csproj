@@ -17,6 +17,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Views\Admin\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
 </Project>
