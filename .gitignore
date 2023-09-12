@@ -18,3 +18,4 @@ Zola.MsfClient/kiota
 iterate.sh
 build/*
 data/*
+log/*
