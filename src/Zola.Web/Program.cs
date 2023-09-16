@@ -1,11 +1,32 @@
 using Zola.Database;
 using Zola.MsfClient;
+using Zola.Web;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
-using Serilog.Sinks.Grafana.Loki;
+
+const string outputTemplate =
+    "[{Level:w}]: {Timestamp:dd-MM-yyyy:HH:mm:ss} {MachineName} {EnvironmentName} {SourceContext} {Message}{NewLine}{Exception}";
+
 
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .CreateBootstrapLogger();
+    .MinimumLevel.Information()
+    .Enrich.FromLogContext()
+    .Enrich.WithThreadId()
+    .Enrich.WithEnvironmentName()
+    .Enrich.WithMachineName()
+    .WriteTo.Console(outputTemplate: outputTemplate)
+    .WriteTo.OpenTelemetry(opts =>
+    {
+        opts.ResourceAttributes = new Dictionary<string, object>
+        {
+            ["app"] = "web",
+            ["runtime"] = "dotnet",
+            ["service.name"] = "MainService"
+        };
+    })
+    .CreateLogger();
 
 Log.Information("Starting up");
 
@@ -20,16 +41,54 @@ DbSettings dbSettings = new(config);
 MsfDbContext dbContext = new(dbSettings);
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
 
-builder.Host.UseSerilog((ctx, lc) => lc
-    .WriteTo.Console()
-    //.WriteTo.GrafanaLoki("https://logs-prod-006.grafana.net")
-    .WriteTo.GrafanaLoki("http://localhost:3100")
-    .ReadFrom.Configuration(ctx.Configuration));
+//builder.Host.UseSerilog((ctx, lc) => lc
+//    .WriteTo.Console()
+//    //.WriteTo.GrafanaLoki("https://logs-prod-006.grafana.net")
+//    .WriteTo.GrafanaLoki("http://localhost:3100")
+//    .ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MsfDbContext>();
 builder.Services.AddSingleton<IConfiguration>(config);
+builder.Services.AddSingleton<Instrumentor>();
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracerProviderBuilder =>
+        tracerProviderBuilder
+            .AddSource(Instrumentor.ServiceName)
+            .ConfigureResource(resource => resource
+                .AddService(Instrumentor.ServiceName))
+            .AddAspNetCoreInstrumentation(opts =>
+            {
+                opts.Filter = ctx =>
+                {
+                    var ignore = new[]
+                    {
+                        "/_blazor", "/_framework", ".css",
+                        "/css", "/favicon"
+                    };
+                    return !ignore.Any(s => ctx.Request.Path.Value!.Contains(s));
+                };
+            })
+            .AddHttpClientInstrumentation(opts =>
+            {
+                var ignore = new[] { "/loki/api" };
+
+                opts.FilterHttpRequestMessage = req =>
+                {
+                    return !ignore.Any(s => req.RequestUri!.ToString().Contains(s));
+                };
+            })
+            .AddOtlpExporter())
+    .WithMetrics(metricsProviderBuilder =>
+        metricsProviderBuilder
+            .AddMeter(Instrumentor.ServiceName)
+            .ConfigureResource(resource => resource
+                .AddService(Instrumentor.ServiceName))
+            .AddRuntimeInstrumentation()
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation().AddOtlpExporter());
 
 var app = builder.Build();
 
