@@ -15,6 +15,13 @@ using Zola.Database.Reports;
 using Microsoft.EntityFrameworkCore;
 using Zola.Database.Models;
 using Zola.Database.Searches;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Events;
+
+
 
 namespace Zola.Discord
 {
@@ -28,9 +35,31 @@ namespace Zola.Discord
         private MsfDbContext _dbContext;
         private ApiSettings _apiSettings;
         private BotSettings _botSettings;
+        private const string outputTemplate = "[{Level:w}]: {Timestamp:dd-MM-yyyy:HH:mm:ss} {MachineName} {EnvironmentName} {SourceContext} {Message}{NewLine}{Exception}";
 
         public Program()
         {
+            Log.Logger = new LoggerConfiguration()
+                //.MinimumLevel.Information()
+                .MinimumLevel.Debug()
+                .Enrich.FromLogContext()
+                .Enrich.WithThreadId()
+                .Enrich.WithEnvironmentName()
+                .Enrich.WithMachineName()
+                .WriteTo.Console(outputTemplate: outputTemplate)
+                .WriteTo.OpenTelemetry(opts =>
+                {
+                    opts.ResourceAttributes = new Dictionary<string, object>
+                    {
+                        ["app"] = "discord",
+                        ["runtime"] = "dotnet",
+                        ["service.name"] = "Zola.Discord"
+                    };
+                })
+                .CreateLogger();
+
+            Log.Information("Starting up Discord bot");
+
             ConfigurationBuilder configurationBuilder = new();
             configurationBuilder.AddUserSecrets<ApiSettings>();
             // https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=linux
@@ -48,7 +77,7 @@ namespace Zola.Discord
             DbInitializer.Initialize(_dbContext, dbSettings);
 
             _discordClient = new DiscordSocketClient();
-            _discordClient.Log += Log;
+            _discordClient.Log += LogAsync;
             _discordClient.Ready += Client_Ready;
         }
 
@@ -63,13 +92,13 @@ namespace Zola.Discord
                 string tableName = "Characters";
                 IEnumerable<object> set = (IEnumerable<object>)_dbContext.GetType().GetProperty(tableName).GetValue(_dbContext, null);
                 int recordCount = set.Count();
-                Console.WriteLine($"Records in {tableName}: {recordCount}");
+                Log.Debug("Records in {Variables}", tableName, recordCount);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
 #pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             }
             catch (NullReferenceException ex)
             {
-                Console.WriteLine(ex.Message);
+                Log.Error(ex.Message);
             }
 
 
@@ -84,9 +113,19 @@ namespace Zola.Discord
             await Task.Delay(-1);
         }
 
-        private Task Log(LogMessage msg)
+        private Task LogAsync(LogMessage message)
         {
-            Console.WriteLine(msg.ToString());
+            var severity = message.Severity switch
+            {
+                LogSeverity.Critical => LogEventLevel.Fatal,
+                LogSeverity.Error => LogEventLevel.Error,
+                LogSeverity.Warning => LogEventLevel.Warning,
+                LogSeverity.Info => LogEventLevel.Information,
+                LogSeverity.Verbose => LogEventLevel.Verbose,
+                LogSeverity.Debug => LogEventLevel.Debug,
+                _ => LogEventLevel.Information
+            };
+            Log.Write(severity, message.Exception, "[{Source}] {Message}", message.Source, message.Message);            
             return Task.CompletedTask;
         }
 

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Kiota.Abstractions;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Microsoft.Kiota.Http.HttpClientLibrary;
+using Serilog;
 using Zola.Database;
 using Zola.Database.Models;
 using Zola.Database.Reports;
@@ -31,9 +32,7 @@ namespace Zola.Discord
 
         public async Task SlashCommandHandler(SocketSlashCommand command)
         {
-            
-            Console.WriteLine(command.CommandName);
-
+            Log.Debug("Command invoked: {Variables}", command.CommandName); // This will output "[21:51:00 DBG] Your log message, with 10!"
             switch (command.CommandName)
             {
                 case "zola":
@@ -187,8 +186,7 @@ namespace Zola.Discord
 
 
         private async Task Link(SocketSlashCommand command, Boolean forceLink = false)
-        {
-            Console.WriteLine("Link");
+        {            
             string response = "";
 
 
@@ -210,7 +208,7 @@ namespace Zola.Discord
             {
                 Ticket ticket = _dbContext.NewTicket(userTokenStore.User);
                 string url = _apiSettings.LinkUri + "?ticket=" + ticket.Id;
-                Console.WriteLine("Link URL: " + url);
+                Log.Debug("Link URL: {Variables}", url);
                 response += $"\r\n{url}";
             }
             else
