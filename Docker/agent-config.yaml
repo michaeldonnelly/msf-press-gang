@@ -1,0 +1,16 @@
+traces:
+  configs:
+  - name: default
+    receivers:
+      jaeger:
+        protocols:
+          grpc: # listens on the default jaeger grpc port: 14250
+    remote_write:
+      - endpoint: tempo-prod-04-prod-us-east-0.grafana.net:443
+        basic_auth:
+          username: 690974
+          password: glc_eyJvIjoiOTQzMTk3IiwibiI6InN0YWNrLTczODgzNy1odC13cml0ZS16b2xhIiwiayI6InB3YzRmMEIxN1h6VTQ2NjlVems5dkQ2eiIsIm0iOnsiciI6InByb2QtdXMtZWFzdC0wIn19
+
+#integrations:
+#  agent:
+#    enabled: true

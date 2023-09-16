@@ -1,6 +1,7 @@
 using Zola.Database;
 using Zola.MsfClient;
 using Serilog;
+using Serilog.Sinks.Grafana.Loki;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -22,6 +23,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((ctx, lc) => lc
     .WriteTo.Console()
+    //.WriteTo.GrafanaLoki("https://logs-prod-006.grafana.net")
+    .WriteTo.GrafanaLoki("http://localhost:3100")
     .ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddControllersWithViews();
