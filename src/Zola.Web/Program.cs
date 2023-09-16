@@ -23,18 +23,17 @@ Log.Logger = new LoggerConfiguration()
         {
             ["app"] = "web",
             ["runtime"] = "dotnet",
-            ["service.name"] = "MainService"
+            ["service.name"] = "Zola.Web"
         };
     })
     .CreateLogger();
 
-Log.Information("Starting up");
+Log.Information("Starting up web site");
 
 ConfigurationBuilder configurationBuilder = new();
 configurationBuilder.AddUserSecrets<ApiSettings>();
 // https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=linux
 IConfiguration config = configurationBuilder.Build();
-
 
 // TODO: do we even need these lines?
 DbSettings dbSettings = new(config);
@@ -42,12 +41,6 @@ MsfDbContext dbContext = new(dbSettings);
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
-
-//builder.Host.UseSerilog((ctx, lc) => lc
-//    .WriteTo.Console()
-//    //.WriteTo.GrafanaLoki("https://logs-prod-006.grafana.net")
-//    .WriteTo.GrafanaLoki("http://localhost:3100")
-//    .ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MsfDbContext>();

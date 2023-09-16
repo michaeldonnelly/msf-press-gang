@@ -12,8 +12,7 @@ public class Instrumentor : IDisposable
         var version = typeof(Instrumentor).Assembly.GetName().Version?.ToString();
         Tracer = new ActivitySource(ServiceName, version);
         Recorder = new Meter(ServiceName, version);
-        OutgoingRequestCounter = Recorder.CreateCounter<long>("app.outing.requests",
-            description: "The number of outgoing backend API requests from the MainService");  // TODO: not relevant
+        OutgoingRequestCounter = Recorder.CreateCounter<long>("zola.web.requests");  
     }
 
     public ActivitySource Tracer { get; }
