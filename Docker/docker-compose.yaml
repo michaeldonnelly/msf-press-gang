@@ -92,3 +92,20 @@ services:
       - "4317:4317" # OTLP gRPC receiver
       - "4318:4318" # OTLP http receiver
     #   - 55679:55679 # zpages extension
+
+  web:
+    image: "michaeldonnelly/zola-web"
+    ports:
+      - "8040:80"
+    volumes:
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.local/share:/root/.local/share:rw
+
+  redis:
+    image: "redis:alpine"
+
+  discord:
+    image: "michaeldonnelly/zola-discord"
+    volumes:
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+      - ~/.local/share:/root/.local/share:rw

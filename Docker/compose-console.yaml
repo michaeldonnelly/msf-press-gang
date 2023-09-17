@@ -1,9 +1,0 @@
-services:
-  console:
-    image: "michaeldonnelly/zola-console"
-    environment:
-      # should be defined Development-env to allow loading user-secrets located on the local computer.
-      - ASPNETCORE_ENVIRONMENT=Development
-    volumes:
-      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
-      - ~/.local/share:/root/.local/share:rw
