@@ -12,6 +12,7 @@ using Zola.Database.Reports;
 using Microsoft.EntityFrameworkCore;
 using Zola.Database.Models;
 using Zola.Database.Searches;
+using Serilog;
 
 #if false
 const bool downloadTraits = true;
@@ -31,13 +32,24 @@ const bool indexEffects = false;
 const bool getUserProfile = false;
 const bool usePlayerAuth = getUserProfile;
 
+const string outputTemplate =
+    "[{Level:w}]: {Timestamp:dd-MM-yyyy:HH:mm:ss} {MachineName} {EnvironmentName} {SourceContext} {Message}{NewLine}{Exception}";
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .Enrich.FromLogContext()
+    .WriteTo.Console(outputTemplate: outputTemplate)
+    .CreateLogger();
+
+Log.Information("Starting console");
+
 ConfigurationBuilder configurationBuilder = new();
 configurationBuilder.AddUserSecrets<ApiSettings>();
 // https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=linux
 IConfiguration config = configurationBuilder.Build();
 ApiSettings apiSettings = new(config);
 DbSettings dbSettings = new(config);
-MsfDbContext dbContext = new(dbSettings);
+MsfDbContext dbContext = new(Log.Logger, dbSettings);
 DbInitializer.Initialize(dbContext, dbSettings);
 
 IAuthenticationProvider authenticationProvider;
@@ -52,17 +64,14 @@ else
     authenticationProvider = MsfAuthenticationProviders.GameAuthenticationProvider(apiSettings);
 }
 
-
 IRequestAdapter requestAdapter = new HttpClientRequestAdapter(authenticationProvider);
 ApiClient client = new ApiClient(requestAdapter);
-
 Download download = new(client, dbContext);
-
 
 string tableName = "Characters";
 IEnumerable<object> set = (IEnumerable<object>)dbContext.GetType().GetProperty(tableName).GetValue(dbContext, null);
 int recordCount = set.Count();
-Console.WriteLine($"Records in {tableName}: {recordCount}");
+Log.Debug($"Records in {tableName}: {recordCount}");
 
 
 
@@ -86,10 +95,9 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
         // GET /characters/{id}
         characterId = "Cyclops";
         oneCharacter = (await client.Game.V1.Characters[characterId].GetAsync()).Data;
-        Console.WriteLine($"Retrieved character\r\n  ID: {oneCharacter?.Id}\r\n  Name: {oneCharacter?.Name}\r\n  Description:{oneCharacter.Description}\r\n\r\n");
 
-        Console.WriteLine(oneCharacter.GearTierCollection.Count);
-
+        Log.Debug("Retrieved character: {Variables}", oneCharacter);
+        Log.Debug("GearTierCollection.Count: {Variables}",oneCharacter.GearTierCollection.Count);
         dbContext.SafeAdd(oneCharacter);
     }
 
@@ -97,17 +105,17 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
     {
         characterId = "Phoenix";
         oneCharacter = (await client.Game.V1.Characters[characterId].GetAsync()).Data;
-        Console.WriteLine($"Retrieved character\r\n  ID: {oneCharacter?.Id}\r\n  Name: {oneCharacter?.Name}\r\n  Description:{oneCharacter.Description}");
+        Log.Debug("Retrieved character: {Variables}", oneCharacter);
         dbContext.SafeAdd(oneCharacter);
     }
 
     set = (IEnumerable<object>)dbContext.GetType().GetProperty(tableName).GetValue(dbContext, null);
     recordCount = set.Count();
-    Console.WriteLine($"Records in {tableName}: {recordCount}");
+    Log.Debug($"Records in {tableName}: {recordCount}");
 
 
 
-    Console.WriteLine("\r\n\r\n");
+    //Console.WriteLine("\r\n\r\n");
     GameReports gameReports = new(dbContext);
 
     if (prydeReport)
@@ -118,14 +126,14 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
     if (indexEffects)
     {
         Indexer indexer = new(dbContext);
-        Console.WriteLine($"indexer.IndexEffects: {indexer.IndexEffects()}");
+        Log.Information($"indexer.IndexEffects: {indexer.IndexEffects()}");
     }
 
 
     if (getUserProfile)
     {
         PlayerCard playerCard = (await client.Player.V1.Card.GetAsync()).Data;
-        Console.WriteLine($"Retrieved player card\r\n  Name: {playerCard.Name}\r\n  TCP: {playerCard.Tcp}\r\n  Arena rank: {playerCard.LatestArena}");
+    Log.Information($"Retrieved player card\r\n  Name: {playerCard.Name}\r\n  TCP: {playerCard.Tcp}\r\n  Arena rank: {playerCard.LatestArena}");
 
     }
 
@@ -175,7 +183,7 @@ Console.WriteLine($"Records in {tableName}: {recordCount}");
 //}
 
 
-Console.WriteLine("Done");
+Log.Warning("Done");
 Console.ReadKey();
 
 #pragma warning restore CS0162 // Unreachable code detected
