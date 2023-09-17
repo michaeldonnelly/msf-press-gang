@@ -96,6 +96,11 @@ namespace Zola.MsfClient.Models {
             AdditionalData = new Dictionary<string, object>();
         }
 
+        public override string ToString()
+        {
+            return $"{Name} - {Description}";
+        }
+
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>

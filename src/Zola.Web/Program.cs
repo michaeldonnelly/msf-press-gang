@@ -37,7 +37,7 @@ IConfiguration config = configurationBuilder.Build();
 
 // TODO: do we even need these lines?
 DbSettings dbSettings = new(config);
-MsfDbContext dbContext = new(dbSettings);
+MsfDbContext dbContext = new(Log.Logger, dbSettings);
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();

@@ -73,7 +73,7 @@ namespace Zola.Discord
             _apiClient = new ApiClient(requestAdapter);
 
             DbSettings dbSettings = new(config);
-            _dbContext = new(dbSettings);
+            _dbContext = new(Log.Logger, dbSettings);
             DbInitializer.Initialize(_dbContext, dbSettings);
 
             _discordClient = new DiscordSocketClient();

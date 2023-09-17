@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Zola.Database.Migrations;
 using Zola.Database.Models;
 using Zola.MsfClient.Models;
 
@@ -8,11 +10,15 @@ namespace Zola.Database
 {
 	public class MsfDbContext : DbContext
 	{
-		public MsfDbContext(DbSettings? options = null) 
+        private readonly ILogger _logger;
+
+		public MsfDbContext(ILogger logger, DbSettings? options = null) 
         {            
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
             DbPath = System.IO.Path.Join(path, "msf.db");
+            _logger = logger;
+            
         }
 
 		public string DbPath { get; }
@@ -25,7 +31,7 @@ namespace Zola.Database
 
         public DbSet<Effect> Effects { get; set; }
 
-        public DbSet<EffectIndex> EffectIndices { get; set; }
+        public DbSet<Models.EffectIndex> EffectIndices { get; set; }
 
         public DbSet<User> Users { get; set; }
 
@@ -53,6 +59,7 @@ namespace Zola.Database
 
         public CharacterInfo? LoadCharacter(string id)
         {
+            _logger.Debug("Load character: {Variables}", id);
             CharacterInfo? character = Characters.Where(c => c.Id == id)
                 .Include(character => character.Traits)
                 .Include(character => character.GearTierCollection)
@@ -94,17 +101,29 @@ namespace Zola.Database
 
         public Ticket NewTicket(User user)
         {
+            _logger.Information("New ticket for {Variables}", user);
             return Operations.TicketOperations.NewTicket(this, user);
         }
 
 
         public Ticket? RetrieveTicket(TicketStatus expectedStatus, string? ticketId = null, string? state = null)
         {
-            return Operations.TicketOperations.RetrieveTicket(this, expectedStatus, ticketId, state);
+            Ticket? ticket = Operations.TicketOperations.RetrieveTicket(this, expectedStatus, ticketId, state);
+            if (ticket is null)
+            {
+                _logger.Warning("Retrieve ticket failed: {Variables}", expectedStatus, ticketId, state);
+            }
+            else
+            {
+                _logger.Information("Retrieved ticket: {Variables}", ticket);
+            }
+            
+            return ticket;
         }
 
         public void SetTicketStatus(Ticket ticket, TicketStatus status)
         {
+            _logger.Information("Set ticket status: {Variables}", ticket, status);
             ticket.TicketStatus = status;
             this.SaveChanges();
         }
