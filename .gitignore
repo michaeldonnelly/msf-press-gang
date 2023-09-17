@@ -19,4 +19,4 @@ iterate.sh
 build/*
 data/*
 log/*
-grafana/tmp
+tmp
